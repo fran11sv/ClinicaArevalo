@@ -24,7 +24,7 @@ public class ClinicaArevalo {
     //Miguel se la come;V
     //PUTO EL QUE LO LEA :v
     //Ia stoy arto :'v
-    
+    //Vacia
     //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHH
     //FUCK, FUCK, FUCK, FUCK, OH... FUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUCCCKKKKKK
     //Aiuda
