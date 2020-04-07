@@ -25,8 +25,8 @@ public class ClinicaArevalo {
     //PUTO EL QUE LO LEA :v
     //Ia stoy arto :'v
     
-    
-    
+    //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHH
+    //FUCK, FUCK, FUCK, FUCK, OH... FUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUCCCKKKKKK
     //Aiuda
     //LOL
 }
