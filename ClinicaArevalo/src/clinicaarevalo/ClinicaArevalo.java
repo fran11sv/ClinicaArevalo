@@ -30,4 +30,5 @@ public class ClinicaArevalo {
     //Aiuda
     //LOL
     //ay te voy san pedro
+    //SOY TERCO
 }
