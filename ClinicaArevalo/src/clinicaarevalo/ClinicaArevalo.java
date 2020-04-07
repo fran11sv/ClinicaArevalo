@@ -21,13 +21,6 @@ public class ClinicaArevalo {
     //Yo muy bien
     //putos
     //Puto el que no le salga
-    
-    
-    
-    
     //Miguel se la come;V
-    
-    
-    
     //PUTO EL QUE LO LEA :v
 }
