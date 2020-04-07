@@ -21,4 +21,13 @@ public class ClinicaArevalo {
     //Yo muy bien
     //putos
     //Puto el que no le salga
+    
+    
+    
+    
+    
+    
+    
+    
+    //PUTO EL QUE LO LEA :v
 }
