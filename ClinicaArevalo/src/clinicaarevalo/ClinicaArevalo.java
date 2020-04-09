@@ -17,19 +17,4 @@ public class ClinicaArevalo {
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    //Hola compas como están?
-    //Yo muy bien
-    //putos
-    //Puto el que no le salga
-    //Miguel se la come;V
-    //PUTO EL QUE LO LEA :v
-    //Ia stoy arto :'v
-    //Vacia
-    //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHH
-    //FUCK, FUCK, FUCK, FUCK, OH... FUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUCCCKKKKKK
-    //Aiuda
-    //LOL
-    //ay te voy san pedro
-    //SOY TERCO
-    //HOLA MUNDO
 }
