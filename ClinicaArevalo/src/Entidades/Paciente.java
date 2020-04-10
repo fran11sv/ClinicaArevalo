@@ -5,8 +5,9 @@ import java.sql.Date;
 
 /**
  *
- * @author BASE CC
+ * @author BASE CCDIT
  */
+
 public class Paciente {
     int idPaciente;
     String Nombres;
