@@ -17,7 +17,10 @@ public class Paciente {
     String Ocupacion;
     String Sexo;
 
-  
+    public Paciente() {
+    }
+
+
     public Paciente(int idPaciente, String Nombres, String Apellidos, String Direccion, String DUI, Date FechaNac, String Ocupacion, String Sexo) {
         this.idPaciente = idPaciente;
         this.Nombres = Nombres;
