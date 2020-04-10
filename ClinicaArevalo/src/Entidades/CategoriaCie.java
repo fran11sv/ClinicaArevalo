@@ -25,6 +25,10 @@ public class CategoriaCie {
         this.descripcion_grupo = descripcion_grupo;
     }
 
+    public CategoriaCie() {
+        
+    }
+    
     public int getId_categoriacie() {
         return id_categoriacie;
     }

@@ -48,6 +48,10 @@ public class Vademecum {
         this.sobredosificacion = sobredosificacion;
     }
 
+    public Vademecum() {
+        
+    }
+
     public int getId_insumo() {
         return id_insumo;
     }

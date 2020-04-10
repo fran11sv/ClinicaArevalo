@@ -53,6 +53,10 @@ public class Consulta {
         this.talla = talla;
     }
 
+    public Consulta() {
+        
+    }    
+
     public int getId_consulta() {
         return id_consulta;
     }

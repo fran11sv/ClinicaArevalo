@@ -25,6 +25,9 @@ public class Enfermedad {
         this.descripcion_cat = descripcion_cat;
     }
 
+    public Enfermedad() {
+    }
+
     public int getId_enfermedad() {
         return id_enfermedad;
     }

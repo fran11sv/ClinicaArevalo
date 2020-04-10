@@ -22,6 +22,10 @@ public class Detalle_Factura {
         this.id_producto = id_producto;
     }
 
+    public Detalle_Factura() {
+        
+    }
+
     public int getId_detalle_factura() {
         return id_detalle_factura;
     }

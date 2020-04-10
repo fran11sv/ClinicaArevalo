@@ -28,6 +28,10 @@ public class Factura {
         this.estado_factura = estado_factura;
     }
 
+    public Factura() {
+        
+    }  
+
     public int getNum_factura() {
         return num_factura;
     }

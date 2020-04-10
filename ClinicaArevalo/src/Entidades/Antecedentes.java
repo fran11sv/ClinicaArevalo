@@ -24,7 +24,11 @@ public class Antecedentes {
         this.familiares = familiares;
         this.personales = personales;
     }
-    
+
+    public Antecedentes() {
+        
+    }
+      
     public int getId_antecedentes() {
         return id_antecedentes;
     }

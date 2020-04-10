@@ -28,6 +28,9 @@ public class Detalle_Receta {
         this.dosis = dosis;
     }
 
+    public Detalle_Receta() {
+    }  
+
     public int getDetalle_receta() {
         return detalle_receta;
     }

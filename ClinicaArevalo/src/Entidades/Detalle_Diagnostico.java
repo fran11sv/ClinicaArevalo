@@ -25,6 +25,9 @@ public class Detalle_Diagnostico {
         this.clave = clave;
     }
 
+    public Detalle_Diagnostico() {
+    }
+
     public int getId_diagnostico() {
         return id_diagnostico;
     }

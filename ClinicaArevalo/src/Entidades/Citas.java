@@ -24,6 +24,10 @@ public class Citas {
         this.id_usuario = id_usuario;
         this.fecha_cita = fecha_cita;
     }
+
+    public Citas() {
+        
+    }
     
     public int getId_citas() {
         return id_citas;

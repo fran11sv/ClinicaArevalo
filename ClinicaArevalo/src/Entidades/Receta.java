@@ -22,6 +22,10 @@ public class Receta {
         this.indicaciones = indicaciones;
     }
 
+    public Receta() {
+        
+    }
+    
     public int getNum_receta() {
         return num_receta;
     }

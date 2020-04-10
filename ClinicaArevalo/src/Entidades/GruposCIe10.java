@@ -22,6 +22,10 @@ public class GruposCIe10 {
         this.descripcion_grupo = descripcion_grupo;
     }
 
+    public GruposCIe10() {
+        
+    }
+
     public int getId_grupo() {
         return id_grupo;
     }
