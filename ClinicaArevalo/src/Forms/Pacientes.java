@@ -275,6 +275,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         txtApellidos.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 2).toString());
         spFecha.setValue(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 3));
         txtDUI.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 4).toString());
+        txtSexo.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 5).toString());
         txtOcupacion.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 6).toString());
         txtDireccion.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 7).toString());
 
