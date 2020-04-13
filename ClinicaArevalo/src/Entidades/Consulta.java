@@ -47,13 +47,13 @@ public class Consulta implements Serializable {
     private String observaciones;
     @Column(name = "Motivo")
     private String motivo;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Presion")
-    private Double presion;
+    private String presion;
     @Column(name = "Frecuencia_cardiaca")
     private Integer frecuenciacardiaca;
     @Column(name = "Frecuencia_respiratoria")
     private Integer frecuenciarespiratoria;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Temperatura")
     private Double temperatura;
     @Column(name = "Peso")
@@ -62,9 +62,8 @@ public class Consulta implements Serializable {
     private Double talla;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConsulta")
     private List<Receta> recetaList;
-    @JoinColumn(name = "id_Diagnostico", referencedColumnName = "id_Diagnostico")
-    @ManyToOne
-    private DetalleDiagnostico idDiagnostico;
+    @OneToMany(mappedBy = "idConsulta")
+    private List<DetalleDiagnostico> detalleDiagnosticoList;
     @JoinColumn(name = "id_Paciente", referencedColumnName = "id_Paciente")
     @ManyToOne
     private Paciente idPaciente;
@@ -111,11 +110,11 @@ public class Consulta implements Serializable {
         this.motivo = motivo;
     }
 
-    public Double getPresion() {
+    public String getPresion() {
         return presion;
     }
 
-    public void setPresion(Double presion) {
+    public void setPresion(String presion) {
         this.presion = presion;
     }
 
@@ -167,12 +166,12 @@ public class Consulta implements Serializable {
         this.recetaList = recetaList;
     }
 
-    public DetalleDiagnostico getIdDiagnostico() {
-        return idDiagnostico;
+    public List<DetalleDiagnostico> getDetalleDiagnosticoList() {
+        return detalleDiagnosticoList;
     }
 
-    public void setIdDiagnostico(DetalleDiagnostico idDiagnostico) {
-        this.idDiagnostico = idDiagnostico;
+    public void setDetalleDiagnosticoList(List<DetalleDiagnostico> detalleDiagnosticoList) {
+        this.detalleDiagnosticoList = detalleDiagnosticoList;
     }
 
     public Paciente getIdPaciente() {

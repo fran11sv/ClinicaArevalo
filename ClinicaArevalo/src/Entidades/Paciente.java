@@ -57,6 +57,10 @@ public class Paciente implements Serializable {
     private String ocupacion;
     @Column(name = "Direccion")
     private String direccion;
+    @Column(name = "Estado_Civil")
+    private Character estadoCivil;
+    @Column(name = "Telefono")
+    private String telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
     private List<Citas> citasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPaciente")
@@ -141,6 +145,22 @@ public class Paciente implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public Character getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(Character estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public List<Citas> getCitasList() {
