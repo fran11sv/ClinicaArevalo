@@ -6,7 +6,6 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -38,13 +36,12 @@ public class DetalleDiagnostico implements Serializable {
     private Integer idDiagnostico;
     @Column(name = "Descripcion")
     private String descripcion;
-    @Column(name = "Clave")
-    private String clave;
+    @JoinColumn(name = "id_Consulta", referencedColumnName = "id_Consulta")
+    @ManyToOne
+    private Consulta idConsulta;
     @JoinColumn(name = "id_Enfermedad", referencedColumnName = "id")
     @ManyToOne
     private EnfermedadesCie10 idEnfermedad;
-    @OneToMany(mappedBy = "idDiagnostico")
-    private List<Consulta> consultaList;
 
     public DetalleDiagnostico() {
     }
@@ -69,12 +66,12 @@ public class DetalleDiagnostico implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getClave() {
-        return clave;
+    public Consulta getIdConsulta() {
+        return idConsulta;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setIdConsulta(Consulta idConsulta) {
+        this.idConsulta = idConsulta;
     }
 
     public EnfermedadesCie10 getIdEnfermedad() {
@@ -83,14 +80,6 @@ public class DetalleDiagnostico implements Serializable {
 
     public void setIdEnfermedad(EnfermedadesCie10 idEnfermedad) {
         this.idEnfermedad = idEnfermedad;
-    }
-
-    public List<Consulta> getConsultaList() {
-        return consultaList;
-    }
-
-    public void setConsultaList(List<Consulta> consultaList) {
-        this.consultaList = consultaList;
     }
 
     @Override

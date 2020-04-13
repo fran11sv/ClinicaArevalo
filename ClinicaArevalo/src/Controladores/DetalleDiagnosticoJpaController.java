@@ -11,10 +11,9 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entidades.EnfermedadesCie10;
 import Entidades.Consulta;
 import Entidades.DetalleDiagnostico;
-import java.util.ArrayList;
+import Entidades.EnfermedadesCie10;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -35,37 +34,28 @@ public class DetalleDiagnosticoJpaController implements Serializable {
     }
 
     public void create(DetalleDiagnostico detalleDiagnostico) {
-        if (detalleDiagnostico.getConsultaList() == null) {
-            detalleDiagnostico.setConsultaList(new ArrayList<Consulta>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Consulta idConsulta = detalleDiagnostico.getIdConsulta();
+            if (idConsulta != null) {
+                idConsulta = em.getReference(idConsulta.getClass(), idConsulta.getIdConsulta());
+                detalleDiagnostico.setIdConsulta(idConsulta);
+            }
             EnfermedadesCie10 idEnfermedad = detalleDiagnostico.getIdEnfermedad();
             if (idEnfermedad != null) {
                 idEnfermedad = em.getReference(idEnfermedad.getClass(), idEnfermedad.getId());
                 detalleDiagnostico.setIdEnfermedad(idEnfermedad);
             }
-            List<Consulta> attachedConsultaList = new ArrayList<Consulta>();
-            for (Consulta consultaListConsultaToAttach : detalleDiagnostico.getConsultaList()) {
-                consultaListConsultaToAttach = em.getReference(consultaListConsultaToAttach.getClass(), consultaListConsultaToAttach.getIdConsulta());
-                attachedConsultaList.add(consultaListConsultaToAttach);
-            }
-            detalleDiagnostico.setConsultaList(attachedConsultaList);
             em.persist(detalleDiagnostico);
+            if (idConsulta != null) {
+                idConsulta.getDetalleDiagnosticoList().add(detalleDiagnostico);
+                idConsulta = em.merge(idConsulta);
+            }
             if (idEnfermedad != null) {
                 idEnfermedad.getDetalleDiagnosticoList().add(detalleDiagnostico);
                 idEnfermedad = em.merge(idEnfermedad);
-            }
-            for (Consulta consultaListConsulta : detalleDiagnostico.getConsultaList()) {
-                DetalleDiagnostico oldIdDiagnosticoOfConsultaListConsulta = consultaListConsulta.getIdDiagnostico();
-                consultaListConsulta.setIdDiagnostico(detalleDiagnostico);
-                consultaListConsulta = em.merge(consultaListConsulta);
-                if (oldIdDiagnosticoOfConsultaListConsulta != null) {
-                    oldIdDiagnosticoOfConsultaListConsulta.getConsultaList().remove(consultaListConsulta);
-                    oldIdDiagnosticoOfConsultaListConsulta = em.merge(oldIdDiagnosticoOfConsultaListConsulta);
-                }
             }
             em.getTransaction().commit();
         } finally {
@@ -81,22 +71,27 @@ public class DetalleDiagnosticoJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             DetalleDiagnostico persistentDetalleDiagnostico = em.find(DetalleDiagnostico.class, detalleDiagnostico.getIdDiagnostico());
+            Consulta idConsultaOld = persistentDetalleDiagnostico.getIdConsulta();
+            Consulta idConsultaNew = detalleDiagnostico.getIdConsulta();
             EnfermedadesCie10 idEnfermedadOld = persistentDetalleDiagnostico.getIdEnfermedad();
             EnfermedadesCie10 idEnfermedadNew = detalleDiagnostico.getIdEnfermedad();
-            List<Consulta> consultaListOld = persistentDetalleDiagnostico.getConsultaList();
-            List<Consulta> consultaListNew = detalleDiagnostico.getConsultaList();
+            if (idConsultaNew != null) {
+                idConsultaNew = em.getReference(idConsultaNew.getClass(), idConsultaNew.getIdConsulta());
+                detalleDiagnostico.setIdConsulta(idConsultaNew);
+            }
             if (idEnfermedadNew != null) {
                 idEnfermedadNew = em.getReference(idEnfermedadNew.getClass(), idEnfermedadNew.getId());
                 detalleDiagnostico.setIdEnfermedad(idEnfermedadNew);
             }
-            List<Consulta> attachedConsultaListNew = new ArrayList<Consulta>();
-            for (Consulta consultaListNewConsultaToAttach : consultaListNew) {
-                consultaListNewConsultaToAttach = em.getReference(consultaListNewConsultaToAttach.getClass(), consultaListNewConsultaToAttach.getIdConsulta());
-                attachedConsultaListNew.add(consultaListNewConsultaToAttach);
-            }
-            consultaListNew = attachedConsultaListNew;
-            detalleDiagnostico.setConsultaList(consultaListNew);
             detalleDiagnostico = em.merge(detalleDiagnostico);
+            if (idConsultaOld != null && !idConsultaOld.equals(idConsultaNew)) {
+                idConsultaOld.getDetalleDiagnosticoList().remove(detalleDiagnostico);
+                idConsultaOld = em.merge(idConsultaOld);
+            }
+            if (idConsultaNew != null && !idConsultaNew.equals(idConsultaOld)) {
+                idConsultaNew.getDetalleDiagnosticoList().add(detalleDiagnostico);
+                idConsultaNew = em.merge(idConsultaNew);
+            }
             if (idEnfermedadOld != null && !idEnfermedadOld.equals(idEnfermedadNew)) {
                 idEnfermedadOld.getDetalleDiagnosticoList().remove(detalleDiagnostico);
                 idEnfermedadOld = em.merge(idEnfermedadOld);
@@ -104,23 +99,6 @@ public class DetalleDiagnosticoJpaController implements Serializable {
             if (idEnfermedadNew != null && !idEnfermedadNew.equals(idEnfermedadOld)) {
                 idEnfermedadNew.getDetalleDiagnosticoList().add(detalleDiagnostico);
                 idEnfermedadNew = em.merge(idEnfermedadNew);
-            }
-            for (Consulta consultaListOldConsulta : consultaListOld) {
-                if (!consultaListNew.contains(consultaListOldConsulta)) {
-                    consultaListOldConsulta.setIdDiagnostico(null);
-                    consultaListOldConsulta = em.merge(consultaListOldConsulta);
-                }
-            }
-            for (Consulta consultaListNewConsulta : consultaListNew) {
-                if (!consultaListOld.contains(consultaListNewConsulta)) {
-                    DetalleDiagnostico oldIdDiagnosticoOfConsultaListNewConsulta = consultaListNewConsulta.getIdDiagnostico();
-                    consultaListNewConsulta.setIdDiagnostico(detalleDiagnostico);
-                    consultaListNewConsulta = em.merge(consultaListNewConsulta);
-                    if (oldIdDiagnosticoOfConsultaListNewConsulta != null && !oldIdDiagnosticoOfConsultaListNewConsulta.equals(detalleDiagnostico)) {
-                        oldIdDiagnosticoOfConsultaListNewConsulta.getConsultaList().remove(consultaListNewConsulta);
-                        oldIdDiagnosticoOfConsultaListNewConsulta = em.merge(oldIdDiagnosticoOfConsultaListNewConsulta);
-                    }
-                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -151,15 +129,15 @@ public class DetalleDiagnosticoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The detalleDiagnostico with id " + id + " no longer exists.", enfe);
             }
+            Consulta idConsulta = detalleDiagnostico.getIdConsulta();
+            if (idConsulta != null) {
+                idConsulta.getDetalleDiagnosticoList().remove(detalleDiagnostico);
+                idConsulta = em.merge(idConsulta);
+            }
             EnfermedadesCie10 idEnfermedad = detalleDiagnostico.getIdEnfermedad();
             if (idEnfermedad != null) {
                 idEnfermedad.getDetalleDiagnosticoList().remove(detalleDiagnostico);
                 idEnfermedad = em.merge(idEnfermedad);
-            }
-            List<Consulta> consultaList = detalleDiagnostico.getConsultaList();
-            for (Consulta consultaListConsulta : consultaList) {
-                consultaListConsulta.setIdDiagnostico(null);
-                consultaListConsulta = em.merge(consultaListConsulta);
             }
             em.remove(detalleDiagnostico);
             em.getTransaction().commit();

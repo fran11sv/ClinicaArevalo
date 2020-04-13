@@ -2,23 +2,23 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="ClinicaArevaloPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>Entidades.Usuario</class>
-    <class>Entidades.DetalleFactura</class>
-    <class>Entidades.Factura</class>
-    <class>Entidades.Receta</class>
-    <class>Entidades.DetalleReceta</class>
-    <class>Entidades.Vademecum</class>
-    <class>Entidades.CategoriasCie10</class>
-    <class>Entidades.DetalleDiagnostico</class>
-    <class>Entidades.SubGruposCie10</class>
     <class>Entidades.Antecedentes</class>
     <class>Entidades.CategoriaProducto</class>
-    <class>Entidades.EnfermedadesCie10</class>
+    <class>Entidades.CategoriasCie10</class>
     <class>Entidades.Citas</class>
-    <class>Entidades.Paciente</class>
     <class>Entidades.Consulta</class>
+    <class>Entidades.DetalleDiagnostico</class>
+    <class>Entidades.DetalleFactura</class>
+    <class>Entidades.DetalleReceta</class>
+    <class>Entidades.EnfermedadesCie10</class>
+    <class>Entidades.Factura</class>
     <class>Entidades.GruposCie10</class>
+    <class>Entidades.Paciente</class>
     <class>Entidades.Producto</class>
+    <class>Entidades.Receta</class>
+    <class>Entidades.SubGruposCie10</class>
+    <class>Entidades.Usuario</class>
+    <class>Entidades.Vademecum</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://194.5.156.94:3306/u795523052_clinica?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="u795523052_admin"/>
