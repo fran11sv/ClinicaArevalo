@@ -60,6 +60,18 @@ public class Consulta implements Serializable {
     private Double peso;
     @Column(name = "Talla")
     private Double talla;
+    @Basic(optional = false)
+    @Column(name = "Pulso")
+    private int pulso;
+    @Basic(optional = false)
+    @Column(name = "Examen_Fisico")
+    private String examenFisico;
+    @Basic(optional = false)
+    @Column(name = "Presente_Enfermedad")
+    private String presenteEnfermedad;
+    @Basic(optional = false)
+    @Column(name = "IMC")
+    private double imc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConsulta")
     private List<Receta> recetaList;
     @OneToMany(mappedBy = "idConsulta")
@@ -76,6 +88,14 @@ public class Consulta implements Serializable {
 
     public Consulta(Integer idConsulta) {
         this.idConsulta = idConsulta;
+    }
+
+    public Consulta(Integer idConsulta, int pulso, String examenFisico, String presenteEnfermedad, double imc) {
+        this.idConsulta = idConsulta;
+        this.pulso = pulso;
+        this.examenFisico = examenFisico;
+        this.presenteEnfermedad = presenteEnfermedad;
+        this.imc = imc;
     }
 
     public Integer getIdConsulta() {
@@ -156,6 +176,38 @@ public class Consulta implements Serializable {
 
     public void setTalla(Double talla) {
         this.talla = talla;
+    }
+
+    public int getPulso() {
+        return pulso;
+    }
+
+    public void setPulso(int pulso) {
+        this.pulso = pulso;
+    }
+
+    public String getExamenFisico() {
+        return examenFisico;
+    }
+
+    public void setExamenFisico(String examenFisico) {
+        this.examenFisico = examenFisico;
+    }
+
+    public String getPresenteEnfermedad() {
+        return presenteEnfermedad;
+    }
+
+    public void setPresenteEnfermedad(String presenteEnfermedad) {
+        this.presenteEnfermedad = presenteEnfermedad;
+    }
+
+    public double getImc() {
+        return imc;
+    }
+
+    public void setImc(double imc) {
+        this.imc = imc;
     }
 
     public List<Receta> getRecetaList() {
