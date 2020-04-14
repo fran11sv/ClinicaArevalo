@@ -60,16 +60,31 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         txtSexo = new javax.swing.JTextField();
         txtDUI = new javax.swing.JTextField();
         txtApellidos = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtEstado = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtTelefono = new javax.swing.JTextField();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pacientes");
+        setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        setForeground(new java.awt.Color(253, 149, 63));
 
         jPanel2.setBackground(new java.awt.Color(187, 232, 223));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pacientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_BOTTOM, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(239, 239, 239))); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(15, 76, 129));
 
         JSpinner.DateEditor de = new JSpinner.DateEditor(spFecha, "dd-MM-yyyy");
         spFecha.setEditor(de);
 
+        jLabel9.setForeground(new java.awt.Color(239, 239, 239));
         jLabel9.setText("Fecha de Nacimiento:");
 
+        tbPacientes.setBackground(new java.awt.Color(187, 232, 223));
+        tbPacientes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        tbPacientes.setForeground(new java.awt.Color(0, 0, 0));
         tbPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -85,6 +100,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         });
         jScrollPane1.setViewportView(tbPacientes);
 
+        btnEditar.setForeground(new java.awt.Color(0, 0, 0));
         btnEditar.setText("EDITAR");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,16 +108,22 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
+        jLabel6.setForeground(new java.awt.Color(239, 239, 239));
         jLabel6.setText("DUI:");
 
+        jLabel5.setForeground(new java.awt.Color(239, 239, 239));
         jLabel5.setText("Direccion:");
 
+        jLabel3.setForeground(new java.awt.Color(239, 239, 239));
         jLabel3.setText("Nombres:");
 
+        jLabel4.setForeground(new java.awt.Color(239, 239, 239));
         jLabel4.setText("Apellidos:");
 
+        jLabel2.setForeground(new java.awt.Color(239, 239, 239));
         jLabel2.setText("ID Paciente:");
 
+        btnEliminar.setForeground(new java.awt.Color(0, 0, 0));
         btnEliminar.setText("ELIMINAR");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +131,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(239, 239, 239));
         jLabel1.setText("Pacientes CRUD");
 
         txtOcupacion.addActionListener(new java.awt.event.ActionListener() {
@@ -117,16 +140,34 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
+        btnReporte.setForeground(new java.awt.Color(0, 0, 0));
         btnReporte.setText("REPORTE");
 
+        jLabel8.setForeground(new java.awt.Color(239, 239, 239));
         jLabel8.setText("Ocupacion:");
 
+        jLabel7.setForeground(new java.awt.Color(239, 239, 239));
         jLabel7.setText("Sexo:");
 
+        btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnAgregar.setText("AGREGAR");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel10.setText("Estado Civil:");
+
+        jLabel11.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel11.setText("Teléfono:");
+
+        btnVolver.setForeground(new java.awt.Color(0, 0, 0));
+        btnVolver.setText("VOLVER");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
             }
         });
 
@@ -137,11 +178,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel9)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel8)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -171,19 +208,36 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnReporte)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnAgregar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminar)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel9))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGap(53, 53, 53)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btnEliminar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btnAgregar)
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addComponent(btnReporte)
+                                    .addGap(60, 60, 60)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -191,6 +245,9 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -224,18 +281,28 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAgregar)
-                            .addComponent(btnEditar)
-                            .addComponent(btnEliminar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnReporte))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(396, Short.MAX_VALUE))
+                            .addComponent(btnEditar))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnVolver))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReporte)
+                        .addGap(0, 279, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -244,8 +311,8 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,6 +332,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         try {
             Paciente P = new Paciente();
             char caracter = txtSexo.getText().charAt(0);
+            char caracterEstado = txtEstado.getText().charAt(0);
 
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
             String spinnerValue = formater.format(spFecha.getValue());
@@ -277,6 +345,8 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             P.setFechaNacimiento(date);
             P.setOcupacion(this.txtOcupacion.getText());
             P.setDireccion(this.txtDireccion.getText());
+            P.setEstadoCivil(caracterEstado);
+            P.setTelefono(this.txtTelefono.getText());
 
             PC.create(P);
             JOptionPane.showMessageDialog(null, "Datos Guardados Exitosamente");
@@ -300,6 +370,8 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         txtSexo.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 5).toString());
         txtOcupacion.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 6).toString());
         txtDireccion.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 7).toString());
+        txtEstado.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 8).toString());
+        txtTelefono.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(),9).toString());
 
         String id = tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString();
         Editar = (Paciente) PC.findPaciente(Integer.parseInt(id));
@@ -312,6 +384,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             String spinnerValue = formater.format(spFecha.getValue());
             Date date = formater.parse(spinnerValue);
             char caracter = txtSexo.getText().charAt(0);
+            char caracterEstado = txtEstado.getText().charAt(0);
             
              Editar.setNombres(this.txtNombres.getText());
              Editar.setApellidos(this.txtApellidos.getText());
@@ -320,6 +393,8 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
              Editar.setFechaNacimiento(date);
              Editar.setOcupacion(this.txtOcupacion.getText());
              Editar.setDireccion(this.txtDireccion.getText());
+             Editar.setEstadoCivil(caracterEstado);
+             Editar.setTelefono(this.txtTelefono.getText());
             
             PC.edit(Editar);
             JOptionPane.showMessageDialog(null, "El registro fue editado con Exito");
@@ -341,6 +416,10 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             JOptionPane.showMessageDialog(null, e.getMessage());
         } 
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverActionPerformed
 DefaultTableModel modelo;
     private void CrearModelo() {
         try {
@@ -348,8 +427,10 @@ DefaultTableModel modelo;
                     null, new String[]{
                         "ID", "Nombres","Apellidos",
                         "Fecha de Nacimiento","DUI","Sexo","Ocupación",
-                         "Dirección"}) {
+                         "Dirección","Estado Civil","Teléfono"}) {
                 Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
                     java.lang.String.class,
                     java.lang.String.class,
                     java.lang.String.class,
@@ -394,6 +475,8 @@ DefaultTableModel modelo;
                 modelo.setValueAt(listUsuarios.get(i).getSexo(), i, 5);
                 modelo.setValueAt(listUsuarios.get(i).getOcupacion(), i, 6);
                 modelo.setValueAt(listUsuarios.get(i).getDireccion(), i, 7);
+                modelo.setValueAt(listUsuarios.get(i).getEstadoCivil(), i, 8);
+                modelo.setValueAt(listUsuarios.get(i).getTelefono(), i, 9);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -439,7 +522,10 @@ DefaultTableModel modelo;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnReporte;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -456,9 +542,11 @@ DefaultTableModel modelo;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtDUI;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtIdPaciente;
     private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtOcupacion;
     private javax.swing.JTextField txtSexo;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
