@@ -146,6 +146,8 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jLabel8.setForeground(new java.awt.Color(239, 239, 239));
         jLabel8.setText("Ocupacion:");
 
+        txtIdPaciente.setEditable(false);
+
         jLabel7.setForeground(new java.awt.Color(239, 239, 239));
         jLabel7.setText("Sexo:");
 
@@ -363,6 +365,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     }//GEN-LAST:event_txtOcupacionActionPerformed
 
     private void tbPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPacientesMouseClicked
+        txtIdPaciente.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString());
         txtNombres.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 1).toString());
         txtApellidos.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 2).toString());
         spFecha.setValue(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 3));
