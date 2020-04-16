@@ -21,7 +21,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author babef
+ * @author franb
  */
 @Entity
 @Table(name = "Categoria_Producto")

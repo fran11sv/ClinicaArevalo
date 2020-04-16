@@ -16,10 +16,11 @@ import Entidades.Paciente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
- * @author babef
+ * @author franb
  */
 public class AntecedentesJpaController implements Serializable {
 
@@ -160,6 +161,16 @@ public class AntecedentesJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    public List<Antecedentes> findbyIdPaciente (Paciente id) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Antecedentes> query=em.createNamedQuery("Antecedentes.findbyIdPaciente",Antecedentes.class);
+            query.setParameter("numero",id);
+            return query.getResultList();
         } finally {
             em.close();
         }

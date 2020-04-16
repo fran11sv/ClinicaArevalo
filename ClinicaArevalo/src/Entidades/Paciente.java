@@ -24,12 +24,14 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author babef
+ * @author franb
  */
 @Entity
 @Table(name = "Paciente")
 @NamedQueries({
-    @NamedQuery(name = "Paciente.findAll", query = "SELECT p FROM Paciente p")})
+    @NamedQuery(name = "Paciente.findAll", query = "SELECT p FROM Paciente p"),
+    @NamedQuery(name = "findPaciente.findByNombre", query = "SELECT p FROM Paciente p WHERE p.nombres LIKE :nombreBuscar order by p.apellidos"),
+    @NamedQuery(name = "findPaciente.findByDui", query = "SELECT p FROM Paciente p WHERE p.dui LIKE :duiBuscar order by p.apellidos")})
 public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -20,7 +20,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author babef
+ * @author franb
  */
 public class DetalleDiagnosticoJpaController implements Serializable {
 

@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author babef
+ * @author franb
  */
 @Entity
 @Table(name = "Citas")

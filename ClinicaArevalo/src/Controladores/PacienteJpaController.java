@@ -20,10 +20,11 @@ import Entidades.Consulta;
 import Entidades.Paciente;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
- * @author babef
+ * @author franb
  */
 public class PacienteJpaController implements Serializable {
 
@@ -299,6 +300,26 @@ public class PacienteJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    public List<Paciente> findPacienteporNombre (String nombre) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Paciente> query=em.createNamedQuery("findPaciente.findByNombre",Paciente.class);
+            query.setParameter("nombreBuscar","%"+nombre+"%");
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+     public List<Paciente> findPacienteporDui (String dui) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Paciente> query=em.createNamedQuery("findPaciente.findByDui",Paciente.class);
+            query.setParameter("duiBuscar","%"+dui+"%");
+            return query.getResultList();
         } finally {
             em.close();
         }

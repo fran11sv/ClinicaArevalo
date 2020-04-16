@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
  * @author BASE CCDIT
  */
 public class Login extends javax.swing.JFrame {
+public static Usuario DatosUsuario;
     
     Usuario U = new Usuario();
     UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
@@ -29,9 +30,10 @@ public class Login extends javax.swing.JFrame {
             Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.clave = :clave ");
             query.setParameter("usuario", usuario);
             query.setParameter("clave", clave);
-            List resultado = query.getResultList();
+            List<Usuario> resultado = query.getResultList();
             if (!resultado.isEmpty()) {
                 valor=true;
+                DatosUsuario = (Usuario) UC.findUsuario(resultado.get(0).getIdUsuario());
             } else {
                 valor = false;
                 JOptionPane.showMessageDialog(null, "Error datos erróneos");
@@ -254,7 +256,6 @@ public class Login extends javax.swing.JFrame {
             if (valor == true) {             
                 menu.setVisible(true);
                 this.setVisible(false);
-                JOptionPane.showMessageDialog(null, "Inicio exitoso");
             }else{
                 
             }

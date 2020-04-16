@@ -24,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author babef
+ * @author franb
  */
 public class ConsultaJpaController implements Serializable {
 

@@ -20,7 +20,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author babef
+ * @author franb
  */
 @Entity
 @Table(name = "Vademecum")
