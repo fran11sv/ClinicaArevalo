@@ -514,7 +514,9 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 DefaultTableModel modelo;
     private void CrearModelo() {

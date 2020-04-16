@@ -253,7 +253,7 @@ public class Login extends javax.swing.JFrame {
             
             if (valor == true) {             
                 menu.setVisible(true);
-                this.dispose();
+                this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Inicio exitoso");
             }else{
                 
