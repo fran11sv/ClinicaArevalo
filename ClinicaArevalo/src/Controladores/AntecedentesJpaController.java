@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author franb
+ * @author babef
  */
 public class AntecedentesJpaController implements Serializable {
 

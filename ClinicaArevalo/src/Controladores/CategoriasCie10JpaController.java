@@ -22,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author franb
+ * @author babef
  */
 public class CategoriasCie10JpaController implements Serializable {
 

@@ -23,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author franb
+ * @author babef
  */
 public class PacienteJpaController implements Serializable {
 

@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author franb
+ * @author babef
  */
 @Entity
 @Table(name = "Factura")

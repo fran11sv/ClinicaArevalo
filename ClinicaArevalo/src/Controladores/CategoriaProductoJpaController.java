@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author franb
+ * @author babef
  */
 public class CategoriaProductoJpaController implements Serializable {
 
