@@ -17,6 +17,7 @@ import Entidades.Receta;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -189,6 +190,16 @@ public class DetalleRecetaJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+     public List<DetalleReceta> findbyNumReceta (Receta receta) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<DetalleReceta> query=em.createNamedQuery("DetalleReceta.findbyNumReceta",DetalleReceta.class);
+            query.setParameter("numreceta",receta);
+            return query.getResultList();
         } finally {
             em.close();
         }

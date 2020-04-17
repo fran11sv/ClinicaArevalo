@@ -27,7 +27,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "EnfermedadesCie10")
 @NamedQueries({
-    @NamedQuery(name = "EnfermedadesCie10.findAll", query = "SELECT e FROM EnfermedadesCie10 e")})
+    @NamedQuery(name = "EnfermedadesCie10.findAll", query = "SELECT e FROM EnfermedadesCie10 e"),
+    @NamedQuery(name = "findEnfermedades.findbyNombre", query = "SELECT p FROM EnfermedadesCie10 p WHERE p.descripcion LIKE :nombreBuscar order by p.descripcion"),
+    @NamedQuery(name = "findEnfermedades.findByCategoria", query = "SELECT  e FROM EnfermedadesCie10 e INNER JOIN e.idCategoria d WHERE d.descripcion LIKE :categoriaBuscar order by e.descripcion")})
 public class EnfermedadesCie10 implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -100,7 +102,7 @@ public class EnfermedadesCie10 implements Serializable {
     public void setDetalleDiagnosticoList(List<DetalleDiagnostico> detalleDiagnosticoList) {
         this.detalleDiagnosticoList = detalleDiagnosticoList;
     }
-
+   
     @Override
     public int hashCode() {
         int hash = 0;
@@ -120,6 +122,7 @@ public class EnfermedadesCie10 implements Serializable {
         }
         return true;
     }
+    
 
     @Override
     public String toString() {

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -211,6 +212,16 @@ public class RecetaJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    public List<Receta> findbyIdConsultaDESC (Consulta id) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Receta> query=em.createNamedQuery("Receta.findbyIdConsultaDESC",Receta.class);
+            query.setParameter("idconsulta",id);
+            return query.getResultList();
         } finally {
             em.close();
         }

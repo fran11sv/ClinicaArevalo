@@ -21,6 +21,7 @@ import java.util.List;
 import Entidades.DetalleDiagnostico;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -303,6 +304,16 @@ public class ConsultaJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+     public List<Consulta> findbyIdPacienteDESC (Paciente id) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Consulta> query=em.createNamedQuery("Consulta.findbyIdPacienteDESC",Consulta.class);
+            query.setParameter("idpaciente",id);
+            return query.getResultList();
         } finally {
             em.close();
         }

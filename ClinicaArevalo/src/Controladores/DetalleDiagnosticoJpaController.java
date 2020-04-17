@@ -17,6 +17,7 @@ import Entidades.EnfermedadesCie10;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -193,5 +194,14 @@ public class DetalleDiagnosticoJpaController implements Serializable {
             em.close();
         }
     }
-    
+    public List<DetalleDiagnostico> findbyConsulta (Consulta consulta) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<DetalleDiagnostico> query=em.createNamedQuery("DetalleDiagnostico.findbyIdConsulta",DetalleDiagnostico.class);
+            query.setParameter("idconsulta",consulta);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

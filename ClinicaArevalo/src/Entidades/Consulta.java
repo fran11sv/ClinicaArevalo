@@ -31,7 +31,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "Consulta")
 @NamedQueries({
-    @NamedQuery(name = "Consulta.findAll", query = "SELECT c FROM Consulta c")})
+    @NamedQuery(name = "Consulta.findAll", query = "SELECT c FROM Consulta c"),
+    @NamedQuery(name = "Consulta.findbyIdPacienteDESC", query = "SELECT c FROM Consulta c WHERE c.idPaciente=:idpaciente ORDER BY c.idConsulta DESC")})
 public class Consulta implements Serializable {
 
     private static final long serialVersionUID = 1L;

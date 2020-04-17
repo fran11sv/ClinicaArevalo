@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -182,6 +183,17 @@ public class VademecumJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    public List<Vademecum> findVademecumporNombre (String nombre) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Vademecum> query=em.createNamedQuery("Vademecum.findbyNombre",Vademecum.class);
+            query.setParameter("nombreBuscar", nombre+"%");
+            query.setMaxResults(10);
+            return query.getResultList();
         } finally {
             em.close();
         }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -214,6 +215,28 @@ public class EnfermedadesCie10JpaController implements Serializable {
         } finally {
             em.close();
         }
+    } public List<EnfermedadesCie10> findEnfermedadporNombre (String nombre) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<EnfermedadesCie10> query=em.createNamedQuery("findEnfermedades.findbyNombre",EnfermedadesCie10.class);
+            query.setParameter("nombreBuscar","%"+nombre+"%");
+            query.setMaxResults(50);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
     }
+     public List<EnfermedadesCie10> findEnfermedadporCategoria (String categoria) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<EnfermedadesCie10> query=em.createNamedQuery("findEnfermedades.findByCategoria",EnfermedadesCie10.class);
+            query.setParameter("categoriaBuscar","%"+categoria+"%");
+            query.setMaxResults(50);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
     
 }

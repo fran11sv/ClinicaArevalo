@@ -25,7 +25,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Vademecum")
 @NamedQueries({
-    @NamedQuery(name = "Vademecum.findAll", query = "SELECT v FROM Vademecum v")})
+    @NamedQuery(name = "Vademecum.findAll", query = "SELECT v FROM Vademecum v"),
+    @NamedQuery(name = "Vademecum.findbyNombre", query = "SELECT v FROM Vademecum v WHERE v.principioactivo LIKE :nombreBuscar")})
 public class Vademecum implements Serializable {
 
     private static final long serialVersionUID = 1L;
