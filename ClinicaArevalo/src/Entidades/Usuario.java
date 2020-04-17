@@ -32,26 +32,20 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_usuario")
     private Integer idUsuario;
-    @Basic(optional = false)
-    @Column(name = "Usuario")
-    private String usuario;
-    @Basic(optional = false)
-    @Column(name = "Contrase\u00f1a")
-    private String contraseña;
-    @Basic(optional = false)
-    @Column(name = "Nombres")
-    private String nombres;
-    @Basic(optional = false)
     @Column(name = "Apellidos")
     private String apellidos;
-    @Column(name = "JVPM")
-    private String jvpm;
-    @Basic(optional = false)
+    @Column(name = "Clave")
+    private String clave;
     @Column(name = "DUI")
     private String dui;
-    @Basic(optional = false)
+    @Column(name = "JVPM")
+    private String jvpm;
     @Column(name = "NIT")
     private String nit;
+    @Column(name = "Nombres")
+    private String nombres;
+    @Column(name = "Usuario")
+    private String usuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Citas> citasList;
     @OneToMany(mappedBy = "idUsuario")
@@ -66,46 +60,12 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String usuario, String contraseña, String nombres, String apellidos, String dui, String nit) {
-        this.idUsuario = idUsuario;
-        this.usuario = usuario;
-        this.contraseña = contraseña;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.dui = dui;
-        this.nit = nit;
-    }
-
     public Integer getIdUsuario() {
         return idUsuario;
     }
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
     }
 
     public String getApellidos() {
@@ -116,12 +76,12 @@ public class Usuario implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public String getJvpm() {
-        return jvpm;
+    public String getClave() {
+        return clave;
     }
 
-    public void setJvpm(String jvpm) {
-        this.jvpm = jvpm;
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
     public String getDui() {
@@ -132,12 +92,36 @@ public class Usuario implements Serializable {
         this.dui = dui;
     }
 
+    public String getJvpm() {
+        return jvpm;
+    }
+
+    public void setJvpm(String jvpm) {
+        this.jvpm = jvpm;
+    }
+
     public String getNit() {
         return nit;
     }
 
     public void setNit(String nit) {
         this.nit = nit;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public List<Citas> getCitasList() {

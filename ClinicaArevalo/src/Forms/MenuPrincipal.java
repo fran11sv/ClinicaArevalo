@@ -31,13 +31,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnRegistro = new javax.swing.JButton();
+        btnCie10 = new javax.swing.JButton();
+        btnAgenda = new javax.swing.JButton();
+        btnVademecum = new javax.swing.JButton();
+        btnFacturas = new javax.swing.JButton();
+        btnConsulta = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -59,46 +59,76 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(15, 76, 129));
 
-        jButton2.setBackground(new java.awt.Color(76, 201, 223));
-        jButton2.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Registro");
-        jButton2.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnRegistro.setBackground(new java.awt.Color(76, 201, 223));
+        btnRegistro.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
+        btnRegistro.setForeground(new java.awt.Color(0, 0, 0));
+        btnRegistro.setText("Registro");
+        btnRegistro.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroActionPerformed(evt);
+            }
+        });
 
-        jButton6.setBackground(new java.awt.Color(76, 201, 223));
-        jButton6.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(0, 0, 0));
-        jButton6.setText("CIE10");
-        jButton6.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnCie10.setBackground(new java.awt.Color(76, 201, 223));
+        btnCie10.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
+        btnCie10.setForeground(new java.awt.Color(0, 0, 0));
+        btnCie10.setText("CIE10");
+        btnCie10.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnCie10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCie10ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(76, 201, 223));
-        jButton3.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Agenda");
-        jButton3.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnAgenda.setBackground(new java.awt.Color(76, 201, 223));
+        btnAgenda.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
+        btnAgenda.setForeground(new java.awt.Color(0, 0, 0));
+        btnAgenda.setText("Agenda");
+        btnAgenda.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnAgenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgendaActionPerformed(evt);
+            }
+        });
 
-        jButton4.setBackground(new java.awt.Color(76, 201, 223));
-        jButton4.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Vademecum");
-        jButton4.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnVademecum.setBackground(new java.awt.Color(76, 201, 223));
+        btnVademecum.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
+        btnVademecum.setForeground(new java.awt.Color(0, 0, 0));
+        btnVademecum.setText("Vademecum");
+        btnVademecum.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnVademecum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVademecumActionPerformed(evt);
+            }
+        });
 
-        jButton5.setBackground(new java.awt.Color(76, 201, 223));
-        jButton5.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setText("Facturas");
-        jButton5.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnFacturas.setBackground(new java.awt.Color(76, 201, 223));
+        btnFacturas.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
+        btnFacturas.setForeground(new java.awt.Color(0, 0, 0));
+        btnFacturas.setText("Facturas");
+        btnFacturas.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnFacturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFacturasActionPerformed(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(76, 201, 223));
-        jButton1.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Consulta");
-        jButton1.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnConsulta.setBackground(new java.awt.Color(76, 201, 223));
+        btnConsulta.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
+        btnConsulta.setForeground(new java.awt.Color(0, 0, 0));
+        btnConsulta.setText("Consulta");
+        btnConsulta.setPreferredSize(new java.awt.Dimension(250, 100));
+        btnConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaActionPerformed(evt);
+            }
+        });
 
-        jButton7.setBackground(new java.awt.Color(76, 201, 223));
-        jButton7.setFont(new java.awt.Font("Liberation Sans", 0, 32)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(0, 0, 0));
-        jButton7.setText("Cerrar Sesión");
+        btnLogout.setBackground(new java.awt.Color(76, 201, 223));
+        btnLogout.setFont(new java.awt.Font("Liberation Sans", 0, 32)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(0, 0, 0));
+        btnLogout.setText("Cerrar Sesión");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -109,19 +139,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnVademecum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCie10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(206, 206, 206)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(206, 206, 206))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -130,19 +160,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVademecum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCie10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
 
@@ -193,7 +223,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -229,6 +259,42 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
+        Consulta_Medica consulta = new Consulta_Medica();
+        consulta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnConsultaActionPerformed
+
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+       Pacientes paciente = new Pacientes();
+       paciente.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void btnAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendaActionPerformed
+        Agenda agenda = new Agenda();
+        agenda.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAgendaActionPerformed
+
+    private void btnVademecumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVademecumActionPerformed
+        Vademecum vademecum = new Vademecum();
+        vademecum.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVademecumActionPerformed
+
+    private void btnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturasActionPerformed
+        Facturas facturas = new Facturas();
+        facturas.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnFacturasActionPerformed
+
+    private void btnCie10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCie10ActionPerformed
+        CIE10 cie = new CIE10();
+        cie.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCie10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,13 +332,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton btnAgenda;
+    private javax.swing.JButton btnCie10;
+    private javax.swing.JButton btnConsulta;
+    private javax.swing.JButton btnFacturas;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnRegistro;
+    private javax.swing.JButton btnVademecum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

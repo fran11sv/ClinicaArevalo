@@ -60,18 +60,14 @@ public class Consulta implements Serializable {
     private Double peso;
     @Column(name = "Talla")
     private Double talla;
-    @Basic(optional = false)
     @Column(name = "Pulso")
-    private int pulso;
-    @Basic(optional = false)
+    private Integer pulso;
     @Column(name = "Examen_Fisico")
     private String examenFisico;
-    @Basic(optional = false)
     @Column(name = "Presente_Enfermedad")
     private String presenteEnfermedad;
-    @Basic(optional = false)
     @Column(name = "IMC")
-    private double imc;
+    private Double imc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConsulta")
     private List<Receta> recetaList;
     @OneToMany(mappedBy = "idConsulta")
@@ -88,14 +84,6 @@ public class Consulta implements Serializable {
 
     public Consulta(Integer idConsulta) {
         this.idConsulta = idConsulta;
-    }
-
-    public Consulta(Integer idConsulta, int pulso, String examenFisico, String presenteEnfermedad, double imc) {
-        this.idConsulta = idConsulta;
-        this.pulso = pulso;
-        this.examenFisico = examenFisico;
-        this.presenteEnfermedad = presenteEnfermedad;
-        this.imc = imc;
     }
 
     public Integer getIdConsulta() {
@@ -178,11 +166,11 @@ public class Consulta implements Serializable {
         this.talla = talla;
     }
 
-    public int getPulso() {
+    public Integer getPulso() {
         return pulso;
     }
 
-    public void setPulso(int pulso) {
+    public void setPulso(Integer pulso) {
         this.pulso = pulso;
     }
 
@@ -202,11 +190,11 @@ public class Consulta implements Serializable {
         this.presenteEnfermedad = presenteEnfermedad;
     }
 
-    public double getImc() {
+    public Double getImc() {
         return imc;
     }
 
-    public void setImc(double imc) {
+    public void setImc(Double imc) {
         this.imc = imc;
     }
 
