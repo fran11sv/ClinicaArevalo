@@ -116,8 +116,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         });
         jScrollPane1.setViewportView(tbPacientes);
 
+        btnEditar.setBackground(new java.awt.Color(76, 201, 223));
+        btnEditar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(0, 0, 0));
         btnEditar.setText("EDITAR");
+        btnEditar.setPreferredSize(new java.awt.Dimension(150, 35));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -154,8 +157,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jLabel2.setText("ID Paciente:");
         jLabel2.setPreferredSize(new java.awt.Dimension(200, 35));
 
+        btnEliminar.setBackground(new java.awt.Color(76, 201, 223));
+        btnEliminar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(0, 0, 0));
         btnEliminar.setText("ELIMINAR");
+        btnEliminar.setPreferredSize(new java.awt.Dimension(150, 35));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -179,8 +185,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
+        btnReporte.setBackground(new java.awt.Color(76, 201, 223));
+        btnReporte.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnReporte.setForeground(new java.awt.Color(0, 0, 0));
         btnReporte.setText("REPORTE");
+        btnReporte.setPreferredSize(new java.awt.Dimension(150, 35));
 
         jLabel8.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(239, 239, 239));
@@ -201,9 +210,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jLabel7.setText("Sexo:");
         jLabel7.setPreferredSize(new java.awt.Dimension(200, 35));
 
+        btnAgregar.setBackground(new java.awt.Color(76, 201, 223));
+        btnAgregar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnAgregar.setText("AGREGAR");
-        btnAgregar.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnAgregar.setPreferredSize(new java.awt.Dimension(150, 35));
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -252,8 +263,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         txtTelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTelefono.setPreferredSize(new java.awt.Dimension(200, 35));
 
+        btnVolver.setBackground(new java.awt.Color(76, 201, 223));
+        btnVolver.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(0, 0, 0));
-        btnVolver.setText("VOLVER");
+        btnVolver.setText("Menú Principal");
+        btnVolver.setPreferredSize(new java.awt.Dimension(150, 35));
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -265,7 +279,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,17 +318,17 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                             .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
