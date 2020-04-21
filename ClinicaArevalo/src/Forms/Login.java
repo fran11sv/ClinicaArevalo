@@ -110,15 +110,19 @@ public static Usuario DatosUsuario;
             }
         });
 
-        jLabel2.setText("Icono 3");
+        jLabel2.setText("Icono Clinica");
 
-        jLabel4.setText("icono1");
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Usuario:");
 
-        jLabel5.setText("icono2");
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Pasword:");
 
         pswClave.setBackground(new java.awt.Color(239, 239, 239));
         pswClave.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        pswClave.setForeground(new java.awt.Color(239, 239, 239));
+        pswClave.setForeground(new java.awt.Color(0, 0, 0));
         pswClave.setSelectedTextColor(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -133,7 +137,7 @@ public static Usuario DatosUsuario;
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(173, 173, 173)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +208,7 @@ public static Usuario DatosUsuario;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

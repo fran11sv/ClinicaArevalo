@@ -5,6 +5,8 @@
  */
 package Entidades;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -28,6 +31,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Antecedentes.findAll", query = "SELECT a FROM Antecedentes a"),
     @NamedQuery(name = "Antecedentes.findbyIdPaciente", query = "SELECT a FROM Antecedentes a WHERE a.idPaciente=:numero")})
 public class Antecedentes implements Serializable {
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,7 +61,9 @@ public class Antecedentes implements Serializable {
     }
 
     public void setIdAntecedentes(Integer idAntecedentes) {
+        Integer oldIdAntecedentes = this.idAntecedentes;
         this.idAntecedentes = idAntecedentes;
+        changeSupport.firePropertyChange("idAntecedentes", oldIdAntecedentes, idAntecedentes);
     }
 
     public String getFamiliares() {
@@ -63,7 +71,9 @@ public class Antecedentes implements Serializable {
     }
 
     public void setFamiliares(String familiares) {
+        String oldFamiliares = this.familiares;
         this.familiares = familiares;
+        changeSupport.firePropertyChange("familiares", oldFamiliares, familiares);
     }
 
     public String getPersonales() {
@@ -71,7 +81,9 @@ public class Antecedentes implements Serializable {
     }
 
     public void setPersonales(String personales) {
+        String oldPersonales = this.personales;
         this.personales = personales;
+        changeSupport.firePropertyChange("personales", oldPersonales, personales);
     }
 
     public Paciente getIdPaciente() {
@@ -79,7 +91,9 @@ public class Antecedentes implements Serializable {
     }
 
     public void setIdPaciente(Paciente idPaciente) {
+        Paciente oldIdPaciente = this.idPaciente;
         this.idPaciente = idPaciente;
+        changeSupport.firePropertyChange("idPaciente", oldIdPaciente, idPaciente);
     }
 
     @Override
@@ -105,6 +119,14 @@ public class Antecedentes implements Serializable {
     @Override
     public String toString() {
         return "Entidades.Antecedentes[ idAntecedentes=" + idAntecedentes + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
