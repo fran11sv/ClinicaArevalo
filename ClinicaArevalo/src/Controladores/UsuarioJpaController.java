@@ -21,6 +21,7 @@ import Entidades.Factura;
 import Entidades.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -309,5 +310,14 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-    
+    public List<Usuario> findporJoin(String usuario){
+        EntityManager em = getEntityManager();
+        try{
+            TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findporId",Usuario.class);
+            query.setParameter("idProd", "="+usuario);
+            return query.getResultList();
+        }finally{
+            em.close();
+        }
+    }
 }

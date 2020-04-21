@@ -17,6 +17,7 @@ import Entidades.Factura;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -190,6 +191,16 @@ public class DetalleFacturaJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
+            em.close();
+        }
+    }
+    public List<DetalleFactura> findporJoin(int idProd){
+        EntityManager em = getEntityManager();
+        try{
+            TypedQuery<DetalleFactura> query = em.createNamedQuery("DetalleFactura.findporJoin",DetalleFactura.class);
+            query.setParameter("idProd", "="+idProd);
+            return query.getResultList();
+        }finally{
             em.close();
         }
     }

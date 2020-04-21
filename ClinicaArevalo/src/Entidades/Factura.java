@@ -30,7 +30,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "Factura")
 @NamedQueries({
-    @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f")})
+    @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f"),
+    @NamedQuery(name = "Factura.findporIdUsuario", query = "SELECT u.usuario FROM Usuario u, Factura f WHERE f.idUsuario = :idUsu")})
 public class Factura implements Serializable {
 
     private static final long serialVersionUID = 1L;
