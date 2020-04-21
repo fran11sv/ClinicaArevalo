@@ -2706,7 +2706,9 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private void btnMenuTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuTratamientoActionPerformed
          int resp = JOptionPane.showConfirmDialog(null, "¿Desea volver al menú principal? Recuerde que los datos ingresados sin guardar se perderán", "Regresar a Menú", JOptionPane.YES_NO_OPTION);
         if (JOptionPane.YES_OPTION == resp) {
-            //INSERTAR CODIGO PARA REGRESAR AL MENÚ
+           MenuPrincipal menu = new MenuPrincipal();
+           menu.setVisible(true);           
+           this.setVisible(false);
         } else {
 
         }

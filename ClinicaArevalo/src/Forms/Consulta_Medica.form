@@ -3747,14 +3747,14 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jSeparator1" pref="5" max="32767" attributes="0"/>
+                                      <Component id="jSeparator1" pref="6" max="32767" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="btnHacerCita" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                                           <Component id="btnAgenda" min="-2" max="-2" attributes="0"/>
                                           <Component id="spFechaCita" alignment="1" min="-2" pref="144" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="btnTerminar" max="32767" attributes="0"/>
                                   <Component id="btnMenuTratamiento" alignment="0" max="32767" attributes="0"/>
