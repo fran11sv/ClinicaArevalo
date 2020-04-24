@@ -4,13 +4,21 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Factura;
 import Controladores.FacturaJpaController;
+import Controladores.ProductoJpaController;
 import Entidades.entityMain;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import Controladores.UsuarioJpaController;
+import Entidades.Producto;
 import Entidades.Usuario;
+import java.awt.Component;
+import java.util.Calendar;
 import java.util.HashSet;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
 import static org.eclipse.persistence.expressions.ExpressionOperator.Cast;
 
 /**
@@ -20,8 +28,10 @@ import static org.eclipse.persistence.expressions.ExpressionOperator.Cast;
 public class Facturar extends javax.swing.JFrame {
 FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
 UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
+ProductoJpaController PC = new ProductoJpaController(entityMain.getInstance());
     public Facturar() {
         initComponents();
+        PanelPestañas.setEnabledAt(1, false);
         CrearModelo();
         CargarTabla();
         Llenar_Combo();
@@ -35,15 +45,21 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         ClinicaArevaloPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("ClinicaArevaloPU").createEntityManager();
         usuarioQuery = java.beans.Beans.isDesignTime() ? null : ClinicaArevaloPUEntityManager.createQuery("SELECT u FROM Usuario u");
         usuarioList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : usuarioQuery.getResultList();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        usuarioQuery1 = java.beans.Beans.isDesignTime() ? null : ClinicaArevaloPUEntityManager.createQuery("SELECT u FROM Usuario u");
+        usuarioList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : usuarioQuery1.getResultList();
+        PanelPestañas = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        spFecha = new javax.swing.JSpinner();
+        Date date = new Date();
+        SpinnerDateModel sm =
+        new SpinnerDateModel(date, null, null, Calendar.DAY_OF_MONTH);
+        spFecha = new javax.swing.JSpinner(sm);
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnSiguiente = new javax.swing.JButton();
@@ -61,7 +77,7 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtProd = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbProducto = new javax.swing.JTable();
@@ -85,19 +101,43 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
 
         jLabel2.setText("Fecha de Factura");
 
+        JSpinner.DateEditor de = new JSpinner.DateEditor(spFecha, "dd-MM-yyyy");
+        spFecha.setEditor(de);
+        spFecha.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+
+        spFecha.setEnabled(false);
+
+        spFecha.setPreferredSize(new java.awt.Dimension(200, 35));
+        spFecha.setEnabled(false);
+
         jLabel3.setText("Cliente");
 
         jLabel4.setText("Usuario");
 
         btnSiguiente.setText("Siguiente");
+        btnSiguiente.setEnabled(false);
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setEnabled(false);
 
         btnMenu.setText("Menú Principal");
+
+        txtCliente.setEnabled(false);
+        txtCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtClienteKeyReleased(evt);
+            }
+        });
 
         lblNumFactura.setText("1");
 
         btnAgregar.setText("Agregar");
+        btnAgregar.setEnabled(false);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -105,8 +145,14 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
         });
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.setEnabled(false);
 
         tbFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,6 +163,9 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
             }
         ));
         jScrollPane1.setViewportView(tbFactura);
+
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, usuarioList, cmbUsuario);
+        bindingGroup.addBinding(jComboBoxBinding);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,7 +247,7 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Datos de Factura", jPanel1);
+        PanelPestañas.addTab("Datos de Factura", jPanel1);
 
         jPanel2.setBackground(new java.awt.Color(15, 76, 129));
 
@@ -207,6 +256,12 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
         jLabel7.setText("1");
 
         jLabel5.setText("Producto");
+
+        txtProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtProdKeyReleased(evt);
+            }
+        });
 
         jLabel8.setText("Total");
 
@@ -218,6 +273,11 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
 
             }
         ));
+        tbProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbProductoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbProducto);
 
         tbDetalleFactura.setModel(new javax.swing.table.DefaultTableModel(
@@ -260,7 +320,7 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtProd, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -291,7 +351,7 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
                         .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -318,9 +378,11 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
                 .addGap(24, 24, 24))
         );
 
-        jTabbedPane1.addTab("Detalle de Factura", jPanel2);
+        PanelPestañas.addTab("Detalle de Factura", jPanel2);
 
-        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(PanelPestañas, java.awt.BorderLayout.CENTER);
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -332,19 +394,47 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
             String spinnerValue = formater.format(spFecha.getValue());
             Date date = formater.parse(spinnerValue);
-            Usuario usuario = (Usuario) cmbUsuario.getSelectedItem();
+
            
             
             
             F.setNombreCliente(this.txtCliente.getText());
-            F.setIdUsuario(usuario);
+            F.setIdUsuario((Usuario) cmbUsuario.getSelectedItem());
             F.setFechaFactura(date);
             
-            
+            JOptionPane.showMessageDialog(null, "Datos agregados exitosamente!");
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+        CargarTabla();
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        this.spFecha.setEnabled(true);
+        this.txtCliente.setEnabled(true);
+        this.btnAgregar.setEnabled(true);
+        this.btnEliminar.setEnabled(true);
+        this.btnLimpiar.setEnabled(true);
+        this.btnNuevo.setEnabled(false);
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void txtProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdKeyReleased
+        CrearModeloProd();
+        CargarTablaProducto(this.txtProd.getText());
+    }//GEN-LAST:event_txtProdKeyReleased
+
+    private void tbProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductoMouseClicked
+        txtProd.setText(tbProducto.getValueAt(tbProducto.getSelectedRow(), 1).toString());
+    }//GEN-LAST:event_tbProductoMouseClicked
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+         this.PanelPestañas.setSelectedIndex(1);
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void txtClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyReleased
+        CrearModelo();
+        CargarTabla();
+    }//GEN-LAST:event_txtClienteKeyReleased
 DefaultTableModel modelo;
     private void CrearModelo() {
         try {
@@ -386,7 +476,7 @@ DefaultTableModel modelo;
                 modelo.addRow(o);
                 modelo.setValueAt(listFactura.get(i).getNumFactura(), i, 0);
                 modelo.setValueAt(listFactura.get(i).getNombreCliente(), i, 1);
-                modelo.setValueAt(listFactura.get(i).getIdUsuario(), i, 2);
+                modelo.setValueAt(listFactura.get(i).getIdUsuario().getUsuario(), i, 2);
                 modelo.setValueAt(listFactura.get(i).getFechaFactura(), i, 3);
                 
             }
@@ -396,15 +486,65 @@ DefaultTableModel modelo;
         }    
     }
     
-    DefaultComboBoxModel dc = new DefaultComboBoxModel();
-    private void Llenar_Combo(){
-        cmbUsuario.setModel(dc);
-        List<Usuario>listUsuario;
-        listUsuario=UC.findUsuarioEntities();
-        for(int i = 0; i < listUsuario.size(); i++){
-            dc.addElement(listUsuario.get(i).getIdUsuario());
-            
+   DefaultTableModel modeloProd;
+   private void CrearModeloProd(){
+       try {
+            modeloProd = (new DefaultTableModel(
+                    null, new String[]{
+                        "ID", "Nombre","Precio"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tbProducto.setModel(modeloProd);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
         }
+   }
+   private void CargarTablaProducto(String nombre){
+       try {
+            Object o[] = null;
+            List<Producto> listProducto = PC.findProductoporNombre(nombre);
+            for (int i = 0; i < listProducto.size(); i++) {
+              
+                modeloProd.addRow(o);
+                modeloProd.setValueAt(listProducto.get(i).getIdProducto(), i, 0);
+                modeloProd.setValueAt(listProducto.get(i).getNombre(), i, 1);
+                modeloProd.setValueAt(listProducto.get(i).getPrecio(),i,2);
+                
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }    
+   }
+    private void Llenar_Combo(){
+        cmbUsuario.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> jlist, Object o, int i, boolean bln, boolean bln1) {
+                if (o instanceof Usuario) {
+                    Usuario U = (Usuario) o;
+                    return super.getListCellRendererComponent(jlist, U.getUsuario(), i, bln, bln1);
+                }
+                return super.getListCellRendererComponent(jlist, o, i, bln, bln1);
+            }
+        });
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -440,6 +580,7 @@ DefaultTableModel modelo;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager ClinicaArevaloPUEntityManager;
+    private javax.swing.JTabbedPane PanelPestañas;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
@@ -461,8 +602,6 @@ DefaultTableModel modelo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblNumFactura;
     private javax.swing.JSpinner spFecha;
     private javax.swing.JTable tbDetalleFactura;
@@ -474,7 +613,11 @@ DefaultTableModel modelo;
     private javax.swing.JButton txtCobrar;
     private javax.swing.JButton txtEliminar;
     private javax.swing.JButton txtImprimir;
+    private javax.swing.JTextField txtProd;
     private java.util.List<Entidades.Usuario> usuarioList;
+    private java.util.List<Entidades.Usuario> usuarioList1;
     private javax.persistence.Query usuarioQuery;
+    private javax.persistence.Query usuarioQuery1;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
