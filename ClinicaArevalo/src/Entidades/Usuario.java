@@ -5,8 +5,6 @@
  */
 package Entidades;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -18,7 +16,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  *
@@ -30,9 +27,6 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findporId", query = "SELECT u.idUsuario FROM Usuario u WHERE u.usuario = :usuario")})
 public class Usuario implements Serializable {
-
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -72,9 +66,7 @@ public class Usuario implements Serializable {
     }
 
     public void setIdUsuario(Integer idUsuario) {
-        Integer oldIdUsuario = this.idUsuario;
         this.idUsuario = idUsuario;
-        changeSupport.firePropertyChange("idUsuario", oldIdUsuario, idUsuario);
     }
 
     public String getApellidos() {
@@ -82,9 +74,7 @@ public class Usuario implements Serializable {
     }
 
     public void setApellidos(String apellidos) {
-        String oldApellidos = this.apellidos;
         this.apellidos = apellidos;
-        changeSupport.firePropertyChange("apellidos", oldApellidos, apellidos);
     }
 
     public String getClave() {
@@ -92,9 +82,7 @@ public class Usuario implements Serializable {
     }
 
     public void setClave(String clave) {
-        String oldClave = this.clave;
         this.clave = clave;
-        changeSupport.firePropertyChange("clave", oldClave, clave);
     }
 
     public String getDui() {
@@ -102,9 +90,7 @@ public class Usuario implements Serializable {
     }
 
     public void setDui(String dui) {
-        String oldDui = this.dui;
         this.dui = dui;
-        changeSupport.firePropertyChange("dui", oldDui, dui);
     }
 
     public String getJvpm() {
@@ -112,9 +98,7 @@ public class Usuario implements Serializable {
     }
 
     public void setJvpm(String jvpm) {
-        String oldJvpm = this.jvpm;
         this.jvpm = jvpm;
-        changeSupport.firePropertyChange("jvpm", oldJvpm, jvpm);
     }
 
     public String getNit() {
@@ -122,9 +106,7 @@ public class Usuario implements Serializable {
     }
 
     public void setNit(String nit) {
-        String oldNit = this.nit;
         this.nit = nit;
-        changeSupport.firePropertyChange("nit", oldNit, nit);
     }
 
     public String getNombres() {
@@ -132,9 +114,7 @@ public class Usuario implements Serializable {
     }
 
     public void setNombres(String nombres) {
-        String oldNombres = this.nombres;
         this.nombres = nombres;
-        changeSupport.firePropertyChange("nombres", oldNombres, nombres);
     }
 
     public String getUsuario() {
@@ -142,9 +122,7 @@ public class Usuario implements Serializable {
     }
 
     public void setUsuario(String usuario) {
-        String oldUsuario = this.usuario;
         this.usuario = usuario;
-        changeSupport.firePropertyChange("usuario", oldUsuario, usuario);
     }
 
     public List<Citas> getCitasList() {
@@ -194,14 +172,6 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "Entidades.Usuario[ idUsuario=" + idUsuario + " ]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

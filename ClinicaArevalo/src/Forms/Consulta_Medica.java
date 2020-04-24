@@ -2831,8 +2831,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-
+        }  
+       
         
         
     }//GEN-LAST:event_btnSiguienteFisicaActionPerformed

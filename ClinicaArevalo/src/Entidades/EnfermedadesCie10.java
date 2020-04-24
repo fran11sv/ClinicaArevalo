@@ -102,7 +102,7 @@ public class EnfermedadesCie10 implements Serializable {
     public void setDetalleDiagnosticoList(List<DetalleDiagnostico> detalleDiagnosticoList) {
         this.detalleDiagnosticoList = detalleDiagnosticoList;
     }
-   
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -122,7 +122,6 @@ public class EnfermedadesCie10 implements Serializable {
         }
         return true;
     }
-    
 
     @Override
     public String toString() {

@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 /**
@@ -205,12 +206,13 @@ public class CitasJpaController implements Serializable {
             em.close();
         }
     }
-      public List<Citas> findbyUsuarioandFecha (Usuario usuario, Date fecha) {
+      public List<Citas> findbyUsuarioandFecha (Usuario usuario, Date fecha1,Date fecha2) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Citas> query=em.createNamedQuery("Citas.findbyUsuarioandFecha",Citas.class);
             query.setParameter("idUsuario",usuario);
-            query.setParameter("Fecha",fecha);     
+            query.setParameter("FechaA",fecha1);
+            query.setParameter("FechaB",fecha2);
             return query.getResultList();
         } finally {
             em.close();

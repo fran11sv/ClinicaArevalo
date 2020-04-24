@@ -30,7 +30,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Citas.findAll", query = "SELECT c FROM Citas c"),
     @NamedQuery(name = "Citas.findbyUsuario", query = "SELECT c FROM Citas c WHERE c.idUsuario=:idUsuario"),
-    @NamedQuery(name = "Citas.findbyUsuarioandFecha", query = "SELECT c FROM Citas c WHERE c.idUsuario=:idUsuario AND c.fechaCita=:Fecha")})
+    @NamedQuery(name = "Citas.findbyUsuarioandFecha", query = "SELECT c FROM Citas c WHERE c.idUsuario=:idUsuario AND c.fechaCita>=:FechaA and c.fechaCita<:FechaB ORDER BY c.fechaCita")})
 public class Citas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,7 +40,7 @@ public class Citas implements Serializable {
     @Column(name = "id_Cita")
     private Integer idCita;
     @Column(name = "Fecha_Cita")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCita;
     @JoinColumn(name = "id_Paciente", referencedColumnName = "id_Paciente")
     @ManyToOne(optional = false)

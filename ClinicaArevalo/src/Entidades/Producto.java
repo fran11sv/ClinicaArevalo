@@ -28,8 +28,7 @@ import javax.persistence.Table;
 @Table(name = "Producto")
 @NamedQueries({
     @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
-    @NamedQuery(name = "Producto.findbyNombreP", query = "SELECT p FROM Producto p WHERE p.nombre LIKE :nombreBuscar ORDER BY p.idProducto")
-})
+    @NamedQuery(name = "Producto.findbyNombreP", query = "SELECT p FROM Producto p WHERE p.nombre LIKE :nombreBuscar ORDER BY p.idProducto")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;

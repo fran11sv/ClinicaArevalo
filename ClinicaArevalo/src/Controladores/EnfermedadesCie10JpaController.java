@@ -238,5 +238,4 @@ public class EnfermedadesCie10JpaController implements Serializable {
         }
     }
     
-    
 }

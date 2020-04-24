@@ -194,7 +194,7 @@ public class DetalleFacturaJpaController implements Serializable {
             em.close();
         }
     }
-    public List<DetalleFactura> findporJoin(int idProd){
+     public List<DetalleFactura> findporJoin(int idProd){
         EntityManager em = getEntityManager();
         try{
             TypedQuery<DetalleFactura> query = em.createNamedQuery("DetalleFactura.findporJoin",DetalleFactura.class);

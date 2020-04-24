@@ -215,6 +215,5 @@ public class FacturaJpaController implements Serializable {
             em.close();
         }
     }
-
     
 }

@@ -165,7 +165,7 @@ public class AntecedentesJpaController implements Serializable {
             em.close();
         }
     }
-    public List<Antecedentes> findbyIdPaciente (Paciente id) {
+     public List<Antecedentes> findbyIdPaciente (Paciente id) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Antecedentes> query=em.createNamedQuery("Antecedentes.findbyIdPaciente",Antecedentes.class);

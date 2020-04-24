@@ -194,7 +194,7 @@ public class DetalleRecetaJpaController implements Serializable {
             em.close();
         }
     }
-     public List<DetalleReceta> findbyNumReceta (Receta receta) {
+    public List<DetalleReceta> findbyNumReceta (Receta receta) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<DetalleReceta> query=em.createNamedQuery("DetalleReceta.findbyNumReceta",DetalleReceta.class);
