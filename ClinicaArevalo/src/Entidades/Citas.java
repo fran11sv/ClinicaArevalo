@@ -30,6 +30,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Citas.findAll", query = "SELECT c FROM Citas c"),
     @NamedQuery(name = "Citas.findbyUsuario", query = "SELECT c FROM Citas c WHERE c.idUsuario=:idUsuario"),
+    @NamedQuery(name = "Citas.findbyUsuarioandFechaconHora", query = "SELECT c FROM Citas c WHERE c.idUsuario=:idUsuario AND c.fechaCita=:Fecha ORDER BY c.fechaCita"),
     @NamedQuery(name = "Citas.findbyUsuarioandFecha", query = "SELECT c FROM Citas c WHERE c.idUsuario=:idUsuario AND c.fechaCita>=:FechaA and c.fechaCita<:FechaB ORDER BY c.fechaCita")})
 public class Citas implements Serializable {
 

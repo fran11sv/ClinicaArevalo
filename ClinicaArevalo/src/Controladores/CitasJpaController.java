@@ -218,4 +218,15 @@ public class CitasJpaController implements Serializable {
             em.close();
         }
     }
+      public List<Citas> findbyUsuarioandFechaconHora (Usuario usuario, Date fecha) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Citas> query=em.createNamedQuery("Citas.findbyUsuarioandFechaconHora",Citas.class);
+            query.setParameter("idUsuario",usuario);
+            query.setParameter("Fecha",fecha);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

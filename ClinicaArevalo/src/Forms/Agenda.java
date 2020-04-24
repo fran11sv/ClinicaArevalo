@@ -358,17 +358,23 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.HOUR,H.getValor());
             
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy hh.mm aa");
+            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
             String spinnerValue = formater.format(calendar.getTime());
             Date date = formater.parse(spinnerValue);
-                       
+            java.sql.Date datesql = new java.sql.Date(date.getTime());
+            List<Citas> listCitas = CC.findbyUsuarioandFechaconHora((Usuario) this.cbUsuario.getSelectedItem(),datesql);
+            if (listCitas.isEmpty()) {
             DatosPaciente = (Paciente) PC.findPaciente(Integer.parseInt(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString()));
             C.setIdPaciente(DatosPaciente);
             C.setIdUsuario((Usuario) this.cbUsuario.getSelectedItem());
             C.setFechaCita(date);
-
             CC.create(C);
-            JOptionPane.showMessageDialog(null,"Cita Creada para el día "+ spinnerValue);
+            JOptionPane.showMessageDialog(null,"Cita Creada para el día "+ spinnerValue); 
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Ya existe una cita creada: "+ listCitas.get(0).getIdPaciente().getApellidos().concat(", "+listCitas.get(0).getIdPaciente().getNombres()+" a esta hora y fecha")); 
+            }           
+            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
