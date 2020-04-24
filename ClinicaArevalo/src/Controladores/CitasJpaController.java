@@ -14,9 +14,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Entidades.Paciente;
 import Entidades.Usuario;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -193,5 +195,25 @@ public class CitasJpaController implements Serializable {
             em.close();
         }
     }
-    
+     public List<Citas> findbyUsuario (Usuario usuario) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Citas> query=em.createNamedQuery("Citas.findbyUsuario",Citas.class);
+            query.setParameter("idUsuario",usuario);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+      public List<Citas> findbyUsuarioandFecha (Usuario usuario, Date fecha) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Citas> query=em.createNamedQuery("Citas.findbyUsuarioandFecha",Citas.class);
+            query.setParameter("idUsuario",usuario);
+            query.setParameter("Fecha",fecha);     
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

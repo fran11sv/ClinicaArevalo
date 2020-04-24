@@ -28,7 +28,9 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "Citas")
 @NamedQueries({
-    @NamedQuery(name = "Citas.findAll", query = "SELECT c FROM Citas c")})
+    @NamedQuery(name = "Citas.findAll", query = "SELECT c FROM Citas c"),
+    @NamedQuery(name = "Citas.findbyUsuario", query = "SELECT c FROM Citas c WHERE c.idUsuario=:idUsuario"),
+    @NamedQuery(name = "Citas.findbyUsuarioandFecha", query = "SELECT c FROM Citas c WHERE c.idUsuario=:idUsuario AND c.fechaCita=:Fecha")})
 public class Citas implements Serializable {
 
     private static final long serialVersionUID = 1L;
