@@ -6,6 +6,7 @@
 package Forms;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -113,6 +114,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Cerrar.png"))); // NOI18N
         btnLogout.setText("Cerrar Sesión");
         btnLogout.setPreferredSize(new java.awt.Dimension(320, 120));
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         btnVademecum.setBackground(new java.awt.Color(76, 201, 223));
         btnVademecum.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
@@ -283,7 +289,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgendaActionPerformed
 
     private void btnVademecumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVademecumActionPerformed
-        Vademecum vademecum = new Vademecum();
+        FVademecum vademecum = new FVademecum();
         vademecum.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVademecumActionPerformed
@@ -299,6 +305,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         cie.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCie10ActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        //Validación de logout
+        int mensaje = JOptionPane.showConfirmDialog(null, "¿Desea cerrar la sesión actual?"
+                + "Se descartarán los datos no guardados.", "Cerrar sesión",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (mensaje == 0) {
+                    Login login = new Login();
+                    login.setVisible(true);
+                    this.dispose();
+                    JOptionPane.showMessageDialog(null, "Sesión cerrada.");
+            }else{
+                    
+                }             
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments

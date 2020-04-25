@@ -92,6 +92,7 @@ ProductoJpaController PC = new ProductoJpaController(entityMain.getInstance());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Factura");
+        setExtendedState(6);
         setPreferredSize(new java.awt.Dimension(1180, 830));
         setSize(new java.awt.Dimension(1180, 830));
 
@@ -191,7 +192,7 @@ ProductoJpaController PC = new ProductoJpaController(entityMain.getInstance());
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(35, 35, 35)
-                                .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
