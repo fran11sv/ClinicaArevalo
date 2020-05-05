@@ -2230,6 +2230,11 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtVademecum.setForeground(new java.awt.Color(0, 0, 0));
         txtVademecum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Vademecum 48.png"))); // NOI18N
         txtVademecum.setText("Ver Vademecum");
+        txtVademecum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVademecumActionPerformed(evt);
+            }
+        });
 
         tbReceta.setBackground(new java.awt.Color(239, 239, 239));
         tbReceta.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
@@ -2324,7 +2329,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                             .addComponent(btnAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                             .addComponent(btnHacerCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
                     .addComponent(btnTerminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMenuTratamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(spFechaCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -2458,7 +2463,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3224,6 +3229,10 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private void btnSiguienteAnteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteAnteActionPerformed
         this.PanelPestañas.setSelectedIndex(3);
     }//GEN-LAST:event_btnSiguienteAnteActionPerformed
+
+    private void txtVademecumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVademecumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVademecumActionPerformed
     private static int CalcularEdad(String fecha) {
         Calendar cal= Calendar.getInstance();
         int year= cal.get(Calendar.YEAR);

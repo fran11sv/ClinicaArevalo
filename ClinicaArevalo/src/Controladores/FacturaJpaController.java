@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -215,5 +216,14 @@ public class FacturaJpaController implements Serializable {
             em.close();
         }
     }
-    
+    public List<Factura> findbyNumFactura (int id) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Factura> query=em.createNamedQuery("Factura.findbyNumFactura",Factura.class);
+            query.setParameter("numFactura",id);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }
