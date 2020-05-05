@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -224,6 +225,27 @@ public class CategoriasCie10JpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    public List<CategoriasCie10> findCategoriaporNombre (String nombre) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<CategoriasCie10> query=em.createNamedQuery("findCategoria.findByCategoria",CategoriasCie10.class);
+            query.setParameter("nombreBuscar","%"+nombre+"%");
+            query.setMaxResults(50);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    public List<CategoriasCie10> findAllCategoriaDESC () {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<CategoriasCie10> query=em.createNamedQuery("findCategoria.findAllDESC",CategoriasCie10.class);
+            query.setMaxResults(50);
+            return query.getResultList();
         } finally {
             em.close();
         }

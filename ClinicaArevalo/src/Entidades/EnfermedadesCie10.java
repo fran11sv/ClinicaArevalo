@@ -28,6 +28,7 @@ import javax.persistence.Table;
 @Table(name = "EnfermedadesCie10")
 @NamedQueries({
     @NamedQuery(name = "EnfermedadesCie10.findAll", query = "SELECT e FROM EnfermedadesCie10 e"),
+    @NamedQuery(name = "findEnfermedades.findAllDESC", query = "SELECT c FROM EnfermedadesCie10 c ORDER BY c.id DESC"),
     @NamedQuery(name = "findEnfermedades.findbyNombre", query = "SELECT p FROM EnfermedadesCie10 p WHERE p.descripcion LIKE :nombreBuscar order by p.descripcion"),
     @NamedQuery(name = "findEnfermedades.findByCategoria", query = "SELECT  e FROM EnfermedadesCie10 e INNER JOIN e.idCategoria d WHERE d.descripcion LIKE :categoriaBuscar order by e.descripcion")})
 public class EnfermedadesCie10 implements Serializable {

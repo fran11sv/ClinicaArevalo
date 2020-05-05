@@ -6,15 +6,36 @@
 
 package Forms;
 
+import Controladores.CategoriasCie10JpaController;
+import Controladores.EnfermedadesCie10JpaController;
+import Controladores.SubGruposCie10JpaController;
+import Entidades.CategoriasCie10;
+import Entidades.EnfermedadesCie10;
+import Entidades.SubGruposCie10;
+import Entidades.entityMain;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author sotoa
  */
 public class CIE10 extends javax.swing.JFrame {
-
+CategoriasCie10JpaController CC = new CategoriasCie10JpaController(entityMain.getInstance());
+EnfermedadesCie10JpaController EC = new EnfermedadesCie10JpaController(entityMain.getInstance());
+SubGruposCie10JpaController SC = new SubGruposCie10JpaController(entityMain.getInstance());
+EnfermedadesCie10 EditarEnfermedad;
+EnfermedadesCie10 EliminarEnfermedad;
+CategoriasCie10 EditarCategoria;
+CategoriasCie10 EliminarCategoria;
     /** Creates new form CIE10 */
     public CIE10() {
         initComponents();
+        CrearModeloCategoria1();
+        CargarTablaCategoria();
+        CrearModeloEnfermedades();
+        CargarTablaEnfermedades();
     }
 
     /** This method is called from within the constructor to
@@ -27,13 +48,332 @@ public class CIE10 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        Paneles = new javax.swing.JTabbedPane();
+        PanelCategoria = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtBuscarSubGrupo = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbSubGrupo = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        lblSubGrupoSeleccionado = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtCategoriaNombre = new javax.swing.JTextField();
+        btnAgregarCategoria = new javax.swing.JButton();
+        btnEditarCategoria = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbCategorias = new javax.swing.JTable();
+        btnEliminarCategoria = new javax.swing.JButton();
+        btnNuevoCategoria = new javax.swing.JButton();
+        btnCancelarCategoria = new javax.swing.JButton();
+        PanelEnfermedad = new javax.swing.JPanel();
+        txtBuscarCategoria = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbCategoria2 = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        txtNombreEnfermedad = new javax.swing.JTextField();
+        btnAgregarEnfermedad = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbEnfermedades = new javax.swing.JTable();
+        btnNuevoEnfermedad = new javax.swing.JButton();
+        btnEliminarEnfermedad = new javax.swing.JButton();
+        btnEditarEnfermedad = new javax.swing.JButton();
+        btnCancelarEnfermedad = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(15, 76, 129));
 
         jPanel1.setBackground(new java.awt.Color(187, 232, 223));
+
+        Paneles.setBackground(new java.awt.Color(76, 201, 223));
+
+        PanelCategoria.setBackground(new java.awt.Color(15, 76, 129));
+
+        jLabel2.setText("Buscar  Subgrupo : ");
+
+        txtBuscarSubGrupo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarSubGrupoKeyReleased(evt);
+            }
+        });
+
+        tbSubGrupo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tbSubGrupo);
+
+        jLabel3.setText("SubGrupo Seleccionado:");
+
+        jLabel4.setText("Nombre de Categoria:");
+
+        txtCategoriaNombre.setEnabled(false);
+
+        btnAgregarCategoria.setText("Agregar ");
+        btnAgregarCategoria.setEnabled(false);
+        btnAgregarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCategoriaActionPerformed(evt);
+            }
+        });
+
+        btnEditarCategoria.setText("Guardar Edición");
+        btnEditarCategoria.setEnabled(false);
+        btnEditarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarCategoriaActionPerformed(evt);
+            }
+        });
+
+        tbCategorias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tbCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbCategoriasMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbCategorias);
+
+        btnEliminarCategoria.setText("Eliminar");
+        btnEliminarCategoria.setEnabled(false);
+        btnEliminarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCategoriaActionPerformed(evt);
+            }
+        });
+
+        btnNuevoCategoria.setText("Nuevo");
+        btnNuevoCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoCategoriaActionPerformed(evt);
+            }
+        });
+
+        btnCancelarCategoria.setText("Cancelar");
+        btnCancelarCategoria.setEnabled(false);
+        btnCancelarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarCategoriaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelCategoriaLayout = new javax.swing.GroupLayout(PanelCategoria);
+        PanelCategoria.setLayout(PanelCategoriaLayout);
+        PanelCategoriaLayout.setHorizontalGroup(
+            PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCategoriaLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addGroup(PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addGroup(PanelCategoriaLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscarSubGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSubGrupoSeleccionado, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
+                    .addGroup(PanelCategoriaLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCategoriaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEliminarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNuevoCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(btnCancelarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
+        );
+        PanelCategoriaLayout.setVerticalGroup(
+            PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCategoriaLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSubGrupoSeleccionado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(txtBuscarSubGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtCategoriaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregarCategoria))
+                .addGap(50, 50, 50)
+                .addGroup(PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelCategoriaLayout.createSequentialGroup()
+                        .addComponent(btnNuevoCategoria)
+                        .addGap(9, 9, 9)
+                        .addComponent(btnEliminarCategoria)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditarCategoria)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelarCategoria)))
+                .addGap(221, 221, 221))
+        );
+
+        Paneles.addTab("Categorias", PanelCategoria);
+
+        PanelEnfermedad.setBackground(new java.awt.Color(15, 76, 129));
+
+        txtBuscarCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarCategoriaKeyReleased(evt);
+            }
+        });
+
+        jLabel5.setText("Buscar  Categoria : ");
+
+        jLabel6.setText("Categoria Seleccionada:");
+
+        tbCategoria2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(tbCategoria2);
+
+        jLabel7.setText("Nombre de Enfermedad:");
+
+        btnAgregarEnfermedad.setText("Agregar ");
+        btnAgregarEnfermedad.setEnabled(false);
+        btnAgregarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarEnfermedadActionPerformed(evt);
+            }
+        });
+
+        tbEnfermedades.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tbEnfermedades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbEnfermedadesMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tbEnfermedades);
+
+        btnNuevoEnfermedad.setText("Nuevo");
+        btnNuevoEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoEnfermedadActionPerformed(evt);
+            }
+        });
+
+        btnEliminarEnfermedad.setText("Eliminar");
+        btnEliminarEnfermedad.setEnabled(false);
+        btnEliminarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarEnfermedadActionPerformed(evt);
+            }
+        });
+
+        btnEditarEnfermedad.setText("Guardar Edición");
+        btnEditarEnfermedad.setEnabled(false);
+        btnEditarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarEnfermedadActionPerformed(evt);
+            }
+        });
+
+        btnCancelarEnfermedad.setText("Cancelar");
+        btnCancelarEnfermedad.setEnabled(false);
+        btnCancelarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarEnfermedadActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelEnfermedadLayout = new javax.swing.GroupLayout(PanelEnfermedad);
+        PanelEnfermedad.setLayout(PanelEnfermedadLayout);
+        PanelEnfermedadLayout.setHorizontalGroup(
+            PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelEnfermedadLayout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane4)
+                    .addGroup(PanelEnfermedadLayout.createSequentialGroup()
+                        .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelEnfermedadLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBuscarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6))
+                            .addGroup(PanelEnfermedadLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNombreEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAgregarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(289, 289, 289)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEliminarEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNuevoEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditarEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(203, Short.MAX_VALUE))
+        );
+        PanelEnfermedadLayout.setVerticalGroup(
+            PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelEnfermedadLayout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtBuscarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtNombreEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregarEnfermedad))
+                .addGap(50, 50, 50)
+                .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelEnfermedadLayout.createSequentialGroup()
+                        .addComponent(btnNuevoEnfermedad)
+                        .addGap(9, 9, 9)
+                        .addComponent(btnEliminarEnfermedad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditarEnfermedad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelarEnfermedad)))
+                .addContainerGap(182, Short.MAX_VALUE))
+        );
+
+        Paneles.addTab("Enfermedades", PanelEnfermedad);
 
         jPanel2.setBackground(new java.awt.Color(253, 149, 53));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -50,28 +390,15 @@ public class CIE10 extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1584, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
-        );
-
-        jPanel3.setBackground(new java.awt.Color(15, 76, 129));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1320, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -80,17 +407,17 @@ public class CIE10 extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(140, 140, 140))
+                .addGap(116, 116, 116)
+                .addComponent(Paneles, javax.swing.GroupLayout.PREFERRED_SIZE, 1390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addGap(59, 59, 59)
+                .addComponent(Paneles, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -107,6 +434,378 @@ public class CIE10 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtBuscarCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCategoriaKeyReleased
+        CrearModeloCategoria();
+        CargarTablaCategoriaporNombre(this.txtBuscarCategoria.getText());
+    }//GEN-LAST:event_txtBuscarCategoriaKeyReleased
+
+    private void btnAgregarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEnfermedadActionPerformed
+         try {
+            EnfermedadesCie10 E = new EnfermedadesCie10();
+            E.setDescripcion(this.txtNombreEnfermedad.getText());
+            E.setIdCategoria((CategoriasCie10) tbCategoria2.getValueAt(tbCategoria2.getSelectedRow(),0));
+
+
+            EC.create(E);
+            JOptionPane.showMessageDialog(null, "Datos Guardados Exitosamente");
+            CrearModeloEnfermedades();
+            CargarTablaEnfermedades();
+            CrearModeloCategoria();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnAgregarEnfermedadActionPerformed
+
+    private void btnEditarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEnfermedadActionPerformed
+         try {
+            EditarEnfermedad.setDescripcion(this.txtNombreEnfermedad.getText());
+            EditarEnfermedad.setIdCategoria((CategoriasCie10) tbCategoria2.getValueAt(tbCategoria2.getSelectedRow(),0));
+            EC.edit(EditarEnfermedad);
+            JOptionPane.showMessageDialog(null, "El registro fue editado con Éxito");
+            CrearModeloEnfermedades();
+            CargarTablaEnfermedades();
+            CrearModeloCategoria();
+            this.btnAgregarEnfermedad.setEnabled(false);
+            this.btnCancelarEnfermedad.setEnabled(false);
+            this.btnNuevoEnfermedad.setEnabled(true);
+            this.btnEditarEnfermedad.setEnabled(false);
+            this.btnEliminarEnfermedad.setEnabled(false);
+            this.txtNombreEnfermedad.setText("");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnEditarEnfermedadActionPerformed
+
+    private void btnEliminarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEnfermedadActionPerformed
+        int resp = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar este registro?", "Eliminar Registro", JOptionPane.YES_NO_OPTION);
+        if (JOptionPane.YES_OPTION == resp) {
+            try {
+                EC.destroy(EliminarEnfermedad.getId());
+                JOptionPane.showMessageDialog(null, "El registro fue eliminado con Exito");
+                CrearModeloEnfermedades();
+                CargarTablaEnfermedades();
+                CrearModeloCategoria();
+                this.btnAgregarEnfermedad.setEnabled(false);
+                this.btnCancelarEnfermedad.setEnabled(false);
+                this.btnNuevoEnfermedad.setEnabled(true);
+                this.btnEditarEnfermedad.setEnabled(false);
+                this.btnEliminarEnfermedad.setEnabled(false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnEliminarEnfermedadActionPerformed
+
+    private void tbEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEnfermedadesMouseClicked
+        this.txtNombreEnfermedad.setText(tbEnfermedades.getValueAt(tbEnfermedades.getSelectedRow(), 1).toString());
+        
+        String id = tbEnfermedades.getValueAt(tbEnfermedades.getSelectedRow(), 0).toString();
+        EditarEnfermedad = (EnfermedadesCie10) EC.findEnfermedadesCie10(Integer.parseInt(id));
+        EliminarEnfermedad = (EnfermedadesCie10) EC.findEnfermedadesCie10(Integer.parseInt(id));
+        this.btnEditarEnfermedad.setEnabled(true);
+        this.btnEliminarEnfermedad.setEnabled(true);
+    }//GEN-LAST:event_tbEnfermedadesMouseClicked
+
+    private void txtBuscarSubGrupoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarSubGrupoKeyReleased
+        CrearModeloSubGrupo();
+        CargarTablaSubGrupoporNombre(this.txtBuscarSubGrupo.getText());
+    }//GEN-LAST:event_txtBuscarSubGrupoKeyReleased
+
+    private void btnAgregarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCategoriaActionPerformed
+        try {
+            CategoriasCie10 C = new CategoriasCie10();
+            C.setDescripcion(this.txtCategoriaNombre.getText());
+            C.setIdSubGrupo(SC.findSubGruposCie10(Integer.parseInt(tbSubGrupo.getValueAt(tbSubGrupo.getSelectedRow(),0).toString())));
+
+            CC.create(C);
+            JOptionPane.showMessageDialog(null, "Datos Guardados Exitosamente");
+            CrearModeloCategoria1();
+            CargarTablaCategoria();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnAgregarCategoriaActionPerformed
+
+    private void btnEliminarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCategoriaActionPerformed
+        int resp = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar este registro?", "Eliminar Registro", JOptionPane.YES_NO_OPTION);
+        if (JOptionPane.YES_OPTION == resp) {
+            try {
+                CC.destroy(EliminarCategoria.getId());
+                JOptionPane.showMessageDialog(null, "El registro fue eliminado con Exito");
+                this.btnAgregarCategoria.setEnabled(false);
+                this.btnNuevoCategoria.setEnabled(true);
+                this.btnCancelarCategoria.setEnabled(false);
+                this.btnEditarCategoria.setEnabled(false);
+                this.btnEliminarCategoria.setEnabled(false);
+                CrearModeloCategoria1();
+                CargarTablaCategoria();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnEliminarCategoriaActionPerformed
+
+    private void btnEditarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCategoriaActionPerformed
+        try {
+            EditarCategoria.setDescripcion(this.txtCategoriaNombre.getText());
+            EditarCategoria.setIdSubGrupo((SubGruposCie10) tbSubGrupo.getValueAt(tbSubGrupo.getSelectedRow(), 0));
+            CC.edit(EditarCategoria);
+            JOptionPane.showMessageDialog(null, "El registro fue editado con Éxito");
+            this.btnAgregarCategoria.setEnabled(false);
+            this.btnNuevoCategoria.setEnabled(true);
+            this.btnCancelarCategoria.setEnabled(false);
+            this.btnEditarCategoria.setEnabled(false);
+            this.btnEliminarCategoria.setEnabled(false);
+            this.txtCategoriaNombre.setText("");
+            CrearModeloCategoria1();
+            CargarTablaCategoria();
+            CrearModeloEnfermedades();
+            CargarTablaEnfermedades();
+            CrearModeloCategoria();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnEditarCategoriaActionPerformed
+
+    private void tbCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCategoriasMouseClicked
+        txtCategoriaNombre.setText(tbCategorias.getValueAt(tbCategorias.getSelectedRow(), 1).toString());
+        String id = tbCategorias.getValueAt(tbCategorias.getSelectedRow(), 0).toString();
+        EditarCategoria = (CategoriasCie10) CC.findCategoriasCie10(Integer.parseInt(id));
+        EliminarCategoria = (CategoriasCie10) CC.findCategoriasCie10(Integer.parseInt(id));
+        this.btnEditarCategoria.setEnabled(true);
+        this.btnEliminarCategoria.setEnabled(true);
+    }//GEN-LAST:event_tbCategoriasMouseClicked
+
+    private void btnNuevoCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCategoriaActionPerformed
+        this.btnAgregarCategoria.setEnabled(true);
+        this.btnNuevoCategoria.setEnabled(false);
+        this.btnCancelarCategoria.setEnabled(true);
+        this.btnEditarCategoria.setEnabled(false);
+        this.btnEliminarCategoria.setEnabled(false);
+        this.txtCategoriaNombre.setText("");
+    }//GEN-LAST:event_btnNuevoCategoriaActionPerformed
+
+    private void btnCancelarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCategoriaActionPerformed
+        this.btnAgregarCategoria.setEnabled(false);
+        this.btnNuevoCategoria.setEnabled(true);
+        this.btnCancelarCategoria.setEnabled(false);
+        this.btnEditarCategoria.setEnabled(false);
+        this.btnEliminarCategoria.setEnabled(false);
+        CrearModeloCategoria1();
+        CargarTablaCategoria();
+    }//GEN-LAST:event_btnCancelarCategoriaActionPerformed
+
+    private void btnNuevoEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEnfermedadActionPerformed
+        this.btnAgregarEnfermedad.setEnabled(true);
+        this.btnCancelarEnfermedad.setEnabled(true);
+        this.btnNuevoEnfermedad.setEnabled(false);
+        this.btnEditarEnfermedad.setEnabled(false);
+        this.btnEliminarEnfermedad.setEnabled(false);
+        this.txtNombreEnfermedad.setText("");
+    }//GEN-LAST:event_btnNuevoEnfermedadActionPerformed
+
+    private void btnCancelarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEnfermedadActionPerformed
+        this.btnAgregarEnfermedad.setEnabled(false);
+        this.btnCancelarEnfermedad.setEnabled(false);
+        this.btnNuevoEnfermedad.setEnabled(true);
+        this.btnEditarEnfermedad.setEnabled(false);
+        this.btnEliminarEnfermedad.setEnabled(false);
+    }//GEN-LAST:event_btnCancelarEnfermedadActionPerformed
+    DefaultTableModel modeloCategoria;
+    private void CrearModeloCategoria() {
+        try {
+            modeloCategoria = (new DefaultTableModel(
+                    null, new String[]{
+                        "ID", "Descripción","SubGrupo",
+                        "Clave de Categoria"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            this.tbCategoria2.setModel(modeloCategoria);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    private void CargarTablaCategoriaporNombre(String nombre) {
+        try {
+            Object o[] = null;
+            List<CategoriasCie10> listPacientes = CC.findCategoriaporNombre(nombre);
+            for (int i = 0; i < listPacientes.size(); i++) {
+                modeloCategoria.addRow(o);
+                modeloCategoria.setValueAt(listPacientes.get(i).getId(), i, 0);
+                modeloCategoria.setValueAt(listPacientes.get(i).getDescripcion(), i, 1);
+                modeloCategoria.setValueAt(listPacientes.get(i).getIdSubGrupo().getDescripcion(), i, 2);
+                modeloCategoria.setValueAt(listPacientes.get(i).getClave(), i, 3);
+            }
+//            this.btnSeleccionPaciente.setEnabled(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }    
+    }
+     DefaultTableModel modeloCategoria1;
+    private void CrearModeloCategoria1() {
+        try {
+            modeloCategoria1 = (new DefaultTableModel(
+                    null, new String[]{
+                        "ID", "Descripción","SubGrupo",
+                        "Clave de Categoria"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            this.tbCategorias.setModel(modeloCategoria1);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    private void CargarTablaCategoria() {
+        try {
+            Object o[] = null;
+            List<CategoriasCie10> listPacientes = CC.findAllCategoriaDESC();
+            for (int i = 0; i < listPacientes.size(); i++) {
+                modeloCategoria1.addRow(o);
+                modeloCategoria1.setValueAt(listPacientes.get(i).getId(), i, 0);
+                modeloCategoria1.setValueAt(listPacientes.get(i).getDescripcion(), i, 1);
+                modeloCategoria1.setValueAt(listPacientes.get(i).getIdSubGrupo().getDescripcion(), i, 2);
+                modeloCategoria1.setValueAt(listPacientes.get(i).getClave(), i, 3);
+            }
+//            this.btnSeleccionPaciente.setEnabled(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }    
+    }
+    DefaultTableModel modeloEnfermedad;
+    private void CrearModeloEnfermedades() {
+        try {
+            modeloEnfermedad = (new DefaultTableModel(
+                    null, new String[]{
+                        "ID", "Descripción","Categoria",
+                        "Clave de Enf."}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            this.tbEnfermedades.setModel(modeloEnfermedad);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    private void CargarTablaEnfermedades() {
+        try {
+            Object o[] = null;
+            List<EnfermedadesCie10> listPacientes = EC.findAllEnfermedadesDESC();
+            for (int i = 0; i < listPacientes.size(); i++) {
+                modeloEnfermedad.addRow(o);
+                modeloEnfermedad.setValueAt(listPacientes.get(i).getId(), i, 0);
+                modeloEnfermedad.setValueAt(listPacientes.get(i).getDescripcion(), i, 1);
+                modeloEnfermedad.setValueAt(listPacientes.get(i).getIdCategoria().getDescripcion(), i, 2);
+                modeloEnfermedad.setValueAt(listPacientes.get(i).getClave(), i, 3);
+            }
+//            this.btnSeleccionPaciente.setEnabled(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }    
+    }
+    DefaultTableModel modeloSubGrupo;
+    private void CrearModeloSubGrupo() {
+        try {
+            modeloSubGrupo = (new DefaultTableModel(
+                    null, new String[]{
+                        "ID", "Descripción","Grupo",
+                        "Clave de SubGrupo"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            this.tbSubGrupo.setModel(modeloSubGrupo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    private void CargarTablaSubGrupoporNombre(String nombre) {
+        try {
+            Object o[] = null;
+            List<SubGruposCie10> listPacientes = SC.findEnfermedadporNombre(nombre);
+            for (int i = 0; i < listPacientes.size(); i++) {
+                modeloSubGrupo.addRow(o);
+                modeloSubGrupo.setValueAt(listPacientes.get(i).getId(), i, 0);
+                modeloSubGrupo.setValueAt(listPacientes.get(i).getDescripcion(), i, 1);
+                modeloSubGrupo.setValueAt(listPacientes.get(i).getIdGrupo().getDescripcion(), i, 2);
+                modeloSubGrupo.setValueAt(listPacientes.get(i).getClave(), i, 3);
+            }
+//            this.btnSeleccionPaciente.setEnabled(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }    
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -143,10 +842,41 @@ public class CIE10 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelCategoria;
+    private javax.swing.JPanel PanelEnfermedad;
+    private javax.swing.JTabbedPane Paneles;
+    private javax.swing.JButton btnAgregarCategoria;
+    private javax.swing.JButton btnAgregarEnfermedad;
+    private javax.swing.JButton btnCancelarCategoria;
+    private javax.swing.JButton btnCancelarEnfermedad;
+    private javax.swing.JButton btnEditarCategoria;
+    private javax.swing.JButton btnEditarEnfermedad;
+    private javax.swing.JButton btnEliminarCategoria;
+    private javax.swing.JButton btnEliminarEnfermedad;
+    private javax.swing.JButton btnNuevoCategoria;
+    private javax.swing.JButton btnNuevoEnfermedad;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblSubGrupoSeleccionado;
+    private javax.swing.JTable tbCategoria2;
+    private javax.swing.JTable tbCategorias;
+    private javax.swing.JTable tbEnfermedades;
+    private javax.swing.JTable tbSubGrupo;
+    private javax.swing.JTextField txtBuscarCategoria;
+    private javax.swing.JTextField txtBuscarSubGrupo;
+    private javax.swing.JTextField txtCategoriaNombre;
+    private javax.swing.JTextField txtNombreEnfermedad;
     // End of variables declaration//GEN-END:variables
 
 }

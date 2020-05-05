@@ -28,7 +28,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "subGruposCie10")
 @NamedQueries({
-    @NamedQuery(name = "SubGruposCie10.findAll", query = "SELECT s FROM SubGruposCie10 s")})
+    @NamedQuery(name = "SubGruposCie10.findAll", query = "SELECT s FROM SubGruposCie10 s"),
+    @NamedQuery(name = "findSubGrupos.findbyNombre", query = "SELECT p FROM SubGruposCie10 p WHERE p.descripcion LIKE :nombreBuscar order by p.descripcion")})
 public class SubGruposCie10 implements Serializable {
 
     private static final long serialVersionUID = 1L;

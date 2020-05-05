@@ -237,5 +237,15 @@ public class EnfermedadesCie10JpaController implements Serializable {
             em.close();
         }
     }
+    public List<EnfermedadesCie10> findAllEnfermedadesDESC () {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<EnfermedadesCie10> query=em.createNamedQuery("findEnfermedades.findAllDESC",EnfermedadesCie10.class);
+            query.setMaxResults(50);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
     
 }

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -228,5 +229,15 @@ public class SubGruposCie10JpaController implements Serializable {
             em.close();
         }
     }
-    
+    public List<SubGruposCie10> findEnfermedadporNombre (String nombre) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<SubGruposCie10> query=em.createNamedQuery("findSubGrupos.findbyNombre",SubGruposCie10.class);
+            query.setParameter("nombreBuscar","%"+nombre+"%");
+            query.setMaxResults(25);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }
