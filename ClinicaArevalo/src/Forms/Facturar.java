@@ -415,12 +415,7 @@ Factura numFac;
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
             String spinnerValue = formater.format(spFecha.getValue());
             Date date = formater.parse(spinnerValue);
-            String id = txtNumFac.getText();
-            numFac = (Factura) FC.findFactura(Integer.parseInt(id));
 
-           
-            
-          
             F.setNombreCliente(this.txtCliente.getText());
             F.setIdUsuario((Usuario) cmbUsuario.getSelectedItem());
             F.setFechaFactura(date);
@@ -428,12 +423,14 @@ Factura numFac;
             
             JOptionPane.showMessageDialog(null, "Datos agregados exitosamente!");
            FC.create(F);
+           CrearModelo();
+           CargarTabla();
+           this.txtCliente.setText("");
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         
-        CargarTabla();
-        this.txtCliente.setText("");
+        
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -446,20 +443,17 @@ Factura numFac;
         this.btnNuevo.setEnabled(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
-    private void txtProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdKeyReleased
-        CrearModeloProd();
-        CargarTablaProducto(this.txtProd.getText());
-    }//GEN-LAST:event_txtProdKeyReleased
-
     private void tbProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductoMouseClicked
         txtProd.setText(tbProducto.getValueAt(tbProducto.getSelectedRow(), 1).toString());
     }//GEN-LAST:event_tbProductoMouseClicked
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-         this.PanelPestañas.setSelectedIndex(1);
+        String id = txtNumFac.getText();
+        numFac = (Factura) FC.findFactura(Integer.parseInt(id));
+        this.PanelPestañas.setSelectedIndex(1);
          PanelPestañas.setEnabledAt(0, false);
-         CargarTablaProductosinNombre();
-         
+         CrearModeloProd();
+         CargarTablaProducto(this.txtProd.getText());
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void txtClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyReleased
@@ -470,18 +464,13 @@ Factura numFac;
     private void btnAgregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar2ActionPerformed
         try {
             DetalleFactura DF = new DetalleFactura();
-            String id = tbFactura.getValueAt(tbFactura.getSelectedRow(),0).toString();
-            numFac = (Factura) FC.findFactura(Integer.parseInt(id));
-            
-            DF.setIdProducto((Producto) this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0));
+            DF.setIdProducto(PC.findProducto(Integer.parseInt(this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0).toString())));
             DF.setNumFactura(numFac);
             DFC.create(DF);
-            
-            
             CrearTablaDetalle();
-            CrearModelo();
             CargarTablaDetalle();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnAgregar2ActionPerformed
 
@@ -500,6 +489,11 @@ Factura numFac;
         spFecha.setValue(tbFactura.getValueAt(tbFactura.getSelectedRow(), 3));
                        
     }//GEN-LAST:event_tbFacturaMouseClicked
+
+    private void txtProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdKeyReleased
+        CrearModeloProd();
+        CargarTablaProducto(this.txtProd.getText());
+    }//GEN-LAST:event_txtProdKeyReleased
 DefaultTableModel modelo;
     private void CrearModelo() {
         try {
@@ -586,23 +580,6 @@ DefaultTableModel modelo;
        try {
             Object o[] = null;
             List<Producto> listProducto = PC.findProductoporNombre(nombre);
-            for (int i = 0; i < listProducto.size(); i++) {
-              
-                modeloProd.addRow(o);
-                modeloProd.setValueAt(listProducto.get(i).getIdProducto(), i, 0);
-                modeloProd.setValueAt(listProducto.get(i).getNombre(), i, 1);
-                modeloProd.setValueAt(listProducto.get(i).getPrecio(),i,2);
-                
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }    
-   }
-   private void CargarTablaProductosinNombre(){
-       try {
-            Object o[] = null;
-            List<Producto> listProducto = PC.findProductoEntities();
             for (int i = 0; i < listProducto.size(); i++) {
               
                 modeloProd.addRow(o);

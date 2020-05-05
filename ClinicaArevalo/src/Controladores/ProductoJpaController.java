@@ -220,7 +220,7 @@ public class ProductoJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try{
             TypedQuery<Producto> query = em.createNamedQuery("Producto.findbyNombreP",Producto.class);
-            query.setParameter("nombreBuscar","%"+nombre+"&");
+            query.setParameter("nombreBuscar","%"+nombre+"%");
             return query.getResultList();
         }finally{
             em.close();
