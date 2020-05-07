@@ -33,6 +33,8 @@ UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
 ProductoJpaController PC = new ProductoJpaController(entityMain.getInstance());
 DetalleFacturaJpaController DFC = new DetalleFacturaJpaController(entityMain.getInstance());
 Factura numFac;
+Factura Eliminar;
+DetalleFactura EliminarDetalleFactura;
     public Facturar() {
         initComponents();
         PanelPestañas.setEnabledAt(1, false);
@@ -91,9 +93,10 @@ Factura numFac;
         jLabel9 = new javax.swing.JLabel();
         btnAgregar2 = new javax.swing.JButton();
         txtCancelar = new javax.swing.JButton();
-        txtEliminar = new javax.swing.JButton();
-        txtCobrar = new javax.swing.JButton();
+        btnEliminar2 = new javax.swing.JButton();
+        btnCobrar = new javax.swing.JButton();
         txtImprimir = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Factura");
@@ -207,7 +210,7 @@ Factura numFac;
                                 .addComponent(jLabel2)
                                 .addGap(35, 35, 35)
                                 .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -304,6 +307,11 @@ Factura numFac;
 
             }
         ));
+        tbDetalleFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDetalleFacturaMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tbDetalleFactura);
 
         jLabel9.setText("$15");
@@ -316,12 +324,34 @@ Factura numFac;
         });
 
         txtCancelar.setText("Cancelar");
+        txtCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCancelarActionPerformed(evt);
+            }
+        });
 
-        txtEliminar.setText("Eliminar");
+        btnEliminar2.setText("Eliminar");
+        btnEliminar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar2ActionPerformed(evt);
+            }
+        });
 
-        txtCobrar.setText("Cobrar");
+        btnCobrar.setText("Cobrar");
+        btnCobrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCobrarActionPerformed(evt);
+            }
+        });
 
         txtImprimir.setText("Imprimir");
+
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -335,7 +365,9 @@ Factura numFac;
                         .addGap(18, 18, 18)
                         .addComponent(txtCancelar)
                         .addGap(18, 18, 18)
-                        .addComponent(txtEliminar))
+                        .addComponent(btnEliminar2)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRegresar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -346,7 +378,7 @@ Factura numFac;
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(89, 89, 89)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,8 +389,8 @@ Factura numFac;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel9))
                             .addComponent(txtImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCobrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                            .addComponent(btnCobrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,11 +409,12 @@ Factura numFac;
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar2)
                     .addComponent(txtCancelar)
-                    .addComponent(txtEliminar))
+                    .addComponent(btnEliminar2)
+                    .addComponent(btnRegresar))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -389,7 +422,7 @@ Factura numFac;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCobrar)
+                        .addComponent(btnCobrar)
                         .addGap(34, 34, 34)
                         .addComponent(txtImprimir)
                         .addGap(47, 47, 47)))
@@ -462,11 +495,10 @@ Factura numFac;
     }//GEN-LAST:event_txtClienteKeyReleased
 
     private void btnAgregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar2ActionPerformed
-        try {
+        try {  
             DetalleFactura DF = new DetalleFactura();
             DF.setIdProducto(PC.findProducto(Integer.parseInt(this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0).toString())));
             DF.setNumFactura(numFac);
-            DFC.create(DF);
             CrearTablaDetalle();
             CargarTablaDetalle();
         } catch (Exception e) {
@@ -475,25 +507,67 @@ Factura numFac;
     }//GEN-LAST:event_btnAgregar2ActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        try {
+             Factura F = new Factura();
+             FC.destroy(Eliminar.getNumFactura());
+        } catch (Exception e) {
+        }
+       
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void tbFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbFacturaMouseClicked
+        
         this.btnSiguiente.setEnabled(true);
         btnNuevo.setEnabled(false);
         btnAgregar.setEnabled(false);
-        
         txtNumFac.setText(tbFactura.getValueAt(tbFactura.getSelectedRow(), 0).toString());
         txtCliente.setText(tbFactura.getValueAt(tbFactura.getSelectedRow(),1).toString());
         cmbUsuario.setSelectedItem(tbFactura.getValueAt(tbFactura.getSelectedRow(), 2).toString());
         spFecha.setValue(tbFactura.getValueAt(tbFactura.getSelectedRow(), 3));
-                       
+        String id = tbFactura.getValueAt(tbFactura.getSelectedRow(), 0).toString(); 
+        Eliminar = (Factura) FC.findFactura(Integer.parseInt(id));
     }//GEN-LAST:event_tbFacturaMouseClicked
 
     private void txtProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdKeyReleased
         CrearModeloProd();
         CargarTablaProducto(this.txtProd.getText());
     }//GEN-LAST:event_txtProdKeyReleased
+
+    private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
+       txtProd.setText("");
+       CrearModeloProd();
+       CrearTablaDetalle();
+       CargarTablaDetalle();
+    }//GEN-LAST:event_txtCancelarActionPerformed
+
+    private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
+        String id = tbDetalleFactura.getValueAt(tbDetalleFactura.getSelectedRow(), 0).toString();
+        modeloDetalle.removeRow(Integer.parseInt(id));
+    }//GEN-LAST:event_btnEliminar2ActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        this.PanelPestañas.setSelectedIndex(0);
+         PanelPestañas.setEnabledAt(0, true);
+         PanelPestañas.setEnabledAt(1, false);
+         btnNuevo.setEnabled(true);
+         CrearModelo();
+         CargarTabla();
+         Llenar_Combo();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
+        DetalleFactura DF = new DetalleFactura();
+        
+        DF.setIdProducto(PC.findProducto(Integer.parseInt(this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0).toString())));
+        DF.setNumFactura(numFac);
+
+        DFC.create(DF);
+    }//GEN-LAST:event_btnCobrarActionPerformed
+
+    private void tbDetalleFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDetalleFacturaMouseClicked
+        String id = tbDetalleFactura.getValueAt(tbDetalleFactura.getSelectedRow(), 0).toString();
+        EliminarDetalleFactura = (DetalleFactura) DFC.findDetalleFactura(Integer.parseInt(id));
+    }//GEN-LAST:event_tbDetalleFacturaMouseClicked
 DefaultTableModel modelo;
     private void CrearModelo() {
         try {
@@ -633,7 +707,7 @@ DefaultTableModel modelo;
                 modeloDetalle.addRow(o);
                 modeloDetalle.setValueAt(listDetalle.get(i).getIdDetalleFactura(), i, 0);
                 modeloDetalle.setValueAt(listDetalle.get(i).getIdProducto().getNombre(), i, 1);
-                modeloDetalle.setValueAt(listDetalle.get(i).getNumFactura(),i,2);
+                modeloDetalle.setValueAt(listDetalle.get(i).getNumFactura().getNumFactura(),i,2);
                 
             }
             
@@ -690,10 +764,13 @@ DefaultTableModel modelo;
     private javax.swing.JTabbedPane PanelPestañas;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregar2;
+    private javax.swing.JButton btnCobrar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminar2;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> cmbUsuario;
     private javax.swing.JLabel jLabel1;
@@ -716,8 +793,6 @@ DefaultTableModel modelo;
     private javax.swing.JTable tbProducto;
     private javax.swing.JButton txtCancelar;
     private javax.swing.JTextField txtCliente;
-    private javax.swing.JButton txtCobrar;
-    private javax.swing.JButton txtEliminar;
     private javax.swing.JButton txtImprimir;
     private javax.swing.JTextField txtNumFac;
     private javax.swing.JTextField txtProd;

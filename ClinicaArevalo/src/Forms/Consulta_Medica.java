@@ -2304,6 +2304,11 @@ public class Consulta_Medica extends javax.swing.JFrame {
         btnTerminar.setForeground(new java.awt.Color(0, 0, 0));
         btnTerminar.setText("Terminar y Facturar");
         btnTerminar.setPreferredSize(new java.awt.Dimension(150, 50));
+        btnTerminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarActionPerformed(evt);
+            }
+        });
 
         btnMenuTratamiento.setBackground(new java.awt.Color(76, 201, 223));
         btnMenuTratamiento.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -3233,6 +3238,10 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private void txtVademecumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVademecumActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtVademecumActionPerformed
+
+    private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTerminarActionPerformed
     private static int CalcularEdad(String fecha) {
         Calendar cal= Calendar.getInstance();
         int year= cal.get(Calendar.YEAR);
