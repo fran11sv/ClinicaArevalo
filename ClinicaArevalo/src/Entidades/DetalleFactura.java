@@ -26,7 +26,7 @@ import javax.persistence.Table;
 @Table(name = "Detalle_Factura")
 @NamedQueries({
     @NamedQuery(name = "DetalleFactura.findAll", query = "SELECT d FROM DetalleFactura d"),
-    @NamedQuery(name = "DetalleFactura.findporJoin", query = "SELECT d, p.nombre, p.precio  FROM DetalleFactura d, Producto p WHERE d.idProducto = :idProd")})
+    @NamedQuery(name = "DetalleFactura.findporFactura", query = "SELECT d  FROM DetalleFactura d WHERE d.numFactura=:numFactura")})
 public class DetalleFactura implements Serializable {
 
     private static final long serialVersionUID = 1L;

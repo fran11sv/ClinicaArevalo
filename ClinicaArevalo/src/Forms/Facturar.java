@@ -16,6 +16,8 @@ import Entidades.Usuario;
 import java.awt.Component;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
@@ -487,6 +489,8 @@ DetalleFactura EliminarDetalleFactura;
          PanelPestañas.setEnabledAt(0, false);
          CrearModeloProd();
          CargarTablaProducto(this.txtProd.getText());
+         CrearTablaDetalle();
+         CargarTablaDetalle();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void txtClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyReleased
@@ -499,8 +503,11 @@ DetalleFactura EliminarDetalleFactura;
             DetalleFactura DF = new DetalleFactura();
             DF.setIdProducto(PC.findProducto(Integer.parseInt(this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0).toString())));
             DF.setNumFactura(numFac);
+            
+            DFC.create(DF);
             CrearTablaDetalle();
             CargarTablaDetalle();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -556,12 +563,13 @@ DetalleFactura EliminarDetalleFactura;
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
-        DetalleFactura DF = new DetalleFactura();
-        
-        DF.setIdProducto(PC.findProducto(Integer.parseInt(this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0).toString())));
-        DF.setNumFactura(numFac);
+    try {
+        numFac.setEstadoFactura(1);
 
-        DFC.create(DF);
+        FC.edit(numFac);
+    } catch (Exception ex) {
+        Logger.getLogger(Facturar.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_btnCobrarActionPerformed
 
     private void tbDetalleFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDetalleFacturaMouseClicked
@@ -603,7 +611,7 @@ DefaultTableModel modelo;
     private void CargarTabla() {
         try {
             Object o[] = null;
-            List<Factura> listFactura = FC.findFacturaEntities();
+            List<Factura> listFactura = FC.findbyEstado();
             for (int i = 0; i < listFactura.size(); i++) {
               
                 modelo.addRow(o);
@@ -672,11 +680,12 @@ DefaultTableModel modelo;
     try {
             modeloDetalle = (new DefaultTableModel(
                     null, new String[]{
-                        "ID", "Nombre","Factura"}) {
+                        "ID", "Nombre","Precio","Factura"}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
                     java.lang.String.class,
                     java.lang.String.class,
+                    java.lang.String.class
 
                 };
                 boolean[] canEdit = new boolean[]{
@@ -701,13 +710,14 @@ DefaultTableModel modelo;
    private void CargarTablaDetalle(){
        try {
             Object o[] = null;
-            List<DetalleFactura> listDetalle  = DFC.findDetalleFacturaEntities();
+            List<DetalleFactura> listDetalle  = DFC.findporFactura(numFac);
             for (int i = 0; i < listDetalle.size(); i++) {
               
                 modeloDetalle.addRow(o);
                 modeloDetalle.setValueAt(listDetalle.get(i).getIdDetalleFactura(), i, 0);
                 modeloDetalle.setValueAt(listDetalle.get(i).getIdProducto().getNombre(), i, 1);
-                modeloDetalle.setValueAt(listDetalle.get(i).getNumFactura().getNumFactura(),i,2);
+                modeloDetalle.setValueAt(listDetalle.get(i).getIdProducto().getPrecio(), i, 2);
+                modeloDetalle.setValueAt(listDetalle.get(i).getNumFactura().getNumFactura(),i,3);
                 
             }
             

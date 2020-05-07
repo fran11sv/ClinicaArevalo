@@ -226,4 +226,13 @@ public class FacturaJpaController implements Serializable {
             em.close();
         }
     }
+    public List<Factura> findbyEstado () {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Factura> query=em.createNamedQuery("Factura.findporEstadoFactura",Factura.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }
