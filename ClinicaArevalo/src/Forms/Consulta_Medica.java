@@ -339,6 +339,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(6);
         setResizable(false);
 
         jPanel4.setBackground(new java.awt.Color(187, 232, 223));
@@ -1278,6 +1279,11 @@ public class Consulta_Medica extends javax.swing.JFrame {
         btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Expedientes.png"))); // NOI18N
         btnHistorial.setText("Ver Historial Clínico de Paciente");
         btnHistorial.setPreferredSize(new java.awt.Dimension(250, 35));
+        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialActionPerformed(evt);
+            }
+        });
 
         jLabel35.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(239, 239, 239));
@@ -2593,6 +2599,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void btnAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacienteActionPerformed
         try {
+            int mensaje = JOptionPane.showConfirmDialog(null, "¿Están sus datos correctos?", "Agregar paciente",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (mensaje == 0) {
+                
+            } else {
+            }
             Paciente P = new Paciente();
             char caracterSexo = txtSexoPaciente.getText().charAt(0);
             char caracterEstado = txtCivilPaciente.getText().charAt(0);
@@ -2721,13 +2733,17 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreBusquedaKeyReleased
 
     private void btnMenuPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPacienteActionPerformed
-         int resp=JOptionPane.showConfirmDialog(null,"¿Desea volver al menú principal? Recuerde que los datos ingresados sin guardar se perderán","Regresar a Menú",JOptionPane.YES_NO_OPTION);
-      if (JOptionPane.YES_OPTION == resp){
-        //INSERTAR CODIGO PARA REGRESAR AL MENÚ
-    }
-      else{
-    
-    }
+         //Validación de regreso
+        int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
+                + "Se descartarán los datos no guardados.", "Regresar al menú",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (mensaje == 0) {
+                    MenuPrincipal menu = new MenuPrincipal();
+                    menu.setVisible(true);
+                    this.dispose();
+            }else{
+                    
+                }
     }//GEN-LAST:event_btnMenuPacienteActionPerformed
 
     private void btnMenuIdentiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuIdentiActionPerformed
@@ -3240,8 +3256,15 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_txtVademecumActionPerformed
 
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
-        // TODO add your handling code here:
+        try {
+            
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btnTerminarActionPerformed
+
+    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHistorialActionPerformed
     private static int CalcularEdad(String fecha) {
         Calendar cal= Calendar.getInstance();
         int year= cal.get(Calendar.YEAR);
