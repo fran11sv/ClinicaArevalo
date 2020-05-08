@@ -37,6 +37,7 @@ DetalleFacturaJpaController DFC = new DetalleFacturaJpaController(entityMain.get
 Factura numFac;
 Factura Eliminar;
 DetalleFactura EliminarDetalleFactura;
+long precio;
     public Facturar() {
         initComponents();
         PanelPestañas.setEnabledAt(1, false);
@@ -92,7 +93,7 @@ DetalleFactura EliminarDetalleFactura;
         tbProducto = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbDetalleFactura = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
         btnAgregar2 = new javax.swing.JButton();
         txtCancelar = new javax.swing.JButton();
         btnEliminar2 = new javax.swing.JButton();
@@ -134,8 +135,18 @@ DetalleFactura EliminarDetalleFactura;
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setEnabled(false);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnMenu.setText("Menú Principal");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
 
         txtCliente.setEnabled(false);
         txtCliente.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -316,7 +327,7 @@ DetalleFactura EliminarDetalleFactura;
         });
         jScrollPane3.setViewportView(tbDetalleFactura);
 
-        jLabel9.setText("$15");
+        lblTotal.setText("$15");
 
         btnAgregar2.setText("Agregar");
         btnAgregar2.addActionListener(new java.awt.event.ActionListener() {
@@ -389,7 +400,7 @@ DetalleFactura EliminarDetalleFactura;
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel9))
+                                .addComponent(lblTotal))
                             .addComponent(txtImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCobrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(127, Short.MAX_VALUE))
@@ -430,7 +441,7 @@ DetalleFactura EliminarDetalleFactura;
                         .addGap(47, 47, 47)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                    .addComponent(lblTotal))
                 .addGap(24, 24, 24))
         );
 
@@ -485,7 +496,8 @@ DetalleFactura EliminarDetalleFactura;
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         String id = txtNumFac.getText();
         numFac = (Factura) FC.findFactura(Integer.parseInt(id));
-        this.PanelPestañas.setSelectedIndex(1);
+         PanelPestañas.setSelectedIndex(1);
+         PanelPestañas.setEnabledAt(1,true);
          PanelPestañas.setEnabledAt(0, false);
          CrearModeloProd();
          CargarTablaProducto(this.txtProd.getText());
@@ -501,12 +513,19 @@ DetalleFactura EliminarDetalleFactura;
     private void btnAgregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar2ActionPerformed
         try {  
             DetalleFactura DF = new DetalleFactura();
-            DF.setIdProducto(PC.findProducto(Integer.parseInt(this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0).toString())));
-            DF.setNumFactura(numFac);
-            
-            DFC.create(DF);
-            CrearTablaDetalle();
-            CargarTablaDetalle();
+            int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea añadir esta factura?", "Añadir factura",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (mensaje == 0) {
+                    DF.setIdProducto(PC.findProducto(Integer.parseInt(this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0).toString())));
+                    DF.setNumFactura(numFac);
+                    DFC.create(DF);
+                    JOptionPane.showMessageDialog(null,"El registro fue añadido con éxito");
+                    CrearTablaDetalle();
+                    CargarTablaDetalle(); 
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"El registro no se añadió");
+                }
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -515,8 +534,17 @@ DetalleFactura EliminarDetalleFactura;
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
-             Factura F = new Factura();
-             FC.destroy(Eliminar.getNumFactura());
+                int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea eliminar esta factura?", "Eliminar factura",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (mensaje == 0) {
+                    FC.destroy(Eliminar.getNumFactura());
+                    CrearModelo();
+                    CargarTabla();
+                    JOptionPane.showMessageDialog(null,"El registro fue eliminado con éxito");
+                }else{
+                    JOptionPane.showMessageDialog(null,"El registro no se eliminó");
+                }
+
         } catch (Exception e) {
         }
        
@@ -548,8 +576,22 @@ DetalleFactura EliminarDetalleFactura;
     }//GEN-LAST:event_txtCancelarActionPerformed
 
     private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
-        String id = tbDetalleFactura.getValueAt(tbDetalleFactura.getSelectedRow(), 0).toString();
-        modeloDetalle.removeRow(Integer.parseInt(id));
+        try {
+                int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea eliminar esta factura?", "Eliminar factura",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (mensaje == 0) {
+                
+                DFC.destroy(EliminarDetalleFactura.getIdDetalleFactura());
+                JOptionPane.showMessageDialog(null,"El registro fue eliminado con éxito");
+                CrearTablaDetalle();
+                CargarTablaDetalle();
+                
+        }else{
+                    JOptionPane.showMessageDialog(null,"El registro no fue eliminado");
+                }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
     }//GEN-LAST:event_btnEliminar2ActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -576,7 +618,30 @@ DetalleFactura EliminarDetalleFactura;
         String id = tbDetalleFactura.getValueAt(tbDetalleFactura.getSelectedRow(), 0).toString();
         EliminarDetalleFactura = (DetalleFactura) DFC.findDetalleFactura(Integer.parseInt(id));
     }//GEN-LAST:event_tbDetalleFacturaMouseClicked
-DefaultTableModel modelo;
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtNumFac.setText("");
+        txtCliente.setText("");
+        btnNuevo.setEnabled(true);
+        btnAgregar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        //Validación de regreso
+        int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
+                + "Se descartarán los datos no guardados.", "Regresar al menú",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (mensaje == 0) {
+                    MenuPrincipal menu = new MenuPrincipal();
+                    menu.setVisible(true);
+                    this.dispose();
+            }else{
+                    
+                }
+    }//GEN-LAST:event_btnMenuActionPerformed
+
+    DefaultTableModel modelo;
     private void CrearModelo() {
         try {
             modelo = (new DefaultTableModel(
@@ -703,6 +768,8 @@ DefaultTableModel modelo;
                 }
             });
             tbDetalleFactura.setModel(modeloDetalle);
+            lblFactura.setText("$ 0.00");
+            precio = 0;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
@@ -719,8 +786,9 @@ DefaultTableModel modelo;
                 modeloDetalle.setValueAt(listDetalle.get(i).getIdProducto().getPrecio(), i, 2);
                 modeloDetalle.setValueAt(listDetalle.get(i).getNumFactura().getNumFactura(),i,3);
                 
+                precio = precio+listDetalle.get(i).getIdProducto().getPrecio();
             }
-            
+            lblTotal.setText(precio + ""); 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }    
@@ -790,13 +858,13 @@ DefaultTableModel modelo;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblFactura;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JSpinner spFecha;
     private javax.swing.JTable tbDetalleFactura;
     private javax.swing.JTable tbFactura;
