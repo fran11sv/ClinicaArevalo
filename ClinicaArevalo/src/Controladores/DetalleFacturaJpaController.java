@@ -202,6 +202,6 @@ public class DetalleFacturaJpaController implements Serializable {
             return query.getResultList();
         }finally{
             em.close();
-        }
+}
     }
 }

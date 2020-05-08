@@ -39,7 +39,6 @@ public class EnfermedadesCie10 implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
     @Column(name = "clave")
     private String clave;
     @Basic(optional = false)
@@ -58,9 +57,8 @@ public class EnfermedadesCie10 implements Serializable {
         this.id = id;
     }
 
-    public EnfermedadesCie10(Integer id, String clave, String descripcion) {
+    public EnfermedadesCie10(Integer id, String descripcion) {
         this.id = id;
-        this.clave = clave;
         this.descripcion = descripcion;
     }
 

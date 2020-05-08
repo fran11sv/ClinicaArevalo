@@ -238,6 +238,6 @@ public class SubGruposCie10JpaController implements Serializable {
             return query.getResultList();
         } finally {
             em.close();
-        }
+}
     }
 }

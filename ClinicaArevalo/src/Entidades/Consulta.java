@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -69,10 +68,10 @@ public class Consulta implements Serializable {
     private String presenteEnfermedad;
     @Column(name = "IMC")
     private Double imc;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConsulta")
-    private List<Receta> recetaList;
+    @OneToMany(mappedBy = "idConsultas")
+    private List<Diagnostico> diagnosticoList;
     @OneToMany(mappedBy = "idConsulta")
-    private List<DetalleDiagnostico> detalleDiagnosticoList;
+    private List<Receta> recetaList;
     @JoinColumn(name = "id_Paciente", referencedColumnName = "id_Paciente")
     @ManyToOne
     private Paciente idPaciente;
@@ -199,20 +198,20 @@ public class Consulta implements Serializable {
         this.imc = imc;
     }
 
+    public List<Diagnostico> getDiagnosticoList() {
+        return diagnosticoList;
+    }
+
+    public void setDiagnosticoList(List<Diagnostico> diagnosticoList) {
+        this.diagnosticoList = diagnosticoList;
+    }
+
     public List<Receta> getRecetaList() {
         return recetaList;
     }
 
     public void setRecetaList(List<Receta> recetaList) {
         this.recetaList = recetaList;
-    }
-
-    public List<DetalleDiagnostico> getDetalleDiagnosticoList() {
-        return detalleDiagnosticoList;
-    }
-
-    public void setDetalleDiagnosticoList(List<DetalleDiagnostico> detalleDiagnosticoList) {
-        this.detalleDiagnosticoList = detalleDiagnosticoList;
     }
 
     public Paciente getIdPaciente() {

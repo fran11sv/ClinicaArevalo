@@ -19,6 +19,7 @@
     <class>Entidades.SubGruposCie10</class>
     <class>Entidades.Usuario</class>
     <class>Entidades.Vademecum</class>
+    <class>Entidades.Diagnostico</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://194.5.156.94:3306/u795523052_clinica?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="u795523052_admin"/>

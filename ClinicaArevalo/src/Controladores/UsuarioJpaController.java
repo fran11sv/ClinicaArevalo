@@ -318,6 +318,6 @@ public class UsuarioJpaController implements Serializable {
             return query.getResultList();
         }finally{
             em.close();
-        }
+}
     }
 }

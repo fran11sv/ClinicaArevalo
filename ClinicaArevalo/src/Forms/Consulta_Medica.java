@@ -5,6 +5,7 @@ import Controladores.CitasJpaController;
 import Controladores.ConsultaJpaController;
 import Controladores.DetalleDiagnosticoJpaController;
 import Controladores.DetalleRecetaJpaController;
+import Controladores.DiagnosticoJpaController;
 import Controladores.EnfermedadesCie10JpaController;
 import Controladores.PacienteJpaController;
 import Controladores.RecetaJpaController;
@@ -14,6 +15,7 @@ import Entidades.Citas;
 import Entidades.Consulta;
 import Entidades.DetalleDiagnostico;
 import Entidades.DetalleReceta;
+import Entidades.Diagnostico;
 import Entidades.EnfermedadesCie10;
 import Entidades.Paciente;
 import Entidades.Receta;
@@ -39,6 +41,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance());
     DetalleRecetaJpaController DRC = new DetalleRecetaJpaController(entityMain.getInstance());
     CitasJpaController CitasC = new CitasJpaController(entityMain.getInstance());
+    DiagnosticoJpaController DGC = new DiagnosticoJpaController(entityMain.getInstance());
  //Creación de Objetos para guardar datos para operaciones de la base de datos
     Receta DatosReceta;
     Receta EditarReceta;
@@ -50,7 +53,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
     Antecedentes EditarAntecedente;
     Antecedentes EliminarAntecedente;
     EnfermedadesCie10 AgregarEnfermedad;
-    DetalleDiagnostico EliminarDiagnostico;
+    DetalleDiagnostico EliminarDetalle;
+    Diagnostico DatosDiagnostico;
     public Consulta_Medica() {
         initComponents();
         CrearModeloPacientes();
@@ -297,6 +301,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         tbEnfermedades = new javax.swing.JTable();
         btnbuscarporCate = new javax.swing.JButton();
         btnBuscarEnfermedad = new javax.swing.JButton();
+        btnDiagnostico = new javax.swing.JButton();
         PanelExamenes = new javax.swing.JPanel();
         jLabel66 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -1869,7 +1874,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         btnEnfermedades.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnEnfermedades.setForeground(new java.awt.Color(0, 0, 0));
         btnEnfermedades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/CIE10 2.png"))); // NOI18N
-        btnEnfermedades.setText("Ver B.D. de Enfermedades");
+        btnEnfermedades.setText("Ver Enfermedades");
         btnEnfermedades.setPreferredSize(new java.awt.Dimension(280, 60));
 
         txtAgregarDiagnostico.setBackground(new java.awt.Color(76, 201, 223));
@@ -1941,6 +1946,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtEnfermedad.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         txtEnfermedad.setForeground(new java.awt.Color(0, 0, 0));
         txtEnfermedad.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtEnfermedad.setEnabled(false);
         txtEnfermedad.setNextFocusableComponent(btnbuscarporCate);
         txtEnfermedad.setPreferredSize(new java.awt.Dimension(200, 40));
         txtEnfermedad.addActionListener(new java.awt.event.ActionListener() {
@@ -1997,6 +2003,17 @@ public class Consulta_Medica extends javax.swing.JFrame {
             }
         });
 
+        btnDiagnostico.setBackground(new java.awt.Color(76, 201, 223));
+        btnDiagnostico.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnDiagnostico.setForeground(new java.awt.Color(0, 0, 0));
+        btnDiagnostico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Agregar.png"))); // NOI18N
+        btnDiagnostico.setText("Diagnostico");
+        btnDiagnostico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiagnosticoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelDiagnosticoLayout = new javax.swing.GroupLayout(PanelDiagnostico);
         PanelDiagnostico.setLayout(PanelDiagnosticoLayout);
         PanelDiagnosticoLayout.setHorizontalGroup(
@@ -2027,20 +2044,22 @@ public class Consulta_Medica extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDiagnosticoLayout.createSequentialGroup()
                                         .addGap(258, 258, 258)
                                         .addComponent(btnMenuFisica1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(PanelDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnEnfermedades, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(PanelDiagnosticoLayout.createSequentialGroup()
-                                    .addGroup(PanelDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(PanelDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblPacienteDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(PanelDiagnosticoLayout.createSequentialGroup()
-                                            .addComponent(txtEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(btnbuscarporCate, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(PanelDiagnosticoLayout.createSequentialGroup()
+                                .addGroup(PanelDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(PanelDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPacienteDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(PanelDiagnosticoLayout.createSequentialGroup()
+                                        .addComponent(txtEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(PanelDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(btnDiagnostico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnbuscarporCate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(PanelDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnEnfermedades, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelDiagnosticoLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
@@ -2062,12 +2081,14 @@ public class Consulta_Medica extends javax.swing.JFrame {
                             .addComponent(txtEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDiagnosticoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(PanelDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnbuscarporCate, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnbuscarporCate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEnfermedades, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(PanelDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnDiagnostico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEnfermedades, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)))
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
@@ -2967,8 +2988,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         int resp = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar este registro?", "Eliminar Registro", JOptionPane.YES_NO_OPTION);
         if (JOptionPane.YES_OPTION == resp) {
             try {
-                EliminarDiagnostico = (DetalleDiagnostico) DC.findDetalleDiagnostico(Integer.parseInt(this.tbDiagnostico.getValueAt(tbDiagnostico.getSelectedRow(), 0).toString()));
-                DC.destroy(EliminarDiagnostico.getIdDiagnostico());
+                EliminarDetalle = (DetalleDiagnostico) DC.findDetalleDiagnostico(Integer.parseInt(this.tbDiagnostico.getValueAt(tbDiagnostico.getSelectedRow(), 0).toString()));
+                DC.destroy(EliminarDetalle.getIdDetalleDiagnostico());
                 JOptionPane.showMessageDialog(null, "El registro fue eliminado con Exito");
 
                 CrearModeloDiagnostico();
@@ -3251,7 +3272,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
         if (txtPresion.getText().isEmpty() || txtPulso.getText().isEmpty() || txtFCC.getText().isEmpty() || txtFR.getText().isEmpty()
-                || txtTemperatura.getText().isEmpty() || txtMasa.getText().isEmpty()|| txtTalla.getText().isEmpty()) {
+                || txtTemperatura.getText().isEmpty() || txtMasa.getText().isEmpty() || txtTalla.getText().isEmpty()) {
             int resp = JOptionPane.showConfirmDialog(null, "Tiene datos sin ingresar en Examen Fisico, si no los ingresa su valor sera de 0 ¿Desea continuar?", "Datos sin ingresar", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == resp) {
                 txtPresion.setText("0");
@@ -3262,102 +3283,107 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 txtMasa.setText("0");
                 txtTalla.setText("0");
                 try {
-            //Agregar Una nueva consulta
-            Consulta C = new Consulta();
-            Login login = new Login();
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-            String spinnerValue = formater.format(this.spFechaConsulta.getValue());
-            Date date = formater.parse(spinnerValue);
+                    //Agregar Una nueva consulta
+                    Consulta C = new Consulta();
+                    Login login = new Login();
+                    SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+                    String spinnerValue = formater.format(this.spFechaConsulta.getValue());
+                    Date date = formater.parse(spinnerValue);
 
-            //Guardamos datos de Consulta
-            C.setExamenFisico(this.txtFisico.getText());
-            C.setFechaConsulta(date);
-            C.setFrecuenciacardiaca(Integer.parseInt(this.txtFCC.getText()));
-            C.setFrecuenciarespiratoria(Integer.parseInt(this.txtFR.getText()));
-            C.setIdPaciente(DatosPaciente);
-            C.setIdUsuario(login.DatosUsuario);
-            C.setImc(Double.parseDouble(this.lblIMC.getText()));
-            C.setMotivo(this.txtMotivoConsulta.getText());
-            C.setObservaciones(this.txtObservacionesIdenti.getText());
-            C.setPeso(Double.parseDouble(this.txtMasa.getText()));
-            C.setPresenteEnfermedad(this.txtPresenteConsulta.getText());
-            C.setPresion(this.txtPresion.getText());
-            C.setPulso(Integer.parseInt(this.txtPulso.getText()));
-            C.setTalla(Double.parseDouble(this.txtTalla.getText()));
-            C.setTemperatura(Double.parseDouble(this.txtTemperatura.getText()));
+                    //Guardamos datos de Consulta
+                    C.setExamenFisico(this.txtFisico.getText());
+                    C.setFechaConsulta(date);
+                    C.setFrecuenciacardiaca(Integer.parseInt(this.txtFCC.getText()));
+                    C.setFrecuenciarespiratoria(Integer.parseInt(this.txtFR.getText()));
+                    C.setIdPaciente(DatosPaciente);
+                    C.setIdUsuario(login.DatosUsuario);
+                    C.setImc(Double.parseDouble(this.lblIMC.getText()));
+                    C.setMotivo(this.txtMotivoConsulta.getText());
+                    C.setObservaciones(this.txtObservacionesIdenti.getText());
+                    C.setPeso(Double.parseDouble(this.txtMasa.getText()));
+                    C.setPresenteEnfermedad(this.txtPresenteConsulta.getText());
+                    C.setPresion(this.txtPresion.getText());
+                    C.setPulso(Integer.parseInt(this.txtPulso.getText()));
+                    C.setTalla(Double.parseDouble(this.txtTalla.getText()));
+                    C.setTemperatura(Double.parseDouble(this.txtTemperatura.getText()));
+                    
+                    CC.create(C);
 
-            CC.create(C);
-            
-            
-
-            //Obtiene la ultima consulta del paciente
-            List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
-            int idConsulta = listconsulta.get(0).getIdConsulta();
-            UltimaConsulta = (Consulta) CC.findConsulta(idConsulta);
-
-            //Guardar Datos de Receta
-            DatosReceta.setIndicaciones(this.txtExamenes.getText());
-            DatosReceta.setIdConsulta(UltimaConsulta);
-            RC.edit(DatosReceta);
-
-            JOptionPane.showMessageDialog(null, "Datos de Consulta Guardados Exitosamente");
-            Facturar menu = new Facturar();
-            menu.setVisible(true);
-            this.setVisible(false);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+                    //Obtiene la ultima consulta del paciente
+                    List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
+                    int idConsulta = listconsulta.get(0).getIdConsulta();
+                    UltimaConsulta = (Consulta) CC.findConsulta(idConsulta);
+                    
+                    if (!btnReceta.isEnabled()) {
+                        //Guardar Datos de Receta
+                    DatosReceta.setIndicaciones(this.txtExamenes.getText());
+                    DatosReceta.setIdConsulta(UltimaConsulta);
+                    RC.edit(DatosReceta);
+                    }
+                    if (!btnDiagnostico.isEnabled()) {
+                        //Guardar Datos de Receta                   
+                    DatosDiagnostico.setIdConsultas(UltimaConsulta);
+                    RC.edit(DatosReceta);
+                    }
+                    
+                                    
+                    JOptionPane.showMessageDialog(null, "Datos de Consulta Guardados Exitosamente");
+                    Facturar menu = new Facturar();
+                    menu.setVisible(true);
+                    this.setVisible(false);
+                    
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             } else {
                 this.PanelPestañas.setSelectedIndex(3);
             }
-        }
-        else{
+        } else {
             try {
-            //Agregar Una nueva consulta
-            Consulta C = new Consulta();
-            Login login = new Login();
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-            String spinnerValue = formater.format(this.spFechaConsulta.getValue());
-            Date date = formater.parse(spinnerValue);
+                //Agregar Una nueva consulta
+                Consulta C = new Consulta();
+                Login login = new Login();
+                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+                String spinnerValue = formater.format(this.spFechaConsulta.getValue());
+                Date date = formater.parse(spinnerValue);
 
-            //Guardamos datos de Consulta
-            C.setExamenFisico(this.txtFisico.getText());
-            C.setFechaConsulta(date);
-            C.setFrecuenciacardiaca(Integer.parseInt(this.txtFCC.getText()));
-            C.setFrecuenciarespiratoria(Integer.parseInt(this.txtFR.getText()));
-            C.setIdPaciente(DatosPaciente);
-            C.setIdUsuario(login.DatosUsuario);
-            C.setImc(Double.parseDouble(this.lblIMC.getText()));
-            C.setMotivo(this.txtMotivoConsulta.getText());
-            C.setObservaciones(this.txtObservacionesIdenti.getText());
-            C.setPeso(Double.parseDouble(this.txtMasa.getText()));
-            C.setPresenteEnfermedad(this.txtPresenteConsulta.getText());
-            C.setPresion(this.txtPresion.getText());
-            C.setPulso(Integer.parseInt(this.txtPulso.getText()));
-            C.setTalla(Double.parseDouble(this.txtTalla.getText()));
-            C.setTemperatura(Double.parseDouble(this.txtTemperatura.getText()));
+                //Guardamos datos de Consulta
+                C.setExamenFisico(this.txtFisico.getText());
+                C.setFechaConsulta(date);
+                C.setFrecuenciacardiaca(Integer.parseInt(this.txtFCC.getText()));
+                C.setFrecuenciarespiratoria(Integer.parseInt(this.txtFR.getText()));
+                C.setIdPaciente(DatosPaciente);
+                C.setIdUsuario(login.DatosUsuario);
+                C.setImc(Double.parseDouble(this.lblIMC.getText()));
+                C.setMotivo(this.txtMotivoConsulta.getText());
+                C.setObservaciones(this.txtObservacionesIdenti.getText());
+                C.setPeso(Double.parseDouble(this.txtMasa.getText()));
+                C.setPresenteEnfermedad(this.txtPresenteConsulta.getText());
+                C.setPresion(this.txtPresion.getText());
+                C.setPulso(Integer.parseInt(this.txtPulso.getText()));
+                C.setTalla(Double.parseDouble(this.txtTalla.getText()));
+                C.setTemperatura(Double.parseDouble(this.txtTemperatura.getText()));
+                
+                CC.create(C);
 
-            CC.create(C);
+                //Obtiene la ultima consulta del paciente
+                List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
+                int idConsulta = listconsulta.get(0).getIdConsulta();
+                UltimaConsulta = (Consulta) CC.findConsulta(idConsulta);
 
-            //Obtiene la ultima consulta del paciente
-            List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
-            int idConsulta = listconsulta.get(0).getIdConsulta();
-            UltimaConsulta = (Consulta) CC.findConsulta(idConsulta);
-
-            //Guardar Datos de Receta
-            DatosReceta.setIndicaciones(this.txtExamenes.getText());
-            DatosReceta.setIdConsulta(UltimaConsulta);
-            RC.edit(DatosReceta);
-
-            JOptionPane.showMessageDialog(null, "Datos de Consulta Guardados Exitosamente");
-            Facturar menu = new Facturar();
-            menu.setVisible(true);
-            this.setVisible(false);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+                //Guardar Datos de Receta
+                DatosReceta.setIndicaciones(this.txtExamenes.getText());
+                DatosReceta.setIdConsulta(UltimaConsulta);
+                RC.edit(DatosReceta);
+                
+                JOptionPane.showMessageDialog(null, "Datos de Consulta Guardados Exitosamente");
+                Facturar menu = new Facturar();
+                menu.setVisible(true);
+                this.setVisible(false);
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
         
     }//GEN-LAST:event_btnTerminarActionPerformed
@@ -3384,6 +3410,22 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnRecetaActionPerformed
+
+    private void btnDiagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosticoActionPerformed
+        try {
+            Diagnostico D = new Diagnostico();
+            DGC.create(D);
+            //Obtener Numero de Diagnostico Creado
+            List<Diagnostico> listreceta = DGC.findbyIdDESC();
+            int idDiagnostico = listreceta.get(0).getIdDiagnostico();
+            DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
+            
+            this.txtEnfermedad.setEnabled(true);
+            this.btnDiagnostico.setEnabled(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btnDiagnosticoActionPerformed
     private static int CalcularEdad(String fecha) {
         Calendar cal= Calendar.getInstance();
         int year= cal.get(Calendar.YEAR);
@@ -3533,13 +3575,13 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private void CargarTablaDiagnostico() {
         try {
             Object o[] = null;
-            List<DetalleDiagnostico> listDiagnostico = DC.findbyConsulta(UltimaConsulta);
+            List<DetalleDiagnostico> listDiagnostico = DC.findbyDiagnostico(DatosDiagnostico);
             for (int i = 0; i < listDiagnostico.size(); i++) {
                 modeloDiagnostico.addRow(o);
                 modeloDiagnostico.setValueAt(listDiagnostico.get(i).getIdDiagnostico(), i, 0);
                 modeloDiagnostico.setValueAt(listDiagnostico.get(i).getIdEnfermedad().getDescripcion(), i, 1);
                 modeloDiagnostico.setValueAt(listDiagnostico.get(i).getDescripcion(), i, 2);
-                modeloDiagnostico.setValueAt(listDiagnostico.get(i).getIdConsulta().getIdPaciente().getNombres(), i, 3);
+                modeloDiagnostico.setValueAt(listDiagnostico.get(i).getIdDiagnostico().getIdConsultas().getIdPaciente().getNombres(), i, 3);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -3691,6 +3733,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelarIdenti;
     private javax.swing.JButton btnCancelarL2;
     private javax.swing.JButton btnCancelarPaciente;
+    private javax.swing.JButton btnDiagnostico;
     private javax.swing.JButton btnEditarAnte;
     private javax.swing.JButton btnEditarMedicamento;
     private javax.swing.JButton btnEliminarDiagnostico;

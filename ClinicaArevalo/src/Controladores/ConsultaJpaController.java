@@ -5,7 +5,6 @@
  */
 package Controladores;
 
-import Controladores.exceptions.IllegalOrphanException;
 import Controladores.exceptions.NonexistentEntityException;
 import Entidades.Consulta;
 import java.io.Serializable;
@@ -15,10 +14,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Entidades.Paciente;
 import Entidades.Usuario;
-import Entidades.Receta;
+import Entidades.Diagnostico;
 import java.util.ArrayList;
 import java.util.List;
-import Entidades.DetalleDiagnostico;
+import Entidades.Receta;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -39,11 +38,11 @@ public class ConsultaJpaController implements Serializable {
     }
 
     public void create(Consulta consulta) {
+        if (consulta.getDiagnosticoList() == null) {
+            consulta.setDiagnosticoList(new ArrayList<Diagnostico>());
+        }
         if (consulta.getRecetaList() == null) {
             consulta.setRecetaList(new ArrayList<Receta>());
-        }
-        if (consulta.getDetalleDiagnosticoList() == null) {
-            consulta.setDetalleDiagnosticoList(new ArrayList<DetalleDiagnostico>());
         }
         EntityManager em = null;
         try {
@@ -59,18 +58,18 @@ public class ConsultaJpaController implements Serializable {
                 idUsuario = em.getReference(idUsuario.getClass(), idUsuario.getIdUsuario());
                 consulta.setIdUsuario(idUsuario);
             }
+            List<Diagnostico> attachedDiagnosticoList = new ArrayList<Diagnostico>();
+            for (Diagnostico diagnosticoListDiagnosticoToAttach : consulta.getDiagnosticoList()) {
+                diagnosticoListDiagnosticoToAttach = em.getReference(diagnosticoListDiagnosticoToAttach.getClass(), diagnosticoListDiagnosticoToAttach.getIdDiagnostico());
+                attachedDiagnosticoList.add(diagnosticoListDiagnosticoToAttach);
+            }
+            consulta.setDiagnosticoList(attachedDiagnosticoList);
             List<Receta> attachedRecetaList = new ArrayList<Receta>();
             for (Receta recetaListRecetaToAttach : consulta.getRecetaList()) {
                 recetaListRecetaToAttach = em.getReference(recetaListRecetaToAttach.getClass(), recetaListRecetaToAttach.getNumReceta());
                 attachedRecetaList.add(recetaListRecetaToAttach);
             }
             consulta.setRecetaList(attachedRecetaList);
-            List<DetalleDiagnostico> attachedDetalleDiagnosticoList = new ArrayList<DetalleDiagnostico>();
-            for (DetalleDiagnostico detalleDiagnosticoListDetalleDiagnosticoToAttach : consulta.getDetalleDiagnosticoList()) {
-                detalleDiagnosticoListDetalleDiagnosticoToAttach = em.getReference(detalleDiagnosticoListDetalleDiagnosticoToAttach.getClass(), detalleDiagnosticoListDetalleDiagnosticoToAttach.getIdDiagnostico());
-                attachedDetalleDiagnosticoList.add(detalleDiagnosticoListDetalleDiagnosticoToAttach);
-            }
-            consulta.setDetalleDiagnosticoList(attachedDetalleDiagnosticoList);
             em.persist(consulta);
             if (idPaciente != null) {
                 idPaciente.getConsultaList().add(consulta);
@@ -79,6 +78,15 @@ public class ConsultaJpaController implements Serializable {
             if (idUsuario != null) {
                 idUsuario.getConsultaList().add(consulta);
                 idUsuario = em.merge(idUsuario);
+            }
+            for (Diagnostico diagnosticoListDiagnostico : consulta.getDiagnosticoList()) {
+                Consulta oldIdConsultasOfDiagnosticoListDiagnostico = diagnosticoListDiagnostico.getIdConsultas();
+                diagnosticoListDiagnostico.setIdConsultas(consulta);
+                diagnosticoListDiagnostico = em.merge(diagnosticoListDiagnostico);
+                if (oldIdConsultasOfDiagnosticoListDiagnostico != null) {
+                    oldIdConsultasOfDiagnosticoListDiagnostico.getDiagnosticoList().remove(diagnosticoListDiagnostico);
+                    oldIdConsultasOfDiagnosticoListDiagnostico = em.merge(oldIdConsultasOfDiagnosticoListDiagnostico);
+                }
             }
             for (Receta recetaListReceta : consulta.getRecetaList()) {
                 Consulta oldIdConsultaOfRecetaListReceta = recetaListReceta.getIdConsulta();
@@ -89,15 +97,6 @@ public class ConsultaJpaController implements Serializable {
                     oldIdConsultaOfRecetaListReceta = em.merge(oldIdConsultaOfRecetaListReceta);
                 }
             }
-            for (DetalleDiagnostico detalleDiagnosticoListDetalleDiagnostico : consulta.getDetalleDiagnosticoList()) {
-                Consulta oldIdConsultaOfDetalleDiagnosticoListDetalleDiagnostico = detalleDiagnosticoListDetalleDiagnostico.getIdConsulta();
-                detalleDiagnosticoListDetalleDiagnostico.setIdConsulta(consulta);
-                detalleDiagnosticoListDetalleDiagnostico = em.merge(detalleDiagnosticoListDetalleDiagnostico);
-                if (oldIdConsultaOfDetalleDiagnosticoListDetalleDiagnostico != null) {
-                    oldIdConsultaOfDetalleDiagnosticoListDetalleDiagnostico.getDetalleDiagnosticoList().remove(detalleDiagnosticoListDetalleDiagnostico);
-                    oldIdConsultaOfDetalleDiagnosticoListDetalleDiagnostico = em.merge(oldIdConsultaOfDetalleDiagnosticoListDetalleDiagnostico);
-                }
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -106,7 +105,7 @@ public class ConsultaJpaController implements Serializable {
         }
     }
 
-    public void edit(Consulta consulta) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Consulta consulta) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -116,22 +115,10 @@ public class ConsultaJpaController implements Serializable {
             Paciente idPacienteNew = consulta.getIdPaciente();
             Usuario idUsuarioOld = persistentConsulta.getIdUsuario();
             Usuario idUsuarioNew = consulta.getIdUsuario();
+            List<Diagnostico> diagnosticoListOld = persistentConsulta.getDiagnosticoList();
+            List<Diagnostico> diagnosticoListNew = consulta.getDiagnosticoList();
             List<Receta> recetaListOld = persistentConsulta.getRecetaList();
             List<Receta> recetaListNew = consulta.getRecetaList();
-            List<DetalleDiagnostico> detalleDiagnosticoListOld = persistentConsulta.getDetalleDiagnosticoList();
-            List<DetalleDiagnostico> detalleDiagnosticoListNew = consulta.getDetalleDiagnosticoList();
-            List<String> illegalOrphanMessages = null;
-            for (Receta recetaListOldReceta : recetaListOld) {
-                if (!recetaListNew.contains(recetaListOldReceta)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Receta " + recetaListOldReceta + " since its idConsulta field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             if (idPacienteNew != null) {
                 idPacienteNew = em.getReference(idPacienteNew.getClass(), idPacienteNew.getIdPaciente());
                 consulta.setIdPaciente(idPacienteNew);
@@ -140,6 +127,13 @@ public class ConsultaJpaController implements Serializable {
                 idUsuarioNew = em.getReference(idUsuarioNew.getClass(), idUsuarioNew.getIdUsuario());
                 consulta.setIdUsuario(idUsuarioNew);
             }
+            List<Diagnostico> attachedDiagnosticoListNew = new ArrayList<Diagnostico>();
+            for (Diagnostico diagnosticoListNewDiagnosticoToAttach : diagnosticoListNew) {
+                diagnosticoListNewDiagnosticoToAttach = em.getReference(diagnosticoListNewDiagnosticoToAttach.getClass(), diagnosticoListNewDiagnosticoToAttach.getIdDiagnostico());
+                attachedDiagnosticoListNew.add(diagnosticoListNewDiagnosticoToAttach);
+            }
+            diagnosticoListNew = attachedDiagnosticoListNew;
+            consulta.setDiagnosticoList(diagnosticoListNew);
             List<Receta> attachedRecetaListNew = new ArrayList<Receta>();
             for (Receta recetaListNewRecetaToAttach : recetaListNew) {
                 recetaListNewRecetaToAttach = em.getReference(recetaListNewRecetaToAttach.getClass(), recetaListNewRecetaToAttach.getNumReceta());
@@ -147,13 +141,6 @@ public class ConsultaJpaController implements Serializable {
             }
             recetaListNew = attachedRecetaListNew;
             consulta.setRecetaList(recetaListNew);
-            List<DetalleDiagnostico> attachedDetalleDiagnosticoListNew = new ArrayList<DetalleDiagnostico>();
-            for (DetalleDiagnostico detalleDiagnosticoListNewDetalleDiagnosticoToAttach : detalleDiagnosticoListNew) {
-                detalleDiagnosticoListNewDetalleDiagnosticoToAttach = em.getReference(detalleDiagnosticoListNewDetalleDiagnosticoToAttach.getClass(), detalleDiagnosticoListNewDetalleDiagnosticoToAttach.getIdDiagnostico());
-                attachedDetalleDiagnosticoListNew.add(detalleDiagnosticoListNewDetalleDiagnosticoToAttach);
-            }
-            detalleDiagnosticoListNew = attachedDetalleDiagnosticoListNew;
-            consulta.setDetalleDiagnosticoList(detalleDiagnosticoListNew);
             consulta = em.merge(consulta);
             if (idPacienteOld != null && !idPacienteOld.equals(idPacienteNew)) {
                 idPacienteOld.getConsultaList().remove(consulta);
@@ -171,6 +158,29 @@ public class ConsultaJpaController implements Serializable {
                 idUsuarioNew.getConsultaList().add(consulta);
                 idUsuarioNew = em.merge(idUsuarioNew);
             }
+            for (Diagnostico diagnosticoListOldDiagnostico : diagnosticoListOld) {
+                if (!diagnosticoListNew.contains(diagnosticoListOldDiagnostico)) {
+                    diagnosticoListOldDiagnostico.setIdConsultas(null);
+                    diagnosticoListOldDiagnostico = em.merge(diagnosticoListOldDiagnostico);
+                }
+            }
+            for (Diagnostico diagnosticoListNewDiagnostico : diagnosticoListNew) {
+                if (!diagnosticoListOld.contains(diagnosticoListNewDiagnostico)) {
+                    Consulta oldIdConsultasOfDiagnosticoListNewDiagnostico = diagnosticoListNewDiagnostico.getIdConsultas();
+                    diagnosticoListNewDiagnostico.setIdConsultas(consulta);
+                    diagnosticoListNewDiagnostico = em.merge(diagnosticoListNewDiagnostico);
+                    if (oldIdConsultasOfDiagnosticoListNewDiagnostico != null && !oldIdConsultasOfDiagnosticoListNewDiagnostico.equals(consulta)) {
+                        oldIdConsultasOfDiagnosticoListNewDiagnostico.getDiagnosticoList().remove(diagnosticoListNewDiagnostico);
+                        oldIdConsultasOfDiagnosticoListNewDiagnostico = em.merge(oldIdConsultasOfDiagnosticoListNewDiagnostico);
+                    }
+                }
+            }
+            for (Receta recetaListOldReceta : recetaListOld) {
+                if (!recetaListNew.contains(recetaListOldReceta)) {
+                    recetaListOldReceta.setIdConsulta(null);
+                    recetaListOldReceta = em.merge(recetaListOldReceta);
+                }
+            }
             for (Receta recetaListNewReceta : recetaListNew) {
                 if (!recetaListOld.contains(recetaListNewReceta)) {
                     Consulta oldIdConsultaOfRecetaListNewReceta = recetaListNewReceta.getIdConsulta();
@@ -179,23 +189,6 @@ public class ConsultaJpaController implements Serializable {
                     if (oldIdConsultaOfRecetaListNewReceta != null && !oldIdConsultaOfRecetaListNewReceta.equals(consulta)) {
                         oldIdConsultaOfRecetaListNewReceta.getRecetaList().remove(recetaListNewReceta);
                         oldIdConsultaOfRecetaListNewReceta = em.merge(oldIdConsultaOfRecetaListNewReceta);
-                    }
-                }
-            }
-            for (DetalleDiagnostico detalleDiagnosticoListOldDetalleDiagnostico : detalleDiagnosticoListOld) {
-                if (!detalleDiagnosticoListNew.contains(detalleDiagnosticoListOldDetalleDiagnostico)) {
-                    detalleDiagnosticoListOldDetalleDiagnostico.setIdConsulta(null);
-                    detalleDiagnosticoListOldDetalleDiagnostico = em.merge(detalleDiagnosticoListOldDetalleDiagnostico);
-                }
-            }
-            for (DetalleDiagnostico detalleDiagnosticoListNewDetalleDiagnostico : detalleDiagnosticoListNew) {
-                if (!detalleDiagnosticoListOld.contains(detalleDiagnosticoListNewDetalleDiagnostico)) {
-                    Consulta oldIdConsultaOfDetalleDiagnosticoListNewDetalleDiagnostico = detalleDiagnosticoListNewDetalleDiagnostico.getIdConsulta();
-                    detalleDiagnosticoListNewDetalleDiagnostico.setIdConsulta(consulta);
-                    detalleDiagnosticoListNewDetalleDiagnostico = em.merge(detalleDiagnosticoListNewDetalleDiagnostico);
-                    if (oldIdConsultaOfDetalleDiagnosticoListNewDetalleDiagnostico != null && !oldIdConsultaOfDetalleDiagnosticoListNewDetalleDiagnostico.equals(consulta)) {
-                        oldIdConsultaOfDetalleDiagnosticoListNewDetalleDiagnostico.getDetalleDiagnosticoList().remove(detalleDiagnosticoListNewDetalleDiagnostico);
-                        oldIdConsultaOfDetalleDiagnosticoListNewDetalleDiagnostico = em.merge(oldIdConsultaOfDetalleDiagnosticoListNewDetalleDiagnostico);
                     }
                 }
             }
@@ -216,7 +209,7 @@ public class ConsultaJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -228,17 +221,6 @@ public class ConsultaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The consulta with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            List<Receta> recetaListOrphanCheck = consulta.getRecetaList();
-            for (Receta recetaListOrphanCheckReceta : recetaListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Consulta (" + consulta + ") cannot be destroyed since the Receta " + recetaListOrphanCheckReceta + " in its recetaList field has a non-nullable idConsulta field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             Paciente idPaciente = consulta.getIdPaciente();
             if (idPaciente != null) {
                 idPaciente.getConsultaList().remove(consulta);
@@ -249,10 +231,15 @@ public class ConsultaJpaController implements Serializable {
                 idUsuario.getConsultaList().remove(consulta);
                 idUsuario = em.merge(idUsuario);
             }
-            List<DetalleDiagnostico> detalleDiagnosticoList = consulta.getDetalleDiagnosticoList();
-            for (DetalleDiagnostico detalleDiagnosticoListDetalleDiagnostico : detalleDiagnosticoList) {
-                detalleDiagnosticoListDetalleDiagnostico.setIdConsulta(null);
-                detalleDiagnosticoListDetalleDiagnostico = em.merge(detalleDiagnosticoListDetalleDiagnostico);
+            List<Diagnostico> diagnosticoList = consulta.getDiagnosticoList();
+            for (Diagnostico diagnosticoListDiagnostico : diagnosticoList) {
+                diagnosticoListDiagnostico.setIdConsultas(null);
+                diagnosticoListDiagnostico = em.merge(diagnosticoListDiagnostico);
+            }
+            List<Receta> recetaList = consulta.getRecetaList();
+            for (Receta recetaListReceta : recetaList) {
+                recetaListReceta.setIdConsulta(null);
+                recetaListReceta = em.merge(recetaListReceta);
             }
             em.remove(consulta);
             em.getTransaction().commit();

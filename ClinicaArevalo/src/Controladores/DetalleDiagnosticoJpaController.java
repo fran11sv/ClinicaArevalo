@@ -6,13 +6,14 @@
 package Controladores;
 
 import Controladores.exceptions.NonexistentEntityException;
+import Entidades.Consulta;
+import Entidades.DetalleDiagnostico;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entidades.Consulta;
-import Entidades.DetalleDiagnostico;
+import Entidades.Diagnostico;
 import Entidades.EnfermedadesCie10;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -39,10 +40,10 @@ public class DetalleDiagnosticoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Consulta idConsulta = detalleDiagnostico.getIdConsulta();
-            if (idConsulta != null) {
-                idConsulta = em.getReference(idConsulta.getClass(), idConsulta.getIdConsulta());
-                detalleDiagnostico.setIdConsulta(idConsulta);
+            Diagnostico idDiagnostico = detalleDiagnostico.getIdDiagnostico();
+            if (idDiagnostico != null) {
+                idDiagnostico = em.getReference(idDiagnostico.getClass(), idDiagnostico.getIdDiagnostico());
+                detalleDiagnostico.setIdDiagnostico(idDiagnostico);
             }
             EnfermedadesCie10 idEnfermedad = detalleDiagnostico.getIdEnfermedad();
             if (idEnfermedad != null) {
@@ -50,9 +51,9 @@ public class DetalleDiagnosticoJpaController implements Serializable {
                 detalleDiagnostico.setIdEnfermedad(idEnfermedad);
             }
             em.persist(detalleDiagnostico);
-            if (idConsulta != null) {
-                idConsulta.getDetalleDiagnosticoList().add(detalleDiagnostico);
-                idConsulta = em.merge(idConsulta);
+            if (idDiagnostico != null) {
+                idDiagnostico.getDetalleDiagnosticoList().add(detalleDiagnostico);
+                idDiagnostico = em.merge(idDiagnostico);
             }
             if (idEnfermedad != null) {
                 idEnfermedad.getDetalleDiagnosticoList().add(detalleDiagnostico);
@@ -71,27 +72,27 @@ public class DetalleDiagnosticoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            DetalleDiagnostico persistentDetalleDiagnostico = em.find(DetalleDiagnostico.class, detalleDiagnostico.getIdDiagnostico());
-            Consulta idConsultaOld = persistentDetalleDiagnostico.getIdConsulta();
-            Consulta idConsultaNew = detalleDiagnostico.getIdConsulta();
+            DetalleDiagnostico persistentDetalleDiagnostico = em.find(DetalleDiagnostico.class, detalleDiagnostico.getIdDetalleDiagnostico());
+            Diagnostico idDiagnosticoOld = persistentDetalleDiagnostico.getIdDiagnostico();
+            Diagnostico idDiagnosticoNew = detalleDiagnostico.getIdDiagnostico();
             EnfermedadesCie10 idEnfermedadOld = persistentDetalleDiagnostico.getIdEnfermedad();
             EnfermedadesCie10 idEnfermedadNew = detalleDiagnostico.getIdEnfermedad();
-            if (idConsultaNew != null) {
-                idConsultaNew = em.getReference(idConsultaNew.getClass(), idConsultaNew.getIdConsulta());
-                detalleDiagnostico.setIdConsulta(idConsultaNew);
+            if (idDiagnosticoNew != null) {
+                idDiagnosticoNew = em.getReference(idDiagnosticoNew.getClass(), idDiagnosticoNew.getIdDiagnostico());
+                detalleDiagnostico.setIdDiagnostico(idDiagnosticoNew);
             }
             if (idEnfermedadNew != null) {
                 idEnfermedadNew = em.getReference(idEnfermedadNew.getClass(), idEnfermedadNew.getId());
                 detalleDiagnostico.setIdEnfermedad(idEnfermedadNew);
             }
             detalleDiagnostico = em.merge(detalleDiagnostico);
-            if (idConsultaOld != null && !idConsultaOld.equals(idConsultaNew)) {
-                idConsultaOld.getDetalleDiagnosticoList().remove(detalleDiagnostico);
-                idConsultaOld = em.merge(idConsultaOld);
+            if (idDiagnosticoOld != null && !idDiagnosticoOld.equals(idDiagnosticoNew)) {
+                idDiagnosticoOld.getDetalleDiagnosticoList().remove(detalleDiagnostico);
+                idDiagnosticoOld = em.merge(idDiagnosticoOld);
             }
-            if (idConsultaNew != null && !idConsultaNew.equals(idConsultaOld)) {
-                idConsultaNew.getDetalleDiagnosticoList().add(detalleDiagnostico);
-                idConsultaNew = em.merge(idConsultaNew);
+            if (idDiagnosticoNew != null && !idDiagnosticoNew.equals(idDiagnosticoOld)) {
+                idDiagnosticoNew.getDetalleDiagnosticoList().add(detalleDiagnostico);
+                idDiagnosticoNew = em.merge(idDiagnosticoNew);
             }
             if (idEnfermedadOld != null && !idEnfermedadOld.equals(idEnfermedadNew)) {
                 idEnfermedadOld.getDetalleDiagnosticoList().remove(detalleDiagnostico);
@@ -105,7 +106,7 @@ public class DetalleDiagnosticoJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = detalleDiagnostico.getIdDiagnostico();
+                Integer id = detalleDiagnostico.getIdDetalleDiagnostico();
                 if (findDetalleDiagnostico(id) == null) {
                     throw new NonexistentEntityException("The detalleDiagnostico with id " + id + " no longer exists.");
                 }
@@ -126,14 +127,14 @@ public class DetalleDiagnosticoJpaController implements Serializable {
             DetalleDiagnostico detalleDiagnostico;
             try {
                 detalleDiagnostico = em.getReference(DetalleDiagnostico.class, id);
-                detalleDiagnostico.getIdDiagnostico();
+                detalleDiagnostico.getIdDetalleDiagnostico();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The detalleDiagnostico with id " + id + " no longer exists.", enfe);
             }
-            Consulta idConsulta = detalleDiagnostico.getIdConsulta();
-            if (idConsulta != null) {
-                idConsulta.getDetalleDiagnosticoList().remove(detalleDiagnostico);
-                idConsulta = em.merge(idConsulta);
+            Diagnostico idDiagnostico = detalleDiagnostico.getIdDiagnostico();
+            if (idDiagnostico != null) {
+                idDiagnostico.getDetalleDiagnosticoList().remove(detalleDiagnostico);
+                idDiagnostico = em.merge(idDiagnostico);
             }
             EnfermedadesCie10 idEnfermedad = detalleDiagnostico.getIdEnfermedad();
             if (idEnfermedad != null) {
@@ -194,7 +195,7 @@ public class DetalleDiagnosticoJpaController implements Serializable {
             em.close();
         }
     }
-    public List<DetalleDiagnostico> findbyConsulta (Consulta consulta) {
+    public List<DetalleDiagnostico> findbyDiagnostico (Diagnostico consulta) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<DetalleDiagnostico> query=em.createNamedQuery("DetalleDiagnostico.findbyIdConsulta",DetalleDiagnostico.class);
@@ -202,6 +203,6 @@ public class DetalleDiagnosticoJpaController implements Serializable {
             return query.getResultList();
         } finally {
             em.close();
-        }
+}
     }
 }

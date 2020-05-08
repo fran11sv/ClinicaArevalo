@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HistorialClinico" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1925a624-5994-4d33-8ccf-2a6a7a93b000">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="384"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -138,23 +138,13 @@ Receta.`id_Consulta`=$P{idConsulta}]]>
      Usuario.`NIT` AS Usuario_NIT,
      Usuario.`Nombres` AS Usuario_Nombres,
      Usuario.`Usuario` AS Usuario_Usuario,
-     Detalle_Diagnostico.`id_Diagnostico` AS Detalle_Diagnostico_id_Diagnostico,
-     Detalle_Diagnostico.`id_Enfermedad` AS Detalle_Diagnostico_id_Enfermedad,
-     Detalle_Diagnostico.`Descripcion` AS Detalle_Diagnostico_Descripcion,
-     Detalle_Diagnostico.`id_Consulta` AS Detalle_Diagnostico_id_Consulta,
-     EnfermedadesCie10.`id` AS EnfermedadesCie10_id,
-     EnfermedadesCie10.`clave` AS EnfermedadesCie10_clave,
-     EnfermedadesCie10.`descripcion` AS EnfermedadesCie10_descripcion,
-     EnfermedadesCie10.`idCategoria` AS EnfermedadesCie10_idCategoria,
      Receta.`Num_Receta` AS Receta_Num_Receta,
      Receta.`id_Consulta` AS Receta_id_Consulta,
      Receta.`Indicaciones` AS Receta_Indicaciones
 FROM
      `Paciente` Paciente INNER JOIN `Consulta` Consulta ON Paciente.`id_Paciente` = Consulta.`id_Paciente`
      INNER JOIN `Usuario` Usuario ON Consulta.`id_usuario` = Usuario.`id_usuario`
-     INNER JOIN `Detalle_Diagnostico` Detalle_Diagnostico ON Consulta.`id_Consulta` = Detalle_Diagnostico.`id_Consulta`
      INNER JOIN `Receta` Receta ON Consulta.`id_Consulta` = Receta.`id_Consulta`
-     INNER JOIN `EnfermedadesCie10` EnfermedadesCie10 ON Detalle_Diagnostico.`id_Enfermedad` = EnfermedadesCie10.`id`
 WHERE
      Consulta.`id_Paciente` = $P{idPaciente}]]>
 	</queryString>
@@ -192,14 +182,6 @@ WHERE
 	<field name="Usuario_NIT" class="java.lang.String"/>
 	<field name="Usuario_Nombres" class="java.lang.String"/>
 	<field name="Usuario_Usuario" class="java.lang.String"/>
-	<field name="Detalle_Diagnostico_id_Diagnostico" class="java.lang.Integer"/>
-	<field name="Detalle_Diagnostico_id_Enfermedad" class="java.lang.Integer"/>
-	<field name="Detalle_Diagnostico_Descripcion" class="java.lang.String"/>
-	<field name="Detalle_Diagnostico_id_Consulta" class="java.lang.Integer"/>
-	<field name="EnfermedadesCie10_id" class="java.lang.Integer"/>
-	<field name="EnfermedadesCie10_clave" class="java.lang.String"/>
-	<field name="EnfermedadesCie10_descripcion" class="java.lang.String"/>
-	<field name="EnfermedadesCie10_idCategoria" class="java.lang.Integer"/>
 	<field name="Receta_Num_Receta" class="java.lang.Integer"/>
 	<field name="Receta_id_Consulta" class="java.lang.Integer"/>
 	<field name="Receta_Indicaciones" class="java.lang.String"/>

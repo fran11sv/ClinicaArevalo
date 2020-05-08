@@ -224,7 +224,7 @@ public class RecetaJpaController implements Serializable {
             return query.getResultList();
         } finally {
             em.close();
-        }
+}
     }
     public List<Receta> findbyIdDESC () {
         EntityManager em = getEntityManager();

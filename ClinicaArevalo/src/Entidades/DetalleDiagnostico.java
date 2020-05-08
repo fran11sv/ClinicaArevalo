@@ -26,20 +26,20 @@ import javax.persistence.Table;
 @Table(name = "Detalle_Diagnostico")
 @NamedQueries({
     @NamedQuery(name = "DetalleDiagnostico.findAll", query = "SELECT d FROM DetalleDiagnostico d"),
-    @NamedQuery(name = "DetalleDiagnostico.findbyIdConsulta", query = "SELECT d FROM DetalleDiagnostico d WHERE d.idConsulta=:idconsulta")})
+    @NamedQuery(name = "DetalleDiagnostico.findbyIdConsulta", query = "SELECT d FROM DetalleDiagnostico d WHERE d.idDiagnostico=:idconsulta")})
 public class DetalleDiagnostico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Diagnostico")
-    private Integer idDiagnostico;
+    @Column(name = "id_detalle_diagnostico")
+    private Integer idDetalleDiagnostico;
     @Column(name = "Descripcion")
     private String descripcion;
-    @JoinColumn(name = "id_Consulta", referencedColumnName = "id_Consulta")
+    @JoinColumn(name = "id_Diagnostico", referencedColumnName = "id_Diagnostico")
     @ManyToOne
-    private Consulta idConsulta;
+    private Diagnostico idDiagnostico;
     @JoinColumn(name = "id_Enfermedad", referencedColumnName = "id")
     @ManyToOne
     private EnfermedadesCie10 idEnfermedad;
@@ -47,16 +47,16 @@ public class DetalleDiagnostico implements Serializable {
     public DetalleDiagnostico() {
     }
 
-    public DetalleDiagnostico(Integer idDiagnostico) {
-        this.idDiagnostico = idDiagnostico;
+    public DetalleDiagnostico(Integer idDetalleDiagnostico) {
+        this.idDetalleDiagnostico = idDetalleDiagnostico;
     }
 
-    public Integer getIdDiagnostico() {
-        return idDiagnostico;
+    public Integer getIdDetalleDiagnostico() {
+        return idDetalleDiagnostico;
     }
 
-    public void setIdDiagnostico(Integer idDiagnostico) {
-        this.idDiagnostico = idDiagnostico;
+    public void setIdDetalleDiagnostico(Integer idDetalleDiagnostico) {
+        this.idDetalleDiagnostico = idDetalleDiagnostico;
     }
 
     public String getDescripcion() {
@@ -67,12 +67,12 @@ public class DetalleDiagnostico implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Consulta getIdConsulta() {
-        return idConsulta;
+    public Diagnostico getIdDiagnostico() {
+        return idDiagnostico;
     }
 
-    public void setIdConsulta(Consulta idConsulta) {
-        this.idConsulta = idConsulta;
+    public void setIdDiagnostico(Diagnostico idDiagnostico) {
+        this.idDiagnostico = idDiagnostico;
     }
 
     public EnfermedadesCie10 getIdEnfermedad() {
@@ -86,7 +86,7 @@ public class DetalleDiagnostico implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idDiagnostico != null ? idDiagnostico.hashCode() : 0);
+        hash += (idDetalleDiagnostico != null ? idDetalleDiagnostico.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +97,7 @@ public class DetalleDiagnostico implements Serializable {
             return false;
         }
         DetalleDiagnostico other = (DetalleDiagnostico) object;
-        if ((this.idDiagnostico == null && other.idDiagnostico != null) || (this.idDiagnostico != null && !this.idDiagnostico.equals(other.idDiagnostico))) {
+        if ((this.idDetalleDiagnostico == null && other.idDetalleDiagnostico != null) || (this.idDetalleDiagnostico != null && !this.idDetalleDiagnostico.equals(other.idDetalleDiagnostico))) {
             return false;
         }
         return true;
@@ -105,7 +105,7 @@ public class DetalleDiagnostico implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.DetalleDiagnostico[ idDiagnostico=" + idDiagnostico + " ]";
+        return "Entidades.DetalleDiagnostico[ idDetalleDiagnostico=" + idDetalleDiagnostico + " ]";
     }
     
 }

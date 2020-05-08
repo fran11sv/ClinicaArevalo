@@ -50,7 +50,7 @@ public class EnfermedadesCie10JpaController implements Serializable {
             }
             List<DetalleDiagnostico> attachedDetalleDiagnosticoList = new ArrayList<DetalleDiagnostico>();
             for (DetalleDiagnostico detalleDiagnosticoListDetalleDiagnosticoToAttach : enfermedadesCie10.getDetalleDiagnosticoList()) {
-                detalleDiagnosticoListDetalleDiagnosticoToAttach = em.getReference(detalleDiagnosticoListDetalleDiagnosticoToAttach.getClass(), detalleDiagnosticoListDetalleDiagnosticoToAttach.getIdDiagnostico());
+                detalleDiagnosticoListDetalleDiagnosticoToAttach = em.getReference(detalleDiagnosticoListDetalleDiagnosticoToAttach.getClass(), detalleDiagnosticoListDetalleDiagnosticoToAttach.getIdDetalleDiagnostico());
                 attachedDetalleDiagnosticoList.add(detalleDiagnosticoListDetalleDiagnosticoToAttach);
             }
             enfermedadesCie10.setDetalleDiagnosticoList(attachedDetalleDiagnosticoList);
@@ -92,7 +92,7 @@ public class EnfermedadesCie10JpaController implements Serializable {
             }
             List<DetalleDiagnostico> attachedDetalleDiagnosticoListNew = new ArrayList<DetalleDiagnostico>();
             for (DetalleDiagnostico detalleDiagnosticoListNewDetalleDiagnosticoToAttach : detalleDiagnosticoListNew) {
-                detalleDiagnosticoListNewDetalleDiagnosticoToAttach = em.getReference(detalleDiagnosticoListNewDetalleDiagnosticoToAttach.getClass(), detalleDiagnosticoListNewDetalleDiagnosticoToAttach.getIdDiagnostico());
+                detalleDiagnosticoListNewDetalleDiagnosticoToAttach = em.getReference(detalleDiagnosticoListNewDetalleDiagnosticoToAttach.getClass(), detalleDiagnosticoListNewDetalleDiagnosticoToAttach.getIdDetalleDiagnostico());
                 attachedDetalleDiagnosticoListNew.add(detalleDiagnosticoListNewDetalleDiagnosticoToAttach);
             }
             detalleDiagnosticoListNew = attachedDetalleDiagnosticoListNew;
@@ -224,7 +224,7 @@ public class EnfermedadesCie10JpaController implements Serializable {
             return query.getResultList();
         } finally {
             em.close();
-        }
+    }
     }
      public List<EnfermedadesCie10> findEnfermedadporCategoria (String categoria) {
         EntityManager em = getEntityManager();
