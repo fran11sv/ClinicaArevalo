@@ -52,7 +52,6 @@ public static Usuario DatosUsuario;
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtUsuario = new java.awt.TextField();
         jLabel3 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
@@ -60,6 +59,7 @@ public static Usuario DatosUsuario;
         jLabel5 = new javax.swing.JLabel();
         pswClave = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -82,15 +82,6 @@ public static Usuario DatosUsuario;
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bienvenido a Clínica Integral del Adulto Mayor ");
         jLabel1.setPreferredSize(new java.awt.Dimension(830, 120));
-
-        txtUsuario.setBackground(new java.awt.Color(239, 239, 239));
-        txtUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
-        txtUsuario.setPreferredSize(new java.awt.Dimension(300, 64));
-        txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtUsuarioMouseClicked(evt);
-            }
-        });
 
         btnSalir.setBackground(new java.awt.Color(76, 201, 223));
         btnSalir.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
@@ -135,6 +126,11 @@ public static Usuario DatosUsuario;
         jLabel2.setText("asidasiod");
         jLabel2.setPreferredSize(new java.awt.Dimension(256, 256));
 
+        txtUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        txtUsuario.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 36)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -148,8 +144,8 @@ public static Usuario DatosUsuario;
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pswClave, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pswClave, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(txtUsuario))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
@@ -178,9 +174,9 @@ public static Usuario DatosUsuario;
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(50, 50, 50)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -275,10 +271,6 @@ public static Usuario DatosUsuario;
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -325,6 +317,6 @@ public static Usuario DatosUsuario;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField pswClave;
-    private java.awt.TextField txtUsuario;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
