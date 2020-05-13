@@ -1,5 +1,7 @@
 package Forms;
 
+import Clases.Conexion;
+import Clases.Hora;
 import Controladores.AntecedentesJpaController;
 import Controladores.CitasJpaController;
 import Controladores.ConsultaJpaController;
@@ -19,16 +21,26 @@ import Entidades.Diagnostico;
 import Entidades.EnfermedadesCie10;
 import Entidades.Paciente;
 import Entidades.Receta;
+import Entidades.Usuario;
 import Entidades.Vademecum;
 import Entidades.entityMain;
+import com.mysql.jdbc.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Consulta_Medica extends javax.swing.JFrame {
  //Creacion de Controladores con su respectivo constructor unido a la persistencia.
@@ -50,6 +62,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     DetalleReceta EliminarDetalleReceta;
     Paciente DatosPaciente;
     Consulta UltimaConsulta;
+    Consulta DatosConsulta;
     Antecedentes EditarAntecedente;
     Antecedentes EliminarAntecedente;
     EnfermedadesCie10 AgregarEnfermedad;
@@ -58,6 +71,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     public Consulta_Medica() {
         initComponents();
         CrearModeloPacientes();
+        CargarCombo();
     }
     DefaultTableModel modeloPacientes;
     private void CrearModeloPacientes() {
@@ -329,15 +343,13 @@ public class Consulta_Medica extends javax.swing.JFrame {
         jLabel68 = new javax.swing.JLabel();
         btnAgregarMedicamento = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        Date dateCita = new Date();
-        SpinnerDateModel smCita =
-        new SpinnerDateModel(dateCita, null, null, Calendar.DAY_OF_MONTH);
-        spFechaCita = new javax.swing.JSpinner(smCita);
         btnHacerCita = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         btnAgenda = new javax.swing.JButton();
         btnTerminar = new javax.swing.JButton();
         btnMenuTratamiento = new javax.swing.JButton();
+        cbHora = new javax.swing.JComboBox<>();
+        fechapicker = new com.toedter.calendar.JDateChooser();
         btnReceta = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -1319,6 +1331,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         btnHistorial.setForeground(new java.awt.Color(0, 0, 0));
         btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Expedientes.png"))); // NOI18N
         btnHistorial.setText("Ver Historial Clínico de Paciente");
+        btnHistorial.setEnabled(false);
         btnHistorial.setPreferredSize(new java.awt.Dimension(250, 35));
         btnHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1449,7 +1462,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                             .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblFechaUltima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(spFechaConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblUltimoMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1467,7 +1480,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 .addGroup(PanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(btnMenuConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
         );
@@ -1983,6 +1996,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         btnbuscarporCate.setForeground(new java.awt.Color(0, 0, 0));
         btnbuscarporCate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Buscar_1.png"))); // NOI18N
         btnbuscarporCate.setText("Buscar por Categoría");
+        btnbuscarporCate.setEnabled(false);
         btnbuscarporCate.setNextFocusableComponent(btnBuscarEnfermedad);
         btnbuscarporCate.setPreferredSize(new java.awt.Dimension(280, 60));
         btnbuscarporCate.addActionListener(new java.awt.event.ActionListener() {
@@ -1996,6 +2010,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         btnBuscarEnfermedad.setForeground(new java.awt.Color(0, 0, 0));
         btnBuscarEnfermedad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Buscar_1.png"))); // NOI18N
         btnBuscarEnfermedad.setText("Buscar por Enfermedad");
+        btnBuscarEnfermedad.setEnabled(false);
         btnBuscarEnfermedad.setPreferredSize(new java.awt.Dimension(280, 60));
         btnBuscarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2352,16 +2367,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(15, 76, 129));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        JSpinner.DateEditor deCita = new JSpinner.DateEditor(spFechaCita, "dd-MM-yyyy");
-        spFechaCita.setEditor(deCita);
-        spFechaCita.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        spFechaCita.setPreferredSize(new java.awt.Dimension(35, 35));
-
         btnHacerCita.setBackground(new java.awt.Color(76, 201, 223));
         btnHacerCita.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnHacerCita.setForeground(new java.awt.Color(0, 0, 0));
         btnHacerCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Agendar.png"))); // NOI18N
         btnHacerCita.setText("Agendar Cita");
+        btnHacerCita.setEnabled(false);
         btnHacerCita.setPreferredSize(new java.awt.Dimension(150, 50));
         btnHacerCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2380,6 +2391,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         btnTerminar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnTerminar.setForeground(new java.awt.Color(0, 0, 0));
         btnTerminar.setText("Terminar y Facturar");
+        btnTerminar.setEnabled(false);
         btnTerminar.setPreferredSize(new java.awt.Dimension(150, 50));
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2403,35 +2415,34 @@ public class Consulta_Medica extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                            .addComponent(btnHacerCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
-                    .addComponent(btnMenuTratamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spFechaCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addComponent(btnTerminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addComponent(btnHacerCita, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fechapicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbHora, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
+                    .addComponent(btnMenuTratamiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(spFechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnHacerCita, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(8, 8, 8)
+                .addGap(22, 22, 22)
+                .addComponent(fechapicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(btnHacerCita, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(btnTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnMenuTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2464,25 +2475,27 @@ public class Consulta_Medica extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtMedicamentoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnReceta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnReceta, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtVademecum, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(19, 19, 19))
                             .addGroup(PanelTratamientoLayout.createSequentialGroup()
-                                .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPacienteTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(PanelTratamientoLayout.createSequentialGroup()
-                                .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtDosis, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
-                                .addComponent(btnAgregarMedicamento)))
+                                .addGroup(PanelTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelTratamientoLayout.createSequentialGroup()
+                                        .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblPacienteTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PanelTratamientoLayout.createSequentialGroup()
+                                        .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtDosis, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnAgregarMedicamento)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
@@ -2806,6 +2819,9 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 String fechaConsulta = formatoConsulta.format(UltimaConsulta.getFechaConsulta());
                 this.lblFechaUltima.setText(fechaConsulta);
             }
+            btnTerminar.setEnabled(true);
+            btnHacerCita.setEnabled(true);
+            btnHistorial.setEnabled(true);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -2961,7 +2977,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         try {
             DetalleDiagnostico DD = new DetalleDiagnostico();
             String id = tbEnfermedades.getValueAt(tbEnfermedades.getSelectedRow(), 0).toString();
-            AgregarEnfermedad = (EnfermedadesCie10) EC.findEnfermedadesCie10(Integer.parseInt(id));
+            AgregarEnfermedad = (EnfermedadesCie10) EC.findEnfermedadesCie10(Integer.parseInt(id));          
+            DD.setIdDiagnostico(DatosDiagnostico);
             DD.setIdEnfermedad(AgregarEnfermedad);
             DD.setDescripcion(this.txtObservacionesDiagnostico.getText());
 
@@ -3119,16 +3136,27 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private void btnHacerCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHacerCitaActionPerformed
         try {
             Citas C = new Citas();
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-            String spinnerValue = formater.format(this.spFechaCita.getValue());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(this.fechapicker.getDate());
+            Hora H = (Hora) this.cbHora.getSelectedItem();
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.HOUR, H.getValor());
+
+            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+            String spinnerValue = formater.format(calendar.getTime());
             Date date = formater.parse(spinnerValue);
-
-            C.setIdPaciente(DatosPaciente);
-            C.setIdUsuario(Login.DatosUsuario);
-            C.setFechaCita(date);
-
-            CitasC.create(C);
-            JOptionPane.showMessageDialog(null,"Cita Creada para el día "+date);
+            java.sql.Date datesql = new java.sql.Date(date.getTime());
+            List<Citas> listCitas = CitasC.findbyUsuarioandFechaconHora(Login.DatosUsuario, datesql);
+            if (listCitas.isEmpty()) {
+                DatosPaciente = (Paciente) PC.findPaciente(Integer.parseInt(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString()));
+                C.setIdPaciente(DatosPaciente);
+                C.setIdUsuario(Login.DatosUsuario);
+                C.setFechaCita(date);
+                CitasC.create(C);
+                JOptionPane.showMessageDialog(null, "Cita Creada para el día " + spinnerValue);
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe una cita creada: " + listCitas.get(0).getIdPaciente().getApellidos().concat(", " + listCitas.get(0).getIdPaciente().getNombres() + " a esta hora y fecha"));
+            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
@@ -3275,14 +3303,28 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 || txtTemperatura.getText().isEmpty() || txtMasa.getText().isEmpty() || txtTalla.getText().isEmpty()) {
             int resp = JOptionPane.showConfirmDialog(null, "Tiene datos sin ingresar en Examen Fisico, si no los ingresa su valor sera de 0 ¿Desea continuar?", "Datos sin ingresar", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == resp) {
-                txtPresion.setText("0");
-                txtPulso.setText("0");
-                txtFCC.setText("0");
-                txtFR.setText("0");
-                txtTemperatura.setText("0");
-                txtMasa.setText("0");
-                txtTalla.setText("0");
-                try {
+                if (txtPresion.getText().isEmpty()) {
+                   txtPresion.setText("0"); 
+                }
+                if (txtPulso.getText().isEmpty()) {
+                    txtPulso.setText("0");
+                }
+                if (txtFCC.getText().isEmpty()) {
+                    txtFCC.setText("0");
+                }
+                if (txtFR.getText().isEmpty()) {
+                    txtFR.setText("0");
+                }
+                if (txtTemperatura.getText().isEmpty()) {
+                   txtTemperatura.setText("0"); 
+                }
+                if (txtMasa.getText().isEmpty()) {
+                   txtMasa.setText("0"); 
+                }
+                if (txtTalla.getText().isEmpty()) {
+                   txtTalla.setText("0"); 
+                }  
+                try {                  
                     //Agregar Una nueva consulta
                     Consulta C = new Consulta();
                     Login login = new Login();
@@ -3312,31 +3354,35 @@ public class Consulta_Medica extends javax.swing.JFrame {
                     //Obtiene la ultima consulta del paciente
                     List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
                     int idConsulta = listconsulta.get(0).getIdConsulta();
-                    UltimaConsulta = (Consulta) CC.findConsulta(idConsulta);
-                    
+                    DatosConsulta = (Consulta) CC.findConsulta(idConsulta);
+                    //Obtener Numero de Diagnostico Creado
+                    int idDiagnostico = DatosDiagnostico.getIdDiagnostico();
+                    DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
+                    //Obtener Numero de Receta creada
+                    int idReceta = DatosReceta.getNumReceta();
+                    DatosReceta = (Receta) RC.findReceta(idReceta);
                     if (!btnReceta.isEnabled()) {
                         //Guardar Datos de Receta
-                    DatosReceta.setIndicaciones(this.txtExamenes.getText());
-                    DatosReceta.setIdConsulta(UltimaConsulta);
-                    RC.edit(DatosReceta);
+                        DatosReceta.setIndicaciones(this.txtExamenes.getText());
+                        DatosReceta.setIdConsulta(DatosConsulta);
+                        RC.edit(DatosReceta);
                     }
                     if (!btnDiagnostico.isEnabled()) {
-                        //Guardar Datos de Receta                   
-                    DatosDiagnostico.setIdConsultas(UltimaConsulta);
-                    RC.edit(DatosReceta);
+                        //Guardar Datos de Diagnostico                   
+                        DatosDiagnostico.setIdConsultas(DatosConsulta);
+                        DGC.edit(DatosDiagnostico);
                     }
-                    
-                                    
+
                     JOptionPane.showMessageDialog(null, "Datos de Consulta Guardados Exitosamente");
                     Facturar menu = new Facturar();
                     menu.setVisible(true);
                     this.setVisible(false);
-                    
+
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             } else {
-                this.PanelPestañas.setSelectedIndex(3);
+                this.PanelPestañas.setSelectedIndex(4);
             }
         } else {
             try {
@@ -3369,13 +3415,25 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 //Obtiene la ultima consulta del paciente
                 List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
                 int idConsulta = listconsulta.get(0).getIdConsulta();
-                UltimaConsulta = (Consulta) CC.findConsulta(idConsulta);
+                DatosConsulta = (Consulta) CC.findConsulta(idConsulta);
+                //Obtener Numero de Diagnostico Creado
+                    int idDiagnostico = DatosDiagnostico.getIdDiagnostico();
+                    DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
+                //Obtener Numero de Receta creada
+                    int idReceta = DatosReceta.getNumReceta();
+                    DatosReceta = (Receta) RC.findReceta(idReceta);
+                if (!btnReceta.isEnabled()) {
+                    //Guardar Datos de Receta
+                    DatosReceta.setIndicaciones(this.txtExamenes.getText());
+                    DatosReceta.setIdConsulta(DatosConsulta);
+                    RC.edit(DatosReceta);
+                }
+                if (!btnDiagnostico.isEnabled()) {
+                    //Guardar Datos de Diagnostico                   
+                    DatosDiagnostico.setIdConsultas(DatosConsulta);
+                    DGC.edit(DatosDiagnostico);
+                }
 
-                //Guardar Datos de Receta
-                DatosReceta.setIndicaciones(this.txtExamenes.getText());
-                DatosReceta.setIdConsulta(UltimaConsulta);
-                RC.edit(DatosReceta);
-                
                 JOptionPane.showMessageDialog(null, "Datos de Consulta Guardados Exitosamente");
                 Facturar menu = new Facturar();
                 menu.setVisible(true);
@@ -3389,7 +3447,24 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTerminarActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
-        // TODO add your handling code here:
+         try  {
+        Conexion con = new Conexion();
+        Connection conn = con.getConexion();
+        int id = DatosPaciente.getIdPaciente();
+        String path = "src\\Reportes\\HistorialClinico.jasper";
+        JasperReport reporte = null;
+        reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+        Map parametro = new HashMap();
+        parametro.put("idPaciente", id);
+        JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+        JasperViewer jv= new JasperViewer(j,false);
+        jv.setTitle("Historial Clinico/ Clinica Arevalo");
+        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
     }//GEN-LAST:event_btnHistorialActionPerformed
 
     private void btnRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetaActionPerformed
@@ -3400,7 +3475,6 @@ public class Consulta_Medica extends javax.swing.JFrame {
             List<Receta> listreceta = RC.findbyIdDESC();
             int idReceta = listreceta.get(0).getNumReceta();
             DatosReceta = (Receta) RC.findReceta(idReceta);
-            
             this.btnAgregarMedicamento.setEnabled(true);
             this.txtDosis.setEnabled(true);
             this.txtCantidad.setEnabled(true);
@@ -3419,9 +3493,10 @@ public class Consulta_Medica extends javax.swing.JFrame {
             List<Diagnostico> listreceta = DGC.findbyIdDESC();
             int idDiagnostico = listreceta.get(0).getIdDiagnostico();
             DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
-            
             this.txtEnfermedad.setEnabled(true);
             this.btnDiagnostico.setEnabled(false);
+            btnbuscarporCate.setEnabled(true);
+            btnBuscarEnfermedad.setEnabled(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -3547,8 +3622,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         try {
             modeloDiagnostico= (new DefaultTableModel(
                     null, new String[]{
-                        "ID", "Enfermedad","Descripcion",
-                        "Paciente"}) {
+                        "ID", "Enfermedad","Descripcion"}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
                     java.lang.String.class,
@@ -3578,10 +3652,9 @@ public class Consulta_Medica extends javax.swing.JFrame {
             List<DetalleDiagnostico> listDiagnostico = DC.findbyDiagnostico(DatosDiagnostico);
             for (int i = 0; i < listDiagnostico.size(); i++) {
                 modeloDiagnostico.addRow(o);
-                modeloDiagnostico.setValueAt(listDiagnostico.get(i).getIdDiagnostico(), i, 0);
+                modeloDiagnostico.setValueAt(listDiagnostico.get(i).getIdDetalleDiagnostico(), i, 0);
                 modeloDiagnostico.setValueAt(listDiagnostico.get(i).getIdEnfermedad().getDescripcion(), i, 1);
                 modeloDiagnostico.setValueAt(listDiagnostico.get(i).getDescripcion(), i, 2);
-                modeloDiagnostico.setValueAt(listDiagnostico.get(i).getIdDiagnostico().getIdConsultas().getIdPaciente().getNombres(), i, 3);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -3661,7 +3734,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
-     private void CargarTablaReceta(){
+    private void CargarTablaReceta(){
         try {
             Object o[] = null;
             List<DetalleReceta> listvademecum = DRC.findbyNumReceta(DatosReceta);
@@ -3676,6 +3749,18 @@ public class Consulta_Medica extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+    private void CargarCombo(){
+            cbHora.addItem(new Hora(8, "08:00 AM"));
+            cbHora.addItem(new Hora(9, "09:00 AM"));
+            cbHora.addItem(new Hora(10, "10:00 AM"));
+            cbHora.addItem(new Hora(11, "11:00 AM"));
+            cbHora.addItem(new Hora(12, "12:00 PM"));
+            cbHora.addItem(new Hora(13, "01:00 PM"));
+            cbHora.addItem(new Hora(14, "02:00 PM"));
+            cbHora.addItem(new Hora(15, "03:00 PM"));
+            cbHora.addItem(new Hora(16, "04:00 PM"));
+            cbHora.addItem(new Hora(17, "05:00 PM"));
     }
     /**
      * @param args the command line arguments
@@ -3762,6 +3847,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private javax.swing.JButton btnSiguienteIdenti;
     private javax.swing.JButton btnTerminar;
     private javax.swing.JButton btnbuscarporCate;
+    private javax.swing.JComboBox<Hora> cbHora;
+    private com.toedter.calendar.JDateChooser fechapicker;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3858,7 +3945,6 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private javax.swing.JLabel lblSexoIdenti;
     private javax.swing.JLabel lblTelefonoIdenti;
     private javax.swing.JLabel lblUltimoMotivo;
-    private javax.swing.JSpinner spFechaCita;
     private javax.swing.JSpinner spFechaConsulta;
     private javax.swing.JSpinner spFechaPaciente;
     private javax.swing.JTable tbAntecendentes;
