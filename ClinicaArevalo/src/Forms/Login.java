@@ -2,9 +2,8 @@ package Forms;
 import Controladores.UsuarioJpaController;
 import Entidades.Usuario;
 import Entidades.entityMain;
+import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.swing.JOptionPane;
 /**
  *
@@ -12,12 +11,10 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 public static Usuario DatosUsuario;
-    
-    Usuario U = new Usuario();
     UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
     String mensaje = "";
     boolean valor;
-    int veces = 0;
+    int veces = 1;
     public Login() {
         initComponents();
         this.setTitle("Inicio de sesión");
@@ -254,9 +251,9 @@ public static Usuario DatosUsuario;
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
        MenuPrincipal menu = new MenuPrincipal();
         String clave = String.valueOf(pswClave.getPassword());
-        UC.Validacion(txtUsuario.getText(), clave);
+        List<Usuario> U = UC.Validacion(txtUsuario.getText());
         if(veces<=3){
-                if (txtUsuario.getText().equals(U.getUsuario().toString()) && clave.equals(U.getClave().toString()) )  {
+                if (txtUsuario.getText().equals(U.get(0).getUsuario()) && clave.equals(U.get(0).getClave()) )  {
                     menu.setVisible(true);
                     this.setVisible(false);
                     veces = 0;
@@ -264,7 +261,7 @@ public static Usuario DatosUsuario;
                 if (txtUsuario.getText().equals("") || clave.equals("")) {             
                 JOptionPane.showMessageDialog(null, "Los campos están vacíos","Incio de sesión",JOptionPane.INFORMATION_MESSAGE);
             }else{
-                    if(txtUsuario.getText().equals(U.getUsuario())){
+                    if(txtUsuario.getText().equals(U.get(0).getUsuario())){
                         JOptionPane.showMessageDialog(this, "Contraseña incorrecta, lleva "+veces+" de 3 intentos");
                     veces = veces+1;    
                     }else{
@@ -273,6 +270,9 @@ public static Usuario DatosUsuario;
                     }   
                 }
             }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Intentos sobrepasados, inténtelo luego");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -291,26 +291,30 @@ public static Usuario DatosUsuario;
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void pswClaveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswClaveKeyReleased
-       MenuPrincipal menu = new MenuPrincipal();
-        String clave = String.valueOf(pswClave.getPassword());
-        UC.Validacion(txtUsuario.getText(), clave);
-        if(veces<=3){
-                if (txtUsuario.getText().equals(U.getUsuario().toString()) && clave.equals(U.getClave().toString()) )  {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            MenuPrincipal menu = new MenuPrincipal();
+            String clave = String.valueOf(pswClave.getPassword());
+            List<Usuario> U = UC.Validacion(txtUsuario.getText());
+            if (veces <= 3) {
+                if (txtUsuario.getText().equals(U.get(0).getUsuario()) && clave.equals(U.get(0).getClave())) {
                     menu.setVisible(true);
                     this.setVisible(false);
                     veces = 0;
                 } else {
-                if (txtUsuario.getText().equals("") || clave.equals("")) {             
-                JOptionPane.showMessageDialog(null, "Los campos están vacíos","Incio de sesión",JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                    if(txtUsuario.getText().equals(U.getUsuario())){
-                        JOptionPane.showMessageDialog(this, "Contraseña incorrecta, lleva "+veces+" de 3 intentos");
-                    veces = veces+1;    
-                    }else{
-                        JOptionPane.showMessageDialog(this, "Usuario incorrecto, lleva "+veces+" de 3 intentos");
-                        veces = veces+1;
-                    }   
+                    if (txtUsuario.getText().equals("") || clave.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Los campos están vacíos", "Incio de sesión", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        if (txtUsuario.getText().equals(U.get(0).getUsuario())) {
+                            JOptionPane.showMessageDialog(this, "Contraseña incorrecta, lleva " + veces + " de 3 intentos");
+                            veces = veces + 1;
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Usuario incorrecto, lleva " + veces + " de 3 intentos");
+                            veces = veces + 1;
+                        }
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Intentos sobrepasados, inténtelo luego");
             }
         }
     }//GEN-LAST:event_pswClaveKeyReleased
