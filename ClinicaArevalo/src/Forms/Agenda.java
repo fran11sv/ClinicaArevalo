@@ -114,6 +114,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         usuarioList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : usuarioQuery.getResultList();
         usuarioQuery1 = java.beans.Beans.isDesignTime() ? null : ClinicaArevaloPUEntityManager.createQuery("SELECT u FROM Usuario u");
         usuarioList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : usuarioQuery1.getResultList();
+        jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         PanelAgenda = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -139,14 +140,40 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jLabel5 = new javax.swing.JLabel();
         cbHora = new javax.swing.JComboBox<>();
         btnMenuPaciente = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(187, 232, 223));
+
+        jTabbedPane1.setBackground(new java.awt.Color(76, 201, 223));
+        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
+        jTabbedPane1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+
+        PanelAgenda.setBackground(new java.awt.Color(15, 76, 129));
+
+        jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Seleccione Médico:");
+        jLabel4.setPreferredSize(new java.awt.Dimension(200, 30));
+
+        cbUsuarioAgenda.setBackground(new java.awt.Color(239, 239, 239));
+        cbUsuarioAgenda.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        cbUsuarioAgenda.setForeground(new java.awt.Color(0, 0, 0));
+        cbUsuarioAgenda.setPreferredSize(new java.awt.Dimension(100, 30));
 
         org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, usuarioList1, cbUsuarioAgenda);
         bindingGroup.addBinding(jComboBoxBinding);
 
+        calendar.setBackground(new java.awt.Color(15, 76, 129));
+        calendar.setForeground(new java.awt.Color(0, 0, 0));
+
+        tbCitas.setBackground(new java.awt.Color(239, 239, 239));
+        tbCitas.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        tbCitas.setForeground(new java.awt.Color(0, 0, 0));
         tbCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -162,6 +189,10 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         });
         jScrollPane2.setViewportView(tbCitas);
 
+        jButton3.setBackground(new java.awt.Color(76, 201, 223));
+        jButton3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Recargar Calendario.png"))); // NOI18N
         jButton3.setText("Recargar Calendario");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +200,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
-        btnEliminarCita.setText("Eliminar Cita");
+        btnEliminarCita.setBackground(new java.awt.Color(76, 201, 223));
+        btnEliminarCita.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnEliminarCita.setForeground(new java.awt.Color(0, 0, 0));
+        btnEliminarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Eliminar M.png"))); // NOI18N
+        btnEliminarCita.setText(" Eliminar Cita");
         btnEliminarCita.setEnabled(false);
         btnEliminarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +212,9 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
+        btnVerCitas.setBackground(new java.awt.Color(76, 201, 223));
+        btnVerCitas.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnVerCitas.setForeground(new java.awt.Color(0, 0, 0));
         btnVerCitas.setText("Ver Citas de Fecha Seleccionada");
         btnVerCitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,7 +223,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         });
 
         btnMenuPaciente1.setBackground(new java.awt.Color(76, 201, 223));
-        btnMenuPaciente1.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
+        btnMenuPaciente1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnMenuPaciente1.setForeground(new java.awt.Color(0, 0, 0));
         btnMenuPaciente1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Menu.png"))); // NOI18N
         btnMenuPaciente1.setText("Volver Al Menú");
@@ -201,64 +239,81 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         PanelAgendaLayout.setHorizontalGroup(
             PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelAgendaLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(calendar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(PanelAgendaLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbUsuarioAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE))
-                .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelAgendaLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelAgendaLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEliminarCita)
-                            .addComponent(btnVerCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbUsuarioAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(PanelAgendaLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(btnMenuPaciente1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(PanelAgendaLayout.createSequentialGroup()
+                                .addComponent(calendar, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnVerCitas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEliminarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMenuPaciente1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35))))
         );
         PanelAgendaLayout.setVerticalGroup(
             PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelAgendaLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbUsuarioAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelAgendaLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(cbUsuarioAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelAgendaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnVerCitas)
-                    .addComponent(calendar, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnVerCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(calendar, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(PanelAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelAgendaLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelAgendaLayout.createSequentialGroup()
                         .addComponent(btnEliminarCita)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMenuPaciente1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))))
+                        .addGap(49, 49, 49)
+                        .addComponent(btnMenuPaciente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
         );
 
         jTabbedPane1.addTab("Ver Agenda", PanelAgenda);
 
-        jLabel1.setText("Seleccione Médico:");
+        PanelCitas.setBackground(new java.awt.Color(15, 76, 129));
 
-        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, usuarioList, cbUsuario);
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Seleccione Médico:");
+        jLabel1.setPreferredSize(new java.awt.Dimension(30, 30));
+
+        cbUsuario.setBackground(new java.awt.Color(239, 239, 239));
+        cbUsuario.setEditable(true);
+        cbUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        cbUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        cbUsuario.setPreferredSize(new java.awt.Dimension(30, 30));
+
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, usuarioList1, cbUsuario);
         bindingGroup.addBinding(jComboBoxBinding);
 
+        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Seleccione Paciente:");
+        jLabel2.setPreferredSize(new java.awt.Dimension(30, 30));
 
+        txtPaciente.setBackground(new java.awt.Color(239, 239, 239));
+        txtPaciente.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtPaciente.setForeground(new java.awt.Color(0, 0, 0));
+        txtPaciente.setPreferredSize(new java.awt.Dimension(30, 30));
         txtPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPacienteKeyReleased(evt);
@@ -275,26 +330,52 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         ));
         jScrollPane1.setViewportView(tbPacientes);
 
+        jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Seleccione Fecha para Consulta:");
+        jLabel3.setPreferredSize(new java.awt.Dimension(30, 30));
 
+        fechapicker.setBackground(new java.awt.Color(239, 239, 239));
+        fechapicker.setForeground(new java.awt.Color(0, 0, 0));
         fechapicker.setDateFormatString("dd-MM-yyyy");
+        fechapicker.setPreferredSize(new java.awt.Dimension(30, 30));
 
-        btnAgregar.setText("Agendar Cita");
+        btnAgregar.setBackground(new java.awt.Color(76, 201, 223));
+        btnAgregar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Agendar 32.png"))); // NOI18N
+        btnAgregar.setText(" Agendar Cita");
+        btnAgregar.setPreferredSize(new java.awt.Dimension(200, 40));
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Nuevo Paciente");
+        jButton2.setBackground(new java.awt.Color(76, 201, 223));
+        jButton2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Agregar Paciente 32.png"))); // NOI18N
+        jButton2.setText(" Nuevo Paciente");
+        jButton2.setPreferredSize(new java.awt.Dimension(200, 40));
 
+        jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Seleccione Hora de Consulta:");
+        jLabel5.setPreferredSize(new java.awt.Dimension(30, 30));
+
+        cbHora.setBackground(new java.awt.Color(239, 239, 239));
+        cbHora.setEditable(true);
+        cbHora.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        cbHora.setForeground(new java.awt.Color(0, 0, 0));
 
         btnMenuPaciente.setBackground(new java.awt.Color(76, 201, 223));
-        btnMenuPaciente.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
+        btnMenuPaciente.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnMenuPaciente.setForeground(new java.awt.Color(0, 0, 0));
         btnMenuPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Menu.png"))); // NOI18N
-        btnMenuPaciente.setText("Volver Al Menú");
+        btnMenuPaciente.setText(" Volver Al Menú");
         btnMenuPaciente.setPreferredSize(new java.awt.Dimension(100, 60));
         btnMenuPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,80 +387,126 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         PanelCitas.setLayout(PanelCitasLayout);
         PanelCitasLayout.setHorizontalGroup(
             PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelCitasLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCitasLayout.createSequentialGroup()
+                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelCitasLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMenuPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelCitasLayout.createSequentialGroup()
+                        .addGap(71, 71, 71)
                         .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbUsuario, 0, 193, Short.MAX_VALUE)
-                            .addComponent(txtPaciente))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addContainerGap(554, Short.MAX_VALUE))
-                    .addGroup(PanelCitasLayout.createSequentialGroup()
-                        .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAgregar)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PanelCitasLayout.createSequentialGroup()
-                                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
+                                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cbHora, javax.swing.GroupLayout.Alignment.LEADING, 0, 200, Short.MAX_VALUE)
+                                    .addComponent(fechapicker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtPaciente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(11, 11, 11)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelCitasLayout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fechapicker, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(PanelCitasLayout.createSequentialGroup()
-                                        .addComponent(cbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnMenuPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(44, 44, 44))))
+                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 3, Short.MAX_VALUE)))
+                .addGap(30, 30, 30))
         );
         PanelCitasLayout.setVerticalGroup(
             PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelCitasLayout.createSequentialGroup()
-                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(24, 24, 24)
+                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fechapicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelCitasLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnMenuPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelCitasLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(fechapicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(cbHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addComponent(btnAgregar)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMenuPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(PanelCitasLayout.createSequentialGroup()
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Hacer Citas", PanelCitas);
+
+        jPanel2.setBackground(new java.awt.Color(253, 149, 53));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1360, 60));
+
+        jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Agenda");
+        jLabel6.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 1344, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         bindingGroup.bind();
@@ -669,6 +796,9 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
