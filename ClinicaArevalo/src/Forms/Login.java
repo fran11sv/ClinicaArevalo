@@ -17,32 +17,12 @@ public static Usuario DatosUsuario;
     UsuarioJpaController UC = new UsuarioJpaController(entityMain.getInstance());
     String mensaje = "";
     boolean valor;
+    int veces = 0;
     public Login() {
         initComponents();
         this.setTitle("Inicio de sesión");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-    }
-        public boolean Validar(String usuario, String clave){
-        EntityManager em = UC.getEntityManager();
-     
-        try {
-            Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.clave = :clave ");
-            query.setParameter("usuario", usuario);
-            query.setParameter("clave", clave);
-            List<Usuario> resultado = query.getResultList();
-            if (!resultado.isEmpty()) {
-                valor=true;
-                DatosUsuario = (Usuario) UC.findUsuario(resultado.get(0).getIdUsuario());
-            } else {
-                valor = false;
-                JOptionPane.showMessageDialog(null, "Error datos erróneos");
-            }
-        } catch (Exception e) {
-            valor = false;
-            e.toString();
-        }
-        return valor;
     }
 
     @SuppressWarnings("unchecked")
@@ -60,6 +40,7 @@ public static Usuario DatosUsuario;
         pswClave = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
+        lblError = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -91,6 +72,11 @@ public static Usuario DatosUsuario;
         btnSalir.setBorder(null);
         btnSalir.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnSalir.setPreferredSize(new java.awt.Dimension(180, 60));
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         btnLogin.setBackground(new java.awt.Color(76, 201, 223));
         btnLogin.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -121,6 +107,11 @@ public static Usuario DatosUsuario;
         pswClave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pswClave.setPreferredSize(new java.awt.Dimension(12, 64));
         pswClave.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        pswClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pswClaveKeyReleased(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Sistema.png"))); // NOI18N
         jLabel2.setText("asidasiod");
@@ -130,6 +121,15 @@ public static Usuario DatosUsuario;
         txtUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(0, 0, 0));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
+
+        lblError.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        lblError.setForeground(new java.awt.Color(255, 0, 0));
+        lblError.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -143,9 +143,11 @@ public static Usuario DatosUsuario;
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pswClave, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(txtUsuario))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(pswClave, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                .addComponent(txtUsuario))
+                            .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
@@ -171,7 +173,9 @@ public static Usuario DatosUsuario;
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(pswClave, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -248,25 +252,68 @@ public static Usuario DatosUsuario;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-       EntityManager em = UC.getEntityManager();
-        MenuPrincipal menu = new MenuPrincipal();
+       MenuPrincipal menu = new MenuPrincipal();
         String clave = String.valueOf(pswClave.getPassword());
-
-        if (txtUsuario.getText().equals("") || pswClave.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Los campos están vacíos");
-        } else {
-            
-            valor = Validar(txtUsuario.getText(), clave);
-            
-            if (valor == true) {             
-                menu.setVisible(true);
-                this.setVisible(false);
+        UC.Validacion(txtUsuario.getText(), clave);
+        if(veces<=3){
+                if (txtUsuario.getText().equals(U.getUsuario().toString()) && clave.equals(U.getClave().toString()) )  {
+                    menu.setVisible(true);
+                    this.setVisible(false);
+                    veces = 0;
+                } else {
+                if (txtUsuario.getText().equals("") || clave.equals("")) {             
+                JOptionPane.showMessageDialog(null, "Los campos están vacíos","Incio de sesión",JOptionPane.INFORMATION_MESSAGE);
             }else{
-                
+                    if(txtUsuario.getText().equals(U.getUsuario())){
+                        JOptionPane.showMessageDialog(this, "Contraseña incorrecta, lleva "+veces+" de 3 intentos");
+                    veces = veces+1;    
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Usuario incorrecto, lleva "+veces+" de 3 intentos");
+                        veces = veces+1;
+                    }   
+                }
             }
-           
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+       char car = evt.getKeyChar();
+        if(Character.isLetter(car)){
+            lblError.setText("");
+        }else{
+            evt.consume();
+            lblError.setText("Ingresa solo letras");
+        }       
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+       dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void pswClaveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswClaveKeyReleased
+       MenuPrincipal menu = new MenuPrincipal();
+        String clave = String.valueOf(pswClave.getPassword());
+        UC.Validacion(txtUsuario.getText(), clave);
+        if(veces<=3){
+                if (txtUsuario.getText().equals(U.getUsuario().toString()) && clave.equals(U.getClave().toString()) )  {
+                    menu.setVisible(true);
+                    this.setVisible(false);
+                    veces = 0;
+                } else {
+                if (txtUsuario.getText().equals("") || clave.equals("")) {             
+                JOptionPane.showMessageDialog(null, "Los campos están vacíos","Incio de sesión",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                    if(txtUsuario.getText().equals(U.getUsuario())){
+                        JOptionPane.showMessageDialog(this, "Contraseña incorrecta, lleva "+veces+" de 3 intentos");
+                    veces = veces+1;    
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Usuario incorrecto, lleva "+veces+" de 3 intentos");
+                        veces = veces+1;
+                    }   
+                }
+            }
+        }
+    }//GEN-LAST:event_pswClaveKeyReleased
 
     /**
      * @param args the command line arguments
@@ -313,6 +360,7 @@ public static Usuario DatosUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblError;
     private javax.swing.JPasswordField pswClave;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

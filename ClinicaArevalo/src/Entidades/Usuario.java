@@ -25,6 +25,7 @@ import javax.persistence.Table;
 @Table(name = "Usuario")
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.Validacion", query="SELECT u FROM Usuario u WHERE u.usuario = :Nusuario AND u.clave = :Uclave"),
     @NamedQuery(name = "Usuario.findporId", query = "SELECT u.idUsuario FROM Usuario u WHERE u.usuario = :usuario")})
 public class Usuario implements Serializable {
 
