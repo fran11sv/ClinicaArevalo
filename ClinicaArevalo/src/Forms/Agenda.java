@@ -10,12 +10,10 @@ import Entidades.Usuario;
 import Entidades.entityMain;
 import java.awt.Component;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,11 +30,12 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         initComponents();
         llenar_combobox();
         cargar_calendario();
+        Date date = new Date();
+        fechapicker.setDate(date);
     }
-    
     private void llenar_combobox() {
-        //Rellena Combobox
-        this.cbUsuario.setRenderer(new DefaultListCellRenderer() {
+        //Rellena Combobox       
+         this.cbUsuario.setRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> jlist, Object o, int i, boolean bln, boolean bln1) {
                 if (o instanceof Usuario) {
@@ -71,7 +70,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     private void cargar_calendario() {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_MONTH, 1);
-        int offset = cal.get(Calendar.DAY_OF_WEEK)+2;
+        int offset = cal.get(Calendar.DAY_OF_WEEK);
         int mon = calendar.getMonthChooser().getMonth() + 1;
         int yr = calendar.getYearChooser().getYear();
         JPanel jPanel = calendar.getDayChooser().getDayPanel();
@@ -114,6 +113,8 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         usuarioList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : usuarioQuery.getResultList();
         usuarioQuery1 = java.beans.Beans.isDesignTime() ? null : ClinicaArevaloPUEntityManager.createQuery("SELECT u FROM Usuario u");
         usuarioList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : usuarioQuery1.getResultList();
+        usuarioQuery2 = java.beans.Beans.isDesignTime() ? null : ClinicaArevaloPUEntityManager.createQuery("SELECT u FROM Usuario u");
+        usuarioList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : usuarioQuery2.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         PanelAgenda = new javax.swing.JPanel();
@@ -128,7 +129,6 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         btnMenuPaciente1 = new javax.swing.JButton();
         PanelCitas = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        cbUsuario = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         txtPaciente = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -140,6 +140,8 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jLabel5 = new javax.swing.JLabel();
         cbHora = new javax.swing.JComboBox<>();
         btnMenuPaciente = new javax.swing.JButton();
+        lblError = new javax.swing.JLabel();
+        cbUsuario = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -165,7 +167,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         cbUsuarioAgenda.setForeground(new java.awt.Color(0, 0, 0));
         cbUsuarioAgenda.setPreferredSize(new java.awt.Dimension(100, 30));
 
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, usuarioList1, cbUsuarioAgenda);
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, usuarioList, cbUsuarioAgenda);
         bindingGroup.addBinding(jComboBoxBinding);
 
         calendar.setBackground(new java.awt.Color(15, 76, 129));
@@ -295,19 +297,10 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jLabel1.setText("Seleccione Médico:");
         jLabel1.setPreferredSize(new java.awt.Dimension(30, 30));
 
-        cbUsuario.setBackground(new java.awt.Color(239, 239, 239));
-        cbUsuario.setEditable(true);
-        cbUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        cbUsuario.setForeground(new java.awt.Color(0, 0, 0));
-        cbUsuario.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, usuarioList1, cbUsuario);
-        bindingGroup.addBinding(jComboBoxBinding);
-
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(239, 239, 239));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Seleccione Paciente:");
+        jLabel2.setText("Seleccione Paciente (Nombre):");
         jLabel2.setPreferredSize(new java.awt.Dimension(30, 30));
 
         txtPaciente.setBackground(new java.awt.Color(239, 239, 239));
@@ -317,6 +310,9 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         txtPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPacienteKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPacienteKeyTyped(evt);
             }
         });
 
@@ -328,6 +324,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
 
             }
         ));
+        tbPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPacientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbPacientes);
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -346,6 +347,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Agendar 32.png"))); // NOI18N
         btnAgregar.setText(" Agendar Cita");
+        btnAgregar.setEnabled(false);
         btnAgregar.setPreferredSize(new java.awt.Dimension(200, 40));
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -383,6 +385,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
+        lblError.setForeground(new java.awt.Color(255, 153, 51));
+
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, usuarioList, cbUsuario);
+        bindingGroup.addBinding(jComboBoxBinding);
+
         javax.swing.GroupLayout PanelCitasLayout = new javax.swing.GroupLayout(PanelCitas);
         PanelCitas.setLayout(PanelCitasLayout);
         PanelCitasLayout.setHorizontalGroup(
@@ -405,15 +412,17 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                                 .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(cbHora, javax.swing.GroupLayout.Alignment.LEADING, 0, 200, Short.MAX_VALUE)
                                     .addComponent(fechapicker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPaciente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtPaciente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(11, 11, 11)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblError))
                             .addGroup(PanelCitasLayout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 3, Short.MAX_VALUE)))
+                        .addGap(0, 1, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
         PanelCitasLayout.setVerticalGroup(
@@ -422,7 +431,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                 .addGap(24, 24, 24)
                 .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -435,11 +444,12 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                 .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblError))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelCitasLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnMenuPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))
@@ -473,7 +483,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -524,35 +534,39 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     }//GEN-LAST:event_txtPacienteKeyReleased
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-         try {
-            Citas C = new Citas();
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(this.fechapicker.getDate());
-            Hora H = (Hora) this.cbHora.getSelectedItem();
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.HOUR,H.getValor());
-            
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
-            String spinnerValue = formater.format(calendar.getTime());
-            Date date = formater.parse(spinnerValue);
-            java.sql.Date datesql = new java.sql.Date(date.getTime());
-            List<Citas> listCitas = CC.findbyUsuarioandFechaconHora((Usuario) this.cbUsuario.getSelectedItem(),datesql);
-            if (listCitas.isEmpty()) {
-            DatosPaciente = (Paciente) PC.findPaciente(Integer.parseInt(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString()));
-            C.setIdPaciente(DatosPaciente);
-            C.setIdUsuario((Usuario) this.cbUsuario.getSelectedItem());
-            C.setFechaCita(date);
-            CC.create(C);
-            JOptionPane.showMessageDialog(null,"Cita Creada para el día "+ spinnerValue); 
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Ya existe una cita creada: "+ listCitas.get(0).getIdPaciente().getApellidos().concat(", "+listCitas.get(0).getIdPaciente().getNombres()+" a esta hora y fecha")); 
-            }           
-            
+        if (!tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString().isEmpty()) {
+            try {
+                Citas C = new Citas();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(this.fechapicker.getDate());
+                Hora H = (Hora) this.cbHora.getSelectedItem();
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.HOUR, H.getValor());
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }  
+                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                String spinnerValue = formater.format(calendar.getTime());
+                Date date = formater.parse(spinnerValue);
+                java.sql.Date datesql = new java.sql.Date(date.getTime());
+                List<Citas> listCitas = CC.findbyUsuarioandFechaconHora((Usuario) this.cbUsuario.getSelectedItem(), datesql);
+                if (listCitas.isEmpty()) {
+                    DatosPaciente = (Paciente) PC.findPaciente(Integer.parseInt(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString()));
+                    C.setIdPaciente(DatosPaciente);
+                    C.setIdUsuario((Usuario) this.cbUsuario.getSelectedItem());
+                    C.setFechaCita(date);
+                    CC.create(C);
+                    JOptionPane.showMessageDialog(null, "Cita Creada para el día " + spinnerValue);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ya existe una cita creada: " + listCitas.get(0).getIdPaciente().getApellidos().concat(", " + listCitas.get(0).getIdPaciente().getNombres() + " a esta hora y fecha"));
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Seleccione Paciente");
+        }
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnVerCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerCitasActionPerformed
@@ -597,6 +611,20 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
            this.setVisible(false);
         }
     }//GEN-LAST:event_btnMenuPacienteActionPerformed
+
+    private void txtPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPacienteKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car)){
+            lblError.setText("");
+        }else{
+            evt.consume();
+            lblError.setText("Ingresa solo letras");
+        }
+    }//GEN-LAST:event_txtPacienteKeyTyped
+
+    private void tbPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPacientesMouseClicked
+       btnAgregar.setEnabled(true);
+    }//GEN-LAST:event_tbPacientesMouseClicked
     DefaultTableModel modeloPacientes;
     private void CrearModeloPacientes() {
         try {
@@ -802,13 +830,16 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblError;
     private javax.swing.JTable tbCitas;
     private javax.swing.JTable tbPacientes;
     private javax.swing.JTextField txtPaciente;
     private java.util.List<Entidades.Usuario> usuarioList;
     private java.util.List<Entidades.Usuario> usuarioList1;
+    private java.util.List<Entidades.Usuario> usuarioList2;
     private javax.persistence.Query usuarioQuery;
     private javax.persistence.Query usuarioQuery1;
+    private javax.persistence.Query usuarioQuery2;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
