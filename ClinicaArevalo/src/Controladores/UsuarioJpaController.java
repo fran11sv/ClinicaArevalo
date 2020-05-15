@@ -320,14 +320,14 @@ public class UsuarioJpaController implements Serializable {
             em.close();
 }
     }
-    public List<Usuario> Validacion(String usuario){
+    public List<Usuario> Validacion(String usuario) {
         EntityManager em = getEntityManager();
-        try{
-            TypedQuery<Usuario> query = em.createNamedQuery("Usuario.Validacion",Usuario.class);
+        try {
+            TypedQuery<Usuario> query = em.createNamedQuery("Usuario.Validacion", Usuario.class);
             query.setParameter("Nusuario", usuario);
             return query.getResultList();
-        }finally{
+        } finally {
             em.close();
-}
+        }
     }
 }
