@@ -151,6 +151,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jPanel1.setBackground(new java.awt.Color(187, 232, 223));
 
         jTabbedPane1.setBackground(new java.awt.Color(76, 201, 223));
+        jTabbedPane1.setBorder(null);
         jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
         jTabbedPane1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
 
@@ -483,7 +484,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

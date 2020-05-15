@@ -99,7 +99,7 @@ public static Usuario DatosUsuario;
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Contraseña.png"))); // NOI18N
 
         pswClave.setBackground(new java.awt.Color(239, 239, 239));
-        pswClave.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        pswClave.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         pswClave.setForeground(new java.awt.Color(0, 0, 0));
         pswClave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pswClave.setPreferredSize(new java.awt.Dimension(12, 64));
@@ -115,7 +115,7 @@ public static Usuario DatosUsuario;
         jLabel2.setPreferredSize(new java.awt.Dimension(256, 256));
 
         txtUsuario.setBackground(new java.awt.Color(255, 255, 255));
-        txtUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(0, 0, 0));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {

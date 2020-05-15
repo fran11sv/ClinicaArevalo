@@ -292,7 +292,8 @@ CategoriasCie10 EliminarCategoria;
                         .addGap(10, 10, 10)
                         .addComponent(btnCancelarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(164, 164, 164))
         );
 
@@ -307,10 +308,12 @@ CategoriasCie10 EliminarCategoria;
         });
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(239, 239, 239));
         jLabel5.setText("Buscar  Categoria : ");
         jLabel5.setPreferredSize(new java.awt.Dimension(200, 30));
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(239, 239, 239));
         jLabel6.setText("Categoria Seleccionada:");
         jLabel6.setPreferredSize(new java.awt.Dimension(200, 30));
 
@@ -325,6 +328,7 @@ CategoriasCie10 EliminarCategoria;
         jScrollPane3.setViewportView(tbCategoria2);
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(239, 239, 239));
         jLabel7.setText("Nombre de Enfermedad:");
         jLabel7.setPreferredSize(new java.awt.Dimension(200, 30));
 
@@ -408,6 +412,7 @@ CategoriasCie10 EliminarCategoria;
         });
 
         jLabel8.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(239, 239, 239));
         jLabel8.setPreferredSize(new java.awt.Dimension(200, 30));
 
         btnVolver1.setBackground(new java.awt.Color(76, 201, 223));
@@ -460,18 +465,20 @@ CategoriasCie10 EliminarCategoria;
             PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEnfermedadLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBuscarCategoria))
+                    .addComponent(txtBuscarCategoria)
+                    .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNombreEnfermedad)
-                    .addComponent(btnAgregarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNombreEnfermedad)
+                        .addComponent(btnAgregarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
                 .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelEnfermedadLayout.createSequentialGroup()

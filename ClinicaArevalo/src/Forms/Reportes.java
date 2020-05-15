@@ -79,8 +79,10 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         );
         BarraNaranjaLayout.setVerticalGroup(
             BarraNaranjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
         );
+
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1110, 524));
 
         PanelHistorialClinico.setBackground(new java.awt.Color(15, 76, 129));
         PanelHistorialClinico.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,20 +125,18 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             PanelHistorialClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelHistorialClinicoLayout.createSequentialGroup()
                 .addGap(69, 69, 69)
-                .addGroup(PanelHistorialClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelHistorialClinicoLayout.createSequentialGroup()
-                        .addGroup(PanelHistorialClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PanelHistorialClinicoLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(543, Short.MAX_VALUE))
+                .addGroup(PanelHistorialClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelHistorialClinicoLayout.createSequentialGroup()
                         .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(204, 204, 204))))
+                        .addGap(357, 357, 357)
+                        .addComponent(jButton1))
+                    .addGroup(PanelHistorialClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanelHistorialClinicoLayout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtBuscarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelHistorialClinicoLayout.setVerticalGroup(
             PanelHistorialClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,14 +147,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                     .addComponent(txtBuscarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(PanelHistorialClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelHistorialClinicoLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(btnHistorial))
-                    .addGroup(PanelHistorialClinicoLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton1)))
-                .addContainerGap(516, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addGroup(PanelHistorialClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHistorial)
+                    .addComponent(jButton1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Historial Clinico", PanelHistorialClinico);
@@ -165,17 +162,17 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             FondoCelesteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(BarraNaranja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(FondoCelesteLayout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addGap(125, 125, 125)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125))
         );
         FondoCelesteLayout.setVerticalGroup(
             FondoCelesteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoCelesteLayout.createSequentialGroup()
                 .addComponent(BarraNaranja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 94, Short.MAX_VALUE))
+                .addGap(58, 58, 58)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,7 +183,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(FondoCeleste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(FondoCeleste, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

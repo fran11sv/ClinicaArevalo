@@ -85,17 +85,17 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jPanel1.setPreferredSize(new java.awt.Dimension(1100, 600));
 
         txtDireccion.setBackground(new java.awt.Color(239, 239, 239));
-        txtDireccion.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtDireccion.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtDireccion.setForeground(new java.awt.Color(0, 0, 0));
         txtDireccion.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDireccion.setPreferredSize(new java.awt.Dimension(40, 40));
 
         JSpinner.DateEditor de = new JSpinner.DateEditor(spFecha, "dd-MM-yyyy");
         spFecha.setEditor(de);
-        spFecha.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        spFecha.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         spFecha.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(239, 239, 239));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Fecha de Nacimiento:");
@@ -132,31 +132,31 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(239, 239, 239));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("DUI:");
         jLabel6.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(239, 239, 239));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Direccion:");
         jLabel5.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(239, 239, 239));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Nombres:");
         jLabel3.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(239, 239, 239));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Apellidos:");
         jLabel4.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(239, 239, 239));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("ID Paciente:");
@@ -175,13 +175,13 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         });
 
         txtNombres.setBackground(new java.awt.Color(239, 239, 239));
-        txtNombres.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtNombres.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtNombres.setForeground(new java.awt.Color(0, 0, 0));
         txtNombres.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNombres.setPreferredSize(new java.awt.Dimension(40, 40));
 
         txtOcupacion.setBackground(new java.awt.Color(239, 239, 239));
-        txtOcupacion.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtOcupacion.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtOcupacion.setForeground(new java.awt.Color(0, 0, 0));
         txtOcupacion.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtOcupacion.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -198,7 +198,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         btnReporte.setText("Reporte");
         btnReporte.setPreferredSize(new java.awt.Dimension(200, 60));
 
-        jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(239, 239, 239));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Ocupacion:");
@@ -206,12 +206,12 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
 
         txtIdPaciente.setEditable(false);
         txtIdPaciente.setBackground(new java.awt.Color(239, 239, 239));
-        txtIdPaciente.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtIdPaciente.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtIdPaciente.setForeground(new java.awt.Color(0, 0, 0));
         txtIdPaciente.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtIdPaciente.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(239, 239, 239));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Sexo:");
@@ -230,43 +230,43 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         });
 
         txtSexo.setBackground(new java.awt.Color(239, 239, 239));
-        txtSexo.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtSexo.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtSexo.setForeground(new java.awt.Color(0, 0, 0));
         txtSexo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtSexo.setPreferredSize(new java.awt.Dimension(40, 40));
 
         txtDUI.setBackground(new java.awt.Color(239, 239, 239));
-        txtDUI.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtDUI.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtDUI.setForeground(new java.awt.Color(0, 0, 0));
         txtDUI.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDUI.setPreferredSize(new java.awt.Dimension(40, 40));
 
         txtApellidos.setBackground(new java.awt.Color(239, 239, 239));
-        txtApellidos.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtApellidos.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtApellidos.setForeground(new java.awt.Color(0, 0, 0));
         txtApellidos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtApellidos.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(239, 239, 239));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Estado Civil:");
         jLabel10.setPreferredSize(new java.awt.Dimension(40, 40));
 
         txtEstado.setBackground(new java.awt.Color(239, 239, 239));
-        txtEstado.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtEstado.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtEstado.setForeground(new java.awt.Color(0, 0, 0));
         txtEstado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtEstado.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(239, 239, 239));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Teléfono:");
         jLabel11.setPreferredSize(new java.awt.Dimension(150, 40));
 
         txtTelefono.setBackground(new java.awt.Color(239, 239, 239));
-        txtTelefono.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtTelefono.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(0, 0, 0));
         txtTelefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtTelefono.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -283,12 +283,12 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Buscar por:");
 
         txtBuscarNom.setBackground(new java.awt.Color(239, 239, 239));
-        txtBuscarNom.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtBuscarNom.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtBuscarNom.setForeground(new java.awt.Color(255, 255, 255));
         txtBuscarNom.setPreferredSize(new java.awt.Dimension(300, 30));
         txtBuscarNom.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -298,7 +298,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         });
 
         txtBuscarDui.setBackground(new java.awt.Color(239, 239, 239));
-        txtBuscarDui.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtBuscarDui.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtBuscarDui.setPreferredSize(new java.awt.Dimension(40, 40));
         txtBuscarDui.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -306,11 +306,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
-        jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(239, 239, 239));
         jLabel13.setText("DUI:");
 
-        jLabel14.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(239, 239, 239));
         jLabel14.setText("Nombre:");
 
@@ -374,8 +374,8 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtBuscarDui, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)))
-                .addGap(84, 84, 84)
+                        .addGap(74, 74, 74)))
+                .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -428,14 +428,14 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                             .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
+                        .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
                             .addComponent(txtBuscarDui, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
                             .addComponent(txtBuscarNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
