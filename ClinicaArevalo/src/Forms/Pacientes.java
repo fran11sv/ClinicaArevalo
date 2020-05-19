@@ -1,4 +1,3 @@
-
 package Forms;
 import Controladores.PacienteJpaController;
 import Entidades.Paciente;
@@ -611,12 +610,12 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             P.setSexo(caracter);
             P.setNombres(this.txtNombres.getText());
             P.setApellidos(this.txtApellidos.getText());
-            P.setDui(this.txtDUI.getText());
+            P.setDui(this.txtDUI.getText().toString());
             P.setFechaNacimiento(date);
             P.setOcupacion(this.txtOcupacion.getText());
             P.setDireccion(this.txtDireccion.getText());
             P.setEstadoCivil(caracterEstado);
-            P.setTelefono(this.txtTelefono.getText());
+            P.setTelefono(this.txtTelefono.getText().toString());
 
             //Validación de datos
             int mensaje = JOptionPane.showConfirmDialog(null, "¿Datos correctos?", "Crear paciente",
@@ -769,7 +768,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     //Llama al método buscar por dui con el valor del textfield
     private void txtBuscarDuiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarDuiKeyReleased
         CrearModelo();
-        CargarTablaPacientesporDui(this.txtBuscarDui.getText());
+        CargarTablaPacientesporDui(this.txtBuscarDui.getText().toString());
     }//GEN-LAST:event_txtBuscarDuiKeyReleased
     //Validaciones de campos
     private void txtNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyTyped

@@ -13,6 +13,7 @@ import Entidades.CategoriasCie10;
 import Entidades.EnfermedadesCie10;
 import Entidades.SubGruposCie10;
 import Entidades.entityMain;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -110,6 +111,9 @@ CategoriasCie10 EliminarCategoria;
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarSubGrupoKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarSubGrupoKeyTyped(evt);
+            }
         });
 
         tbSubGrupo.setModel(new javax.swing.table.DefaultTableModel(
@@ -137,6 +141,11 @@ CategoriasCie10 EliminarCategoria;
         txtCategoriaNombre.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtCategoriaNombre.setForeground(new java.awt.Color(0, 0, 0));
         txtCategoriaNombre.setEnabled(false);
+        txtCategoriaNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCategoriaNombreKeyTyped(evt);
+            }
+        });
 
         btnAgregarCategoria.setBackground(new java.awt.Color(76, 201, 223));
         btnAgregarCategoria.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -305,6 +314,9 @@ CategoriasCie10 EliminarCategoria;
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarCategoriaKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarCategoriaKeyTyped(evt);
+            }
         });
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -331,6 +343,12 @@ CategoriasCie10 EliminarCategoria;
         jLabel7.setForeground(new java.awt.Color(239, 239, 239));
         jLabel7.setText("Nombre de Enfermedad:");
         jLabel7.setPreferredSize(new java.awt.Dimension(200, 30));
+
+        txtNombreEnfermedad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreEnfermedadKeyTyped(evt);
+            }
+        });
 
         btnAgregarEnfermedad.setBackground(new java.awt.Color(76, 201, 223));
         btnAgregarEnfermedad.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -519,7 +537,7 @@ CategoriasCie10 EliminarCategoria;
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -562,7 +580,10 @@ CategoriasCie10 EliminarCategoria;
     }//GEN-LAST:event_txtBuscarCategoriaKeyReleased
 
     private void btnAgregarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEnfermedadActionPerformed
-         try {
+        if (txtNombreEnfermedad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione una enfermedad","Campos vacíos",JOptionPane.WARNING_MESSAGE);
+        } else { 
+        try {
             EnfermedadesCie10 E = new EnfermedadesCie10();
             E.setDescripcion(this.txtNombreEnfermedad.getText());
             E.setIdCategoria((CategoriasCie10) tbCategoria2.getValueAt(tbCategoria2.getSelectedRow(),0));
@@ -577,6 +598,7 @@ CategoriasCie10 EliminarCategoria;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
     }//GEN-LAST:event_btnAgregarEnfermedadActionPerformed
 
     private void btnEditarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEnfermedadActionPerformed
@@ -635,7 +657,10 @@ CategoriasCie10 EliminarCategoria;
     }//GEN-LAST:event_txtBuscarSubGrupoKeyReleased
 
     private void btnAgregarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCategoriaActionPerformed
-        try {
+        if (txtCategoriaNombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione una enfermedad","Campos vacíos",JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
             CategoriasCie10 C = new CategoriasCie10();
             C.setDescripcion(this.txtCategoriaNombre.getText());
             C.setIdSubGrupo(SC.findSubGruposCie10(Integer.parseInt(tbSubGrupo.getValueAt(tbSubGrupo.getSelectedRow(),0).toString())));
@@ -648,6 +673,8 @@ CategoriasCie10 EliminarCategoria;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+        }
+        
     }//GEN-LAST:event_btnAgregarCategoriaActionPerformed
 
     private void btnEliminarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCategoriaActionPerformed
@@ -670,6 +697,8 @@ CategoriasCie10 EliminarCategoria;
     }//GEN-LAST:event_btnEliminarCategoriaActionPerformed
 
     private void btnEditarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCategoriaActionPerformed
+        int resp = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar este registro?", "Eliminar Registro", JOptionPane.YES_NO_OPTION);
+        if (JOptionPane.YES_OPTION == resp) {
         try {
             EditarCategoria.setDescripcion(this.txtCategoriaNombre.getText());
             EditarCategoria.setIdSubGrupo((SubGruposCie10) tbSubGrupo.getValueAt(tbSubGrupo.getSelectedRow(), 0));
@@ -689,6 +718,7 @@ CategoriasCie10 EliminarCategoria;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+       }
     }//GEN-LAST:event_btnEditarCategoriaActionPerformed
 
     private void tbCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCategoriasMouseClicked
@@ -752,8 +782,50 @@ CategoriasCie10 EliminarCategoria;
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
-        // TODO add your handling code here:
+       //Validación de regreso
+        int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
+            + "Se descartarán los datos no guardados.", "Regresar al menú",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (mensaje == 0) {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        }else{
+
+        }
     }//GEN-LAST:event_btnVolver1ActionPerformed
+
+    private void txtCategoriaNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCategoriaNombreKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){      
+        }else{
+            evt.consume();  
+        }
+    }//GEN-LAST:event_txtCategoriaNombreKeyTyped
+
+    private void txtBuscarSubGrupoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarSubGrupoKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){      
+        }else{
+            evt.consume();  
+        }
+    }//GEN-LAST:event_txtBuscarSubGrupoKeyTyped
+
+    private void txtBuscarCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCategoriaKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){      
+        }else{
+            evt.consume();  
+        }
+    }//GEN-LAST:event_txtBuscarCategoriaKeyTyped
+
+    private void txtNombreEnfermedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreEnfermedadKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){      
+        }else{
+            evt.consume();  
+        }
+    }//GEN-LAST:event_txtNombreEnfermedadKeyTyped
     DefaultTableModel modeloCategoria;
     private void CrearModeloCategoria() {
         try {

@@ -647,7 +647,10 @@ long precio;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        try
+        if (txtCliente.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No puede dejar el campo del cliente vacío","Campos vacios",JOptionPane.WARNING_MESSAGE);
+        } else {
+            try
         {
             Factura F = new Factura();
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
@@ -667,9 +670,7 @@ long precio;
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        
-        
-
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed

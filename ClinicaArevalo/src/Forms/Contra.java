@@ -56,7 +56,7 @@ Usuario Usuario;
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(239, 239, 239));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Por Favor ingrese una nueva contraseña");
+        jLabel1.setText("Porfavor ingrese una nueva contraseña");
         jLabel1.setPreferredSize(new java.awt.Dimension(830, 120));
 
         btnSalir.setBackground(new java.awt.Color(76, 201, 223));

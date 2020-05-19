@@ -10,6 +10,7 @@ import Controladores.PacienteJpaController;
 import Entidades.Paciente;
 import Entidades.entityMain;
 import com.mysql.jdbc.Connection;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,6 +110,9 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         txtBuscarPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarPacienteKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarPacienteKeyTyped(evt);
             }
         });
 
@@ -349,6 +353,15 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void txtBuscarPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPacienteKeyTyped
+       char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        }else{
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtBuscarPacienteKeyTyped
     DefaultTableModel modelo;
     //Crea modelo de la tabla
     private void CrearModelo() {

@@ -200,9 +200,9 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtCivilPaciente = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         btnMenuPaciente = new javax.swing.JButton();
-        txtDUIPaciente = new javax.swing.JTextField();
-        txtTelefonoPaciente = new javax.swing.JTextField();
         lblError = new javax.swing.JLabel();
+        txtDUIPaciente = new javax.swing.JFormattedTextField();
+        txtTelefonoPaciente = new javax.swing.JFormattedTextField();
         PanelIdentificacion = new javax.swing.JPanel();
         btnCancelarIdenti = new javax.swing.JButton();
         btnSiguienteIdenti = new javax.swing.JButton();
@@ -645,28 +645,28 @@ public class Consulta_Medica extends javax.swing.JFrame {
             }
         });
 
-        txtDUIPaciente.setBackground(new java.awt.Color(255, 255, 255));
-        txtDUIPaciente.setForeground(new java.awt.Color(0, 0, 0));
-        txtDUIPaciente.setEnabled(false);
-        txtDUIPaciente.setPreferredSize(new java.awt.Dimension(14, 27));
-        txtDUIPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDUIPacienteKeyTyped(evt);
-            }
-        });
-
-        txtTelefonoPaciente.setBackground(new java.awt.Color(255, 255, 255));
-        txtTelefonoPaciente.setForeground(new java.awt.Color(0, 0, 0));
-        txtTelefonoPaciente.setEnabled(false);
-        txtTelefonoPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTelefonoPacienteKeyTyped(evt);
-            }
-        });
-
         lblError.setFont(new java.awt.Font("Lucida Sans Unicode", 3, 14)); // NOI18N
         lblError.setForeground(new java.awt.Color(255, 0, 0));
         lblError.setEnabled(false);
+
+        txtDUIPaciente.setBackground(new java.awt.Color(255, 255, 255));
+        txtDUIPaciente.setForeground(new java.awt.Color(0, 0, 0));
+        try {
+            txtDUIPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtDUIPaciente.setEnabled(false);
+        txtDUIPaciente.setPreferredSize(new java.awt.Dimension(4, 27));
+
+        txtTelefonoPaciente.setBackground(new java.awt.Color(255, 255, 255));
+        txtTelefonoPaciente.setForeground(new java.awt.Color(0, 0, 0));
+        try {
+            txtTelefonoPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtTelefonoPaciente.setEnabled(false);
 
         javax.swing.GroupLayout PanelSeleccionLayout = new javax.swing.GroupLayout(PanelSeleccion);
         PanelSeleccion.setLayout(PanelSeleccionLayout);
@@ -681,22 +681,16 @@ public class Consulta_Medica extends javax.swing.JFrame {
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                             .addComponent(jLabel72, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
                         .addGroup(PanelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelSeleccionLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(PanelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnMenuPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(PanelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnMenuPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PanelSeleccionLayout.createSequentialGroup()
                                 .addGroup(PanelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(PanelSeleccionLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addGroup(PanelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtNombrePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtDireccionPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addGroup(PanelSeleccionLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtTelefonoPaciente)))
+                                    .addComponent(txtNombrePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtDireccionPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtTelefonoPaciente))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(PanelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel71, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -768,19 +762,16 @@ public class Consulta_Medica extends javax.swing.JFrame {
                     .addComponent(txtOcupacionPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel76, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spFechaPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(PanelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelSeleccionLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(PanelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel73, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCivilPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDUIPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(PanelSeleccionLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTelefonoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20)
+                    .addComponent(txtTelefonoPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel73, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCivilPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDUIPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21)
                 .addGroup(PanelSeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelSeleccionLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
@@ -801,7 +792,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(btnMenuPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         PanelPestañas.addTab("Seleccionar Paciente", PanelSeleccion);
@@ -2822,7 +2813,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             P.setSexo(caracterSexo);
             P.setNombres(this.txtNombrePaciente.getText());
             P.setApellidos(this.txtApellidoPaciente.getText());
-            P.setDui(this.txtDUIPaciente.getText());
+            P.setDui(this.txtDUIPaciente.getText().toString());
             P.setFechaNacimiento(date);
             P.setOcupacion(this.txtOcupacionPaciente.getText());
             P.setDireccion(this.txtDireccionPaciente.getText());
@@ -2872,7 +2863,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtDUIBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDUIBusquedaKeyReleased
        CrearModeloPacientes();
-       CargarTablaPacientesporDui(this.txtDUIBusqueda.getText());
+       CargarTablaPacientesporDui(txtDUIBusqueda.getText().toString());
     }//GEN-LAST:event_txtDUIBusquedaKeyReleased
 
     private void btnSeleccionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionPacienteActionPerformed
@@ -3014,7 +3005,11 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuFisica1ActionPerformed
 
     private void btnSiguienteFisica1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteFisica1ActionPerformed
-        this.PanelPestañas.setSelectedIndex(6);
+        int mensaje = JOptionPane.showConfirmDialog(null, "Aún existen campos vacíos, ¿desea continuar?","Campos vacíos",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (mensaje == 0) {
+                    this.PanelPestañas.setSelectedIndex(6);
+                }       
     }//GEN-LAST:event_btnSiguienteFisica1ActionPerformed
 
     private void btnMenuTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuTratamientoActionPerformed
@@ -3040,8 +3035,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarIdentiActionPerformed
 
     private void btnSiguienteConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteConsultaActionPerformed
-         this.PanelPestañas.setSelectedIndex(4);
+        if (txtMotivoConsulta.getText().equals("") || txtPresenteConsulta.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Ingrese motivo de consulta y presente enfermedad","Campos vacíos",JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            this.PanelPestañas.setSelectedIndex(4);
          txtPresion.requestFocus();
+        }
     }//GEN-LAST:event_btnSiguienteConsultaActionPerformed
 
     private void btnCancelarCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCancelarActionPerformed
@@ -3173,7 +3172,11 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void btnSiguienteExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteExamenActionPerformed
         //Orden de Pestañas
-            this.PanelPestañas.setSelectedIndex(7);
+        int mensaje = JOptionPane.showConfirmDialog(null, "Aún existen campos vacíos, ¿desea continuar?","Campos vacíos",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (mensaje == 0) {
+                    this.PanelPestañas.setSelectedIndex(7);
+                }  
     }//GEN-LAST:event_btnSiguienteExamenActionPerformed
 
     private void btnMenuExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuExamenActionPerformed
@@ -3200,7 +3203,10 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_tbVademecumMouseClicked
 
     private void btnAgregarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMedicamentoActionPerformed
-          try {
+        if (txtCantidad.getText().equals("") || txtDosis.getText().equals("")) {
+            JOptionPane.showMessageDialog(this,"Los campos de dosis y cantidad no pueden estar vacíos","Campos vacíos",JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
             DetalleReceta DD = new DetalleReceta();
             String id = tbVademecum.getValueAt(tbVademecum.getSelectedRow(), 0).toString();
             Insumo = (Vademecum) VC.findVademecum(Integer.parseInt(id));
@@ -3220,6 +3226,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
+        }
         }
     }//GEN-LAST:event_btnAgregarMedicamentoActionPerformed
 
@@ -3835,24 +3842,6 @@ public class Consulta_Medica extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtFisicoKeyTyped
 
-    private void txtDUIPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDUIPacienteKeyTyped
-        char car = evt.getKeyChar();
-        if(Character.isDigit(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-        }else{
-            evt.consume();
-            getToolkit().beep();
-        }
-    }//GEN-LAST:event_txtDUIPacienteKeyTyped
-
-    private void txtTelefonoPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoPacienteKeyTyped
-        char car = evt.getKeyChar();
-        if(Character.isDigit(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-        }else{
-            evt.consume();
-            getToolkit().beep();
-        }
-    }//GEN-LAST:event_txtTelefonoPacienteKeyTyped
-
     private void txtEnfermedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnfermedadKeyTyped
         char car = evt.getKeyChar();
         if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
@@ -4365,7 +4354,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCivilPaciente;
     private javax.swing.JTextField txtDUIBusqueda;
-    private javax.swing.JTextField txtDUIPaciente;
+    private javax.swing.JFormattedTextField txtDUIPaciente;
     private javax.swing.JTextField txtDireccionPaciente;
     private javax.swing.JTextField txtDosis;
     private javax.swing.JTextField txtEnfermedad;
@@ -4389,7 +4378,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private javax.swing.JTextField txtPulso;
     private javax.swing.JTextField txtSexoPaciente;
     private javax.swing.JTextField txtTalla;
-    private javax.swing.JTextField txtTelefonoPaciente;
+    private javax.swing.JFormattedTextField txtTelefonoPaciente;
     private javax.swing.JTextField txtTemperatura;
     private javax.swing.JButton txtVademecum;
     // End of variables declaration//GEN-END:variables

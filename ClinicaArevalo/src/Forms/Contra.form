@@ -181,7 +181,7 @@
                   <Color blue="ef" green="ef" red="ef" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Por Favor ingrese una nueva contrase&#xf1;a"/>
+                <Property name="text" type="java.lang.String" value="Porfavor ingrese una nueva contrase&#xf1;a"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[830, 120]"/>
                 </Property>

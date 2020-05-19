@@ -9,6 +9,7 @@ import Entidades.Paciente;
 import Entidades.Usuario;
 import Entidades.entityMain;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -136,7 +137,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jLabel3 = new javax.swing.JLabel();
         fechapicker = new com.toedter.calendar.JDateChooser();
         btnAgregar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnNuevoPaciente = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cbHora = new javax.swing.JComboBox<>();
         btnMenuPaciente = new javax.swing.JButton();
@@ -151,7 +152,6 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jPanel1.setBackground(new java.awt.Color(187, 232, 223));
 
         jTabbedPane1.setBackground(new java.awt.Color(76, 201, 223));
-        jTabbedPane1.setBorder(null);
         jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
         jTabbedPane1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
 
@@ -356,12 +356,17 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(76, 201, 223));
-        jButton2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Agregar Paciente 32.png"))); // NOI18N
-        jButton2.setText(" Nuevo Paciente");
-        jButton2.setPreferredSize(new java.awt.Dimension(200, 40));
+        btnNuevoPaciente.setBackground(new java.awt.Color(76, 201, 223));
+        btnNuevoPaciente.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnNuevoPaciente.setForeground(new java.awt.Color(0, 0, 0));
+        btnNuevoPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Agregar Paciente 32.png"))); // NOI18N
+        btnNuevoPaciente.setText(" Nuevo Paciente");
+        btnNuevoPaciente.setPreferredSize(new java.awt.Dimension(200, 40));
+        btnNuevoPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoPacienteActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(239, 239, 239));
@@ -416,9 +421,9 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                                     .addComponent(txtPaciente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cbUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(11, 11, 11)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnNuevoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblError))
+                                .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PanelCitasLayout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -429,24 +434,28 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         PanelCitasLayout.setVerticalGroup(
             PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelCitasLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechapicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblError))
+                    .addGroup(PanelCitasLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fechapicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNuevoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCitasLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelCitasLayout.createSequentialGroup()
@@ -484,7 +493,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -615,7 +624,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
 
     private void txtPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPacienteKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car)){
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
             lblError.setText("");
         }else{
             evt.consume();
@@ -626,6 +635,10 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     private void tbPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPacientesMouseClicked
        btnAgregar.setEnabled(true);
     }//GEN-LAST:event_tbPacientesMouseClicked
+
+    private void btnNuevoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoPacienteActionPerformed
     DefaultTableModel modeloPacientes;
     private void CrearModeloPacientes() {
         try {
@@ -812,13 +825,13 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     private javax.swing.JButton btnEliminarCita;
     private javax.swing.JButton btnMenuPaciente;
     private javax.swing.JButton btnMenuPaciente1;
+    private javax.swing.JButton btnNuevoPaciente;
     private javax.swing.JButton btnVerCitas;
     private com.toedter.calendar.JCalendar calendar;
     private javax.swing.JComboBox<Hora> cbHora;
     private javax.swing.JComboBox<String> cbUsuario;
     private javax.swing.JComboBox<String> cbUsuarioAgenda;
     private com.toedter.calendar.JDateChooser fechapicker;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

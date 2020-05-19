@@ -3,6 +3,7 @@ package Forms;
 import Controladores.VademecumJpaController;
 import Entidades.entityMain;
 import Entidades.Vademecum;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -92,7 +93,7 @@ Vademecum Eliminar;
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -187,16 +188,31 @@ Vademecum Eliminar;
         txtPrincipio.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtPrincipio.setForeground(new java.awt.Color(0, 0, 0));
         txtPrincipio.setPreferredSize(new java.awt.Dimension(200, 40));
+        txtPrincipio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrincipioKeyTyped(evt);
+            }
+        });
 
         txtAccion.setBackground(new java.awt.Color(239, 239, 239));
         txtAccion.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtAccion.setForeground(new java.awt.Color(0, 0, 0));
         txtAccion.setPreferredSize(new java.awt.Dimension(200, 40));
+        txtAccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAccionKeyTyped(evt);
+            }
+        });
 
         txtIndicaciones.setBackground(new java.awt.Color(239, 239, 239));
         txtIndicaciones.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtIndicaciones.setForeground(new java.awt.Color(0, 0, 0));
         txtIndicaciones.setPreferredSize(new java.awt.Dimension(200, 40));
+        txtIndicaciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIndicacionesKeyTyped(evt);
+            }
+        });
 
         txtMarcas.setBackground(new java.awt.Color(239, 239, 239));
         txtMarcas.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
@@ -280,6 +296,11 @@ Vademecum Eliminar;
         btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Reporte 32.png"))); // NOI18N
         btnReporte.setText(" Reporte");
         btnReporte.setPreferredSize(new java.awt.Dimension(200, 40));
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
 
         btnMenu.setBackground(new java.awt.Color(76, 201, 223));
         btnMenu.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -492,46 +513,57 @@ Vademecum Eliminar;
     }//GEN-LAST:event_tbVademMouseClicked
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        try {
-            Vademecum V = new Vademecum();
-            
-            V.setPrincipioactivo(txtPrincipio.getText());
-            V.setAccionterapeutica(txtAccion.getText());
-            V.setIndicaciones(txtIndicaciones.getText());
-            V.setMarcas(txtMarcas.getText());
-            V.setPropiedades(txtPropiedades.getText());
-            V.setReaccionesadversas(txtReacciones.getText());
-            V.setPrecauciones(txtPrecauciones.getText());
-            V.setDosificacion(txtDosis.getText());
-            V.setInteracciones(txtInteracciones.getText());
-            V.setContraindicaciones(txtContraIndi.getText());
-            V.setSobredosificacion(txtSobredosis.getText());
-            
-            //Validación de datos
-            int mensaje = JOptionPane.showConfirmDialog(null, "¿Datos correctos?", "Añadir medicamento",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                VC.create(V);
-                JOptionPane.showMessageDialog(null,"El medicamento fue añadido exitosamente");
-                CrearModelo();
-                CargarTabla();
-                //Limpia los campos luego de añadir un nuevo registro
-                txtPrincipio.setText("");
-                txtAccion.setText("");  
-                txtIndicaciones.setText("");
-                txtMarcas.setText("");
-                txtPropiedades.setText("");
-                txtReacciones.setText("");
-                txtPrecauciones.setText("");
-                txtDosis.setText("");
-                txtInteracciones.setText("");
-                txtContraIndi.setText("");
-                txtSobredosis.setText("");
-                }else{
+        if (txtPrincipio.getText().isEmpty() || txtAccion.getText().isEmpty() || txtIndicaciones.getText().isEmpty()
+                || txtMarcas.getText().isEmpty() || txtPropiedades.getText().isEmpty() || txtReacciones.getText().isEmpty()
+                || txtPrecauciones.getText().isEmpty() || txtDosis.getText().isEmpty() || txtInteracciones.getText().isEmpty()
+                || txtContraIndi.getText().isEmpty() || txtSobredosis.getText().isEmpty()) {
+            int resp = JOptionPane.showConfirmDialog(null, "Aún tiene campos vacíos, ¿desea continuar y dejarlos en blanco?", "Campos vacíos", JOptionPane.YES_NO_OPTION);
+            if (JOptionPane.YES_OPTION == resp) {
+                try {
+                    Vademecum V = new Vademecum();
 
+                    V.setPrincipioactivo(txtPrincipio.getText());
+                    V.setAccionterapeutica(txtAccion.getText());
+                    V.setIndicaciones(txtIndicaciones.getText());
+                    V.setMarcas(txtMarcas.getText());
+                    V.setPropiedades(txtPropiedades.getText());
+                    V.setReaccionesadversas(txtReacciones.getText());
+                    V.setPrecauciones(txtPrecauciones.getText());
+                    V.setDosificacion(txtDosis.getText());
+                    V.setInteracciones(txtInteracciones.getText());
+                    V.setContraindicaciones(txtContraIndi.getText());
+                    V.setSobredosificacion(txtSobredosis.getText());
+
+                    //Validación de datos
+                    int mensaje = JOptionPane.showConfirmDialog(null, "¿Datos correctos?", "Añadir medicamento",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (mensaje == 0) {
+                        VC.create(V);
+                        JOptionPane.showMessageDialog(null, "El medicamento fue añadido exitosamente");
+                        CrearModelo();
+                        CargarTabla();
+                        //Limpia los campos luego de añadir un nuevo registro
+                        txtPrincipio.setText("");
+                        txtAccion.setText("");
+                        txtIndicaciones.setText("");
+                        txtMarcas.setText("");
+                        txtPropiedades.setText("");
+                        txtReacciones.setText("");
+                        txtPrecauciones.setText("");
+                        txtDosis.setText("");
+                        txtInteracciones.setText("");
+                        txtContraIndi.setText("");
+                        txtSobredosis.setText("");
+                    } else {
+
+                    }
+                } catch (Exception e) {
                 }
-        } catch (Exception e) {
+            }
+        } else {
+
         }
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -619,6 +651,34 @@ Vademecum Eliminar;
                     
                 }           
     }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void txtPrincipioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrincipioKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){      
+        }else{
+            evt.consume();  
+        }
+    }//GEN-LAST:event_txtPrincipioKeyTyped
+
+    private void txtAccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAccionKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){      
+        }else{
+            evt.consume();  
+        }
+    }//GEN-LAST:event_txtAccionKeyTyped
+
+    private void txtIndicacionesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIndicacionesKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){      
+        }else{
+            evt.consume();  
+        }
+    }//GEN-LAST:event_txtIndicacionesKeyTyped
+
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        // Conectar con el reporte
+    }//GEN-LAST:event_btnReporteActionPerformed
 
 DefaultTableModel modelo;
     private void CrearModelo() {
