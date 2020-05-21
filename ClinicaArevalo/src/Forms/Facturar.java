@@ -14,6 +14,7 @@ import Entidades.DetalleFactura;
 import Entidades.Producto;
 import Entidades.Usuario;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.logging.Level;
@@ -84,7 +85,8 @@ long precio;
         tbFactura = new javax.swing.JTable();
         cmbUsuario = new javax.swing.JComboBox<>();
         txtNumFac = new javax.swing.JTextField();
-        lblErrorLetra = new javax.swing.JLabel();
+        lblDireccion = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         lblFactura = new javax.swing.JLabel();
@@ -273,9 +275,19 @@ long precio;
         txtNumFac.setForeground(new java.awt.Color(0, 0, 0));
         txtNumFac.setPreferredSize(new java.awt.Dimension(200, 30));
 
-        lblErrorLetra.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        lblErrorLetra.setForeground(new java.awt.Color(204, 0, 0));
-        lblErrorLetra.setPreferredSize(new java.awt.Dimension(200, 30));
+        lblDireccion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lblDireccion.setForeground(new java.awt.Color(255, 255, 255));
+        lblDireccion.setText("Dirección:");
+
+        txtDireccion.setBackground(new java.awt.Color(255, 255, 255));
+        txtDireccion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        txtDireccion.setForeground(new java.awt.Color(0, 0, 0));
+        txtDireccion.setEnabled(false);
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -283,31 +295,13 @@ long precio;
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(95, 95, 95)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addComponent(lblErrorLetra, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(327, 327, 327))
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
@@ -315,8 +309,25 @@ long precio;
                             .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(95, 95, 95))))
+                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblDireccion)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumFac, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtDireccion)
+                                .addGap(242, 242, 242)))))
+                .addGap(95, 95, 95))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,9 +344,14 @@ long precio;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addComponent(lblErrorLetra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblDireccion)
+                        .addGap(15, 15, 15))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addGap(12, 12, 12)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -607,7 +623,7 @@ long precio;
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -650,13 +666,15 @@ long precio;
         if (txtCliente.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "No puede dejar el campo del cliente vacío","Campos vacios",JOptionPane.WARNING_MESSAGE);
         } else {
+            
             try
         {
             Factura F = new Factura();
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
             String spinnerValue = formater.format(spFecha.getValue());
             Date date = formater.parse(spinnerValue);
-
+            
+            
             F.setNombreCliente(this.txtCliente.getText());
             F.setIdUsuario((Usuario) cmbUsuario.getSelectedItem());
             F.setFechaFactura(date);
@@ -680,6 +698,7 @@ long precio;
         this.btnEliminar.setEnabled(true);
         this.btnLimpiar.setEnabled(true);
         this.btnNuevo.setEnabled(false);
+        txtDireccion.setEnabled(true);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void tbProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProductoMouseClicked
@@ -687,7 +706,10 @@ long precio;
     }//GEN-LAST:event_tbProductoMouseClicked
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        String id = txtNumFac.getText();
+        if (txtNumFac.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione una factura","Error",JOptionPane.WARNING_MESSAGE);
+        } else {
+            String id = txtNumFac.getText();
         numFac = (Factura) FC.findFactura(Integer.parseInt(id));
          PanelPestañas.setSelectedIndex(1);
          PanelPestañas.setEnabledAt(1,true);
@@ -696,6 +718,8 @@ long precio;
          CargarTablaProducto(this.txtProd.getText());
          CrearTablaDetalle();
          CargarTablaDetalle();
+        }
+        
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void txtClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyReleased
@@ -706,13 +730,13 @@ long precio;
     private void btnAgregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar2ActionPerformed
         try {  
             DetalleFactura DF = new DetalleFactura();
-            int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea añadir esta factura?", "Añadir factura",
+            int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea añadir este producto a esta factura?", "Añadir factura",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (mensaje == 0) {
                     DF.setIdProducto(PC.findProducto(Integer.parseInt(this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0).toString())));
                     DF.setNumFactura(numFac);
                     DFC.create(DF);
-                    JOptionPane.showMessageDialog(null,"El registro fue añadido con éxito");
+                    JOptionPane.showMessageDialog(null,"El producto fue añadido con éxito");
                     CrearTablaDetalle();
                     CargarTablaDetalle(); 
                 }
@@ -754,6 +778,7 @@ long precio;
         spFecha.setValue(tbFactura.getValueAt(tbFactura.getSelectedRow(), 3));
         String id = tbFactura.getValueAt(tbFactura.getSelectedRow(), 0).toString(); 
         Eliminar = (Factura) FC.findFactura(Integer.parseInt(id));
+        btnLimpiar.setEnabled(true);
     }//GEN-LAST:event_tbFacturaMouseClicked
 
     private void txtProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdKeyReleased
@@ -770,12 +795,12 @@ long precio;
 
     private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
         try {
-                int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea eliminar esta factura?", "Eliminar factura",
+                int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea eliminar este producto de esta factura?", "Eliminar factura",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (mensaje == 0) {
                 
                 DFC.destroy(EliminarDetalleFactura.getIdDetalleFactura());
-                JOptionPane.showMessageDialog(null,"El registro fue eliminado con éxito");
+                JOptionPane.showMessageDialog(null,"El producto fue eliminado con éxito");
                 CrearTablaDetalle();
                 CargarTablaDetalle();
                 
@@ -798,10 +823,20 @@ long precio;
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
-    try {
-        numFac.setEstadoFactura(1);
-
-        FC.edit(numFac);
+        try {
+            int resp = JOptionPane.showConfirmDialog(null, "¿Quiere cobrar esta factura?", "Cobrar", JOptionPane.YES_NO_OPTION);
+            if (JOptionPane.YES_OPTION == resp) {
+                numFac.setEstadoFactura(1);
+                JOptionPane.showMessageDialog(this, "Factura cobrada exitosamente","Cobrar",JOptionPane.INFORMATION_MESSAGE);
+                FC.edit(numFac);
+                txtProd.setText("");
+                //lblTotal.setText("0.00");
+                lblFactura.setText("");
+                CrearTablaDetalle();
+                CargarTablaDetalle();
+                
+            }
+        
     } catch (Exception ex) {
         Logger.getLogger(Facturar.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -814,6 +849,7 @@ long precio;
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         txtNumFac.setText("");
+        txtDireccion.setText("");
         txtCliente.setText("");
         btnNuevo.setEnabled(true);
         btnAgregar.setEnabled(false);
@@ -836,30 +872,40 @@ long precio;
 
     private void txtClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyTyped
        char car = evt.getKeyChar();
-        if(Character.isLetter(car)){
-            lblErrorLetra.setText("");
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+            
         }else{
             evt.consume();
-            lblErrorLetra.setText("Ingresa solo letras");
+            getToolkit().beep();
         }
     }//GEN-LAST:event_txtClienteKeyTyped
 
     private void txtProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car)){
-        lblError.setText("");
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        
         }else{
             evt.consume();
-            lblError.setText("Ingresa solo letras");
+            getToolkit().beep();
         }
     }//GEN-LAST:event_txtProdKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetterOrDigit(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+            
+        }else{
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
 
     DefaultTableModel modelo;
     private void CrearModelo() {
         try {
             modelo = (new DefaultTableModel(
                     null, new String[]{
-                        "ID", "Cliente","Usuario","Fecha"}) {
+                        "# Factura", "Cliente","Usuario","Fecha"}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
                     java.lang.String.class,
@@ -958,7 +1004,7 @@ long precio;
     try {
             modeloDetalle = (new DefaultTableModel(
                     null, new String[]{
-                        "ID", "Nombre","Precio","Factura"}) {
+                        "ID", "Nombre","Precio","# Factura"}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
                     java.lang.String.class,
@@ -1079,8 +1125,8 @@ long precio;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblError;
-    private javax.swing.JLabel lblErrorLetra;
     private javax.swing.JLabel lblFactura;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JSpinner spFecha;
@@ -1089,6 +1135,7 @@ long precio;
     private javax.swing.JTable tbProducto;
     private javax.swing.JButton txtCancelar;
     private javax.swing.JTextField txtCliente;
+    private javax.swing.JTextField txtDireccion;
     private javax.swing.JButton txtImprimir;
     private javax.swing.JTextField txtNumFac;
     private javax.swing.JTextField txtProd;
