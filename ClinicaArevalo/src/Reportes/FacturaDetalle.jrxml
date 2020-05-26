@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FacturaDetalle" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d9da3b1f-63ff-4052-94eb-1a6010dcbbf9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Detalle" uuid="951c9123-9ecd-4de7-8c7a-43f83b7947a9">
+		<parameter name="numFactura" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     Detalle_Factura.`Num_Factura` AS Detalle_Factura_Num_Factura,
+     Detalle_Factura.`id_Producto` AS Detalle_Factura_id_Producto,
+     Producto.`Nombre` AS Producto_Nombre,
+     Producto.`Precio` AS Producto_Precio
+FROM
+     `Factura` Factura INNER JOIN `Detalle_Factura` Detalle_Factura ON Factura.`Num_Factura` = Detalle_Factura.`Num_Factura`
+     INNER JOIN `Producto` Producto ON Detalle_Factura.`id_Producto` = Producto.`id_Producto`
+WHERE
+     Factura.`Num_Factura` = $P{numFactura}]]>
+		</queryString>
+		<field name="Detalle_Factura_Num_Factura" class="java.lang.Integer"/>
+		<field name="Detalle_Factura_id_Producto" class="java.lang.Integer"/>
+		<field name="Producto_Nombre" class="java.lang.String"/>
+		<field name="Producto_Precio" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="idUsuario" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaInicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFinal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     Factura.`Num_Factura` AS Factura_Num_Factura,
+     Factura.`id_Usuario` AS Factura_id_Usuario,
+     Factura.`Nombre_Cliente` AS Factura_Nombre_Cliente,
+     Factura.`Fecha_Factura` AS Factura_Fecha_Factura,
+     Factura.`Estado_Factura` AS Factura_Estado_Factura,
+     Detalle_Factura.`id_detalle_factura` AS Detalle_Factura_id_detalle_factura,
+     Detalle_Factura.`Num_Factura` AS Detalle_Factura_Num_Factura,
+     Detalle_Factura.`id_Producto` AS Detalle_Factura_id_Producto,
+     Producto.`id_Producto` AS Producto_id_Producto,
+     Producto.`id_Categoria` AS Producto_id_Categoria,
+     Producto.`Nombre` AS Producto_Nombre,
+     Producto.`Detalle` AS Producto_Detalle,
+     SUM(Producto.`Precio`) AS Producto_Precio
+FROM
+     `Factura` Factura INNER JOIN `Detalle_Factura` Detalle_Factura ON Factura.`Num_Factura` = Detalle_Factura.`Num_Factura`
+     INNER JOIN `Producto` Producto ON Detalle_Factura.`id_Producto` = Producto.`id_Producto`
+WHERE
+Factura.`Estado_Factura`=1
+AND Factura.`Fecha_Factura`>= $P{fechaInicio}
+AND Factura.`Fecha_Factura`<=$P{fechaFinal}
+GROUP BY Factura.`Num_Factura`
+ORDER BY Factura.`Num_Factura`]]>
+	</queryString>
+	<field name="Factura_Num_Factura" class="java.lang.Integer"/>
+	<field name="Factura_id_Usuario" class="java.lang.Integer"/>
+	<field name="Factura_Nombre_Cliente" class="java.lang.String"/>
+	<field name="Factura_Fecha_Factura" class="java.sql.Date"/>
+	<field name="Factura_Estado_Factura" class="java.lang.Integer"/>
+	<field name="Detalle_Factura_id_detalle_factura" class="java.lang.Integer"/>
+	<field name="Detalle_Factura_Num_Factura" class="java.lang.Integer"/>
+	<field name="Detalle_Factura_id_Producto" class="java.lang.Integer"/>
+	<field name="Producto_id_Producto" class="java.lang.Integer"/>
+	<field name="Producto_id_Categoria" class="java.lang.Integer"/>
+	<field name="Producto_Nombre" class="java.lang.String"/>
+	<field name="Producto_Detalle" class="java.lang.String"/>
+	<field name="Producto_Precio" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="218" height="36" uuid="fbdc9ec4-d0a2-42df-a97e-4ba4309e45e5"/>
+				<textElement>
+					<font size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clinica Arévalo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="47" width="218" height="32" uuid="6466b3b9-55c7-4057-a4cf-45f6af035186"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Factura Detallada]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="79" width="100" height="20" uuid="13d07d31-b23e-4e6e-a9b2-bcb4e5553f82"/>
+				<textFieldExpression><![CDATA[$P{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="132" y="79" width="100" height="20" uuid="f473279e-0364-4a92-87ec-8f1028393895"/>
+				<textFieldExpression><![CDATA[$P{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="79" width="32" height="20" uuid="bd550d28-7710-4204-8cac-33d6826dca34"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="193" splitType="Stretch">
+			<textField pattern="$ #,##0.00">
+				<reportElement x="388" y="40" width="100" height="20" uuid="03efb303-7804-483f-ae47-ff27deaac9f9"/>
+				<textFieldExpression><![CDATA[$F{Producto_Precio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="347" y="40" width="41" height="20" uuid="eb74a7a1-e883-40b8-9b94-e6e122d11aeb"/>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="fcc80e5c-045c-4026-82f0-489b36fcc48c"/>
+				<text><![CDATA[Número de Factura:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="89eac337-3243-4855-adc3-2e3d141242f7"/>
+				<textFieldExpression><![CDATA[$F{Factura_Num_Factura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="58" y="20" width="42" height="20" uuid="36dba575-99e0-4d65-b6c3-36504df0b268"/>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="20" width="150" height="20" uuid="ae5397a8-2a29-4ba7-9129-0070336b881f"/>
+				<textFieldExpression><![CDATA[$F{Factura_Nombre_Cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="40" width="89" height="20" uuid="63e78111-8864-404b-9492-d76462fcea2b"/>
+				<text><![CDATA[Fecha de Factura:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="100" y="40" width="100" height="20" uuid="bb19dc44-11ed-4b46-9b58-32451bde3dc4"/>
+				<textFieldExpression><![CDATA[$F{Factura_Fecha_Factura}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="60" width="555" height="131" uuid="a1ae5c60-180d-40ae-b002-dad09fc44ef1"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Detalle" uuid="4fb03ce8-8844-49dd-9028-0746eb620e75">
+						<datasetParameter name="numFactura">
+							<datasetParameterExpression><![CDATA[$F{Factura_Num_Factura}]]></datasetParameterExpression>
+						</datasetParameter>
+					</datasetRun>
+					<jr:column width="373" uuid="a41e959e-49e3-4f6c-bcc5-54fba551950f">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="373" height="30" uuid="e4b318ab-a2b9-4045-ac39-f7ae07bf0e93"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Producto]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="373" height="20" uuid="8a61d8c8-395c-45fd-8d2b-2c6a7db16b93"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Producto_Nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="136" uuid="8db8ccae-f41e-4c8c-b21e-50db6d0edd1b">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="136" height="30" uuid="7797c265-a847-4c54-ae87-041e604e563f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Precio]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="136" height="20" uuid="1cbb7e2a-d936-4c46-af91-4778e858c821"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Producto_Precio}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="200" y="0" width="80" height="20" uuid="a728ae39-f3c1-4d7e-8156-2af13552f09d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="0" width="40" height="20" uuid="96c9ebb1-1230-4dfb-a003-03c531e74bb7"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="4" splitType="Stretch"/>
+	</summary>
+</jasperReport>

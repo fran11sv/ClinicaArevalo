@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Enfermedad" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f090d8d-a405-40df-a558-5cdca2cce2a8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idEnfermedad" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     EnfermedadesCie10.`descripcion` AS EnfermedadesCie10_descripcion,
+     categoriasCie10.`descripcion` AS categoriasCie10_descripcion,
+     gruposCie10.`descripcion` AS gruposCie10_descripcion,
+     subGruposCie10.`descripcion` AS subGruposCie10_descripcion,
+     EnfermedadesCie10.`id` AS EnfermedadesCie10_id
+FROM
+     `categoriasCie10` categoriasCie10 INNER JOIN `EnfermedadesCie10` EnfermedadesCie10 ON categoriasCie10.`id` = EnfermedadesCie10.`idCategoria`
+     INNER JOIN `subGruposCie10` subGruposCie10 ON categoriasCie10.`idSubGrupo` = subGruposCie10.`id`
+     INNER JOIN `gruposCie10` gruposCie10 ON subGruposCie10.`idGrupo` = gruposCie10.`id`
+WHERE EnfermedadesCie10.`id`=$P{idEnfermedad}]]>
+	</queryString>
+	<field name="EnfermedadesCie10_descripcion" class="java.lang.String"/>
+	<field name="categoriasCie10_descripcion" class="java.lang.String"/>
+	<field name="gruposCie10_descripcion" class="java.lang.String"/>
+	<field name="subGruposCie10_descripcion" class="java.lang.String"/>
+	<field name="EnfermedadesCie10_id" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="35" width="360" height="35" uuid="02f63eeb-19ef-4bcb-8d5f-86dac85d3931"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Enfermedad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="360" height="35" uuid="e0c4a717-9a58-43fd-8eeb-26452f8f913b"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clinica Arévalo]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="c28342d8-e75b-4956-a243-633adc53c47b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="4" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="192" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="17" width="67" height="20" uuid="46178193-3a33-4c02-b3e9-d62c6bb103b1"/>
+				<text><![CDATA[Enfermedad:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="17" width="488" height="35" uuid="5f24170c-d7bf-470f-a0d3-e55f1c9fac0a"/>
+				<textFieldExpression><![CDATA[$F{EnfermedadesCie10_descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="55" width="56" height="20" uuid="a372af19-0048-484e-9fa8-8364632c4efd"/>
+				<text><![CDATA[Categoria:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="55" width="488" height="36" uuid="9087d2b8-a9cf-42bb-a58b-01e5e1053099"/>
+				<textFieldExpression><![CDATA[$F{categoriasCie10_descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="91" width="51" height="20" uuid="91fbdb5e-fd0d-4600-9fe1-4f1ade99726b"/>
+				<text><![CDATA[SubGrupo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="91" width="488" height="38" uuid="dfbd7850-e45e-4451-9a8b-0e29830a6ed1"/>
+				<textFieldExpression><![CDATA[$F{subGruposCie10_descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="129" width="33" height="20" uuid="cd3741ae-c295-4327-8f69-2bebfcffdcec"/>
+				<text><![CDATA[Grupo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="129" width="488" height="38" uuid="1758eea7-9eff-4c03-8077-761a1eac5e4f"/>
+				<textFieldExpression><![CDATA[$F{gruposCie10_descripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="200" y="0" width="80" height="20" uuid="1f90ee9a-03f0-45f5-b890-4755d59e18dd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="0" width="40" height="20" uuid="c9605bdc-c15c-4ee4-b84f-608bdb7d1785"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

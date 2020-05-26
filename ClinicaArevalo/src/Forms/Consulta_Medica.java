@@ -247,6 +247,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         btnAgregarAnte = new javax.swing.JButton();
         btnEditarAnte = new javax.swing.JButton();
         btnElminarAnte = new javax.swing.JButton();
+        btnReporteAntecedentes = new javax.swing.JButton();
         PanelConsulta = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         lblPacienteConsulta = new javax.swing.JLabel();
@@ -1221,6 +1222,18 @@ public class Consulta_Medica extends javax.swing.JFrame {
             }
         });
 
+        btnReporteAntecedentes.setBackground(new java.awt.Color(76, 201, 223));
+        btnReporteAntecedentes.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnReporteAntecedentes.setForeground(new java.awt.Color(0, 0, 0));
+        btnReporteAntecedentes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
+        btnReporteAntecedentes.setText("Reporte de Antecedentes");
+        btnReporteAntecedentes.setEnabled(false);
+        btnReporteAntecedentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteAntecedentesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelAntecedentesLayout = new javax.swing.GroupLayout(PanelAntecedentes);
         PanelAntecedentes.setLayout(PanelAntecedentesLayout);
         PanelAntecedentesLayout.setHorizontalGroup(
@@ -1228,6 +1241,26 @@ public class Consulta_Medica extends javax.swing.JFrame {
             .addGroup(PanelAntecedentesLayout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelAntecedentesLayout.createSequentialGroup()
+                        .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelAntecedentesLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnCancelarL2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnSiguienteAnte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(PanelAntecedentesLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnMenuAnte, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelAntecedentesLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnReporteAntecedentes, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(PanelAntecedentesLayout.createSequentialGroup()
                         .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1246,24 +1279,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                     .addGroup(PanelAntecedentesLayout.createSequentialGroup()
                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblPacienteAnte, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelAntecedentesLayout.createSequentialGroup()
-                        .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelAntecedentesLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnCancelarL2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnSiguienteAnte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(PanelAntecedentesLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnMenuAnte, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(lblPacienteAnte, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelAntecedentesLayout.setVerticalGroup(
@@ -1274,12 +1290,14 @@ public class Consulta_Medica extends javax.swing.JFrame {
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPacienteAnte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PanelAntecedentesLayout.createSequentialGroup()
                         .addComponent(btnSiguienteAnte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelarL2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnReporteAntecedentes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnMenuAnte, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelAntecedentesLayout.createSequentialGroup()
                         .addGroup(PanelAntecedentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2660,7 +2678,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 1360, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -2675,11 +2693,11 @@ public class Consulta_Medica extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1360, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1376, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(125, 125, 125)
                 .addComponent(PanelPestañas, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125))
+                .addGap(133, 133, 133))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2922,6 +2940,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             btnTerminar.setEnabled(true);
             btnHacerCita.setEnabled(true);
             btnHistorial.setEnabled(true);
+            btnReporteAntecedentes.setEnabled(true);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -3525,19 +3544,21 @@ public class Consulta_Medica extends javax.swing.JFrame {
                     List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
                     int idConsulta = listconsulta.get(0).getIdConsulta();
                     DatosConsulta = (Consulta) CC.findConsulta(idConsulta);
-                    //Obtener Numero de Diagnostico Creado
-                    int idDiagnostico = DatosDiagnostico.getIdDiagnostico();
-                    DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
-                    //Obtener Numero de Receta creada
-                    int idReceta = DatosReceta.getNumReceta();
-                    DatosReceta = (Receta) RC.findReceta(idReceta);
-                    if (!btnReceta.isEnabled()) {
+                    boolean btnrecet=btnReceta.isEnabled();
+                    boolean btndiag=btnDiagnostico.isEnabled();
+                    if (btnrecet==false) {
+                        //Obtener Numero de Receta creada
+                        int idReceta = DatosReceta.getNumReceta();
+                        DatosReceta = (Receta) RC.findReceta(idReceta);
                         //Guardar Datos de Receta
                         DatosReceta.setIndicaciones(this.txtExamenes.getText());
                         DatosReceta.setIdConsulta(DatosConsulta);
                         RC.edit(DatosReceta);
                     }
-                    if (!btnDiagnostico.isEnabled()) {
+                    if (btndiag==false) {
+                        //Obtener Numero de Diagnostico Creado
+                        int idDiagnostico = DatosDiagnostico.getIdDiagnostico();
+                        DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
                         //Guardar Datos de Diagnostico                   
                         DatosDiagnostico.setIdConsultas(DatosConsulta);
                         DGC.edit(DatosDiagnostico);
@@ -3586,23 +3607,25 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
                 int idConsulta = listconsulta.get(0).getIdConsulta();
                 DatosConsulta = (Consulta) CC.findConsulta(idConsulta);
-                //Obtener Numero de Diagnostico Creado
-                    int idDiagnostico = DatosDiagnostico.getIdDiagnostico();
-                    DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
-                //Obtener Numero de Receta creada
-                    int idReceta = DatosReceta.getNumReceta();
-                    DatosReceta = (Receta) RC.findReceta(idReceta);
-                if (!btnReceta.isEnabled()) {
-                    //Guardar Datos de Receta
-                    DatosReceta.setIndicaciones(this.txtExamenes.getText());
-                    DatosReceta.setIdConsulta(DatosConsulta);
-                    RC.edit(DatosReceta);
-                }
-                if (!btnDiagnostico.isEnabled()) {
-                    //Guardar Datos de Diagnostico                   
-                    DatosDiagnostico.setIdConsultas(DatosConsulta);
-                    DGC.edit(DatosDiagnostico);
-                }
+                 boolean btnrecet=btnReceta.isEnabled();
+                    boolean btndiag=btnDiagnostico.isEnabled();
+                    if (btnrecet==false) {
+                        //Obtener Numero de Receta creada
+                        int idReceta = DatosReceta.getNumReceta();
+                        DatosReceta = (Receta) RC.findReceta(idReceta);
+                        //Guardar Datos de Receta
+                        DatosReceta.setIndicaciones(this.txtExamenes.getText());
+                        DatosReceta.setIdConsulta(DatosConsulta);
+                        RC.edit(DatosReceta);
+                    }
+                    if (btndiag==false) {
+                        //Obtener Numero de Diagnostico Creado
+                        int idDiagnostico = DatosDiagnostico.getIdDiagnostico();
+                        DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
+                        //Guardar Datos de Diagnostico                   
+                        DatosDiagnostico.setIdConsultas(DatosConsulta);
+                        DGC.edit(DatosDiagnostico);
+                    }
 
                 JOptionPane.showMessageDialog(null, "Datos de Consulta Guardados Exitosamente");
                 Facturar menu = new Facturar();
@@ -3895,6 +3918,27 @@ public class Consulta_Medica extends javax.swing.JFrame {
             getToolkit().beep();
         }
     }//GEN-LAST:event_txtDosisKeyTyped
+
+    private void btnReporteAntecedentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteAntecedentesActionPerformed
+         try  {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int id = DatosPaciente.getIdPaciente();
+            String path = "src\\Reportes\\Paciente.jasper";
+            JasperReport reporte = null;
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idPaciente", id);
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv= new JasperViewer(j,false);
+            jv.setTitle("Paciente / Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_btnReporteAntecedentesActionPerformed
     private static int CalcularEdad(String fecha) {
         Calendar cal= Calendar.getInstance();
         int year= cal.get(Calendar.YEAR);
@@ -4233,6 +4277,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevoAnte;
     private javax.swing.JButton btnNuevoPaciente;
     private javax.swing.JButton btnReceta;
+    private javax.swing.JButton btnReporteAntecedentes;
     private javax.swing.JButton btnSeleccionPaciente;
     private javax.swing.JButton btnSiguienteAnte;
     private javax.swing.JButton btnSiguienteConsulta;

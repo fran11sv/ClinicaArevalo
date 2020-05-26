@@ -1,16 +1,26 @@
 package Forms;
+import Clases.Conexion;
 import Controladores.PacienteJpaController;
 import Entidades.Paciente;
 import Entidades.entityMain;
+import com.mysql.jdbc.Connection;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Pacientes extends javax.swing.JFrame {
 PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
@@ -212,6 +222,11 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Reportes 48.png"))); // NOI18N
         btnReporte.setText("Reporte");
         btnReporte.setPreferredSize(new java.awt.Dimension(200, 60));
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(239, 239, 239));
@@ -708,7 +723,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                 txtEstado.setText("");
   
             }else{
-                    JOptionPane.showMessageDialog(null,"El registro no se edito");
+                    JOptionPane.showMessageDialog(null,"El registro no se editó");
                 }           
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -834,6 +849,27 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             evt.consume();
         }
     }//GEN-LAST:event_txtBuscarDuiKeyTyped
+
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        try  {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int id = Integer.parseInt(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString());
+            String path = "src\\Reportes\\Paciente.jasper";
+            JasperReport reporte = null;
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idPaciente", id);
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv= new JasperViewer(j,false);
+            jv.setTitle("Paciente / Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_btnReporteActionPerformed
 DefaultTableModel modelo;
     //Crea modelo de la tabla
     private void CrearModelo() {

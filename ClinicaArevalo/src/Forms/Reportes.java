@@ -6,11 +6,20 @@
 package Forms;
 
 import Clases.Conexion;
+import Clases.Hora;
+import Controladores.EnfermedadesCie10JpaController;
 import Controladores.PacienteJpaController;
+import Controladores.VademecumJpaController;
+import Entidades.DetalleDiagnostico;
+import Entidades.EnfermedadesCie10;
 import Entidades.Paciente;
+import Entidades.Vademecum;
 import Entidades.entityMain;
 import com.mysql.jdbc.Connection;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,12 +39,17 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Reportes extends javax.swing.JFrame {
 PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
-
+EnfermedadesCie10JpaController EC = new EnfermedadesCie10JpaController(entityMain.getInstance());
+VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance());
     /**
      * Creates new form Reportes
      */
     public Reportes() {
         initComponents();
+        Date date = new Date();
+        fechapickerInicial.setDate(date);
+        fechapickerFinal.setDate(date);
+        llenar_combobox();
     }
 
     /**
@@ -50,7 +64,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         FondoCeleste = new javax.swing.JPanel();
         BarraNaranja = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        PanelReportes = new javax.swing.JTabbedPane();
         PanelHistorialClinico = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtBuscarPaciente = new javax.swing.JTextField();
@@ -58,13 +72,38 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         tbPacientes = new javax.swing.JTable();
         btnHistorial = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        PanelFacturas = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btnHistorial1 = new javax.swing.JButton();
+        btnFacturas = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbFactura = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        fechapickerInicial = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
+        fechapickerFinal = new com.toedter.calendar.JDateChooser();
+        btnGanancias = new javax.swing.JButton();
+        PanelPacientes = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        txtNombreBusqueda = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbPacientes1 = new javax.swing.JTable();
+        btnPaciente = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        tbEnfermedades = new javax.swing.JTable();
+        txtEnfermedad = new javax.swing.JTextField();
+        jLabel57 = new javax.swing.JLabel();
+        btnbuscarporCate = new javax.swing.JButton();
+        btnBuscarEnfermedad = new javax.swing.JButton();
+        btnEnfermedad = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel63 = new javax.swing.JLabel();
+        txtMedicamentoBusqueda = new javax.swing.JTextField();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tbVademecum = new javax.swing.JTable();
+        btnVademecum = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -90,9 +129,9 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
-        jTabbedPane1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1110, 524));
+        PanelReportes.setForeground(new java.awt.Color(0, 0, 0));
+        PanelReportes.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        PanelReportes.setPreferredSize(new java.awt.Dimension(1110, 524));
 
         PanelHistorialClinico.setBackground(new java.awt.Color(15, 76, 129));
         PanelHistorialClinico.setForeground(new java.awt.Color(255, 255, 255));
@@ -186,38 +225,24 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                 .addGap(66, 66, 66))
         );
 
-        jTabbedPane1.addTab("Historial Clinico", PanelHistorialClinico);
+        PanelReportes.addTab("Historial Clinico", PanelHistorialClinico);
 
-        jPanel1.setBackground(new java.awt.Color(15, 76, 129));
+        PanelFacturas.setBackground(new java.awt.Color(15, 76, 129));
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(239, 239, 239));
-        jLabel3.setText("Cargar por:");
+        jLabel3.setText("Cargar Facturas por:");
         jLabel3.setPreferredSize(new java.awt.Dimension(70, 30));
 
-        jTable1.setBackground(new java.awt.Color(239, 239, 239));
-        jTable1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jTable1.setToolTipText("");
-        jScrollPane2.setViewportView(jTable1);
-
-        btnHistorial1.setBackground(new java.awt.Color(76, 201, 223));
-        btnHistorial1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        btnHistorial1.setForeground(new java.awt.Color(0, 0, 0));
-        btnHistorial1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
-        btnHistorial1.setText(" Generar Reporte Detallado");
-        btnHistorial1.setPreferredSize(new java.awt.Dimension(200, 40));
-        btnHistorial1.addActionListener(new java.awt.event.ActionListener() {
+        btnFacturas.setBackground(new java.awt.Color(76, 201, 223));
+        btnFacturas.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnFacturas.setForeground(new java.awt.Color(0, 0, 0));
+        btnFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
+        btnFacturas.setText(" Generar Reporte Facturas");
+        btnFacturas.setPreferredSize(new java.awt.Dimension(200, 40));
+        btnFacturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorial1ActionPerformed(evt);
+                btnFacturasActionPerformed(evt);
             }
         });
 
@@ -233,48 +258,396 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
-        jComboBox1.setBackground(new java.awt.Color(239, 239, 239));
-        jComboBox1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Última Semana", "Último Mes", "Último Año", "Totales" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(150, 30));
+        cbFactura.setBackground(new java.awt.Color(239, 239, 239));
+        cbFactura.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        cbFactura.setForeground(new java.awt.Color(0, 0, 0));
+        cbFactura.setPreferredSize(new java.awt.Dimension(150, 30));
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Cargar Ganancias desde:");
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Fecha Inicial:");
+
+        fechapickerInicial.setDateFormatString("dd-MM-yyyy");
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Fecha Final:");
+
+        fechapickerFinal.setDateFormatString("dd-MM-yyyy");
+
+        btnGanancias.setBackground(new java.awt.Color(76, 201, 223));
+        btnGanancias.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnGanancias.setForeground(new java.awt.Color(0, 0, 0));
+        btnGanancias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
+        btnGanancias.setText("Generar Reporte Ganancias");
+        btnGanancias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGananciasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelFacturasLayout = new javax.swing.GroupLayout(PanelFacturas);
+        PanelFacturas.setLayout(PanelFacturasLayout);
+        PanelFacturasLayout.setHorizontalGroup(
+            PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFacturasLayout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addGroup(PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(PanelFacturasLayout.createSequentialGroup()
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(159, 159, 159))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFacturasLayout.createSequentialGroup()
+                            .addGroup(PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnGanancias, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(PanelFacturasLayout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(cbFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(35, 35, 35)
+                                    .addComponent(btnFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addContainerGap(397, Short.MAX_VALUE)))
+                    .addGroup(PanelFacturasLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(155, 155, 155))))
+            .addGroup(PanelFacturasLayout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addGroup(PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(PanelFacturasLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(fechapickerFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PanelFacturasLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fechapickerInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        PanelFacturasLayout.setVerticalGroup(
+            PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFacturasLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFacturasLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(fechapickerInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel5))
+                    .addComponent(fechapickerFinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(btnGanancias, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
+        );
+
+        PanelReportes.addTab("Facturas", PanelFacturas);
+
+        PanelPacientes.setBackground(new java.awt.Color(15, 76, 129));
+
+        jLabel21.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel21.setText("Buscar por:");
+        jLabel21.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        txtNombreBusqueda.setBackground(new java.awt.Color(239, 239, 239));
+        txtNombreBusqueda.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombreBusqueda.setPreferredSize(new java.awt.Dimension(100, 30));
+        txtNombreBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreBusquedaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreBusquedaKeyTyped(evt);
+            }
+        });
+
+        jLabel22.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel22.setText("Nombre:");
+        jLabel22.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        tbPacientes1.setBackground(new java.awt.Color(239, 239, 239));
+        tbPacientes1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        tbPacientes1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tbPacientes1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPacientes1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbPacientes1);
+
+        btnPaciente.setBackground(new java.awt.Color(76, 201, 223));
+        btnPaciente.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnPaciente.setForeground(new java.awt.Color(0, 0, 0));
+        btnPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
+        btnPaciente.setText("Generar Reporte Pacientes");
+        btnPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPacienteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelPacientesLayout = new javax.swing.GroupLayout(PanelPacientes);
+        PanelPacientes.setLayout(PanelPacientesLayout);
+        PanelPacientesLayout.setHorizontalGroup(
+            PanelPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelPacientesLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(PanelPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(PanelPacientesLayout.createSequentialGroup()
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombreBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPaciente))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(167, Short.MAX_VALUE))
+        );
+        PanelPacientesLayout.setVerticalGroup(
+            PanelPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelPacientesLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addGroup(PanelPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPaciente))
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(176, Short.MAX_VALUE))
+        );
+
+        PanelReportes.addTab("Pacientes", PanelPacientes);
+
+        jPanel1.setBackground(new java.awt.Color(15, 76, 129));
+
+        tbEnfermedades.setBackground(new java.awt.Color(239, 239, 239));
+        tbEnfermedades.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        tbEnfermedades.setForeground(new java.awt.Color(0, 0, 0));
+        tbEnfermedades.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tbEnfermedades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbEnfermedadesMouseClicked(evt);
+            }
+        });
+        jScrollPane14.setViewportView(tbEnfermedades);
+
+        txtEnfermedad.setBackground(new java.awt.Color(239, 239, 239));
+        txtEnfermedad.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        txtEnfermedad.setForeground(new java.awt.Color(0, 0, 0));
+        txtEnfermedad.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtEnfermedad.setPreferredSize(new java.awt.Dimension(200, 40));
+        txtEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEnfermedadActionPerformed(evt);
+            }
+        });
+        txtEnfermedad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEnfermedadKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEnfermedadKeyTyped(evt);
+            }
+        });
+
+        jLabel57.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel57.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel57.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel57.setText("Buscar Enfermedad:");
+        jLabel57.setPreferredSize(new java.awt.Dimension(200, 30));
+
+        btnbuscarporCate.setBackground(new java.awt.Color(76, 201, 223));
+        btnbuscarporCate.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnbuscarporCate.setForeground(new java.awt.Color(0, 0, 0));
+        btnbuscarporCate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Buscar 32.png"))); // NOI18N
+        btnbuscarporCate.setText("Buscar por Categoría");
+        btnbuscarporCate.setPreferredSize(new java.awt.Dimension(240, 40));
+        btnbuscarporCate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarporCateActionPerformed(evt);
+            }
+        });
+
+        btnBuscarEnfermedad.setBackground(new java.awt.Color(76, 201, 223));
+        btnBuscarEnfermedad.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnBuscarEnfermedad.setForeground(new java.awt.Color(0, 0, 0));
+        btnBuscarEnfermedad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Buscar 32.png"))); // NOI18N
+        btnBuscarEnfermedad.setText("Buscar por Enfermedad");
+        btnBuscarEnfermedad.setPreferredSize(new java.awt.Dimension(240, 40));
+        btnBuscarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarEnfermedadActionPerformed(evt);
+            }
+        });
+
+        btnEnfermedad.setBackground(new java.awt.Color(76, 201, 223));
+        btnEnfermedad.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnEnfermedad.setForeground(new java.awt.Color(0, 0, 0));
+        btnEnfermedad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
+        btnEnfermedad.setText("Generar Reporte Enfermedad");
+        btnEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnfermedadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnHistorial1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(335, 335, 335)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(155, 155, 155))
+                .addGap(61, 61, 61)
+                .addComponent(jLabel57, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnbuscarporCate, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addGap(57, 57, 57))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEnfermedad)
+                .addGap(87, 87, 87))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(62, 62, 62)
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 984, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(62, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(125, 125, 125)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHistorial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(103, Short.MAX_VALUE))
+                    .addComponent(btnbuscarporCate, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                .addComponent(btnEnfermedad)
+                .addGap(71, 71, 71))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(215, 215, 215)
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(130, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("Facturas", jPanel1);
+        PanelReportes.addTab("Enfermedades", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(15, 76, 129));
+
+        jLabel63.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel63.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel63.setText("Buscar Medicamento por Nombre:");
+        jLabel63.setPreferredSize(new java.awt.Dimension(40, 30));
+
+        txtMedicamentoBusqueda.setBackground(new java.awt.Color(239, 239, 239));
+        txtMedicamentoBusqueda.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtMedicamentoBusqueda.setForeground(new java.awt.Color(0, 0, 0));
+        txtMedicamentoBusqueda.setPreferredSize(new java.awt.Dimension(40, 45));
+        txtMedicamentoBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMedicamentoBusquedaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMedicamentoBusquedaKeyTyped(evt);
+            }
+        });
+
+        tbVademecum.setBackground(new java.awt.Color(239, 239, 239));
+        tbVademecum.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        tbVademecum.setForeground(new java.awt.Color(0, 0, 0));
+        tbVademecum.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tbVademecum.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbVademecumMouseClicked(evt);
+            }
+        });
+        jScrollPane7.setViewportView(tbVademecum);
+
+        btnVademecum.setBackground(new java.awt.Color(76, 201, 223));
+        btnVademecum.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnVademecum.setForeground(new java.awt.Color(0, 0, 0));
+        btnVademecum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
+        btnVademecum.setText("Generar Reporte Enfermedad");
+        btnVademecum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVademecumActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMedicamentoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnVademecum)))
+                .addContainerGap(197, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtMedicamentoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVademecum)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(202, Short.MAX_VALUE))
+        );
+
+        PanelReportes.addTab("Vademecum", jPanel2);
 
         javax.swing.GroupLayout FondoCelesteLayout = new javax.swing.GroupLayout(FondoCeleste);
         FondoCeleste.setLayout(FondoCelesteLayout);
@@ -283,7 +656,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             .addComponent(BarraNaranja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(FondoCelesteLayout.createSequentialGroup()
                 .addGap(125, 125, 125)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PanelReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         FondoCelesteLayout.setVerticalGroup(
@@ -291,7 +664,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             .addGroup(FondoCelesteLayout.createSequentialGroup()
                 .addComponent(BarraNaranja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PanelReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
 
@@ -309,59 +682,406 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBuscarPacienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPacienteKeyReleased
-       CrearModelo();
-       CargarTablaPacientesporNombre(this.txtBuscarPaciente.getText());
-    }//GEN-LAST:event_txtBuscarPacienteKeyReleased
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void btnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturasActionPerformed
+         try {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+             Hora H = (Hora) this.cbFactura.getSelectedItem();
+             Date fecha = new Date();
+             String path = "src\\Reportes\\FacturaDetalle.jasper";
+             switch (H.getValor()) {
+                 case 0:
+                     int id = Login.DatosUsuario.getIdUsuario();
+                     Calendar calendar = Calendar.getInstance();
+                     calendar.setTime(fecha);
+                     calendar.set(Calendar.MINUTE, 0);
+                     calendar.set(Calendar.HOUR, 0);
+                     SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                     String spinnerValue = formater.format(calendar.getTime());
+                     Date date = formater.parse(spinnerValue);
+                     java.sql.Date Final = new java.sql.Date(date.getTime());
+
+                     Calendar calendar2 = Calendar.getInstance();
+                     calendar2.setTime(fecha);
+                     calendar2.add(Calendar.DAY_OF_YEAR, -7);
+                     calendar2.set(Calendar.MINUTE, 0);
+                     calendar2.set(Calendar.HOUR, 0);
+                     SimpleDateFormat formater2 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                     String spinnerValue2 = formater2.format(calendar2.getTime());
+                     Date date2 = formater2.parse(spinnerValue2);
+                     java.sql.Date Inicial = new java.sql.Date(date2.getTime());
+
+                     JasperReport reporte = null;
+                     reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+                     Map parametro = new HashMap<>();
+                     parametro.put("idUsuario", id);
+                     parametro.put("fechaInicio", Inicial);
+                     parametro.put("fechaFinal", Final);
+                     JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+                     JasperViewer jv = new JasperViewer(j, false);
+                     jv.setTitle("Factura Reporte / Clinica Arevalo");
+                     jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                     jv.setVisible(true);
+                     break;
+
+                 case 1:
+                     int id2 = Login.DatosUsuario.getIdUsuario();
+                     Calendar calendar3 = Calendar.getInstance();
+                     calendar3.setTime(fecha);
+                     calendar3.set(Calendar.MINUTE, 0);
+                     calendar3.set(Calendar.HOUR, 0);
+                     SimpleDateFormat formater3 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                     String spinnerValue3 = formater3.format(calendar3.getTime());
+                     Date date3 = formater3.parse(spinnerValue3);
+                     java.sql.Date Final3 = new java.sql.Date(date3.getTime());
+
+                     Calendar calendar4 = Calendar.getInstance();
+                     calendar4.setTime(fecha);
+                     calendar4.add(Calendar.MONTH, -1);
+                     calendar4.set(Calendar.MINUTE, 0);
+                     calendar4.set(Calendar.HOUR, 0);
+                     SimpleDateFormat formater4 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                     String spinnerValue4 = formater4.format(calendar4.getTime());
+                     Date date4 = formater4.parse(spinnerValue4);
+                     java.sql.Date Inicial4 = new java.sql.Date(date4.getTime());
+
+                     JasperReport reporte2 = null;
+                     reporte2 = (JasperReport) JRLoader.loadObjectFromFile(path);
+                     Map parametro2 = new HashMap<>();
+                     parametro2.put("idUsuario", id2);
+                     parametro2.put("fechaInicio", Inicial4);
+                     parametro2.put("fechaFinal", Final3);
+                     JasperPrint j2 = JasperFillManager.fillReport(reporte2, parametro2, conn);
+                     JasperViewer jv2 = new JasperViewer(j2, false);
+                     jv2.setTitle("Factura Reporte / Clinica Arevalo");
+                     jv2.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                     jv2.setVisible(true);
+                     break;
+
+                 case 2:
+                     int id3 = Login.DatosUsuario.getIdUsuario();
+                     Calendar calendar5 = Calendar.getInstance();
+                     calendar5.setTime(fecha);
+                     calendar5.set(Calendar.MINUTE, 0);
+                     calendar5.set(Calendar.HOUR, 0);
+                     SimpleDateFormat formater5 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                     String spinnerValue5 = formater5.format(calendar5.getTime());
+                     Date date5 = formater5.parse(spinnerValue5);
+                     java.sql.Date Final5 = new java.sql.Date(date5.getTime());
+
+                     Calendar calendar6 = Calendar.getInstance();
+                     calendar6.setTime(fecha);
+                     calendar6.add(Calendar.YEAR, -1);
+                     calendar6.set(Calendar.MINUTE, 0);
+                     calendar6.set(Calendar.HOUR, 0);
+                     SimpleDateFormat formater6 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                     String spinnerValue6 = formater6.format(calendar6.getTime());
+                     Date date6 = formater6.parse(spinnerValue6);
+                     java.sql.Date Inicial6 = new java.sql.Date(date6.getTime());
+
+                     JasperReport reporte3 = null;
+                     reporte3= (JasperReport) JRLoader.loadObjectFromFile(path);
+                     Map parametro3 = new HashMap<>();
+                     parametro3.put("idUsuario", id3);
+                     parametro3.put("fechaInicio", Inicial6);
+                     parametro3.put("fechaFinal", Final5);
+                     JasperPrint j3 = JasperFillManager.fillReport(reporte3, parametro3, conn);
+                     JasperViewer jv3 = new JasperViewer(j3, false);
+                     jv3.setTitle("Factura Reporte / Clinica Arevalo");
+                     jv3.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                     jv3.setVisible(true);
+                     break;
+             }
+
+
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_btnFacturasActionPerformed
+    private void llenar_combobox() {
+    cbFactura.addItem(new Hora(0, "Última Semana"));
+    cbFactura.addItem(new Hora(1, "Último Mes"));
+    cbFactura.addItem(new Hora(2, "Último Año"));
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
+            + "Se descartarán los datos no guardados.", "Regresar al menú",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (mensaje == 0) {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         try  {
-        Conexion con = new Conexion();
-        Connection conn = con.getConexion();
-        int id = Integer.parseInt(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString());
-        String path = "src\\Reportes\\HistorialClinico.jasper";
-        JasperReport reporte = null;
-        reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
-        Map parametro = new HashMap();
-        parametro.put("idPaciente", id);
-        JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
-        JasperViewer jv= new JasperViewer(j,false);
-        jv.setTitle("Historial Clinico/ Clinica Arevalo");
-        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        jv.setVisible(true);
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int id = Integer.parseInt(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString());
+            String path = "src\\Reportes\\HistorialClinico.jasper";
+            JasperReport reporte = null;
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idPaciente", id);
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv= new JasperViewer(j,false);
+            jv.setTitle("Historial Clinico/ Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
         }
         catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
     }//GEN-LAST:event_btnHistorialActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
-                + "Se descartarán los datos no guardados.", "Regresar al menú",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    MenuPrincipal menu = new MenuPrincipal();
-                    menu.setVisible(true);
-                    this.dispose();
-            }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnHistorial1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorial1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHistorial1ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void txtBuscarPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPacienteKeyTyped
-       char car = evt.getKeyChar();
+        char car = evt.getKeyChar();
         if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
         }else{
             evt.consume();
             getToolkit().beep();
         }
     }//GEN-LAST:event_txtBuscarPacienteKeyTyped
+
+    private void txtBuscarPacienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPacienteKeyReleased
+        CrearModelo();
+        CargarTablaPacientesporNombre(this.txtBuscarPaciente.getText());
+    }//GEN-LAST:event_txtBuscarPacienteKeyReleased
+
+    private void btnGananciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGananciasActionPerformed
+        try {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int id = Login.DatosUsuario.getIdUsuario();
+            
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(this.fechapickerInicial.getDate());
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.HOUR, 0);
+            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+            String spinnerValue = formater.format(calendar.getTime());
+            Date date = formater.parse(spinnerValue);
+            java.sql.Date Inicial = new java.sql.Date(date.getTime());
+            
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.setTime(this.fechapickerFinal.getDate());
+            calendar2.set(Calendar.MINUTE, 0);
+            calendar2.set(Calendar.HOUR, 0);
+            SimpleDateFormat formater2 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+            String spinnerValue2 = formater2.format(calendar2.getTime());
+            Date date2 = formater2.parse(spinnerValue2);
+            java.sql.Date Final = new java.sql.Date(date2.getTime());
+
+            String path = "src\\Reportes\\GananciasTotales.jasper";
+            JasperReport reporte = null;
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idUsuario", id);
+            parametro.put("fechaInicial", Inicial);
+            parametro.put("fechaFinal", Final);
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv = new JasperViewer(j,false);
+            jv.setTitle("Historial Clinico/ Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_btnGananciasActionPerformed
+
+    private void txtNombreBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreBusquedaKeyReleased
+        CrearModelo2();
+        CargarTablaPacientesporNombre2(this.txtNombreBusqueda.getText());
+    }//GEN-LAST:event_txtNombreBusquedaKeyReleased
+
+    private void txtNombreBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreBusquedaKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+
+        }else{
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtNombreBusquedaKeyTyped
+
+    private void tbPacientes1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPacientes1MouseClicked
+        
+    }//GEN-LAST:event_tbPacientes1MouseClicked
+
+    private void btnPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacienteActionPerformed
+        try  {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int id = Integer.parseInt(tbPacientes1.getValueAt(tbPacientes1.getSelectedRow(), 0).toString());
+            String path = "src\\Reportes\\Paciente.jasper";
+            JasperReport reporte = null;
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idPaciente", id);
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv= new JasperViewer(j,false);
+            jv.setTitle("Paciente / Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_btnPacienteActionPerformed
+    DefaultTableModel modeloEnfermedades;
+    private void CrearModeloEnfermedades() {
+        try {
+            modeloEnfermedades= (new DefaultTableModel(
+                    null, new String[]{
+                        "ID", "Enfermedad","Categoria"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tbEnfermedades.setModel(modeloEnfermedades);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    private void CargarTablaPorEnfermedad(String nombre) {
+        try {
+            Object o[] = null;
+            List<EnfermedadesCie10> listAnte = EC.findEnfermedadporNombre(nombre);
+            for (int i = 0; i < listAnte.size(); i++) {
+                modeloEnfermedades.addRow(o);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getId(), i, 0);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getDescripcion(), i, 1);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getIdCategoria().getDescripcion(), i, 2);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    private void CargarTablaPorCategoria(String nombre) {
+        try {
+            Object o[] = null;
+            List<EnfermedadesCie10> listAnte = EC.findEnfermedadporCategoria(nombre);
+            for (int i = 0; i < listAnte.size(); i++) {
+                modeloEnfermedades.addRow(o);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getId(), i, 0);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getDescripcion(), i, 1);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getIdCategoria().getDescripcion(), i, 2);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    private void tbEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEnfermedadesMouseClicked
+
+    }//GEN-LAST:event_tbEnfermedadesMouseClicked
+
+    private void txtEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnfermedadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEnfermedadActionPerformed
+
+    private void txtEnfermedadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnfermedadKeyReleased
+        
+    }//GEN-LAST:event_txtEnfermedadKeyReleased
+
+    private void txtEnfermedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnfermedadKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        }else{
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtEnfermedadKeyTyped
+
+    private void btnbuscarporCateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarporCateActionPerformed
+        this.CrearModeloEnfermedades();
+        this.CargarTablaPorCategoria(this.txtEnfermedad.getText());
+    }//GEN-LAST:event_btnbuscarporCateActionPerformed
+
+    private void btnBuscarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEnfermedadActionPerformed
+        this.CrearModeloEnfermedades();
+        this.CargarTablaPorEnfermedad(this.txtEnfermedad.getText());
+    }//GEN-LAST:event_btnBuscarEnfermedadActionPerformed
+
+    private void btnEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadActionPerformed
+         try  {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int id = Integer.parseInt(tbEnfermedades.getValueAt(tbEnfermedades.getSelectedRow(), 0).toString());
+            String path = "src\\Reportes\\Enfermedad.jasper";
+            JasperReport reporte = null;
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idEnfermedad", id);
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv= new JasperViewer(j,false);
+            jv.setTitle("Enfermedad Detalles / Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_btnEnfermedadActionPerformed
+
+    private void txtMedicamentoBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedicamentoBusquedaKeyReleased
+        this.CrearModeloVademecum();
+        this.CargarTablaVademecum(this.txtMedicamentoBusqueda.getText());
+    }//GEN-LAST:event_txtMedicamentoBusquedaKeyReleased
+
+    private void txtMedicamentoBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedicamentoBusquedaKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        }else{
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtMedicamentoBusquedaKeyTyped
+
+    private void tbVademecumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVademecumMouseClicked
+
+    }//GEN-LAST:event_tbVademecumMouseClicked
+
+    private void btnVademecumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVademecumActionPerformed
+        try  {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int id = Integer.parseInt(tbVademecum.getValueAt(tbVademecum.getSelectedRow(), 0).toString());
+            String path = "src\\Reportes\\Vademecum.jasper";
+            JasperReport reporte = null;
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idInsumo", id);
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv= new JasperViewer(j,false);
+            jv.setTitle("Medicamento Detalles / Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_btnVademecumActionPerformed
     DefaultTableModel modelo;
     //Crea modelo de la tabla
     private void CrearModelo() {
@@ -423,6 +1143,110 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             JOptionPane.showMessageDialog(null, e.getMessage());
         }    
     }
+    DefaultTableModel modelo2;
+    //Crea modelo de la tabla
+    private void CrearModelo2() {
+        try {
+            modelo2 = (new DefaultTableModel(
+                    null, new String[]{
+                        "ID", "Nombres","Apellidos",
+                        "Fecha de Nacimiento","DUI","Sexo","Ocupación",
+                         "Dirección","Estado Civil","Teléfono"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tbPacientes1.setModel(modelo2);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    private void CargarTablaPacientesporNombre2(String nombre ) {
+        try {
+            Object o[] = null;
+            List<Paciente> listPacientes = PC.findPacienteporNombre(nombre);
+            for (int i = 0; i < listPacientes.size(); i++) {
+                modelo2.addRow(o);
+                modelo2.setValueAt(listPacientes.get(i).getIdPaciente(), i, 0);
+                modelo2.setValueAt(listPacientes.get(i).getNombres(), i, 1);
+                modelo2.setValueAt(listPacientes.get(i).getApellidos(), i, 2);
+                modelo2.setValueAt(listPacientes.get(i).getFechaNacimiento(), i, 3);
+                modelo2.setValueAt(listPacientes.get(i).getDui(), i, 4);
+                modelo2.setValueAt(listPacientes.get(i).getSexo(), i, 5);
+                modelo2.setValueAt(listPacientes.get(i).getOcupacion(), i, 6);
+                modelo2.setValueAt(listPacientes.get(i).getDireccion(), i, 7);
+                modelo2.setValueAt(listPacientes.get(i).getEstadoCivil(), i, 8);
+                modelo2.setValueAt(listPacientes.get(i).getTelefono(), i, 9);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }    
+    }
+    DefaultTableModel modeloVademecum;
+    private void CrearModeloVademecum() {
+        try {
+            modeloVademecum= (new DefaultTableModel(
+                    null, new String[]{
+                        "ID","Principio Activo", "Marcas",
+                    }) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false
+                };
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            this.tbVademecum.setModel(modeloVademecum);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    private void CargarTablaVademecum(String Buscar){
+        try {
+            Object o[] = null;
+            List<Vademecum> listvademecum = VC.findVademecumporNombre(Buscar);
+            for (int i = 0; i < listvademecum.size(); i++) {
+                modeloVademecum.addRow(o);
+                modeloVademecum.setValueAt(listvademecum.get(i).getIdInsumo(), i, 0);
+                modeloVademecum.setValueAt(listvademecum.get(i).getPrincipioactivo(), i, 1);
+                modeloVademecum.setValueAt(listvademecum.get(i).getMarcas(), i, 2);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -461,21 +1285,46 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BarraNaranja;
     private javax.swing.JPanel FondoCeleste;
+    private javax.swing.JPanel PanelFacturas;
     private javax.swing.JPanel PanelHistorialClinico;
+    private javax.swing.JPanel PanelPacientes;
+    private javax.swing.JTabbedPane PanelReportes;
+    private javax.swing.JButton btnBuscarEnfermedad;
+    private javax.swing.JButton btnEnfermedad;
+    private javax.swing.JButton btnFacturas;
+    private javax.swing.JButton btnGanancias;
     private javax.swing.JButton btnHistorial;
-    private javax.swing.JButton btnHistorial1;
+    private javax.swing.JButton btnPaciente;
+    private javax.swing.JButton btnVademecum;
+    private javax.swing.JButton btnbuscarporCate;
+    private javax.swing.JComboBox<Hora> cbFactura;
+    private com.toedter.calendar.JDateChooser fechapickerFinal;
+    private com.toedter.calendar.JDateChooser fechapickerInicial;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel63;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JTable tbEnfermedades;
     private javax.swing.JTable tbPacientes;
+    private javax.swing.JTable tbPacientes1;
+    private javax.swing.JTable tbVademecum;
     private javax.swing.JTextField txtBuscarPaciente;
+    private javax.swing.JTextField txtEnfermedad;
+    private javax.swing.JTextField txtMedicamentoBusqueda;
+    private javax.swing.JTextField txtNombreBusqueda;
     // End of variables declaration//GEN-END:variables
 }

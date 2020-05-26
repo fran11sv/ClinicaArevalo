@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Medicamento" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a7f834a4-56cf-4340-975f-47fc1dca7688">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="261"/>
+	<parameter name="idInsumo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     Vademecum.`id_insumo` AS Vademecum_id_insumo,
+     Vademecum.`Principio_activo` AS Vademecum_Principio_activo,
+     Vademecum.`Accion_terapeutica` AS Vademecum_Accion_terapeutica,
+     Vademecum.`Indicaciones` AS Vademecum_Indicaciones,
+     Vademecum.`Marcas` AS Vademecum_Marcas,
+     Vademecum.`Propiedades` AS Vademecum_Propiedades,
+     Vademecum.`Precauciones` AS Vademecum_Precauciones,
+     Vademecum.`Dosificacion` AS Vademecum_Dosificacion,
+     Vademecum.`Reacciones_adversas` AS Vademecum_Reacciones_adversas,
+     Vademecum.`Interacciones` AS Vademecum_Interacciones,
+     Vademecum.`Contraindicaciones` AS Vademecum_Contraindicaciones,
+     Vademecum.`Sobredosificacion` AS Vademecum_Sobredosificacion
+FROM
+     `Vademecum` Vademecum
+WHERE Vademecum.`id_insumo`=$P{idInsumo}]]>
+	</queryString>
+	<field name="Vademecum_id_insumo" class="java.lang.Integer"/>
+	<field name="Vademecum_Principio_activo" class="java.lang.String"/>
+	<field name="Vademecum_Accion_terapeutica" class="java.lang.String"/>
+	<field name="Vademecum_Indicaciones" class="java.lang.String"/>
+	<field name="Vademecum_Marcas" class="java.lang.String"/>
+	<field name="Vademecum_Propiedades" class="java.lang.String"/>
+	<field name="Vademecum_Precauciones" class="java.lang.String"/>
+	<field name="Vademecum_Dosificacion" class="java.lang.String"/>
+	<field name="Vademecum_Reacciones_adversas" class="java.lang.String"/>
+	<field name="Vademecum_Interacciones" class="java.lang.String"/>
+	<field name="Vademecum_Contraindicaciones" class="java.lang.String"/>
+	<field name="Vademecum_Sobredosificacion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="84" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="360" height="35" uuid="60c13711-8e71-46aa-8408-afb881eacdfa"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clinica Arévalo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="49" width="360" height="35" uuid="7e00e173-a5ad-47d0-bedb-7110a8cae8f3"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Medicamento]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="c1d24459-42c9-49c6-b701-1de44a48cad4"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="680" splitType="Stretch">
+			<textField>
+				<reportElement x="104" y="639" width="446" height="41" uuid="1d2eb033-e46a-4484-b0af-ee33e0f6ef2c"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Sobredosificacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="209" width="448" height="107" uuid="a191f9b8-5f7e-44f8-ac57-7d4f088aa65e"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Propiedades}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="57" y="169" width="46" height="40" uuid="978dbac0-e5c1-46d6-b74b-b4043a0a73cb"/>
+				<text><![CDATA[Marcas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="30" width="92" height="40" uuid="412874cd-2e48-46c8-8e71-c908119994eb"/>
+				<text><![CDATA[Principio activo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="70" width="92" height="40" uuid="fc85e422-8ab1-41c6-84a4-d7a792f70949"/>
+				<text><![CDATA[Accion terapeutica:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="584" width="93" height="20" uuid="817724c6-fbd4-4dad-bcfd-fa1f3dde5200"/>
+				<text><![CDATA[Contraindicaciones:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="104" y="316" width="448" height="111" uuid="8058ce7a-8c2d-48c5-9e14-a8ce9ada4e4c"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Precauciones}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="103" y="472" width="449" height="47" uuid="74183660-ed17-49aa-8e87-681f87f520ba"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Reacciones_adversas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="103" y="30" width="449" height="40" uuid="d1f91c08-d3ad-4f6a-a6ec-04edef3d2ace"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Principio_activo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="103" y="169" width="449" height="40" uuid="c6e296f6-13e6-423c-8fbd-7a54de876fe9"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Marcas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="209" width="71" height="73" uuid="0a8da2db-4e11-4e17-baa5-8277ad9b63b0"/>
+				<text><![CDATA[Propiedades:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="103" y="110" width="449" height="59" uuid="cc79f2f6-18d3-44e2-8161-fe15b71f6ca3"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Indicaciones}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="519" width="448" height="65" uuid="5c49f584-2dcb-4844-b58a-2a7931e59a59"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Interacciones}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="504" y="0" width="46" height="20" uuid="2123c235-5bff-41b8-997d-74209ab57061"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_id_insumo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="427" width="448" height="45" uuid="5e78f317-7053-47a8-871a-3e10e9bd8da6"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Dosificacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="584" width="448" height="55" uuid="57cdbe1c-e0f6-4f33-a77f-ad7e41972411"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Contraindicaciones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="480" y="0" width="24" height="20" uuid="87be22c9-1c7d-4021-a1db-4c9e0b731df1"/>
+				<text><![CDATA[ID:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="316" width="71" height="24" uuid="b1f59522-db71-410b-b467-359f35e8b512"/>
+				<text><![CDATA[Precauciones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="519" width="70" height="20" uuid="1ac8cdf5-4730-4eb4-9934-f247256f3d74"/>
+				<text><![CDATA[Interacciones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="110" width="71" height="59" uuid="2e966f0a-d84e-4ec6-979f-adc9019d31fc"/>
+				<text><![CDATA[Indicaciones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="639" width="83" height="20" uuid="698a7039-5b52-402e-b233-c5e6dc4c30c1"/>
+				<text><![CDATA[Sobredosificación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="427" width="70" height="20" uuid="7b23c08a-bbb4-405c-84bb-52d7d144723c"/>
+				<text><![CDATA[Dosificación:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="103" y="70" width="449" height="40" uuid="da3b2635-cfa6-4adb-91dd-46ba507eed78"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Accion_terapeutica}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-3" y="472" width="107" height="47" uuid="67650cf4-76f9-4268-bac9-e3f06c95ae61"/>
+				<text><![CDATA[Reacciones Adversas:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="191" y="0" width="80" height="20" uuid="50b1cea3-96e1-4ec5-896e-c7ad222fdfbb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="271" y="0" width="40" height="20" uuid="bc23bad9-05f5-463e-b747-806da947d15f"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="4" splitType="Stretch"/>
+	</summary>
+</jasperReport>

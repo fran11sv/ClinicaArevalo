@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GananciasTotales" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="07908326-cb0b-459e-a143-585acf686834">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="PorFecha" uuid="999a163e-a179-470b-a8b9-fa0967d31101">
+		<parameter name="fechaInicial" class="java.util.Date">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="fechaFinal" class="java.util.Date">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="idUsuario" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     SUM(Producto.`Precio`) AS Producto_Precio,
+     Factura.`Num_Factura` AS Factura_Num_Factura,
+     Factura.`Fecha_Factura` AS Factura_Fecha_Factura,
+     Factura.`Estado_Factura` AS Factura_Estado_Factura,
+     Factura.`id_Usuario` AS Factura_id_Usuario
+FROM
+     `Factura` Factura INNER JOIN `Detalle_Factura` Detalle_Factura ON Factura.`Num_Factura` = Detalle_Factura.`Num_Factura`
+     INNER JOIN `Producto` Producto ON Detalle_Factura.`id_Producto` = Producto.`id_Producto`
+WHERE
+     Factura.`Estado_Factura` = 1
+     and Factura.`id_Usuario`=$P{idUsuario}
+     and Factura.`Fecha_Factura` > $P{fechaInicial}
+     and Factura.`Fecha_Factura` <= $P{fechaFinal}
+GROUP BY
+     Factura.`Fecha_Factura`]]>
+		</queryString>
+		<field name="Producto_Precio" class="java.math.BigDecimal"/>
+		<field name="Factura_Num_Factura" class="java.lang.Integer"/>
+		<field name="Factura_Fecha_Factura" class="java.sql.Date"/>
+		<field name="Factura_Estado_Factura" class="java.lang.Integer"/>
+		<field name="Factura_id_Usuario" class="java.lang.Integer"/>
+		<group name="Factura_Fecha_Factura">
+			<groupExpression><![CDATA[$F{Factura_Fecha_Factura}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="idUsuario" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaInicial" class="java.util.Date">
+		<defaultValueExpression><![CDATA[2020/10/05]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFinal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[2020/19/05]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     SUM(Producto.`Precio`) AS Producto_Precio,
+     Factura.`Num_Factura` AS Factura_Num_Factura,
+     Factura.`Estado_Factura` AS Factura_Estado_Factura,
+     Usuario.`Apellidos` AS Usuario_Apellidos,
+     Usuario.`Nombres` AS Usuario_Nombres,
+     Factura.`Fecha_Factura` AS Factura_Fecha_Factura
+FROM
+     `Factura` Factura INNER JOIN `Detalle_Factura` Detalle_Factura ON Factura.`Num_Factura` = Detalle_Factura.`Num_Factura`
+     INNER JOIN `Usuario` Usuario ON Factura.`id_Usuario` = Usuario.`id_usuario`
+     INNER JOIN `Producto` Producto ON Detalle_Factura.`id_Producto` = Producto.`id_Producto`
+WHERE
+     Factura.`Estado_Factura` = 1
+     and Factura.`id_Usuario` = $P{idUsuario}
+and Factura.`Fecha_Factura`>$P{fechaInicial}
+and Factura.`Fecha_Factura` <= $P{fechaFinal}
+GROUP BY
+     Factura.`Estado_Factura`]]>
+	</queryString>
+	<field name="Producto_Precio" class="java.math.BigDecimal"/>
+	<field name="Factura_Num_Factura" class="java.lang.Integer"/>
+	<field name="Factura_Estado_Factura" class="java.lang.Integer"/>
+	<field name="Usuario_Apellidos" class="java.lang.String"/>
+	<field name="Usuario_Nombres" class="java.lang.String"/>
+	<field name="Factura_Fecha_Factura" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="360" height="35" uuid="8281fef0-bea4-471a-83b7-21e2dca785fa"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clinica Arévalo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="35" width="360" height="35" uuid="c8118c2a-06bf-449a-b7d0-c4b0731e8f3d"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ganancias Totales]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="c164a6ee-ff99-4f94-97f6-51f10b998915"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="15" width="43" height="20" uuid="1ef19638-65fe-44ec-8d52-91f7c4ab14e3"/>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="43" y="15" width="339" height="20" uuid="6a307a88-1a93-4531-a518-97fd05b5251f"/>
+				<textFieldExpression><![CDATA[$F{Usuario_Nombres}+" "+$F{Usuario_Apellidos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="356" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="13" width="100" height="20" uuid="6e383f1d-125e-42a9-af92-47919e50e745"/>
+				<text><![CDATA[Ganancias Totales:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="13" width="149" height="20" uuid="8fa62afb-6827-433c-ad89-d2f928f6d8cc"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$"+$F{Producto_Precio}]]></textFieldExpression>
+			</textField>
+			<lineChart>
+				<chart>
+					<reportElement x="0" y="95" width="555" height="261" uuid="57b440b9-5022-4a87-9ed1-629c0599d4af"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="PorFecha" uuid="f5e0e232-3ddd-4271-bb0a-ad8539faac4f">
+							<datasetParameter name="idUsuario">
+								<datasetParameterExpression><![CDATA[$P{idUsuario}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="fechaInicial">
+								<datasetParameterExpression><![CDATA[$P{fechaInicial}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="fechaFinal">
+								<datasetParameterExpression><![CDATA[$P{fechaFinal}]]></datasetParameterExpression>
+							</datasetParameter>
+						</datasetRun>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Facturación por día"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Factura_Fecha_Factura}.getDate()]]></categoryExpression>
+						<valueExpression><![CDATA[$F{Producto_Precio}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<staticText>
+				<reportElement x="0" y="54" width="33" height="20" uuid="96ba4240-ddd9-4ca5-aa80-2794922fcd69"/>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="33" y="54" width="101" height="20" uuid="13b4c47a-1f1e-4164-8ff8-dc20a601574b"/>
+				<textFieldExpression><![CDATA[$P{fechaInicial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="134" y="54" width="36" height="20" uuid="05514663-4812-4e3a-8dda-ef22ad97c61e"/>
+				<text><![CDATA[- Hasta:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="170" y="54" width="100" height="20" uuid="48fc6c04-fd82-4752-b06d-b34abc594914"/>
+				<textFieldExpression><![CDATA[$P{fechaFinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="86" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="190" y="34" width="80" height="20" uuid="d8812210-34d6-4f6c-8eb6-3ed4004e948c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="270" y="34" width="40" height="20" uuid="cd70c4aa-722f-494d-8bb6-1df95fdf0719"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
