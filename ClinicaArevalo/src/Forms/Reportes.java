@@ -113,7 +113,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         BarraNaranja.setBackground(new java.awt.Color(253, 149, 53));
         BarraNaranja.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("REPORTES");
@@ -129,8 +129,9 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
         );
 
+        PanelReportes.setBackground(new java.awt.Color(76, 201, 223));
         PanelReportes.setForeground(new java.awt.Color(0, 0, 0));
-        PanelReportes.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        PanelReportes.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         PanelReportes.setPreferredSize(new java.awt.Dimension(1110, 524));
 
         PanelHistorialClinico.setBackground(new java.awt.Color(15, 76, 129));
@@ -263,21 +264,23 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         cbFactura.setForeground(new java.awt.Color(0, 0, 0));
         cbFactura.setPreferredSize(new java.awt.Dimension(150, 30));
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cargar Ganancias desde:");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Fecha Inicial:");
 
         fechapickerInicial.setDateFormatString("dd-MM-yyyy");
+        fechapickerInicial.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Fecha Final:");
 
         fechapickerFinal.setDateFormatString("dd-MM-yyyy");
+        fechapickerFinal.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
 
         btnGanancias.setBackground(new java.awt.Color(76, 201, 223));
         btnGanancias.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -303,14 +306,14 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
                             .addGap(159, 159, 159))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelFacturasLayout.createSequentialGroup()
                             .addGroup(PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnGanancias, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnGanancias)
                                 .addGroup(PanelFacturasLayout.createSequentialGroup()
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(cbFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(35, 35, 35)
                                     .addComponent(btnFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addContainerGap(397, Short.MAX_VALUE)))
+                            .addContainerGap(388, Short.MAX_VALUE)))
                     .addGroup(PanelFacturasLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(155, 155, 155))))
@@ -335,7 +338,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(PanelFacturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFacturasLayout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -348,7 +351,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
                     .addComponent(fechapickerFinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(btnGanancias, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addGap(22, 22, 22)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59))
         );
@@ -364,6 +367,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         jLabel21.setPreferredSize(new java.awt.Dimension(100, 30));
 
         txtNombreBusqueda.setBackground(new java.awt.Color(239, 239, 239));
+        txtNombreBusqueda.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         txtNombreBusqueda.setForeground(new java.awt.Color(0, 0, 0));
         txtNombreBusqueda.setPreferredSize(new java.awt.Dimension(100, 30));
         txtNombreBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -382,7 +386,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         jLabel22.setPreferredSize(new java.awt.Dimension(100, 30));
 
         tbPacientes1.setBackground(new java.awt.Color(239, 239, 239));
-        tbPacientes1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        tbPacientes1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         tbPacientes1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -399,7 +403,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         jScrollPane2.setViewportView(tbPacientes1);
 
         btnPaciente.setBackground(new java.awt.Color(76, 201, 223));
-        btnPaciente.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnPaciente.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnPaciente.setForeground(new java.awt.Color(0, 0, 0));
         btnPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
         btnPaciente.setText("Generar Reporte Pacientes");
@@ -438,7 +442,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
                     .addComponent(btnPaciente))
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         PanelReportes.addTab("Pacientes", PanelPacientes);
@@ -446,7 +450,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         jPanel1.setBackground(new java.awt.Color(15, 76, 129));
 
         tbEnfermedades.setBackground(new java.awt.Color(239, 239, 239));
-        tbEnfermedades.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        tbEnfermedades.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         tbEnfermedades.setForeground(new java.awt.Color(0, 0, 0));
         tbEnfermedades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -513,7 +517,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         });
 
         btnEnfermedad.setBackground(new java.awt.Color(76, 201, 223));
-        btnEnfermedad.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnEnfermedad.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnEnfermedad.setForeground(new java.awt.Color(0, 0, 0));
         btnEnfermedad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
         btnEnfermedad.setText("Generar Reporte Enfermedad");
@@ -556,14 +560,14 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
                     .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
                 .addComponent(btnEnfermedad)
                 .addGap(71, 71, 71))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(215, 215, 215)
                     .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(130, Short.MAX_VALUE)))
+                    .addContainerGap(125, Short.MAX_VALUE)))
         );
 
         PanelReportes.addTab("Enfermedades", jPanel1);
@@ -589,7 +593,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         });
 
         tbVademecum.setBackground(new java.awt.Color(239, 239, 239));
-        tbVademecum.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        tbVademecum.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         tbVademecum.setForeground(new java.awt.Color(0, 0, 0));
         tbVademecum.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -607,10 +611,10 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         jScrollPane7.setViewportView(tbVademecum);
 
         btnVademecum.setBackground(new java.awt.Color(76, 201, 223));
-        btnVademecum.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnVademecum.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnVademecum.setForeground(new java.awt.Color(0, 0, 0));
         btnVademecum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
-        btnVademecum.setText("Generar Reporte Enfermedad");
+        btnVademecum.setText("Generar Reporte Medicamento");
         btnVademecum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVademecumActionPerformed(evt);
@@ -631,7 +635,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
                         .addComponent(txtMedicamentoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(btnVademecum)))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,7 +648,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
                         .addComponent(btnVademecum)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         PanelReportes.addTab("Vademecum", jPanel2);

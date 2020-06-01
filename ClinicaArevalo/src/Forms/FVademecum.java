@@ -93,7 +93,7 @@ Vademecum Eliminar;
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -255,7 +255,7 @@ Vademecum Eliminar;
         txtSobredosis.setPreferredSize(new java.awt.Dimension(200, 40));
 
         btnAgregar.setBackground(new java.awt.Color(76, 201, 223));
-        btnAgregar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnAgregar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Agg 32.png"))); // NOI18N
         btnAgregar.setText(" Agregar");
@@ -267,7 +267,7 @@ Vademecum Eliminar;
         });
 
         btnEdit.setBackground(new java.awt.Color(76, 201, 223));
-        btnEdit.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnEdit.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnEdit.setForeground(new java.awt.Color(0, 0, 0));
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Editar 32.png"))); // NOI18N
         btnEdit.setText(" Editar");
@@ -279,7 +279,7 @@ Vademecum Eliminar;
         });
 
         btnEliminar.setBackground(new java.awt.Color(76, 201, 223));
-        btnEliminar.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnEliminar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(0, 0, 0));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Eliminar 32.png"))); // NOI18N
         btnEliminar.setText(" Eliminar");
@@ -291,7 +291,7 @@ Vademecum Eliminar;
         });
 
         btnReporte.setBackground(new java.awt.Color(76, 201, 223));
-        btnReporte.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnReporte.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnReporte.setForeground(new java.awt.Color(0, 0, 0));
         btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Reporte 32.png"))); // NOI18N
         btnReporte.setText(" Reporte");

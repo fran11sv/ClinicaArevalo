@@ -96,7 +96,7 @@ public static Usuario Recuperacion;
         jLabel5.setText("DUI:");
 
         txtUsuario.setBackground(new java.awt.Color(255, 255, 255));
-        txtUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(0, 0, 0));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -110,7 +110,7 @@ public static Usuario Recuperacion;
         lblError.setEnabled(false);
 
         txtDui.setBackground(new java.awt.Color(255, 255, 255));
-        txtDui.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtDui.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtDui.setForeground(new java.awt.Color(0, 0, 0));
         txtDui.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDui.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -206,7 +206,7 @@ public static Usuario Recuperacion;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

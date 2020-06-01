@@ -116,6 +116,9 @@ CategoriasCie10 EliminarCategoria;
             }
         });
 
+        tbSubGrupo.setBackground(new java.awt.Color(239, 239, 239));
+        tbSubGrupo.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        tbSubGrupo.setForeground(new java.awt.Color(0, 0, 0));
         tbSubGrupo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -141,6 +144,7 @@ CategoriasCie10 EliminarCategoria;
         txtCategoriaNombre.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtCategoriaNombre.setForeground(new java.awt.Color(0, 0, 0));
         txtCategoriaNombre.setEnabled(false);
+        txtCategoriaNombre.setPreferredSize(new java.awt.Dimension(4, 30));
         txtCategoriaNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCategoriaNombreKeyTyped(evt);
@@ -172,6 +176,9 @@ CategoriasCie10 EliminarCategoria;
             }
         });
 
+        tbCategorias.setBackground(new java.awt.Color(239, 239, 239));
+        tbCategorias.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        tbCategorias.setForeground(new java.awt.Color(0, 0, 0));
         tbCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -248,9 +255,9 @@ CategoriasCie10 EliminarCategoria;
                         .addGroup(PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelCategoriaLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(8, 8, 8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCategoriaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(14, 14, 14)
                                 .addComponent(btnAgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -270,7 +277,7 @@ CategoriasCie10 EliminarCategoria;
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(lblSubGrupoSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         PanelCategoriaLayout.setVerticalGroup(
             PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,11 +293,11 @@ CategoriasCie10 EliminarCategoria;
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCategoriaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCategoriaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9)
                 .addGroup(PanelCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PanelCategoriaLayout.createSequentialGroup()
                         .addComponent(btnNuevoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,6 +317,9 @@ CategoriasCie10 EliminarCategoria;
 
         PanelEnfermedad.setBackground(new java.awt.Color(15, 76, 129));
 
+        txtBuscarCategoria.setBackground(new java.awt.Color(239, 239, 239));
+        txtBuscarCategoria.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtBuscarCategoria.setForeground(new java.awt.Color(0, 0, 0));
         txtBuscarCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarCategoriaKeyReleased(evt);
@@ -329,6 +339,7 @@ CategoriasCie10 EliminarCategoria;
         jLabel6.setText("Categoria Seleccionada:");
         jLabel6.setPreferredSize(new java.awt.Dimension(200, 30));
 
+        tbCategoria2.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         tbCategoria2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -344,6 +355,10 @@ CategoriasCie10 EliminarCategoria;
         jLabel7.setText("Nombre de Enfermedad:");
         jLabel7.setPreferredSize(new java.awt.Dimension(200, 30));
 
+        txtNombreEnfermedad.setBackground(new java.awt.Color(239, 239, 239));
+        txtNombreEnfermedad.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtNombreEnfermedad.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombreEnfermedad.setPreferredSize(new java.awt.Dimension(4, 30));
         txtNombreEnfermedad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreEnfermedadKeyTyped(evt);
@@ -363,6 +378,7 @@ CategoriasCie10 EliminarCategoria;
             }
         });
 
+        tbEnfermedades.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         tbEnfermedades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -454,9 +470,9 @@ CategoriasCie10 EliminarCategoria;
                 .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelEnfermedadLayout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(txtNombreEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAgregarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelEnfermedadLayout.createSequentialGroup()
@@ -477,7 +493,7 @@ CategoriasCie10 EliminarCategoria;
                             .addComponent(btnEditarEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCancelarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnVolver1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(94, 116, Short.MAX_VALUE))
+                .addGap(94, 111, Short.MAX_VALUE))
         );
         PanelEnfermedadLayout.setVerticalGroup(
             PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,10 +509,10 @@ CategoriasCie10 EliminarCategoria;
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtNombreEnfermedad)
-                        .addComponent(btnAgregarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtNombreEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAgregarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(PanelEnfermedadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelEnfermedadLayout.createSequentialGroup()
@@ -537,7 +553,7 @@ CategoriasCie10 EliminarCategoria;
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

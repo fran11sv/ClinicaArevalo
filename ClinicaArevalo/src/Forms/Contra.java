@@ -60,7 +60,7 @@ Usuario Usuario;
         jLabel1.setPreferredSize(new java.awt.Dimension(830, 120));
 
         btnSalir.setBackground(new java.awt.Color(76, 201, 223));
-        btnSalir.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnSalir.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(0, 0, 0));
         btnSalir.setText("Regresar  a Login");
         btnSalir.setToolTipText("");
@@ -74,7 +74,7 @@ Usuario Usuario;
         });
 
         btnLogin.setBackground(new java.awt.Color(76, 201, 223));
-        btnLogin.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnLogin.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(0, 0, 0));
         btnLogin.setText("Guardar Nueva Contraseña");
         btnLogin.setBorder(null);
@@ -86,12 +86,12 @@ Usuario Usuario;
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Contraseña:");
         jLabel4.setPreferredSize(new java.awt.Dimension(64, 64));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Confirme Contraseña:");
 
@@ -102,14 +102,14 @@ Usuario Usuario;
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Logo.png"))); // NOI18N
 
         txtClave.setBackground(new java.awt.Color(239, 239, 239));
-        txtClave.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtClave.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtClave.setForeground(new java.awt.Color(0, 0, 0));
         txtClave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtClave.setPreferredSize(new java.awt.Dimension(12, 64));
         txtClave.setSelectedTextColor(new java.awt.Color(0, 0, 0));
 
         txtclave1.setBackground(new java.awt.Color(239, 239, 239));
-        txtclave1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtclave1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtclave1.setForeground(new java.awt.Color(0, 0, 0));
         txtclave1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtclave1.setPreferredSize(new java.awt.Dimension(12, 64));
@@ -206,7 +206,7 @@ Usuario Usuario;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

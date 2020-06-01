@@ -157,14 +157,14 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
 
         PanelAgenda.setBackground(new java.awt.Color(15, 76, 129));
 
-        jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(239, 239, 239));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Seleccione Médico:");
         jLabel4.setPreferredSize(new java.awt.Dimension(200, 30));
 
         cbUsuarioAgenda.setBackground(new java.awt.Color(239, 239, 239));
-        cbUsuarioAgenda.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        cbUsuarioAgenda.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         cbUsuarioAgenda.setForeground(new java.awt.Color(0, 0, 0));
         cbUsuarioAgenda.setPreferredSize(new java.awt.Dimension(100, 30));
 
@@ -173,9 +173,10 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
 
         calendar.setBackground(new java.awt.Color(15, 76, 129));
         calendar.setForeground(new java.awt.Color(0, 0, 0));
+        calendar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
 
         tbCitas.setBackground(new java.awt.Color(239, 239, 239));
-        tbCitas.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        tbCitas.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         tbCitas.setForeground(new java.awt.Color(0, 0, 0));
         tbCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -193,7 +194,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         jScrollPane2.setViewportView(tbCitas);
 
         jButton3.setBackground(new java.awt.Color(76, 201, 223));
-        jButton3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Recargar Calendario.png"))); // NOI18N
         jButton3.setText("Recargar Calendario");
@@ -204,7 +205,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
         });
 
         btnEliminarCita.setBackground(new java.awt.Color(76, 201, 223));
-        btnEliminarCita.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnEliminarCita.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnEliminarCita.setForeground(new java.awt.Color(0, 0, 0));
         btnEliminarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Eliminar M.png"))); // NOI18N
         btnEliminarCita.setText(" Eliminar Cita");
@@ -317,6 +318,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             }
         });
 
+        tbPacientes.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         tbPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -428,7 +430,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 1, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
         PanelCitasLayout.setVerticalGroup(
@@ -486,14 +488,14 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 1344, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 1332, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

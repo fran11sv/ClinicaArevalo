@@ -86,7 +86,7 @@ public static Usuario DatosUsuario;
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Contraseña.png"))); // NOI18N
 
         pswClave.setBackground(new java.awt.Color(239, 239, 239));
-        pswClave.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        pswClave.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         pswClave.setForeground(new java.awt.Color(0, 0, 0));
         pswClave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pswClave.setNextFocusableComponent(btnLogin);
@@ -102,7 +102,7 @@ public static Usuario DatosUsuario;
         jLabel2.setPreferredSize(new java.awt.Dimension(256, 256));
 
         txtUsuario.setBackground(new java.awt.Color(255, 255, 255));
-        txtUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(0, 0, 0));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -130,6 +130,7 @@ public static Usuario DatosUsuario;
         });
 
         jButton2.setBackground(new java.awt.Color(15, 75, 129));
+        jButton2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("¿Olvidaste la contraseña?");
         jButton2.setToolTipText("");
@@ -230,7 +231,7 @@ public static Usuario DatosUsuario;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
