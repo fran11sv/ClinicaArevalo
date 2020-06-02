@@ -10,7 +10,6 @@ import Clases.Hora;
 import Controladores.EnfermedadesCie10JpaController;
 import Controladores.PacienteJpaController;
 import Controladores.VademecumJpaController;
-import Entidades.DetalleDiagnostico;
 import Entidades.EnfermedadesCie10;
 import Entidades.Paciente;
 import Entidades.Vademecum;
@@ -521,6 +520,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         btnEnfermedad.setForeground(new java.awt.Color(0, 0, 0));
         btnEnfermedad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
         btnEnfermedad.setText("Generar Reporte Enfermedad");
+        btnEnfermedad.setEnabled(false);
         btnEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnfermedadActionPerformed(evt);
@@ -615,6 +615,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         btnVademecum.setForeground(new java.awt.Color(0, 0, 0));
         btnVademecum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
         btnVademecum.setText("Generar Reporte Medicamento");
+        btnVademecum.setEnabled(false);
         btnVademecum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVademecumActionPerformed(evt);
@@ -997,7 +998,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
         }
     }
     private void tbEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEnfermedadesMouseClicked
-
+btnEnfermedad.setEnabled(true);
     }//GEN-LAST:event_tbEnfermedadesMouseClicked
 
     private void txtEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnfermedadActionPerformed
@@ -1063,7 +1064,7 @@ VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance())
     }//GEN-LAST:event_txtMedicamentoBusquedaKeyTyped
 
     private void tbVademecumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVademecumMouseClicked
-
+        btnVademecum.setEnabled(true);
     }//GEN-LAST:event_tbVademecumMouseClicked
 
     private void btnVademecumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVademecumActionPerformed

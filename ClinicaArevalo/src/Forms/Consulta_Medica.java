@@ -1041,9 +1041,9 @@ public class Consulta_Medica extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblFechaIdenti1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelIdentificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTelefonoIdenti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(PanelIdentificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTelefonoIdenti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PanelIdentificacionLayout.createSequentialGroup()
                         .addGroup(PanelIdentificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2002,6 +2002,11 @@ public class Consulta_Medica extends javax.swing.JFrame {
         btnEnfermedades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Enfermedades 32.png"))); // NOI18N
         btnEnfermedades.setText("Ver Enfermedades");
         btnEnfermedades.setPreferredSize(new java.awt.Dimension(240, 40));
+        btnEnfermedades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnfermedadesActionPerformed(evt);
+            }
+        });
 
         txtAgregarDiagnostico.setBackground(new java.awt.Color(76, 201, 223));
         txtAgregarDiagnostico.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -2703,7 +2708,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 1348, Short.MAX_VALUE)
+                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 1360, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -3506,7 +3511,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSiguienteAnteActionPerformed
 
     private void txtVademecumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVademecumActionPerformed
-        // TODO add your handling code here:
+        ReporteVademecum menu = new ReporteVademecum();
+        menu.setVisible(true);
     }//GEN-LAST:event_txtVademecumActionPerformed
 
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
@@ -3961,6 +3967,11 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
     }//GEN-LAST:event_btnReporteAntecedentesActionPerformed
+
+    private void btnEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadesActionPerformed
+         ReporteEnfermedades menu = new ReporteEnfermedades();
+         menu.setVisible(true);
+    }//GEN-LAST:event_btnEnfermedadesActionPerformed
     private static int CalcularEdad(String fecha) {
         Calendar cal= Calendar.getInstance();
         int year= cal.get(Calendar.YEAR);

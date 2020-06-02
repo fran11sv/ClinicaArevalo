@@ -892,6 +892,7 @@
                       <Image iconType="3" name="/Iconos/Generar Reporte.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Generar Reporte Enfermedad"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnfermedadActionPerformed"/>
@@ -1031,6 +1032,7 @@
                       <Image iconType="3" name="/Iconos/Generar Reporte.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Generar Reporte Medicamento"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVademecumActionPerformed"/>

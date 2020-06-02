@@ -4,18 +4,34 @@
  * and open the template in the editor.
  */
 package Forms;
-
+import Clases.Conexion;
+import Controladores.VademecumJpaController;
+import Entidades.Vademecum;
+import Entidades.entityMain;
+import com.mysql.jdbc.Connection;
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author sotoa
  */
 public class ReporteVademecum extends javax.swing.JFrame {
-
+VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance());
     /**
      * Creates new form ReporteVademecum
      */
     public ReporteVademecum() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -32,12 +48,14 @@ public class ReporteVademecum extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel63 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtMedicamentoBusqueda = new javax.swing.JTextField();
         btnVademecum = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbVademecum = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(187, 232, 223));
 
@@ -69,16 +87,25 @@ public class ReporteVademecum extends javax.swing.JFrame {
         jLabel63.setText("Buscar Medicamento por Nombre:");
         jLabel63.setPreferredSize(new java.awt.Dimension(200, 40));
 
-        jTextField1.setBackground(new java.awt.Color(239, 239, 239));
-        jTextField1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setPreferredSize(new java.awt.Dimension(200, 40));
+        txtMedicamentoBusqueda.setBackground(new java.awt.Color(239, 239, 239));
+        txtMedicamentoBusqueda.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtMedicamentoBusqueda.setForeground(new java.awt.Color(0, 0, 0));
+        txtMedicamentoBusqueda.setPreferredSize(new java.awt.Dimension(200, 40));
+        txtMedicamentoBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMedicamentoBusquedaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMedicamentoBusquedaKeyTyped(evt);
+            }
+        });
 
         btnVademecum.setBackground(new java.awt.Color(76, 201, 223));
         btnVademecum.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnVademecum.setForeground(new java.awt.Color(0, 0, 0));
         btnVademecum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
         btnVademecum.setText("Generar Reporte Medicamento");
+        btnVademecum.setEnabled(false);
         btnVademecum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVademecumActionPerformed(evt);
@@ -103,21 +130,33 @@ public class ReporteVademecum extends javax.swing.JFrame {
         });
         jScrollPane7.setViewportView(tbVademecum);
 
+        jButton1.setText("Cerrar ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane7)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVademecum)))
-                .addGap(138, 138, 138))
+                        .addGap(138, 138, 138)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane7)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMedicamentoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnVademecum))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(879, 879, 879)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,11 +164,13 @@ public class ReporteVademecum extends javax.swing.JFrame {
                 .addGap(136, 136, 136)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMedicamentoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVademecum))
                 .addGap(60, 60, 60)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -189,9 +230,69 @@ public class ReporteVademecum extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVademecumActionPerformed
 
     private void tbVademecumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVademecumMouseClicked
-
+        btnVademecum.setEnabled(true);
     }//GEN-LAST:event_tbVademecumMouseClicked
 
+    private void txtMedicamentoBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedicamentoBusquedaKeyReleased
+         this.CrearModeloVademecum();
+        this.CargarTablaVademecum(this.txtMedicamentoBusqueda.getText());
+    }//GEN-LAST:event_txtMedicamentoBusquedaKeyReleased
+
+    private void txtMedicamentoBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedicamentoBusquedaKeyTyped
+        char car = evt.getKeyChar();
+        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        }else{
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtMedicamentoBusquedaKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    DefaultTableModel modeloVademecum;
+    private void CrearModeloVademecum() {
+        try {
+            modeloVademecum= (new DefaultTableModel(
+                    null, new String[]{
+                        "ID","Principio Activo", "Marcas",
+                    }) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false
+                };
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            this.tbVademecum.setModel(modeloVademecum);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    private void CargarTablaVademecum(String Buscar){
+        try {
+            Object o[] = null;
+            List<Vademecum> listvademecum = VC.findVademecumporNombre(Buscar);
+            for (int i = 0; i < listvademecum.size(); i++) {
+                modeloVademecum.addRow(o);
+                modeloVademecum.setValueAt(listvademecum.get(i).getIdInsumo(), i, 0);
+                modeloVademecum.setValueAt(listvademecum.get(i).getPrincipioactivo(), i, 1);
+                modeloVademecum.setValueAt(listvademecum.get(i).getMarcas(), i, 2);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -229,13 +330,14 @@ public class ReporteVademecum extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVademecum;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tbVademecum;
+    private javax.swing.JTextField txtMedicamentoBusqueda;
     // End of variables declaration//GEN-END:variables
 }

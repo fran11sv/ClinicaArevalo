@@ -5,17 +5,35 @@
  */
 package Forms;
 
+import Clases.Conexion;
+import Controladores.EnfermedadesCie10JpaController;
+import Entidades.EnfermedadesCie10;
+import Entidades.entityMain;
+import com.mysql.jdbc.Connection;
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author sotoa
  */
 public class ReporteEnfermedades extends javax.swing.JFrame {
-
+EnfermedadesCie10JpaController EC = new EnfermedadesCie10JpaController(entityMain.getInstance());
     /**
      * Creates new form ReporteEnfermedades
      */
     public ReporteEnfermedades() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -38,8 +56,10 @@ public class ReporteEnfermedades extends javax.swing.JFrame {
         jScrollPane14 = new javax.swing.JScrollPane();
         tbEnfermedades = new javax.swing.JTable();
         btnEnfermedad = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(187, 232, 223));
         jPanel1.setPreferredSize(new java.awt.Dimension(1360, 700));
@@ -140,9 +160,17 @@ public class ReporteEnfermedades extends javax.swing.JFrame {
         btnEnfermedad.setForeground(new java.awt.Color(0, 0, 0));
         btnEnfermedad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
         btnEnfermedad.setText("Generar Reporte Enfermedad");
+        btnEnfermedad.setEnabled(false);
         btnEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnfermedadActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Cerrar ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -153,20 +181,23 @@ public class ReporteEnfermedades extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEnfermedad))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane14)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel57, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                                .addComponent(jLabel57, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnbuscarporCate, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                                .addComponent(btnbuscarporCate, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))))
+                                .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)))))
                 .addGap(70, 70, 70))
         );
         jPanel3Layout.setVerticalGroup(
@@ -182,7 +213,9 @@ public class ReporteEnfermedades extends javax.swing.JFrame {
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(btnEnfermedad)
-                .addGap(110, 110, 110))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -201,7 +234,7 @@ public class ReporteEnfermedades extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(74, 74, 74)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
@@ -252,7 +285,7 @@ public class ReporteEnfermedades extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarEnfermedadActionPerformed
 
     private void tbEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEnfermedadesMouseClicked
-
+        btnEnfermedad.setEnabled(true);
     }//GEN-LAST:event_tbEnfermedadesMouseClicked
 
     private void btnEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadActionPerformed
@@ -276,6 +309,66 @@ public class ReporteEnfermedades extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEnfermedadActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    DefaultTableModel modeloEnfermedades;
+    private void CrearModeloEnfermedades() {
+        try {
+            modeloEnfermedades= (new DefaultTableModel(
+                    null, new String[]{
+                        "ID", "Enfermedad","Categoria"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tbEnfermedades.setModel(modeloEnfermedades);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    private void CargarTablaPorEnfermedad(String nombre) {
+        try {
+            Object o[] = null;
+            List<EnfermedadesCie10> listAnte = EC.findEnfermedadporNombre(nombre);
+            for (int i = 0; i < listAnte.size(); i++) {
+                modeloEnfermedades.addRow(o);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getId(), i, 0);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getDescripcion(), i, 1);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getIdCategoria().getDescripcion(), i, 2);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    private void CargarTablaPorCategoria(String nombre) {
+        try {
+            Object o[] = null;
+            List<EnfermedadesCie10> listAnte = EC.findEnfermedadporCategoria(nombre);
+            for (int i = 0; i < listAnte.size(); i++) {
+                modeloEnfermedades.addRow(o);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getId(), i, 0);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getDescripcion(), i, 1);
+                modeloEnfermedades.setValueAt(listAnte.get(i).getIdCategoria().getDescripcion(), i, 2);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -315,6 +408,7 @@ public class ReporteEnfermedades extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarEnfermedad;
     private javax.swing.JButton btnEnfermedad;
     private javax.swing.JButton btnbuscarporCate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JPanel jPanel1;
