@@ -18,14 +18,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author franb
+ * @author babef
  */
 @Entity
 @Table(name = "Factura")
@@ -44,6 +43,8 @@ public class Factura implements Serializable {
     private Integer numFactura;
     @Column(name = "Nombre_Cliente")
     private String nombreCliente;
+    @Column(name = "Direccion_cliente")
+    private String direccioncliente;
     @Basic(optional = false)
     @Column(name = "Fecha_Factura")
     @Temporal(TemporalType.DATE)
@@ -51,8 +52,11 @@ public class Factura implements Serializable {
     @Basic(optional = false)
     @Column(name = "Estado_Factura")
     private int estadoFactura;
-    @OneToMany(mappedBy = "numFactura")
     private List<DetalleFactura> detalleFacturaList;
+    @Column(name = "num_letras")
+    private String numLetras;
+    @Column(name = "Total")
+    private Long total;
     @JoinColumn(name = "id_Usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario idUsuario;
@@ -86,6 +90,14 @@ public class Factura implements Serializable {
         this.nombreCliente = nombreCliente;
     }
 
+    public String getDireccioncliente() {
+        return direccioncliente;
+    }
+
+    public void setDireccioncliente(String direccioncliente) {
+        this.direccioncliente = direccioncliente;
+    }
+
     public Date getFechaFactura() {
         return fechaFactura;
     }
@@ -101,13 +113,27 @@ public class Factura implements Serializable {
     public void setEstadoFactura(int estadoFactura) {
         this.estadoFactura = estadoFactura;
     }
-
     public List<DetalleFactura> getDetalleFacturaList() {
         return detalleFacturaList;
     }
 
     public void setDetalleFacturaList(List<DetalleFactura> detalleFacturaList) {
         this.detalleFacturaList = detalleFacturaList;
+    }
+    public String getNumLetras() {
+        return numLetras;
+    }
+
+    public void setNumLetras(String numLetras) {
+        this.numLetras = numLetras;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
     }
 
     public Usuario getIdUsuario() {

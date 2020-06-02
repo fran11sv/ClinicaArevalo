@@ -3832,7 +3832,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtPulsoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPulsoKeyTyped
         char car = evt.getKeyChar();
-        if((car<'0' || car>'9') & (car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        if(Character.isDigit(car) || (car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
         }else{
             evt.consume();
             getToolkit().beep();
@@ -3841,7 +3841,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtFCCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFCCKeyTyped
         char car = evt.getKeyChar();
-        if((car<'0' || car>'9') & (car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
         }else{
             evt.consume();
             getToolkit().beep();
@@ -3850,7 +3850,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtFRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFRKeyTyped
         char car = evt.getKeyChar();
-        if((car<'0' || car>'9') & (car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
         }else{
             evt.consume();
             getToolkit().beep();
@@ -3859,7 +3859,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtTemperaturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTemperaturaKeyTyped
        char car = evt.getKeyChar();
-        if((car<'0' || car>'9') & (car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
         }else{
             evt.consume();
             getToolkit().beep();
@@ -3868,7 +3868,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtMasaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMasaKeyTyped
         char car = evt.getKeyChar();
-        if((car<'0' || car>'9') & (car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
         }else{
             evt.consume();
             getToolkit().beep();
@@ -3877,7 +3877,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtTallaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyTyped
         char car = evt.getKeyChar();
-        if((car<'0' || car>'9') & (car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
         }else{
             evt.consume();
             getToolkit().beep();
@@ -3886,7 +3886,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtFisicoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFisicoKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
+        if(Character.isLetterOrDigit(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
         }else{
             evt.consume();
             getToolkit().beep();

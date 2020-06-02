@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="297" pageHeight="439" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dbb15034-faf9-4908-b3f0-c743ea361252">
-	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="236"/>
+	<property name="ireport.y" value="48"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000099"/>
@@ -139,9 +139,6 @@ FROM
 		</queryString>
 		<field name="Producto" class="java.lang.String"/>
 		<field name="Precio unitario" class="java.math.BigDecimal"/>
-		<variable name="numLetras" class="java.lang.String">
-			<variableExpression><![CDATA[]]></variableExpression>
-		</variable>
 		<variable name="Sumas" class="java.math.BigDecimal" calculation="Sum">
 			<variableExpression><![CDATA[$F{Precio unitario}]]></variableExpression>
 		</variable>
@@ -173,7 +170,9 @@ FROM
      Factura.`Nombre_Cliente` AS Cliente,
      Factura.`Fecha_Factura` AS Fecha,
      Factura.`Direccion_cliente` AS Direccion,
-     Producto.`Precio` AS Producto_Precio
+     Producto.`Precio` AS Producto_Precio,
+     Factura.`num_letras` AS Factura_num_letras,
+     Factura.`Total` AS Factura_Total
 FROM
      `Factura` Factura,
      `Producto` Producto
@@ -185,6 +184,8 @@ WHERE
 	<field name="Fecha" class="java.sql.Date"/>
 	<field name="Direccion" class="java.lang.String"/>
 	<field name="Producto_Precio" class="java.math.BigDecimal"/>
+	<field name="Factura_num_letras" class="java.lang.String"/>
+	<field name="Factura_Total" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -382,12 +383,7 @@ WHERE
 								<text><![CDATA[Cant]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell height="40" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="47" height="40" uuid="e32dcee5-8089-4330-8298-e427b7644405"/>
-								<textFieldExpression><![CDATA[$V{Ventas Exentas}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
+						<jr:detailCell height="40" rowSpan="1"/>
 					</jr:column>
 					<jr:column width="187" uuid="a0869494-946d-44a4-945e-371b2b8cd159">
 						<jr:columnHeader height="30" rowSpan="1">
@@ -447,14 +443,15 @@ unitario
 						<jr:columnFooter height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="49" height="30" uuid="e1e76a5e-dcd1-4be7-83e4-a6dd8893f978"/>
+								<textElement textAlignment="Center"/>
 								<textFieldExpression><![CDATA[$V{Venta total}]]></textFieldExpression>
 							</textField>
 						</jr:columnFooter>
 						<jr:detailCell style="table 3_TD" height="40" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="49" height="40" uuid="eea15403-0534-49ef-8407-d800b1e23540"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{Precio unitario}]]></textFieldExpression>
+								<reportElement x="0" y="0" width="49" height="40" uuid="7f2a888e-9e3c-4db9-8a98-af8f50e04fea"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$V{Sumas}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
