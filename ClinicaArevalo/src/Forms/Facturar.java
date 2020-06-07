@@ -1,4 +1,5 @@
 package Forms;
+import Clases.Conexion;
 import Controladores.DetalleFacturaJpaController;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -25,6 +26,15 @@ import javax.swing.JList;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import static org.eclipse.persistence.expressions.ExpressionOperator.Cast;
+import Clases.Numeros;
+import com.mysql.jdbc.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -38,7 +48,7 @@ DetalleFacturaJpaController DFC = new DetalleFacturaJpaController(entityMain.get
 Factura numFac;
 Factura Eliminar;
 DetalleFactura EliminarDetalleFactura;
-long precio;
+long precio = 0;
     public Facturar() {
         initComponents();
         PanelPestañas.setEnabledAt(1, false);
@@ -501,6 +511,11 @@ long precio;
         txtImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imprimir 32.png"))); // NOI18N
         txtImprimir.setText(" Imprimir");
         txtImprimir.setPreferredSize(new java.awt.Dimension(150, 40));
+        txtImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtImprimirActionPerformed(evt);
+            }
+        });
 
         btnRegresar.setBackground(new java.awt.Color(76, 201, 223));
         btnRegresar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -677,6 +692,7 @@ long precio;
             
             F.setNombreCliente(this.txtCliente.getText());
             F.setIdUsuario((Usuario) cmbUsuario.getSelectedItem());
+            F.setDireccioncliente(txtDireccion.getText());
             F.setFechaFactura(date);
             F.setEstadoFactura(0);
             
@@ -726,7 +742,7 @@ long precio;
         CrearModelo();
         CargarTabla();
     }//GEN-LAST:event_txtClienteKeyReleased
-
+    
     private void btnAgregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar2ActionPerformed
         try {  
             DetalleFactura DF = new DetalleFactura();
@@ -736,6 +752,10 @@ long precio;
                     DF.setIdProducto(PC.findProducto(Integer.parseInt(this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0).toString())));
                     DF.setNumFactura(numFac);
                     DFC.create(DF);
+                    Numeros num = new Numeros();
+                    numFac.setTotal(precio);
+                    numFac.setNumLetras(num.Convertir(numFac.getTotal().toString(), true));
+                    FC.edit(numFac);
                     JOptionPane.showMessageDialog(null,"El producto fue añadido con éxito");
                     CrearTablaDetalle();
                     CargarTablaDetalle(); 
@@ -774,8 +794,9 @@ long precio;
         btnAgregar.setEnabled(false);
         txtNumFac.setText(tbFactura.getValueAt(tbFactura.getSelectedRow(), 0).toString());
         txtCliente.setText(tbFactura.getValueAt(tbFactura.getSelectedRow(),1).toString());
-        cmbUsuario.setSelectedItem(tbFactura.getValueAt(tbFactura.getSelectedRow(), 2).toString());
-        spFecha.setValue(tbFactura.getValueAt(tbFactura.getSelectedRow(), 3));
+        txtDireccion.setText(tbFactura.getValueAt(tbFactura.getSelectedRow(),2).toString());
+        cmbUsuario.setSelectedItem(tbFactura.getValueAt(tbFactura.getSelectedRow(), 3).toString());
+        spFecha.setValue(tbFactura.getValueAt(tbFactura.getSelectedRow(), 4));
         String id = tbFactura.getValueAt(tbFactura.getSelectedRow(), 0).toString(); 
         Eliminar = (Factura) FC.findFactura(Integer.parseInt(id));
         btnLimpiar.setEnabled(true);
@@ -826,11 +847,15 @@ long precio;
         try {
             int resp = JOptionPane.showConfirmDialog(null, "¿Quiere cobrar esta factura?", "Cobrar", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == resp) {
+                Numeros num = new Numeros();
+                Double numero = (double) precio;
                 numFac.setEstadoFactura(1);
+                numFac.setTotal(precio);
+                numFac.setNumLetras(num.Convertir(numFac.getTotal().toString(), true));
                 JOptionPane.showMessageDialog(this, "Factura cobrada exitosamente","Cobrar",JOptionPane.INFORMATION_MESSAGE);
                 FC.edit(numFac);
                 txtProd.setText("");
-                //lblTotal.setText("0.00");
+                lblTotal.setText("0.00");
                 lblFactura.setText("");
                 CrearTablaDetalle();
                 CargarTablaDetalle();
@@ -900,13 +925,35 @@ long precio;
         }
     }//GEN-LAST:event_txtDireccionKeyTyped
 
+    private void txtImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImprimirActionPerformed
+        try  {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int id = Integer.parseInt(tbFactura.getValueAt(tbFactura.getSelectedRow(), 0).toString());
+            String path = "src\\Reportes\\ImprimirFactura.jasper";
+            JasperReport reporte = null;
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("numFactura", id);
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv= new JasperViewer(j,false);
+            jv.setTitle("Imprimir Factura/ Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_txtImprimirActionPerformed
+
     DefaultTableModel modelo;
     private void CrearModelo() {
         try {
             modelo = (new DefaultTableModel(
                     null, new String[]{
-                        "# Factura", "Cliente","Usuario","Fecha"}) {
+                        "# Factura", "Cliente","Dirección","Usuario","Fecha"}) {
                 Class[] types = new Class[]{
+                    java.lang.String.class,
                     java.lang.String.class,
                     java.lang.String.class,
                     java.lang.String.class,
@@ -941,8 +988,9 @@ long precio;
                 modelo.addRow(o);
                 modelo.setValueAt(listFactura.get(i).getNumFactura(), i, 0);
                 modelo.setValueAt(listFactura.get(i).getNombreCliente(), i, 1);
-                modelo.setValueAt(listFactura.get(i).getIdUsuario().getUsuario(), i, 2);
-                modelo.setValueAt(listFactura.get(i).getFechaFactura(), i, 3);
+                modelo.setValueAt(listFactura.get(i).getDireccioncliente(),i,2);
+                modelo.setValueAt(listFactura.get(i).getIdUsuario().getUsuario(), i, 3);
+                modelo.setValueAt(listFactura.get(i).getFechaFactura(), i, 4);
                 
             }
             
@@ -1027,8 +1075,8 @@ long precio;
                 }
             });
             tbDetalleFactura.setModel(modeloDetalle);
-            lblTotal.setText("$ 0.00");
-            precio = 0;
+            lblTotal.setText(" 0.00");
+           
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
@@ -1048,6 +1096,7 @@ long precio;
                 precio = precio+listDetalle.get(i).getIdProducto().getPrecio();
             }
             lblTotal.setText(precio + ""); 
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }    

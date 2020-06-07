@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="297" pageHeight="439" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e5670c8a-f3e9-4260-a007-ad825f601149">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#8CB1C8">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDDE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="DSProducto" uuid="bf37c224-7b88-49b9-92f5-082a10674237">
+		<parameter name="numFactura1" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     Producto.`id_Producto` AS idProducto,
+     Producto.`Nombre` AS PNombre,
+     Producto.`Detalle` AS Detalle,
+     Producto.`Precio` AS Precio,
+     Detalle_Factura.`id_Producto` AS DFIdProducto,
+     Factura.`Num_Factura` AS FNumFactura,
+     Factura.`num_letras` AS Fnumletras,
+     Factura.`Total` AS FTotal,
+     Detalle_Factura.`Num_Factura` AS DFNumFactura
+FROM
+     `Producto` Producto INNER JOIN `Detalle_Factura` Detalle_Factura ON Producto.`id_Producto` = Detalle_Factura.`id_Producto`
+     INNER JOIN `Factura` Factura ON Detalle_Factura.`Num_Factura` = Factura.`Num_Factura`
+WHERE
+Factura.`Num_Factura`=$P{numFactura1}]]>
+		</queryString>
+		<field name="idProducto" class="java.lang.Integer"/>
+		<field name="PNombre" class="java.lang.String"/>
+		<field name="Detalle" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="Precio" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="DFIdProducto" class="java.lang.Integer"/>
+		<field name="FNumFactura" class="java.lang.Integer"/>
+		<field name="Fnumletras" class="java.lang.String"/>
+		<field name="FTotal" class="java.math.BigDecimal"/>
+		<field name="DFNumFactura" class="java.lang.Integer"/>
+		<sortField name="PNombre"/>
+		<variable name="IVA" class="java.lang.Double" resetType="Group" resetGroup="GrupoProducto">
+			<variableExpression><![CDATA[$V{GrupoProducto_COUNT}*($F{Precio}-($F{Precio}/1.13))]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="Producto sin IVA" class="java.lang.Double" resetType="Group" resetGroup="GrupoProducto">
+			<variableExpression><![CDATA[$V{GrupoProducto_COUNT}*($F{Precio}/1.13)]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="Suma" class="java.lang.Double" incrementType="Group" incrementGroup="GrupoProducto" calculation="Sum">
+			<variableExpression><![CDATA[$V{Producto sin IVA}]]></variableExpression>
+		</variable>
+		<variable name="Suma VExt" class="java.lang.Double" incrementType="Group" incrementGroup="GrupoProducto" calculation="Sum">
+			<variableExpression><![CDATA[$V{IVA}]]></variableExpression>
+		</variable>
+		<variable name="Total" class="java.lang.Double">
+			<variableExpression><![CDATA[$V{Total}.sum( $V{Suma}, $V{Suma VExt} )]]></variableExpression>
+		</variable>
+		<group name="GrupoProducto" keepTogether="true">
+			<groupExpression><![CDATA[$F{PNombre}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="numFactura" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     Factura.`Num_Factura` AS N_Factura,
+     Factura.`id_Usuario` AS Usuario,
+     Factura.`Nombre_Cliente` AS Cliente,
+     Factura.`Direccion_cliente` AS Dirección,
+     Factura.`Fecha_Factura` AS Fecha,
+     Factura.`num_letras` AS Factura_num_letras,
+     Factura.`Total` AS Total
+FROM
+     `Factura` Factura
+WHERE
+Factura.`Num_Factura`=$P{numFactura}]]>
+	</queryString>
+	<field name="N_Factura" class="java.lang.Integer"/>
+	<field name="Usuario" class="java.lang.Integer"/>
+	<field name="Cliente" class="java.lang.String"/>
+	<field name="Dirección" class="java.lang.String"/>
+	<field name="Fecha" class="java.sql.Date"/>
+	<field name="Factura_num_letras" class="java.lang.String"/>
+	<field name="Total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="51" splitType="Stretch">
+			<textField pattern="MM">
+				<reportElement x="193" y="31" width="32" height="20" uuid="7a3b0799-e57f-42ec-aa1a-ec68e9cd707c"/>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="YYYY">
+				<reportElement x="225" y="31" width="32" height="20" uuid="3587bd70-dae0-46d9-bd55-2084f6b09124"/>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd">
+				<reportElement x="161" y="31" width="32" height="20" uuid="2a1d1cae-a9ab-455c-9d76-14cb5dd47c20"/>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="83" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="49" y="43" width="208" height="20" uuid="1bff8b9b-027d-4df5-9691-f8bdfae48d35"/>
+				<textFieldExpression><![CDATA[$F{Cliente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="49" y="63" width="208" height="20" uuid="da4234fb-6199-4170-aa7c-94edcc1d939a"/>
+				<textFieldExpression><![CDATA[$F{Dirección}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="63" width="49" height="20" uuid="35968c93-f1f6-463d-bb41-67cc075377a5"/>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="43" width="49" height="20" uuid="2bd5b60c-7ce8-404f-a70a-44051cba2a81"/>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="257" height="125" uuid="7235db48-7b00-422f-8c49-960e1db06f1f"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DSProducto" uuid="0f21d1e2-dc70-4b59-8668-a41238fb71b8">
+						<datasetParameter name="numFactura1">
+							<datasetParameterExpression><![CDATA[$P{numFactura}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="30" uuid="75fe27bc-23c3-4eb9-954a-2b8fa852cbf2">
+						<jr:groupFooter groupName="GrupoProducto">
+							<jr:cell height="15" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="30" height="15" uuid="4a7a1b16-6c0f-4673-8fe7-01fea5d56e07"/>
+									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+										<pen lineWidth="0.5"/>
+										<topPen lineWidth="0.5"/>
+										<leftPen lineWidth="0.5"/>
+										<bottomPen lineWidth="0.5"/>
+										<rightPen lineWidth="0.5"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$V{GrupoProducto_COUNT}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table_CH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="15" uuid="f7583303-6e66-4347-bd8d-64208a21d00c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Cant]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="24" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="24" uuid="47ee6240-05bd-4582-95cc-13f07a2b6bdc"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Son]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="127" uuid="404aa58f-7457-425e-a3bf-f97711598293">
+						<jr:groupFooter groupName="GrupoProducto">
+							<jr:cell height="15" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="127" height="15" uuid="d3c5a876-ee9b-4edf-81b9-99385c0bb926"/>
+									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+										<pen lineWidth="0.5"/>
+										<topPen lineWidth="0.5"/>
+										<leftPen lineWidth="0.5"/>
+										<bottomPen lineWidth="0.5"/>
+										<rightPen lineWidth="0.5"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{PNombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table_CH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="127" height="15" uuid="27035df4-c03f-4473-8614-c11d62be66f4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Producto]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="24" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="127" height="24" uuid="3b49a7c2-37da-4773-92ed-7fe6b32d3da2"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Fnumletras}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="35" uuid="9c1e5a55-469c-4792-aa3b-f8e63a5de21a">
+						<jr:groupFooter groupName="GrupoProducto">
+							<jr:cell height="15" rowSpan="1">
+								<textField pattern="¤ #,##0.00">
+									<reportElement x="0" y="0" width="35" height="15" uuid="f2567078-3bd4-4ed1-a05e-17add04d2579"/>
+									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+										<pen lineWidth="0.5"/>
+										<topPen lineWidth="0.5"/>
+										<leftPen lineWidth="0.5"/>
+										<bottomPen lineWidth="0.5"/>
+										<rightPen lineWidth="0.5"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="8"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Precio}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table_CH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="35" height="15" uuid="b49ef6ef-4af4-4ac8-88ad-cc665029dbd7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="5"/>
+								</textElement>
+								<text><![CDATA[Precio
+Uni]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="33" uuid="ed76e4cc-a974-4de8-b280-2fcf34316c3f">
+						<jr:groupFooter groupName="GrupoProducto">
+							<jr:cell height="15" rowSpan="1">
+								<textField pattern="¤ #,##0.00">
+									<reportElement x="0" y="0" width="33" height="15" uuid="83c0005b-5f60-4862-9377-bc7eb9f07dcd"/>
+									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+										<pen lineWidth="0.5"/>
+										<topPen lineWidth="0.5"/>
+										<leftPen lineWidth="0.5"/>
+										<bottomPen lineWidth="0.5"/>
+										<rightPen lineWidth="0.5"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="8"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{IVA}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table_CH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="33" height="15" uuid="fbf766b5-25b0-42df-9d41-34f14d2b3a5e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="5"/>
+								</textElement>
+								<text><![CDATA[Ventas
+Exentas]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="32" uuid="22422f18-b03a-4c13-947d-dce6ae7eae4b">
+						<jr:tableFooter height="23" rowSpan="1">
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="0" y="0" width="32" height="23" uuid="aab16f4c-4061-453d-94bc-bb5622c19a43"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{Total}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="GrupoProducto">
+							<jr:cell height="15" rowSpan="1">
+								<textField pattern="¤ #,##0.00">
+									<reportElement x="0" y="0" width="32" height="15" uuid="60f5f214-0c7b-4056-af27-56d5e9d880eb"/>
+									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+										<pen lineWidth="0.5"/>
+										<topPen lineWidth="0.5"/>
+										<leftPen lineWidth="0.5"/>
+										<bottomPen lineWidth="0.5"/>
+										<rightPen lineWidth="0.5"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="8"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{Producto sin IVA}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table_CH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="32" height="15" uuid="e403af4f-e86e-4711-ba10-8180c0d97a01"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="5"/>
+								</textElement>
+								<text><![CDATA[Ventas
+Afectas]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="24" rowSpan="1">
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="0" y="12" width="32" height="12" uuid="a8497124-8208-4ec0-824a-fc1bccd7599e"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{Suma VExt}]]></textFieldExpression>
+							</textField>
+							<textField pattern="¤ #,##0.00">
+								<reportElement x="0" y="0" width="32" height="12" uuid="841f0a68-101a-45e5-a45b-4ff82dbaad47"/>
+								<box>
+									<pen lineWidth="0.5" lineColor="#000000"/>
+									<topPen lineWidth="0.5" lineColor="#000000"/>
+									<leftPen lineWidth="0.5" lineColor="#000000"/>
+									<bottomPen lineWidth="0.5" lineColor="#000000"/>
+									<rightPen lineWidth="0.5" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{Suma}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell height="0" rowSpan="1"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

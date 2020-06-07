@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="297" pageHeight="439" whenNoDataType="BlankPage" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a4a4bad7-a940-4c8e-961d-7e4b2c7906c7">
 	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="73"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#0000FF"/>
@@ -93,22 +93,26 @@ WHERE
 		<field name="Factura_num_letras" class="java.lang.String"/>
 		<field name="Factura_Total" class="java.lang.Double"/>
 		<field name="Detalle_Factura_Num_Factura" class="java.lang.Integer"/>
-		<variable name="Cantidad" class="java.lang.Integer" calculation="Count">
-			<variableExpression><![CDATA[$F{Producto_Detalle}]]></variableExpression>
+		<sortField name="Producto_Nombre"/>
+		<variable name="IVA" class="java.lang.Double" incrementType="Group" incrementGroup="GrupoProducto">
+			<variableExpression><![CDATA[$V{GrupoProducto_COUNT}*($F{Producto_Precio}-($F{Producto_Precio}/1.13))]]></variableExpression>
 		</variable>
-		<variable name="Suma" class="java.lang.Double" calculation="Sum">
+		<variable name="Precio sin iva" class="java.lang.Double" resetType="Group" resetGroup="GrupoProducto">
+			<variableExpression><![CDATA[$V{GrupoProducto_COUNT}*($F{Producto_Precio}/1.13)]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="Suma" class="java.lang.Double" incrementType="Group" incrementGroup="GrupoProducto" calculation="Sum">
+			<variableExpression><![CDATA[$V{Precio sin iva}]]></variableExpression>
+		</variable>
+		<variable name="Suma VExt" class="java.lang.Double" incrementType="Group" incrementGroup="GrupoProducto" calculation="Sum">
 			<variableExpression><![CDATA[$V{IVA}]]></variableExpression>
 		</variable>
-		<variable name="IVA" class="java.lang.Double">
-			<variableExpression><![CDATA[$F{Producto_Precio}/1.13]]></variableExpression>
-		</variable>
-		<variable name="Precio sin IVA" class="java.lang.Double">
-			<variableExpression><![CDATA[$F{Producto_Precio}-$V{IVA}]]></variableExpression>
-		</variable>
-		<variable name="Suma Venta ext" class="java.lang.String"/>
 		<variable name="Total" class="java.lang.Double">
-			<variableExpression><![CDATA[$V{Suma Venta ext}+$V{Suma}]]></variableExpression>
+			<variableExpression><![CDATA[$V{Total}.sum( $V{Suma}, $V{Suma VExt} )]]></variableExpression>
 		</variable>
+		<group name="GrupoProducto" keepTogether="true">
+			<groupExpression><![CDATA[$F{Producto_Nombre}]]></groupExpression>
+		</group>
 	</subDataset>
 	<parameter name="numFactura" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -278,7 +282,7 @@ WHERE
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="45" splitType="Stretch">
+		<band height="40" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="40" height="20" forecolor="#0000FF" uuid="71660235-954d-4b94-b203-127d943baf3a"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
@@ -306,7 +310,7 @@ WHERE
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="165" splitType="Stretch">
+		<band height="163" splitType="Stretch">
 			<componentElement>
 				<reportElement key="table 1" style="table 1" x="0" y="0" width="257" height="163" forecolor="#0000FF" uuid="77b85b94-c879-481b-8653-6fb00cfbf268"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
@@ -317,205 +321,297 @@ WHERE
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="36" uuid="c7e3ff7b-7388-4eb9-9bd8-e0d9dafd5e13">
-						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+						<jr:groupFooter groupName="GrupoProducto">
+							<jr:cell height="15" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="36" height="15" forecolor="#0000FF" uuid="eac30fd3-1015-408a-a09a-0595c1dd575a"/>
+									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+										<pen lineWidth="0.5" lineColor="#0000FF"/>
+										<topPen lineWidth="0.5" lineColor="#0000FF"/>
+										<leftPen lineWidth="0.5" lineColor="#0000FF"/>
+										<bottomPen lineWidth="0.5" lineColor="#0000FF"/>
+										<rightPen lineWidth="0.5" lineColor="#0000FF"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$V{GrupoProducto_COUNT}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table 1_CH" height="18" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="36" height="30" forecolor="#0000FF" uuid="bc0442b2-f1f8-4633-8f63-d9d5cafd23f9"/>
+								<reportElement x="0" y="0" width="36" height="18" forecolor="#0000FF" uuid="bc0442b2-f1f8-4633-8f63-d9d5cafd23f9"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Cant]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter height="47" rowSpan="1">
+						<jr:columnFooter height="25" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="36" height="45" forecolor="#0000FF" uuid="e3d5e1e9-4851-4308-97e5-521644d29438"/>
+								<reportElement x="0" y="0" width="36" height="25" forecolor="#0000FF" uuid="e3d5e1e9-4851-4308-97e5-521644d29438"/>
+								<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+									<pen lineWidth="0.5" lineColor="#0000FF"/>
+									<topPen lineWidth="0.5" lineColor="#0000FF"/>
+									<leftPen lineWidth="0.5" lineColor="#0000FF"/>
+									<bottomPen lineWidth="0.5" lineColor="#0000FF"/>
+									<rightPen lineWidth="0.0" lineColor="#0000FF"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[Son: ]]></text>
+								<text><![CDATA[Son]]></text>
 							</staticText>
-							<line>
-								<reportElement x="0" y="46" width="36" height="1" forecolor="#0000FF" uuid="d476b9fb-1008-4684-9fa8-d053d92cf2fa"/>
-							</line>
 						</jr:columnFooter>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="36" height="20" forecolor="#0000FF" uuid="a363f576-00d4-48a8-8904-1c45cffd7c8b"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$V{Cantidad}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
+						<jr:detailCell style="table 1_TD" height="0" rowSpan="1"/>
 					</jr:column>
 					<jr:column width="119" uuid="7533c128-61b2-4380-a29c-3c97ac48167c">
-						<jr:tableFooter height="41" rowSpan="1"/>
-						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+						<jr:tableFooter height="24" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="119" height="30" forecolor="#0000FF" uuid="fd07650b-5844-4c05-9673-553503413ffb"/>
+								<reportElement x="0" y="0" width="119" height="24" forecolor="#0000FF" uuid="5864682f-5e94-4a78-9736-18c18aeca2d5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="4"/>
+								</textElement>
+								<text><![CDATA[NIT o DUI de cliente por operaciones iguales o mayores de $200.00]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="GrupoProducto">
+							<jr:cell height="15" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="119" height="15" forecolor="#0000FF" uuid="a7f89f98-2766-4a83-af7a-ff11b1591abf"/>
+									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+										<pen lineWidth="0.5" lineColor="#0000FF"/>
+										<topPen lineWidth="0.5" lineColor="#0000FF"/>
+										<leftPen lineWidth="0.5" lineColor="#0000FF"/>
+										<bottomPen lineWidth="0.5" lineColor="#0000FF"/>
+										<rightPen lineWidth="0.5" lineColor="#0000FF"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{Producto_Nombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table 1_CH" height="18" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="119" height="18" forecolor="#0000FF" uuid="fd07650b-5844-4c05-9673-553503413ffb"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Producto]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter height="47" rowSpan="1">
+						<jr:columnFooter height="25" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="119" height="47" forecolor="#0000FF" uuid="f421137b-059b-42aa-b1a3-668120572506"/>
+								<reportElement x="0" y="0" width="119" height="25" uuid="259a6eae-ed3a-4f5c-bb6e-3085f31eab9f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{Factura_num_letras}]]></textFieldExpression>
 							</textField>
-							<line>
-								<reportElement x="0" y="46" width="119" height="1" forecolor="#0000FF" uuid="be6f534a-c2fc-4644-8b00-2d62c83b1487"/>
-							</line>
 						</jr:columnFooter>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="119" height="20" forecolor="#0000FF" uuid="28db5040-6fca-41d5-89d5-8f0e0a1016b1"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{Producto_Nombre}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
+						<jr:detailCell style="table 1_TD" height="0" rowSpan="1"/>
 					</jr:column>
 					<jr:column width="35" uuid="909769fa-33c8-4ec3-997e-4a92279bbfc9">
-						<jr:tableFooter height="41" rowSpan="1">
-							<line>
-								<reportElement x="0" y="0" width="1" height="41" forecolor="#0000FF" uuid="77f35d52-682c-4ac9-b193-79e3c44e6a02"/>
-							</line>
+						<jr:tableFooter height="24" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="35" height="41" forecolor="#0000FF" uuid="1ce9380c-413e-4d2a-8fd9-af84ec9056b9"/>
+								<reportElement x="0" y="0" width="35" height="24" forecolor="#0000FF" uuid="1ce9380c-413e-4d2a-8fd9-af84ec9056b9"/>
+								<box>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
 								<text><![CDATA[Venta]]></text>
 							</staticText>
 						</jr:tableFooter>
-						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+						<jr:groupFooter groupName="GrupoProducto">
+							<jr:cell height="15" rowSpan="1">
+								<textField pattern="¤ #,##0.00">
+									<reportElement x="0" y="0" width="35" height="15" forecolor="#0000FF" uuid="13e0178c-69d1-4d32-9cbe-0bf3b1d4b8d4"/>
+									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+										<pen lineWidth="0.5" lineColor="#0000FF"/>
+										<topPen lineWidth="0.5" lineColor="#0000FF"/>
+										<leftPen lineWidth="0.5" lineColor="#0000FF"/>
+										<bottomPen lineWidth="0.5" lineColor="#0000FF"/>
+										<rightPen lineWidth="0.5" lineColor="#0000FF"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="8"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Producto_Precio}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table 1_CH" height="18" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="35" height="30" forecolor="#0000FF" uuid="87a9a9e1-665c-43d5-8089-c3f8e57d562f"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="35" height="18" forecolor="#0000FF" uuid="87a9a9e1-665c-43d5-8089-c3f8e57d562f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
 								<text><![CDATA[Precio 
 Uni
 ]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter height="47" rowSpan="1">
-							<line>
-								<reportElement x="0" y="46" width="35" height="1" forecolor="#0000FF" uuid="c01d455e-4a30-4e13-bdd2-cb3c59dde20c"/>
-							</line>
-							<line>
-								<reportElement positionType="Float" x="0" y="0" width="1" height="47" forecolor="#0000FF" uuid="c0c878e3-60ee-4572-94b3-72038e9111e6"/>
-							</line>
+						<jr:columnFooter height="25" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="35" height="23" forecolor="#0000FF" uuid="9fd606fd-f7f1-4654-a9a3-114338bd1cc4"/>
+								<reportElement x="0" y="12" width="35" height="13" forecolor="#0000FF" uuid="8bc66f81-40d9-456a-ae89-828e5891016e"/>
+								<box leftPadding="0" bottomPadding="0">
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="8"/>
-								</textElement>
-								<text><![CDATA[Sumas]]></text>
-							</staticText>
-							<staticText>
-								<reportElement x="0" y="22" width="35" height="25" forecolor="#0000FF" uuid="8bc66f81-40d9-456a-ae89-828e5891016e"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="8"/>
+									<font size="9"/>
 								</textElement>
 								<text><![CDATA[Ventas]]></text>
 							</staticText>
-						</jr:columnFooter>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField pattern="¤ #,##0.00">
-								<reportElement x="0" y="0" width="35" height="20" forecolor="#0000FF" uuid="7b0519ab-a576-41bc-b1d0-ee703f6f551a"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{Producto_Precio}]]></textFieldExpression>
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="35" height="12" uuid="ecfd636d-f7a8-4edf-b71a-2262a340c149"/>
+								<box>
+									<pen lineWidth="0.5" lineColor="#0000FF"/>
+									<topPen lineWidth="0.5" lineColor="#0000FF"/>
+									<leftPen lineWidth="0.5" lineColor="#0000FF"/>
+									<bottomPen lineWidth="0.5" lineColor="#0000FF"/>
+									<rightPen lineWidth="0.0" lineColor="#0000FF"/>
+								</box>
 							</textField>
-						</jr:detailCell>
+						</jr:columnFooter>
+						<jr:detailCell style="table 1_TD" height="0" rowSpan="1"/>
 					</jr:column>
 					<jr:column width="38" uuid="495d574b-afdf-484f-83fc-166ab030e18d">
-						<jr:tableFooter height="41" rowSpan="1">
+						<jr:tableFooter height="24" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="38" height="41" forecolor="#0000FF" uuid="e04c065e-725d-42af-afb7-7282698e4b14"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
+								<reportElement x="0" y="0" width="38" height="24" forecolor="#0000FF" uuid="e04c065e-725d-42af-afb7-7282698e4b14"/>
+								<box>
+									<topPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
 								<text><![CDATA[Total:]]></text>
 							</staticText>
 						</jr:tableFooter>
-						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+						<jr:groupFooter groupName="GrupoProducto">
+							<jr:cell height="15" rowSpan="1">
+								<textField pattern="¤ #,##0.00">
+									<reportElement x="0" y="0" width="38" height="15" forecolor="#0000FF" uuid="a05677d1-180c-413b-81fd-e838cc51eb36"/>
+									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+										<pen lineWidth="0.5" lineColor="#0000FF"/>
+										<topPen lineWidth="0.5" lineColor="#0000FF"/>
+										<leftPen lineWidth="0.5" lineColor="#0000FF"/>
+										<bottomPen lineWidth="0.5" lineColor="#0000FF"/>
+										<rightPen lineWidth="0.5" lineColor="#0000FF"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="8"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{IVA}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table 1_CH" height="18" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="38" height="30" forecolor="#0000FF" uuid="44b6ab7b-79ab-4e58-be96-f121daa1b741"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="38" height="18" forecolor="#0000FF" uuid="44b6ab7b-79ab-4e58-be96-f121daa1b741"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
 								<text><![CDATA[Ventas
 Exent]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter height="47" rowSpan="1">
-							<line>
-								<reportElement x="0" y="22" width="38" height="1" forecolor="#0000FF" uuid="56e5d0d6-6d3a-42af-abda-535b22055323"/>
-							</line>
-							<line>
-								<reportElement x="0" y="46" width="38" height="1" forecolor="#0000FF" uuid="537a9d01-7590-44b2-8047-7d1e4933b4f4"/>
-							</line>
-							<line>
-								<reportElement x="0" y="0" width="1" height="22" forecolor="#0000FF" uuid="aee3e195-8ca6-441f-83ab-4f03b3d31a1b"/>
-							</line>
+						<jr:columnFooter height="25" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="22" width="38" height="25" forecolor="#0000FF" uuid="10849edc-02d0-4e51-bd9e-02e84068e075"/>
+								<reportElement x="0" y="12" width="38" height="13" forecolor="#0000FF" uuid="10849edc-02d0-4e51-bd9e-02e84068e075"/>
+								<box>
+									<topPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="8"/>
+									<font size="9"/>
 								</textElement>
-								<text><![CDATA[Exentas]]></text>
+								<text><![CDATA[Exentas:]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="0" y="0" width="38" height="12" forecolor="#0000FF" uuid="926c1ccb-f0b4-4a1d-a330-9e4e5db58dbf"/>
+								<box>
+									<pen lineWidth="0.5" lineColor="#0000FF"/>
+									<topPen lineWidth="0.5" lineColor="#0000FF"/>
+									<leftPen lineWidth="0.0" lineColor="#0000FF"/>
+									<bottomPen lineWidth="0.5" lineColor="#0000FF"/>
+									<rightPen lineWidth="0.5" lineColor="#0000FF"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Sumas:]]></text>
 							</staticText>
 						</jr:columnFooter>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField pattern="¤ #,##0.00">
-								<reportElement x="0" y="0" width="38" height="20" forecolor="#0000FF" uuid="74a72439-844a-4892-8692-58dc5bc5be12"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$V{Precio sin IVA}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
+						<jr:detailCell style="table 1_TD" height="0" rowSpan="1"/>
 					</jr:column>
 					<jr:column width="35" uuid="aa368692-c2db-439c-be66-2d9bff268744">
-						<jr:tableFooter height="41" rowSpan="1">
-							<line>
-								<reportElement x="0" y="0" width="1" height="40" forecolor="#0000FF" uuid="0df7c6f9-222e-487b-bce5-f1d396b30fb8"/>
-							</line>
+						<jr:tableFooter height="24" rowSpan="1">
 							<textField pattern="¤ #,##0.00">
-								<reportElement x="0" y="0" width="35" height="40" forecolor="#0000FF" uuid="cd43cc80-b7a1-47ef-b098-90da5dbb83b8"/>
+								<reportElement x="0" y="0" width="35" height="24" forecolor="#0000FF" uuid="b2a4279a-8d57-4385-8fac-1cd6a88f942f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$V{Total}]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>
-						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+						<jr:groupFooter groupName="GrupoProducto">
+							<jr:cell height="15" rowSpan="1">
+								<textField pattern="¤ #,##0.00">
+									<reportElement x="0" y="0" width="35" height="15" forecolor="#0000FF" uuid="d480868f-6049-48f7-b392-c36f086c016a"/>
+									<box>
+										<pen lineWidth="0.5" lineColor="#0000FF"/>
+										<topPen lineWidth="0.5" lineColor="#0000FF"/>
+										<leftPen lineWidth="0.5" lineColor="#0000FF"/>
+										<bottomPen lineWidth="0.5" lineColor="#0000FF"/>
+										<rightPen lineWidth="0.5" lineColor="#0000FF"/>
+									</box>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="8"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{Precio sin iva}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="table 1_CH" height="18" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="35" height="30" forecolor="#0000FF" uuid="7cb17462-ad18-49db-97fe-85269ab15197"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="35" height="18" forecolor="#0000FF" uuid="7cb17462-ad18-49db-97fe-85269ab15197"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
 								<text><![CDATA[Ventas
 Afect]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter height="47" rowSpan="1">
+						<jr:columnFooter height="25" rowSpan="1">
 							<textField pattern="¤ #,##0.00">
-								<reportElement x="0" y="0" width="35" height="22" forecolor="#0000FF" uuid="74370d4e-9853-4f97-9a47-843607de96b3"/>
+								<reportElement x="0" y="0" width="35" height="12" forecolor="#0000FF" uuid="eeb278cd-a2dc-4a72-8ef2-7e7d995bcb63"/>
+								<box>
+									<pen lineWidth="0.5" lineColor="#0000FF"/>
+									<topPen lineWidth="0.5" lineColor="#0000FF"/>
+									<leftPen lineWidth="0.5" lineColor="#0000FF"/>
+									<bottomPen lineWidth="0.5" lineColor="#0000FF"/>
+									<rightPen lineWidth="0.5" lineColor="#0000FF"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="7"/>
+									<font size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$V{Suma}]]></textFieldExpression>
 							</textField>
-							<line>
-								<reportElement x="0" y="0" width="1" height="22" forecolor="#0000FF" uuid="a2996d6f-1e88-4b20-aa38-3d2cfe288fc2"/>
-							</line>
-							<line>
-								<reportElement x="0" y="22" width="35" height="1" forecolor="#0000FF" uuid="f1dd4f5c-c104-4730-ad9d-258dd947df9c"/>
-							</line>
-							<line>
-								<reportElement x="0" y="46" width="35" height="1" forecolor="#0000FF" uuid="70532519-425d-4f83-8e28-2a94377e500b"/>
-							</line>
 							<textField pattern="¤ #,##0.00">
-								<reportElement x="0" y="23" width="35" height="24" forecolor="#0000FF" uuid="144a8d5f-08f0-4f5e-aac1-0844d1f5acf3"/>
+								<reportElement x="0" y="12" width="35" height="13" forecolor="#0000FF" uuid="20d01216-d815-4633-a4ef-5364c1871d02"/>
+								<box>
+									<pen lineWidth="0.5" lineColor="#0000FF"/>
+									<topPen lineWidth="0.5" lineColor="#0000FF"/>
+									<leftPen lineWidth="0.5" lineColor="#0000FF"/>
+									<bottomPen lineWidth="0.5" lineColor="#0000FF"/>
+									<rightPen lineWidth="0.5" lineColor="#0000FF"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="7"/>
+									<font size="8"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{Suma Venta ext}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{Suma VExt}]]></textFieldExpression>
 							</textField>
 						</jr:columnFooter>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField pattern="¤ #,##0.00">
-								<reportElement x="0" y="0" width="35" height="20" forecolor="#0000FF" uuid="b348bbd1-c0af-431f-b49c-ace2ced309c1"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$V{IVA}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
+						<jr:detailCell style="table 1_TD" height="0" rowSpan="1"/>
 					</jr:column>
 				</jr:table>
 			</componentElement>
