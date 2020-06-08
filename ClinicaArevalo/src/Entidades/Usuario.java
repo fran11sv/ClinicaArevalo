@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author babef
+ * @author franb
  */
 @Entity
 @Table(name = "Usuario")
@@ -125,6 +125,7 @@ public class Usuario implements Serializable {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+
     public List<Citas> getCitasList() {
         return citasList;
     }
@@ -140,6 +141,7 @@ public class Usuario implements Serializable {
     public void setConsultaList(List<Consulta> consultaList) {
         this.consultaList = consultaList;
     }
+
     public List<Factura> getFacturaList() {
         return facturaList;
     }

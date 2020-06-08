@@ -215,37 +215,41 @@ public class EnfermedadesCie10JpaController implements Serializable {
         } finally {
             em.close();
         }
-    } public List<EnfermedadesCie10> findEnfermedadporNombre (String nombre) {
+    }
+
+    public List<EnfermedadesCie10> findEnfermedadporNombre(String nombre) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<EnfermedadesCie10> query=em.createNamedQuery("findEnfermedades.findbyNombre",EnfermedadesCie10.class);
-            query.setParameter("nombreBuscar","%"+nombre+"%");
-            query.setMaxResults(50);
-            return query.getResultList();
-        } finally {
-            em.close();
-    }
-    }
-     public List<EnfermedadesCie10> findEnfermedadporCategoria (String categoria) {
-        EntityManager em = getEntityManager();
-        try {
-            TypedQuery<EnfermedadesCie10> query=em.createNamedQuery("findEnfermedades.findByCategoria",EnfermedadesCie10.class);
-            query.setParameter("categoriaBuscar","%"+categoria+"%");
+            TypedQuery<EnfermedadesCie10> query = em.createNamedQuery("findEnfermedades.findbyNombre", EnfermedadesCie10.class);
+            query.setParameter("nombreBuscar", "%" + nombre + "%");
             query.setMaxResults(50);
             return query.getResultList();
         } finally {
             em.close();
         }
     }
-    public List<EnfermedadesCie10> findAllEnfermedadesDESC () {
+
+    public List<EnfermedadesCie10> findEnfermedadporCategoria(String categoria) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<EnfermedadesCie10> query=em.createNamedQuery("findEnfermedades.findAllDESC",EnfermedadesCie10.class);
+            TypedQuery<EnfermedadesCie10> query = em.createNamedQuery("findEnfermedades.findByCategoria", EnfermedadesCie10.class);
+            query.setParameter("categoriaBuscar", "%" + categoria + "%");
             query.setMaxResults(50);
             return query.getResultList();
         } finally {
             em.close();
         }
     }
-    
+
+    public List<EnfermedadesCie10> findAllEnfermedadesDESC() {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<EnfermedadesCie10> query = em.createNamedQuery("findEnfermedades.findAllDESC", EnfermedadesCie10.class);
+            query.setMaxResults(50);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
 }

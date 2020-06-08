@@ -6,7 +6,6 @@
 package Controladores;
 
 import Controladores.exceptions.NonexistentEntityException;
-import Entidades.Consulta;
 import Entidades.DetalleDiagnostico;
 import java.io.Serializable;
 import javax.persistence.Query;

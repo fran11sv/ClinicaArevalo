@@ -18,13 +18,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author babef
+ * @author franb
  */
 @Entity
 @Table(name = "Factura")
@@ -53,11 +54,12 @@ public class Factura implements Serializable {
     @Basic(optional = false)
     @Column(name = "Estado_Factura")
     private int estadoFactura;
-    private List<DetalleFactura> detalleFacturaList;
     @Column(name = "num_letras")
     private String numLetras;
     @Column(name = "Total")
     private Long total;
+    @OneToMany(mappedBy = "numFactura")
+    private List<DetalleFactura> detalleFacturaList;
     @JoinColumn(name = "id_Usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario idUsuario;
@@ -114,13 +116,7 @@ public class Factura implements Serializable {
     public void setEstadoFactura(int estadoFactura) {
         this.estadoFactura = estadoFactura;
     }
-    public List<DetalleFactura> getDetalleFacturaList() {
-        return detalleFacturaList;
-    }
 
-    public void setDetalleFacturaList(List<DetalleFactura> detalleFacturaList) {
-        this.detalleFacturaList = detalleFacturaList;
-    }
     public String getNumLetras() {
         return numLetras;
     }
@@ -135,6 +131,14 @@ public class Factura implements Serializable {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public List<DetalleFactura> getDetalleFacturaList() {
+        return detalleFacturaList;
+    }
+
+    public void setDetalleFacturaList(List<DetalleFactura> detalleFacturaList) {
+        this.detalleFacturaList = detalleFacturaList;
     }
 
     public Usuario getIdUsuario() {
