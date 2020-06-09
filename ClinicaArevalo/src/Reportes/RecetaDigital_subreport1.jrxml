@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RecetaDigital_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="91480656-9b88-4509-b869-d50dc1141a0c">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RecetaDigital_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="91480656-9b88-4509-b869-d50dc1141a0c">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -52,16 +52,17 @@ Receta.`Num_Receta`=$P{NumReceta}]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="21">
-			<staticText>
-				<reportElement x="32" y="0" width="14" height="20" forecolor="#0000FF" uuid="34eaddca-2927-4497-a7df-875550b4344c"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[*]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="46" y="0" width="509" height="20" forecolor="#0000FF" uuid="bd746064-705d-4137-8548-bf497c745d5d"/>
+		<band height="22">
+			<textField isBlankWhenNull="true">
+				<reportElement x="92" y="1" width="463" height="20" forecolor="#0000FF" uuid="bd746064-705d-4137-8548-bf497c745d5d"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Receta_Indicaciones}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="32" y="1" width="60" height="20" forecolor="#0000FF" uuid="1013d6c0-42c0-4a21-881d-969389c07703"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[*Exámenes: ]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 </jasperReport>

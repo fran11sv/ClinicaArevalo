@@ -229,10 +229,21 @@ public class RecetaJpaController implements Serializable {
     public List<Receta> findbyIdDESC () {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Receta> query=em.createNamedQuery("Receta.findbyIdDESC",Receta.class);
+            TypedQuery<Receta> query = em.createNamedQuery("Receta.findbyIdDESC", Receta.class);
             return query.getResultList();
         } finally {
             em.close();
         }
-    }  
+    }
+
+    public List<Receta> findbyNombrePaciente(String id) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Receta> query = em.createNamedQuery("Receta.findbypaciente", Receta.class);
+            query.setParameter("nombrePaciente", "%"+id+"%");
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

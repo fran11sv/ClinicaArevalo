@@ -357,6 +357,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         cbHora = new javax.swing.JComboBox<>();
         fechapicker = new com.toedter.calendar.JDateChooser();
         btnReceta = new javax.swing.JButton();
+        btnImprimirReceta = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
 
@@ -2603,6 +2604,18 @@ public class Consulta_Medica extends javax.swing.JFrame {
             }
         });
 
+        btnImprimirReceta.setBackground(new java.awt.Color(76, 201, 223));
+        btnImprimirReceta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnImprimirReceta.setForeground(new java.awt.Color(0, 0, 0));
+        btnImprimirReceta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
+        btnImprimirReceta.setText("Imprimir Receta");
+        btnImprimirReceta.setEnabled(false);
+        btnImprimirReceta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirRecetaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelTratamientoLayout = new javax.swing.GroupLayout(PanelTratamiento);
         PanelTratamiento.setLayout(PanelTratamientoLayout);
         PanelTratamientoLayout.setHorizontalGroup(
@@ -2615,7 +2628,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnEditarMedicamento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarMedicamento, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(btnEliminarMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnImprimirReceta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(PanelTratamientoLayout.createSequentialGroup()
                         .addGroup(PanelTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelTratamientoLayout.createSequentialGroup()
@@ -2647,7 +2661,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         PanelTratamientoLayout.setVerticalGroup(
             PanelTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2687,7 +2701,9 @@ public class Consulta_Medica extends javax.swing.JFrame {
                     .addGroup(PanelTratamientoLayout.createSequentialGroup()
                         .addComponent(btnEliminarMedicamento)
                         .addGap(20, 20, 20)
-                        .addComponent(btnEditarMedicamento)))
+                        .addComponent(btnEditarMedicamento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnImprimirReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(83, 83, 83))
         );
 
@@ -3701,6 +3717,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             this.txtCantidad.setEnabled(true);
             this.btnReceta.setEnabled(false);
             txtMedicamentoBusqueda.setEnabled(true);
+            btnImprimirReceta.setEnabled(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -3972,6 +3989,30 @@ public class Consulta_Medica extends javax.swing.JFrame {
          ReporteEnfermedades menu = new ReporteEnfermedades();
          menu.setVisible(true);
     }//GEN-LAST:event_btnEnfermedadesActionPerformed
+
+    private void btnImprimirRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRecetaActionPerformed
+         try  {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int idPaciente = DatosPaciente.getIdPaciente();
+            int idReceta = DatosReceta.getNumReceta();
+            String path = "src\\Reportes\\ImprimirReceta.jasper";
+            JasperReport reporte = null;
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idPaciente", idPaciente);
+            parametro.put("numReceta", idReceta);
+            parametro.put("SUBREPORT_DIR","src\\Reportes\\");
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv= new JasperViewer(j,false);
+            jv.setTitle("Impresión de Receta / Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_btnImprimirRecetaActionPerformed
     private static int CalcularEdad(String fecha) {
         Calendar cal= Calendar.getInstance();
         int year= cal.get(Calendar.YEAR);
@@ -4299,6 +4340,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private javax.swing.JButton btnEnfermedades;
     private javax.swing.JButton btnHacerCita;
     private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnImprimirReceta;
     private javax.swing.JButton btnMenuAnte;
     private javax.swing.JButton btnMenuConsulta;
     private javax.swing.JButton btnMenuExamen;

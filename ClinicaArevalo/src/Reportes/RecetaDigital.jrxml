@@ -63,23 +63,31 @@ WHERE Receta.`Num_Receta`=$P{NumReceta}]]>
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\franb\\Documents\\NetBeansProjects\\ClinicaArevalo\\ClinicaArevalo\\src\\Reportes\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      Paciente.`id_Paciente` AS Paciente_id_Paciente,
      Paciente.`Nombres` AS Paciente_Nombres,
      Paciente.`Apellidos` AS Paciente_Apellidos,
-     Paciente.`Fecha_Nacimiento` AS Paciente_Fecha_Nacimiento
+     Paciente.`Fecha_Nacimiento` AS Paciente_Fecha_Nacimiento,
+     Receta.`Num_Receta` AS Receta_Num_Receta,
+     Consulta.`id_Consulta` AS Consulta_id_Consulta,
+     Consulta.`Fecha_Consulta` AS Consulta_Fecha_Consulta
 FROM
-     `Paciente` Paciente
+     `Paciente` Paciente INNER JOIN `Consulta` Consulta ON Paciente.`id_Paciente` = Consulta.`id_Paciente`
+     INNER JOIN `Receta` Receta ON Consulta.`id_Consulta` = Receta.`id_Consulta`
 WHERE
-Paciente.`id_Paciente`=$P{idPaciente}]]>
+     Paciente.`id_Paciente` = $P{idPaciente}
+AND  Receta.`Num_Receta`=$P{NumReceta}]]>
 	</queryString>
 	<field name="Paciente_id_Paciente" class="java.lang.Integer"/>
 	<field name="Paciente_Nombres" class="java.lang.String"/>
 	<field name="Paciente_Apellidos" class="java.lang.String"/>
 	<field name="Paciente_Fecha_Nacimiento" class="java.sql.Date"/>
+	<field name="Receta_Num_Receta" class="java.lang.Integer"/>
+	<field name="Consulta_id_Consulta" class="java.lang.Integer"/>
+	<field name="Consulta_Fecha_Consulta" class="java.sql.Date"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -163,7 +171,7 @@ J.V.P.M 3681]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="450" y="40" width="100" height="20" forecolor="#0000FF" uuid="e787b578-c644-412c-a2c2-c112eea12dc3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Sello y Firma:]]></text>
 			</staticText>
 			<staticText>
@@ -172,29 +180,29 @@ J.V.P.M 3681]]></text>
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="0" width="350" height="20" uuid="f1a0868b-66ea-497d-87b2-b0ad2d24ff87"/>
+				<reportElement x="100" y="0" width="350" height="20" forecolor="#0000FF" uuid="f1a0868b-66ea-497d-87b2-b0ad2d24ff87"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Paciente_Apellidos}+", "+$F{Paciente_Nombres}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="483" y="0" width="88" height="20" uuid="3edf7993-bc73-4396-a15b-a3bb81e77f74"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<textField>
-				<reportElement x="483" y="20" width="88" height="20" uuid="01ed3bb4-149c-4cce-b36d-4857f654aa67"/>
+				<reportElement x="483" y="20" width="88" height="20" forecolor="#0000FF" uuid="01ed3bb4-149c-4cce-b36d-4857f654aa67"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[(new java.util.Date().getYear())-$F{Paciente_Fecha_Nacimiento}.getYear()+" Años"]]></textFieldExpression>
 			</textField>
 			<elementGroup/>
 			<subreport>
-				<reportElement x="100" y="20" width="350" height="105" uuid="9347e94e-3604-453d-a1e2-608041721025"/>
+				<reportElement x="100" y="20" width="350" height="105" uuid="0387fd9c-0141-4f23-b7cd-0a5d785caeab"/>
 				<subreportParameter name="NumReceta">
 					<subreportParameterExpression><![CDATA[$P{NumReceta}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RecetaDigital_subreport1.jasper"]]></subreportExpression>
 			</subreport>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="483" y="0" width="88" height="20" forecolor="#0000FF" uuid="50a4f11f-8c78-496d-85b0-08b55d2d74de"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Consulta_Fecha_Consulta}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

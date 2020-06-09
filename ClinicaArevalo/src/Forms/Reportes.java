@@ -10,10 +10,12 @@ import Clases.Hora;
 import Controladores.EnfermedadesCie10JpaController;
 import Controladores.FacturaJpaController;
 import Controladores.PacienteJpaController;
+import Controladores.RecetaJpaController;
 import Controladores.VademecumJpaController;
 import Entidades.EnfermedadesCie10;
 import Entidades.Factura;
 import Entidades.Paciente;
+import Entidades.Receta;
 import Entidades.Vademecum;
 import Entidades.entityMain;
 import com.mysql.jdbc.Connection;
@@ -43,6 +45,7 @@ PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
 EnfermedadesCie10JpaController EC = new EnfermedadesCie10JpaController(entityMain.getInstance());
 VademecumJpaController VC = new VademecumJpaController(entityMain.getInstance());
 FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
+RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
     /**
      * Creates new form Reportes
      */
@@ -94,6 +97,7 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
         jScrollPane2 = new javax.swing.JScrollPane();
         tbPacientes1 = new javax.swing.JTable();
         btnPaciente = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane14 = new javax.swing.JScrollPane();
         tbEnfermedades = new javax.swing.JTable();
@@ -102,26 +106,30 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
         btnbuscarporCate = new javax.swing.JButton();
         btnBuscarEnfermedad = new javax.swing.JButton();
         btnEnfermedad = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel63 = new javax.swing.JLabel();
         txtMedicamentoBusqueda = new javax.swing.JTextField();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbVademecum = new javax.swing.JTable();
         btnVademecum = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         PanelFactura = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         btnReporteFac = new javax.swing.JButton();
         txtIdFactura = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbFactura = new javax.swing.JTable();
-        btnMenuFac = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         PanelRecetas = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbRecetas = new javax.swing.JTable();
         txtReceta = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -431,23 +439,37 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
             }
         });
 
+        jButton7.setBackground(new java.awt.Color(76, 201, 223));
+        jButton7.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(0, 0, 0));
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Home-80_icon-icons.com_57317.png"))); // NOI18N
+        jButton7.setText(" Volver a Menú");
+        jButton7.setPreferredSize(new java.awt.Dimension(200, 40));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelPacientesLayout = new javax.swing.GroupLayout(PanelPacientes);
         PanelPacientes.setLayout(PanelPacientesLayout);
         PanelPacientesLayout.setHorizontalGroup(
             PanelPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPacientesLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(PanelPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(PanelPacientesLayout.createSequentialGroup()
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombreBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPaciente))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addGroup(PanelPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(PanelPacientesLayout.createSequentialGroup()
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtNombreBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPaciente))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         PanelPacientesLayout.setVerticalGroup(
             PanelPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -460,7 +482,9 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
                     .addComponent(btnPaciente))
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
 
         PanelReportes.addTab("Pacientes", PanelPacientes);
@@ -546,29 +570,60 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
             }
         });
 
+        jButton8.setBackground(new java.awt.Color(76, 201, 223));
+        jButton8.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(0, 0, 0));
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Home-80_icon-icons.com_57317.png"))); // NOI18N
+        jButton8.setText(" Volver a Menú");
+        jButton8.setPreferredSize(new java.awt.Dimension(200, 40));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setBackground(new java.awt.Color(76, 201, 223));
+        jButton9.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(0, 0, 0));
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Home-80_icon-icons.com_57317.png"))); // NOI18N
+        jButton9.setText(" Volver a Menú");
+        jButton9.setPreferredSize(new java.awt.Dimension(200, 40));
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jLabel57, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnbuscarporCate, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                .addGap(57, 57, 57))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEnfermedad)
-                .addGap(87, 87, 87))
+                .addGap(61, 61, 61)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnEnfermedad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel57, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnbuscarporCate, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)))
+                .addGap(57, 57, 57))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(62, 62, 62)
                     .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 984, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(64, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(454, 454, 454)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(454, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,14 +634,21 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
                     .addComponent(btnBuscarEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
-                .addComponent(btnEnfermedad)
-                .addGap(71, 71, 71))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEnfermedad))
+                .addGap(43, 43, 43))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(215, 215, 215)
                     .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(125, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(225, 225, 225)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(225, Short.MAX_VALUE)))
         );
 
         PanelReportes.addTab("Enfermedades", jPanel1);
@@ -641,21 +703,35 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
             }
         });
 
+        jButton10.setBackground(new java.awt.Color(76, 201, 223));
+        jButton10.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(0, 0, 0));
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Home-80_icon-icons.com_57317.png"))); // NOI18N
+        jButton10.setText(" Volver a Menú");
+        jButton10.setPreferredSize(new java.awt.Dimension(200, 40));
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMedicamentoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnVademecum)))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtMedicamentoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
+                            .addComponent(btnVademecum))))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -668,7 +744,9 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
                         .addComponent(btnVademecum)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
 
         PanelReportes.addTab("Vademecum", jPanel2);
@@ -705,10 +783,15 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
         ));
         jScrollPane3.setViewportView(tbFactura);
 
-        btnMenuFac.setText("Volver al menú");
-        btnMenuFac.addActionListener(new java.awt.event.ActionListener() {
+        jButton11.setBackground(new java.awt.Color(76, 201, 223));
+        jButton11.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(0, 0, 0));
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Home-80_icon-icons.com_57317.png"))); // NOI18N
+        jButton11.setText(" Volver a Menú");
+        jButton11.setPreferredSize(new java.awt.Dimension(200, 40));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuFacActionPerformed(evt);
+                jButton11ActionPerformed(evt);
             }
         });
 
@@ -718,16 +801,17 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
             PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFacturaLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelFacturaLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelFacturaLayout.createSequentialGroup()
                         .addComponent(btnReporteFac, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnMenuFac, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(407, 407, 407)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanelFacturaLayout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtIdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(275, Short.MAX_VALUE))
         );
         PanelFacturaLayout.setVerticalGroup(
@@ -742,15 +826,15 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReporteFac)
-                    .addComponent(btnMenuFac))
-                .addGap(36, 36, 36))
+                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
 
         PanelReportes.addTab("Factura Digital", PanelFactura);
 
         PanelRecetas.setBackground(new java.awt.Color(15, 76, 129));
 
-        jLabel8.setText("# de Receta:");
+        jLabel8.setText("Búsqueda de Receta por Paciente (Nombre):");
 
         tbRecetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -762,9 +846,37 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
         ));
         jScrollPane4.setViewportView(tbRecetas);
 
-        jButton2.setText("Generar receta digital");
+        txtReceta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRecetaKeyReleased(evt);
+            }
+        });
 
-        jButton3.setText("Volver al menú");
+        jButton2.setText("Generar receta digital");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Imprimir Receta");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setBackground(new java.awt.Color(76, 201, 223));
+        jButton12.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton12.setForeground(new java.awt.Color(0, 0, 0));
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Home-80_icon-icons.com_57317.png"))); // NOI18N
+        jButton12.setText(" Volver a Menú");
+        jButton12.setPreferredSize(new java.awt.Dimension(200, 40));
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelRecetasLayout = new javax.swing.GroupLayout(PanelRecetas);
         PanelRecetas.setLayout(PanelRecetasLayout);
@@ -774,14 +886,17 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
                 .addGap(51, 51, 51)
                 .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRecetasLayout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelRecetasLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(PanelRecetasLayout.createSequentialGroup()
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(38, 38, 38)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(244, Short.MAX_VALUE))
         );
         PanelRecetasLayout.setVerticalGroup(
@@ -793,11 +908,16 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
                     .addComponent(txtReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelRecetasLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton4)))
+                    .addGroup(PanelRecetasLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         PanelReportes.addTab("Recetas", PanelRecetas);
@@ -1243,17 +1363,6 @@ btnEnfermedad.setEnabled(true);
         }
     }//GEN-LAST:event_btnVademecumActionPerformed
 
-    private void btnMenuFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuFacActionPerformed
-       int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
-            + "Se descartarán los datos no guardados.", "Regresar al menú",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (mensaje == 0) {
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.setVisible(true);
-            this.dispose();
-        }
-    }//GEN-LAST:event_btnMenuFacActionPerformed
-
     private void btnReporteFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteFacActionPerformed
         try  {
             Conexion con = new Conexion();
@@ -1289,6 +1398,83 @@ btnEnfermedad.setEnabled(true);
             getToolkit().beep();
         }
     }//GEN-LAST:event_txtIdFacturaKeyTyped
+
+    private void txtRecetaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRecetaKeyReleased
+        CrearModelo3();
+        CargarTablaPacientesporNombre3(this.txtReceta.getText());
+    }//GEN-LAST:event_txtRecetaKeyReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try  {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int idPaciente = Integer.parseInt(tbRecetas.getValueAt(tbRecetas.getSelectedRow(), 0).toString());
+            int idReceta = Integer.parseInt(tbRecetas.getValueAt(tbRecetas.getSelectedRow(), 3).toString());
+            String path = "src\\Reportes\\RecetaDigital.jasper";
+            JasperReport reporte = null;
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idPaciente", idPaciente);
+            parametro.put("NumReceta", idReceta);
+            parametro.put("SUBREPORT_DIR","src\\Reportes\\");
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv= new JasperViewer(j,false);
+            jv.setTitle("Impresión de Receta / Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try  {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int idPaciente = Integer.parseInt(tbRecetas.getValueAt(tbRecetas.getSelectedRow(), 0).toString());
+            int idReceta = Integer.parseInt(tbRecetas.getValueAt(tbRecetas.getSelectedRow(), 3).toString());
+            String path = "src\\Reportes\\ImprimirReceta.jasper";
+            JasperReport reporte = null;
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idPaciente", idPaciente);
+            parametro.put("numReceta", idReceta);
+            parametro.put("SUBREPORT_DIR","src\\Reportes\\");
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv= new JasperViewer(j,false);
+            jv.setTitle("Impresión de Receta / Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12ActionPerformed
     DefaultTableModel modelo;
     //Crea modelo de la tabla
     private void CrearModelo() {
@@ -1406,6 +1592,56 @@ btnEnfermedad.setEnabled(true);
                 modelo2.setValueAt(listPacientes.get(i).getDireccion(), i, 7);
                 modelo2.setValueAt(listPacientes.get(i).getEstadoCivil(), i, 8);
                 modelo2.setValueAt(listPacientes.get(i).getTelefono(), i, 9);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }    
+    }
+    DefaultTableModel modelo3;
+    //Crea modelo de la tabla
+    private void CrearModelo3() {
+        try {
+            modelo3 = (new DefaultTableModel(
+                    null, new String[]{
+                        "ID Paciente","Nombre Paciente","Fecha de Consulta","Número de Receta"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                    
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tbRecetas.setModel(modelo3);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    private void CargarTablaPacientesporNombre3(String nombre ) {
+        try {
+            Object o[] = null;
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            List<Receta> listPacientes = RC.findbyNombrePaciente(nombre);
+            for (int i = 0; i < listPacientes.size(); i++) {
+                String fechaconformato = formato.format((Date) listPacientes.get(i).getIdConsulta().getFechaConsulta());
+                modelo3.addRow(o);
+                modelo3.setValueAt(listPacientes.get(i).getIdConsulta().getIdPaciente().getIdPaciente(), i, 0);
+                modelo3.setValueAt(listPacientes.get(i).getIdConsulta().getIdPaciente().getNombres().concat(" " + listPacientes.get(i).getIdConsulta().getIdPaciente().getApellidos()), i, 1);
+                modelo3.setValueAt(fechaconformato, i, 2);
+                modelo3.setValueAt(listPacientes.get(i).getNumReceta(), i, 3);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -1574,7 +1810,6 @@ btnEnfermedad.setEnabled(true);
     private javax.swing.JButton btnFacturas;
     private javax.swing.JButton btnGanancias;
     private javax.swing.JButton btnHistorial;
-    private javax.swing.JButton btnMenuFac;
     private javax.swing.JButton btnPaciente;
     private javax.swing.JButton btnReporteFac;
     private javax.swing.JButton btnVademecum;
@@ -1583,9 +1818,15 @@ btnEnfermedad.setEnabled(true);
     private com.toedter.calendar.JDateChooser fechapickerFinal;
     private com.toedter.calendar.JDateChooser fechapickerInicial;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;

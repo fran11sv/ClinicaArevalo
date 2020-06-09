@@ -29,7 +29,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Receta.findAll", query = "SELECT r FROM Receta r"),
     @NamedQuery(name = "Receta.findbyIdConsultaDESC", query = "SELECT r FROM Receta r WHERE r.idConsulta=:idconsulta ORDER BY r.numReceta DESC"),
-    @NamedQuery(name = "Receta.findbyIdDESC", query = "SELECT r FROM Receta r ORDER BY r.numReceta DESC")})
+    @NamedQuery(name = "Receta.findbyIdDESC", query = "SELECT r FROM Receta r ORDER BY r.numReceta DESC"),
+    @NamedQuery(name = "Receta.findbypaciente", query = "SELECT r FROM Receta r WHERE r.idConsulta.idPaciente.nombres LIKE :nombrePaciente ORDER BY r.idConsulta.fechaConsulta DESC")})
 public class Receta implements Serializable {
 
     private static final long serialVersionUID = 1L;

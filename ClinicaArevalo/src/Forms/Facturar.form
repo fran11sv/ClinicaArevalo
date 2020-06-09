@@ -723,9 +723,6 @@
                       <Dimension value="[200, 30]"/>
                     </Property>
                   </Properties>
-                  <BindingProperties>
-                    <BindingProperty name="text" source="txtNumFac" sourcePath="${text}" target="lblFactura" targetPath="text" updateStrategy="0" immediately="false"/>
-                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
