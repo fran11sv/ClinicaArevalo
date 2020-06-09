@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RecetaDigital_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="91480656-9b88-4509-b869-d50dc1141a0c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NumReceta" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     Receta.`Num_Receta` AS Receta_Num_Receta,
+     Receta.`id_Consulta` AS Receta_id_Consulta,
+     Receta.`Indicaciones` AS Receta_Indicaciones,
+     Detalle_Receta.`Detalle_Receta` AS Detalle_Receta_Detalle_Receta,
+     Detalle_Receta.`Num_Receta` AS Detalle_Receta_Num_Receta,
+     Detalle_Receta.`id_insumo` AS Detalle_Receta_id_insumo,
+     Detalle_Receta.`Cantidad` AS Detalle_Receta_Cantidad,
+     Detalle_Receta.`Dosis` AS Detalle_Receta_Dosis,
+     Vademecum.`id_insumo` AS Vademecum_id_insumo,
+     Vademecum.`Principio_activo` AS Vademecum_Principio_activo
+FROM
+     `Receta` Receta INNER JOIN `Detalle_Receta` Detalle_Receta ON Receta.`Num_Receta` = Detalle_Receta.`Num_Receta`
+     INNER JOIN `Vademecum` Vademecum ON Detalle_Receta.`id_insumo` = Vademecum.`id_insumo`
+WHERE
+Receta.`Num_Receta`=$P{NumReceta}]]>
+	</queryString>
+	<field name="Receta_Num_Receta" class="java.lang.Integer"/>
+	<field name="Receta_id_Consulta" class="java.lang.Integer"/>
+	<field name="Receta_Indicaciones" class="java.lang.String"/>
+	<field name="Detalle_Receta_Detalle_Receta" class="java.lang.Integer"/>
+	<field name="Detalle_Receta_Num_Receta" class="java.lang.Integer"/>
+	<field name="Detalle_Receta_id_insumo" class="java.lang.Integer"/>
+	<field name="Detalle_Receta_Cantidad" class="java.lang.Integer"/>
+	<field name="Detalle_Receta_Dosis" class="java.lang.String"/>
+	<field name="Vademecum_id_insumo" class="java.lang.Integer"/>
+	<field name="Vademecum_Principio_activo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="46" y="0" width="509" height="20" uuid="c363ca59-0608-4906-a4e8-569ae9fa2ee2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Vademecum_Principio_activo}+" - "+$F{Detalle_Receta_Dosis}+"(Cantidad "+$F{Detalle_Receta_Cantidad}+" )"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="0" width="14" height="20" uuid="c72bba30-4dfe-48f8-94e1-209baf3979c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[*]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21">
+			<staticText>
+				<reportElement x="32" y="0" width="14" height="20" uuid="34eaddca-2927-4497-a7df-875550b4344c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[*]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="46" y="0" width="509" height="20" uuid="bd746064-705d-4137-8548-bf497c745d5d"/>
+				<textFieldExpression><![CDATA[$F{Receta_Indicaciones}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

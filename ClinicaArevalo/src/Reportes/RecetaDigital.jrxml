@@ -3,44 +3,83 @@
 	<property name="ireport.zoom" value="1.3310000000000006"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="numReceta" class="java.lang.Integer">
+	<subDataset name="DetalleReceta" uuid="6f070f7c-21d7-4f36-976a-f7fdea01d60a">
+		<parameter name="NumReceta" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     Receta.`Num_Receta` AS Receta_Num_Receta,
+     Receta.`id_Consulta` AS Receta_id_Consulta,
+     Receta.`Indicaciones` AS Receta_Indicaciones,
+     Detalle_Receta.`Detalle_Receta` AS Detalle_Receta_Detalle_Receta,
+     Detalle_Receta.`Num_Receta` AS Detalle_Receta_Num_Receta,
+     Detalle_Receta.`id_insumo` AS Detalle_Receta_id_insumo,
+     Detalle_Receta.`Cantidad` AS Detalle_Receta_Cantidad,
+     Detalle_Receta.`Dosis` AS Detalle_Receta_Dosis,
+     Vademecum.`id_insumo` AS Vademecum_id_insumo,
+     Vademecum.`Principio_activo` AS Vademecum_Principio_activo,
+     Vademecum.`Accion_terapeutica` AS Vademecum_Accion_terapeutica,
+     Vademecum.`Indicaciones` AS Vademecum_Indicaciones,
+     Vademecum.`Marcas` AS Vademecum_Marcas,
+     Vademecum.`Propiedades` AS Vademecum_Propiedades,
+     Vademecum.`Precauciones` AS Vademecum_Precauciones,
+     Vademecum.`Dosificacion` AS Vademecum_Dosificacion,
+     Vademecum.`Reacciones_adversas` AS Vademecum_Reacciones_adversas,
+     Vademecum.`Interacciones` AS Vademecum_Interacciones,
+     Vademecum.`Contraindicaciones` AS Vademecum_Contraindicaciones,
+     Vademecum.`Sobredosificacion` AS Vademecum_Sobredosificacion
+FROM
+     `Receta` Receta INNER JOIN `Detalle_Receta` Detalle_Receta ON Receta.`Num_Receta` = Detalle_Receta.`Num_Receta`
+     INNER JOIN `Vademecum` Vademecum ON Detalle_Receta.`id_insumo` = Vademecum.`id_insumo`
+WHERE Receta.`Num_Receta`=$P{NumReceta}]]>
+		</queryString>
+		<field name="Receta_Num_Receta" class="java.lang.Integer"/>
+		<field name="Receta_id_Consulta" class="java.lang.Integer"/>
+		<field name="Receta_Indicaciones" class="java.lang.String"/>
+		<field name="Detalle_Receta_Detalle_Receta" class="java.lang.Integer"/>
+		<field name="Detalle_Receta_Num_Receta" class="java.lang.Integer"/>
+		<field name="Detalle_Receta_id_insumo" class="java.lang.Integer"/>
+		<field name="Detalle_Receta_Cantidad" class="java.lang.Integer"/>
+		<field name="Detalle_Receta_Dosis" class="java.lang.String"/>
+		<field name="Vademecum_id_insumo" class="java.lang.Integer"/>
+		<field name="Vademecum_Principio_activo" class="java.lang.String"/>
+		<field name="Vademecum_Accion_terapeutica" class="java.lang.String"/>
+		<field name="Vademecum_Indicaciones" class="java.lang.String"/>
+		<field name="Vademecum_Marcas" class="java.lang.String"/>
+		<field name="Vademecum_Propiedades" class="java.lang.String"/>
+		<field name="Vademecum_Precauciones" class="java.lang.String"/>
+		<field name="Vademecum_Dosificacion" class="java.lang.String"/>
+		<field name="Vademecum_Reacciones_adversas" class="java.lang.String"/>
+		<field name="Vademecum_Interacciones" class="java.lang.String"/>
+		<field name="Vademecum_Contraindicaciones" class="java.lang.String"/>
+		<field name="Vademecum_Sobredosificacion" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="dataset2" uuid="c0ab4914-fd6a-444f-9576-c040500230be"/>
+	<parameter name="idPaciente" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Edad" class="java.lang.Integer">
+	<parameter name="NumReceta" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\franb\\Documents\\NetBeansProjects\\ClinicaArevalo\\ClinicaArevalo\\src\\Reportes\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     Receta.`Num_Receta` AS NumReceta,
-     Receta.`id_Consulta` AS RidConsulta,
-     Receta.`Indicaciones` AS Indicaciones,
-     Paciente.`id_Paciente` AS Paciente,
-     Paciente.`Nombres` AS PNombres,
-     Paciente.`Apellidos` AS PApellidos,
-     Consulta.`id_Consulta` AS CidConsulta,
-     Consulta.`id_Paciente` AS CidPaciente,
-     Consulta.`id_usuario` AS Cidusuario,
-     Consulta.`Fecha_Consulta` AS CFechaConsulta,
-     Paciente.`Fecha_Nacimiento` AS Edad
+     Paciente.`id_Paciente` AS Paciente_id_Paciente,
+     Paciente.`Nombres` AS Paciente_Nombres,
+     Paciente.`Apellidos` AS Paciente_Apellidos,
+     Paciente.`Fecha_Nacimiento` AS Paciente_Fecha_Nacimiento
 FROM
-     `Paciente` Paciente INNER JOIN `Consulta` Consulta ON Paciente.`id_Paciente` = Consulta.`id_Paciente`
-     INNER JOIN `Receta` Receta ON Consulta.`id_Consulta` = Receta.`id_Consulta`
+     `Paciente` Paciente
 WHERE
-     Receta.`Num_Receta` = $P{numReceta}]]>
+Paciente.`id_Paciente`=$P{idPaciente}]]>
 	</queryString>
-	<field name="NumReceta" class="java.lang.Integer"/>
-	<field name="RidConsulta" class="java.lang.Integer"/>
-	<field name="Indicaciones" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="Paciente" class="java.lang.Integer"/>
-	<field name="PNombres" class="java.lang.String"/>
-	<field name="PApellidos" class="java.lang.String"/>
-	<field name="CidConsulta" class="java.lang.Integer"/>
-	<field name="CidPaciente" class="java.lang.Integer"/>
-	<field name="Cidusuario" class="java.lang.Integer"/>
-	<field name="CFechaConsulta" class="java.sql.Date"/>
-	<field name="Edad" class="java.sql.Date"/>
+	<field name="Paciente_id_Paciente" class="java.lang.Integer"/>
+	<field name="Paciente_Nombres" class="java.lang.String"/>
+	<field name="Paciente_Apellidos" class="java.lang.String"/>
+	<field name="Paciente_Fecha_Nacimiento" class="java.sql.Date"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -49,10 +88,6 @@ WHERE
 	</title>
 	<pageHeader>
 		<band height="62" splitType="Stretch">
-			<image scaleImage="RetainShape" hAlign="Center">
-				<reportElement x="116" y="0" width="45" height="62" forecolor="#0000FF" uuid="e24a0f46-a9fa-4717-a372-84eaadf9995e"/>
-				<imageExpression><![CDATA["C:\\Users\\babef\\Documents\\NetBeansProjects\\ClinicaArevalo\\ClinicaArevalo\\ClinicaArevalo\\src\\Iconos\\varaEsculapio.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="24" y="0" width="100" height="20" forecolor="#0000FF" uuid="cbeba5af-8725-4cb3-8d46-d7cdb6ed4957"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -97,10 +132,14 @@ Cel. 7883-8335]]></text>
 				<text><![CDATA[Médico Internista
 J.V.P.M 3681]]></text>
 			</staticText>
+			<image>
+				<reportElement x="124" y="0" width="146" height="62" uuid="a5cf4372-0dbb-4e44-a1b9-a41f5c9c6d31"/>
+				<imageExpression><![CDATA["C:\\Users\\franb\\Documents\\NetBeansProjects\\ClinicaArevalo\\ClinicaArevalo\\src\\Iconos\\varaEsculapio.png"]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band splitType="Stretch"/>
+		<band height="26" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
@@ -110,34 +149,20 @@ J.V.P.M 3681]]></text>
 			<staticText>
 				<reportElement x="0" y="0" width="100" height="20" forecolor="#0000FF" uuid="0431fb09-d044-4062-91d7-9d17bb35449d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<text><![CDATA[Nombre:]]></text>
+				<text><![CDATA[Nombre: ]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="100" y="0" width="350" height="20" forecolor="#0000FF" uuid="46ea4dd2-5bdc-461b-99b0-03bdf4c6588a"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{PNombres}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="450" y="0" width="33" height="20" forecolor="#0000FF" uuid="d92d7e58-1e56-4184-a791-21946fa74a17"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="483" y="0" width="100" height="20" forecolor="#0000FF" uuid="f7f9165f-67ff-4fda-a8aa-0f63df167b8c"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{CFechaConsulta}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="0" y="20" width="100" height="20" forecolor="#0000FF" uuid="efc2a680-7fd5-4ead-8b31-e2ff98fead04"/>
 				<textElement textAlignment="Right"/>
-				<text><![CDATA[Rp]]></text>
+				<text><![CDATA[Rp: ]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="100" y="20" width="350" height="85" forecolor="#0000FF" uuid="67899a67-1050-46e5-a9eb-7532abfdb180"/>
-				<textFieldExpression><![CDATA[$F{Indicaciones}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="350" y="105" width="100" height="20" forecolor="#0000FF" uuid="e787b578-c644-412c-a2c2-c112eea12dc3"/>
+				<reportElement x="450" y="40" width="100" height="20" forecolor="#0000FF" uuid="e787b578-c644-412c-a2c2-c112eea12dc3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Sello y Firma:]]></text>
 			</staticText>
@@ -147,10 +172,29 @@ J.V.P.M 3681]]></text>
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="483" y="20" width="100" height="20" forecolor="#0000FF" uuid="b0556d3b-db49-40e1-80a7-697ed9570e78"/>
+				<reportElement x="100" y="0" width="350" height="20" uuid="f1a0868b-66ea-497d-87b2-b0ad2d24ff87"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{Edad}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Paciente_Apellidos}+", "+$F{Paciente_Nombres}]]></textFieldExpression>
 			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="483" y="0" width="88" height="20" uuid="3edf7993-bc73-4396-a15b-a3bb81e77f74"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="20" width="88" height="20" uuid="01ed3bb4-149c-4cce-b36d-4857f654aa67"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[(new java.util.Date().getYear())-$F{Paciente_Fecha_Nacimiento}.getYear()+" Años"]]></textFieldExpression>
+			</textField>
+			<elementGroup/>
+			<subreport>
+				<reportElement x="100" y="20" width="350" height="105" uuid="9347e94e-3604-453d-a1e2-608041721025"/>
+				<subreportParameter name="NumReceta">
+					<subreportParameterExpression><![CDATA[$P{NumReceta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RecetaDigital_subreport1.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 	<columnFooter>
