@@ -115,13 +115,6 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
         tbVademecum = new javax.swing.JTable();
         btnVademecum = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        PanelFactura = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        btnReporteFac = new javax.swing.JButton();
-        txtIdFactura = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbFactura = new javax.swing.JTable();
-        jButton11 = new javax.swing.JButton();
         PanelRecetas = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -130,6 +123,13 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        PanelFactura = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        btnReporteFac = new javax.swing.JButton();
+        txtIdFactura = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbFactura = new javax.swing.JTable();
+        jButton11 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -386,7 +386,7 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
 
         PanelPacientes.setBackground(new java.awt.Color(15, 76, 129));
 
-        jLabel21.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(239, 239, 239));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel21.setText("Buscar por:");
@@ -405,7 +405,7 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
             }
         });
 
-        jLabel22.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(239, 239, 239));
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText("Nombre:");
@@ -751,91 +751,15 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
 
         PanelReportes.addTab("Vademecum", jPanel2);
 
-        PanelFactura.setBackground(new java.awt.Color(15, 76, 129));
-
-        jLabel7.setText("Buscar por # de Factura:");
-
-        btnReporteFac.setText("Generar factura digital");
-        btnReporteFac.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReporteFacActionPerformed(evt);
-            }
-        });
-
-        txtIdFactura.setBackground(new java.awt.Color(255, 255, 255));
-        txtIdFactura.setForeground(new java.awt.Color(0, 0, 0));
-        txtIdFactura.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtIdFacturaKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtIdFacturaKeyTyped(evt);
-            }
-        });
-
-        tbFactura.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane3.setViewportView(tbFactura);
-
-        jButton11.setBackground(new java.awt.Color(76, 201, 223));
-        jButton11.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(0, 0, 0));
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Home-80_icon-icons.com_57317.png"))); // NOI18N
-        jButton11.setText(" Volver a Menú");
-        jButton11.setPreferredSize(new java.awt.Dimension(200, 40));
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout PanelFacturaLayout = new javax.swing.GroupLayout(PanelFactura);
-        PanelFactura.setLayout(PanelFacturaLayout);
-        PanelFacturaLayout.setHorizontalGroup(
-            PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelFacturaLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PanelFacturaLayout.createSequentialGroup()
-                        .addComponent(btnReporteFac, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(407, 407, 407)
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(PanelFacturaLayout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtIdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(275, Short.MAX_VALUE))
-        );
-        PanelFacturaLayout.setVerticalGroup(
-            PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelFacturaLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtIdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReporteFac)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
-        );
-
-        PanelReportes.addTab("Factura Digital", PanelFactura);
-
         PanelRecetas.setBackground(new java.awt.Color(15, 76, 129));
 
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(239, 239, 239));
         jLabel8.setText("Búsqueda de Receta por Paciente (Nombre):");
 
+        tbRecetas.setBackground(new java.awt.Color(239, 239, 239));
+        tbRecetas.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        tbRecetas.setForeground(new java.awt.Color(0, 0, 0));
         tbRecetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -846,12 +770,19 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
         ));
         jScrollPane4.setViewportView(tbRecetas);
 
+        txtReceta.setBackground(new java.awt.Color(239, 239, 239));
+        txtReceta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        txtReceta.setForeground(new java.awt.Color(0, 0, 0));
         txtReceta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtRecetaKeyReleased(evt);
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(76, 201, 223));
+        jButton2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
         jButton2.setText("Generar receta digital");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -859,6 +790,10 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(76, 201, 223));
+        jButton4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 0, 0));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imprimir 32.png"))); // NOI18N
         jButton4.setText("Imprimir Receta");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -891,36 +826,128 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
                         .addComponent(txtReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(PanelRecetasLayout.createSequentialGroup()
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(38, 38, 38)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2)
+                            .addGap(34, 34, 34)
+                            .addComponent(jButton4)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
         PanelRecetasLayout.setVerticalGroup(
             PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelRecetasLayout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRecetasLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRecetasLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton4)))
-                    .addGroup(PanelRecetasLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         PanelReportes.addTab("Recetas", PanelRecetas);
+
+        PanelFactura.setBackground(new java.awt.Color(15, 76, 129));
+
+        jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(239, 239, 239));
+        jLabel7.setText("Buscar por # de Factura:");
+
+        btnReporteFac.setBackground(new java.awt.Color(76, 201, 223));
+        btnReporteFac.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnReporteFac.setForeground(new java.awt.Color(0, 0, 0));
+        btnReporteFac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
+        btnReporteFac.setText(" Generar factura digital");
+        btnReporteFac.setToolTipText("");
+        btnReporteFac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteFacActionPerformed(evt);
+            }
+        });
+
+        txtIdFactura.setBackground(new java.awt.Color(239, 239, 239));
+        txtIdFactura.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtIdFactura.setForeground(new java.awt.Color(0, 0, 0));
+        txtIdFactura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtIdFacturaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdFacturaKeyTyped(evt);
+            }
+        });
+
+        tbFactura.setBackground(new java.awt.Color(239, 239, 239));
+        tbFactura.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        tbFactura.setForeground(new java.awt.Color(0, 0, 0));
+        tbFactura.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(tbFactura);
+
+        jButton11.setBackground(new java.awt.Color(76, 201, 223));
+        jButton11.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(0, 0, 0));
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Home-80_icon-icons.com_57317.png"))); // NOI18N
+        jButton11.setText(" Volver a Menú");
+        jButton11.setPreferredSize(new java.awt.Dimension(200, 40));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelFacturaLayout = new javax.swing.GroupLayout(PanelFactura);
+        PanelFactura.setLayout(PanelFacturaLayout);
+        PanelFacturaLayout.setHorizontalGroup(
+            PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFacturaLayout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(PanelFacturaLayout.createSequentialGroup()
+                        .addComponent(btnReporteFac)
+                        .addGap(363, 363, 363)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelFacturaLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtIdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(436, 436, 436))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(153, 153, 153))
+        );
+        PanelFacturaLayout.setVerticalGroup(
+            PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFacturaLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(btnReporteFac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
+        );
+
+        PanelReportes.addTab("Factura Digital", PanelFactura);
 
         javax.swing.GroupLayout FondoCelesteLayout = new javax.swing.GroupLayout(FondoCeleste);
         FondoCeleste.setLayout(FondoCelesteLayout);
