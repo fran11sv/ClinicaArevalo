@@ -120,8 +120,8 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
         jScrollPane4 = new javax.swing.JScrollPane();
         tbRecetas = new javax.swing.JTable();
         txtReceta = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnReceta = new javax.swing.JButton();
+        btnImprimirReceta = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         PanelFactura = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -193,6 +193,11 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
 
             }
         ));
+        tbPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPacientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbPacientes);
 
         btnHistorial.setBackground(new java.awt.Color(76, 201, 223));
@@ -200,6 +205,7 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
         btnHistorial.setForeground(new java.awt.Color(0, 0, 0));
         btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
         btnHistorial.setText(" Generar Historial Clinico");
+        btnHistorial.setEnabled(false);
         btnHistorial.setPreferredSize(new java.awt.Dimension(200, 40));
         btnHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -433,6 +439,7 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
         btnPaciente.setForeground(new java.awt.Color(0, 0, 0));
         btnPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
         btnPaciente.setText("Generar Reporte Pacientes");
+        btnPaciente.setEnabled(false);
         btnPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPacienteActionPerformed(evt);
@@ -768,6 +775,11 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
 
             }
         ));
+        tbRecetas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbRecetasMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tbRecetas);
 
         txtReceta.setBackground(new java.awt.Color(239, 239, 239));
@@ -779,25 +791,27 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(76, 201, 223));
-        jButton2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
-        jButton2.setText("Generar receta digital");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnReceta.setBackground(new java.awt.Color(76, 201, 223));
+        btnReceta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnReceta.setForeground(new java.awt.Color(0, 0, 0));
+        btnReceta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
+        btnReceta.setText("Generar receta digital");
+        btnReceta.setEnabled(false);
+        btnReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRecetaActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(76, 201, 223));
-        jButton4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imprimir 32.png"))); // NOI18N
-        jButton4.setText("Imprimir Receta");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnImprimirReceta.setBackground(new java.awt.Color(76, 201, 223));
+        btnImprimirReceta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnImprimirReceta.setForeground(new java.awt.Color(0, 0, 0));
+        btnImprimirReceta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imprimir 32.png"))); // NOI18N
+        btnImprimirReceta.setText("Imprimir Receta");
+        btnImprimirReceta.setEnabled(false);
+        btnImprimirReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnImprimirRecetaActionPerformed(evt);
             }
         });
 
@@ -826,9 +840,9 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
                         .addComponent(txtReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(PanelRecetasLayout.createSequentialGroup()
-                            .addComponent(jButton2)
+                            .addComponent(btnReceta)
                             .addGap(34, 34, 34)
-                            .addComponent(jButton4)
+                            .addComponent(btnImprimirReceta)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -850,8 +864,8 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRecetasLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnImprimirReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -869,6 +883,7 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
         btnReporteFac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
         btnReporteFac.setText(" Generar factura digital");
         btnReporteFac.setToolTipText("");
+        btnReporteFac.setEnabled(false);
         btnReporteFac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporteFacActionPerformed(evt);
@@ -898,6 +913,11 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
 
             }
         ));
+        tbFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbFacturaMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tbFactura);
 
         jButton11.setBackground(new java.awt.Color(76, 201, 223));
@@ -1103,8 +1123,6 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
                      jv3.setVisible(true);
                      break;
              }
-
-
         }
         catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
@@ -1127,10 +1145,14 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
-        try  {
+        int id = Integer.parseInt(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString());
+        if (id==0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un paciente","Error",JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            try  {
             Conexion con = new Conexion();
             Connection conn = con.getConexion();
-            int id = Integer.parseInt(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0).toString());
             String path = "src\\Reportes\\HistorialClinico.jasper";
             JasperReport reporte = null;
             reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
@@ -1145,6 +1167,8 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
         catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
+        }
+        
     }//GEN-LAST:event_btnHistorialActionPerformed
 
     private void txtBuscarPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPacienteKeyTyped
@@ -1219,26 +1243,29 @@ RecetaJpaController RC = new RecetaJpaController(entityMain.getInstance());
     }//GEN-LAST:event_txtNombreBusquedaKeyTyped
 
     private void tbPacientes1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPacientes1MouseClicked
-        
+        btnPaciente.setEnabled(true);
     }//GEN-LAST:event_tbPacientes1MouseClicked
 
     private void btnPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacienteActionPerformed
-        try  {
-            Conexion con = new Conexion();
-            Connection conn = con.getConexion();
+        try {
             int id = Integer.parseInt(tbPacientes1.getValueAt(tbPacientes1.getSelectedRow(), 0).toString());
-            String path = "src\\Reportes\\Paciente.jasper";
-            JasperReport reporte = null;
-            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
-            Map parametro = new HashMap();
-            parametro.put("idPaciente", id);
-            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
-            JasperViewer jv= new JasperViewer(j,false);
-            jv.setTitle("Paciente / Clinica Arevalo");
-            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            jv.setVisible(true);
-        }
-        catch (Exception ex) {
+            if (id==0) {
+                JOptionPane.showMessageDialog(this, "Seleccione un paciente", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                Conexion con = new Conexion();
+                Connection conn = con.getConexion();
+                String path = "src\\Reportes\\Paciente.jasper";
+                JasperReport reporte = null;
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+                Map parametro = new HashMap();
+                parametro.put("idPaciente", id);
+                JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+                JasperViewer jv = new JasperViewer(j, false);
+                jv.setTitle("Paciente / Clinica Arevalo");
+                jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                jv.setVisible(true);
+            }
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
     }//GEN-LAST:event_btnPacienteActionPerformed
@@ -1391,22 +1418,25 @@ btnEnfermedad.setEnabled(true);
     }//GEN-LAST:event_btnVademecumActionPerformed
 
     private void btnReporteFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteFacActionPerformed
-        try  {
-            Conexion con = new Conexion();
-            Connection conn = con.getConexion();
+        try {
             int id = Integer.parseInt(tbFactura.getValueAt(tbFactura.getSelectedRow(), 0).toString());
-            String path = "src\\Reportes\\Factura.jasper";
-            JasperReport reporte = null;
-            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
-            Map parametro = new HashMap();
-            parametro.put("numFactura", id);
-            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
-            JasperViewer jv= new JasperViewer(j,false);
-            jv.setTitle("Factura/ Clinica Arevalo");
-            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            jv.setVisible(true);
-        }
-        catch (Exception ex) {
+            if (id == 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione una factura", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                Conexion con = new Conexion();
+                Connection conn = con.getConexion();
+                String path = "src\\Reportes\\Factura.jasper";
+                JasperReport reporte = null;
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+                Map parametro = new HashMap();
+                parametro.put("numFactura", id);
+                JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+                JasperViewer jv = new JasperViewer(j, false);
+                jv.setTitle("Factura/ Clinica Arevalo");
+                jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                jv.setVisible(true);
+            }
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
     }//GEN-LAST:event_btnReporteFacActionPerformed
@@ -1431,53 +1461,61 @@ btnEnfermedad.setEnabled(true);
         CargarTablaPacientesporNombre3(this.txtReceta.getText());
     }//GEN-LAST:event_txtRecetaKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try  {
-            Conexion con = new Conexion();
-            Connection conn = con.getConexion();
+    private void btnRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetaActionPerformed
+        try {
             int idPaciente = Integer.parseInt(tbRecetas.getValueAt(tbRecetas.getSelectedRow(), 0).toString());
             int idReceta = Integer.parseInt(tbRecetas.getValueAt(tbRecetas.getSelectedRow(), 3).toString());
-            String path = "src\\Reportes\\RecetaDigital.jasper";
-            JasperReport reporte = null;
-            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
-            Map parametro = new HashMap();
-            parametro.put("idPaciente", idPaciente);
-            parametro.put("NumReceta", idReceta);
-            parametro.put("SUBREPORT_DIR","src\\Reportes\\");
-            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
-            JasperViewer jv= new JasperViewer(j,false);
-            jv.setTitle("Impresión de Receta / Clinica Arevalo");
-            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            jv.setVisible(true);
-        }
-        catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.toString());
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+            if (idPaciente == 0 || idReceta == 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione una receta", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                Conexion con = new Conexion();
+                Connection conn = con.getConexion();
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try  {
-            Conexion con = new Conexion();
-            Connection conn = con.getConexion();
-            int idPaciente = Integer.parseInt(tbRecetas.getValueAt(tbRecetas.getSelectedRow(), 0).toString());
-            int idReceta = Integer.parseInt(tbRecetas.getValueAt(tbRecetas.getSelectedRow(), 3).toString());
-            String path = "src\\Reportes\\ImprimirReceta.jasper";
-            JasperReport reporte = null;
-            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
-            Map parametro = new HashMap();
-            parametro.put("idPaciente", idPaciente);
-            parametro.put("numReceta", idReceta);
-            parametro.put("SUBREPORT_DIR","src\\Reportes\\");
-            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
-            JasperViewer jv= new JasperViewer(j,false);
-            jv.setTitle("Impresión de Receta / Clinica Arevalo");
-            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            jv.setVisible(true);
-        }
-        catch (Exception ex) {
+                String path = "src\\Reportes\\RecetaDigital.jasper";
+                JasperReport reporte = null;
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+                Map parametro = new HashMap();
+                parametro.put("idPaciente", idPaciente);
+                parametro.put("NumReceta", idReceta);
+                parametro.put("SUBREPORT_DIR", "src\\Reportes\\");
+                JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+                JasperViewer jv = new JasperViewer(j, false);
+                jv.setTitle("Impresión de Receta / Clinica Arevalo");
+                jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                jv.setVisible(true);
+            }
+
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnRecetaActionPerformed
+
+    private void btnImprimirRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRecetaActionPerformed
+        try {
+            int idPaciente = Integer.parseInt(tbRecetas.getValueAt(tbRecetas.getSelectedRow(), 0).toString());
+            int idReceta = Integer.parseInt(tbRecetas.getValueAt(tbRecetas.getSelectedRow(), 3).toString());
+            if (idPaciente == 0 || idReceta == 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione una receta", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                Conexion con = new Conexion();
+                Connection conn = con.getConexion();
+                String path = "src\\Reportes\\ImprimirReceta.jasper";
+                JasperReport reporte = null;
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+                Map parametro = new HashMap();
+                parametro.put("idPaciente", idPaciente);
+                parametro.put("numReceta", idReceta);
+                parametro.put("SUBREPORT_DIR", "src\\Reportes\\");
+                JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+                JasperViewer jv = new JasperViewer(j, false);
+                jv.setTitle("Impresión de Receta / Clinica Arevalo");
+                jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                jv.setVisible(true);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_btnImprimirRecetaActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
@@ -1502,6 +1540,19 @@ btnEnfermedad.setEnabled(true);
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void tbPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPacientesMouseClicked
+        btnHistorial.setEnabled(true);
+    }//GEN-LAST:event_tbPacientesMouseClicked
+
+    private void tbRecetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRecetasMouseClicked
+       btnReceta.setEnabled(true);
+       btnImprimirReceta.setEnabled(true);
+    }//GEN-LAST:event_tbRecetasMouseClicked
+
+    private void tbFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbFacturaMouseClicked
+        btnReporteFac.setEnabled(true);
+    }//GEN-LAST:event_tbFacturaMouseClicked
     DefaultTableModel modelo;
     //Crea modelo de la tabla
     private void CrearModelo() {
@@ -1837,7 +1888,9 @@ btnEnfermedad.setEnabled(true);
     private javax.swing.JButton btnFacturas;
     private javax.swing.JButton btnGanancias;
     private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnImprimirReceta;
     private javax.swing.JButton btnPaciente;
+    private javax.swing.JButton btnReceta;
     private javax.swing.JButton btnReporteFac;
     private javax.swing.JButton btnVademecum;
     private javax.swing.JButton btnbuscarporCate;
@@ -1848,8 +1901,6 @@ btnEnfermedad.setEnabled(true);
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
