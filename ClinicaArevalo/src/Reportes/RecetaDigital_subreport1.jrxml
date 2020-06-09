@@ -40,12 +40,12 @@ Receta.`Num_Receta`=$P{NumReceta}]]>
 	<detail>
 		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="46" y="0" width="509" height="20" uuid="c363ca59-0608-4906-a4e8-569ae9fa2ee2"/>
+				<reportElement x="46" y="0" width="509" height="20" forecolor="#0000FF" uuid="c363ca59-0608-4906-a4e8-569ae9fa2ee2"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Vademecum_Principio_activo}+" - "+$F{Detalle_Receta_Dosis}+"(Cantidad "+$F{Detalle_Receta_Cantidad}+" )"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="32" y="0" width="14" height="20" uuid="c72bba30-4dfe-48f8-94e1-209baf3979c6"/>
+				<reportElement x="32" y="0" width="14" height="20" forecolor="#0000FF" uuid="c72bba30-4dfe-48f8-94e1-209baf3979c6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[*]]></text>
 			</staticText>
@@ -54,12 +54,12 @@ Receta.`Num_Receta`=$P{NumReceta}]]>
 	<columnFooter>
 		<band height="21">
 			<staticText>
-				<reportElement x="32" y="0" width="14" height="20" uuid="34eaddca-2927-4497-a7df-875550b4344c"/>
+				<reportElement x="32" y="0" width="14" height="20" forecolor="#0000FF" uuid="34eaddca-2927-4497-a7df-875550b4344c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[*]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="46" y="0" width="509" height="20" uuid="bd746064-705d-4137-8548-bf497c745d5d"/>
+				<reportElement x="46" y="0" width="509" height="20" forecolor="#0000FF" uuid="bd746064-705d-4137-8548-bf497c745d5d"/>
 				<textFieldExpression><![CDATA[$F{Receta_Indicaciones}]]></textFieldExpression>
 			</textField>
 		</band>

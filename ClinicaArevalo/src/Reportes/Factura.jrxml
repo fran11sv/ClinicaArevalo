@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="297" pageHeight="439" whenNoDataType="BlankPage" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a4a4bad7-a940-4c8e-961d-7e4b2c7906c7">
 	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="73"/>
+	<property name="ireport.y" value="97"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#0000FF"/>
@@ -310,7 +310,7 @@ WHERE
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="163" splitType="Stretch">
+		<band height="179" splitType="Stretch">
 			<componentElement>
 				<reportElement key="table 1" style="table 1" x="0" y="0" width="257" height="163" forecolor="#0000FF" uuid="77b85b94-c879-481b-8653-6fb00cfbf268"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">

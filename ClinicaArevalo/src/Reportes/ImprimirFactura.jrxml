@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="297" pageHeight="439" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e5670c8a-f3e9-4260-a007-ad825f601149">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="311" pageHeight="453" columnWidth="271" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e5670c8a-f3e9-4260-a007-ad825f601149">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
-			<pen lineWidth="1.0" lineColor="#000000"/>
+			<pen lineWidth="1.0" lineColor="#0000FF"/>
 		</box>
 	</style>
 	<style name="table_TH" mode="Opaque" backcolor="#8CB1C8">
 		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
+			<pen lineWidth="0.5" lineColor="#0000FF"/>
 		</box>
 	</style>
 	<style name="table_CH" mode="Opaque" backcolor="#CFDDE6">
 		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
+			<pen lineWidth="0.5" lineColor="#0000FF"/>
 		</box>
 	</style>
 	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
 		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
+			<pen lineWidth="0.5" lineColor="#0000FF"/>
 		</box>
 	</style>
 	<subDataset name="DSProducto" uuid="bf37c224-7b88-49b9-92f5-082a10674237">
@@ -105,6 +105,9 @@ Factura.`Num_Factura`=$P{numFactura}]]>
 	<field name="Total" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<variable name="Suma" class="java.lang.Double" calculation="System"/>
+	<variable name="SumaVExt" class="java.lang.Double" calculation="System"/>
+	<variable name="Total" class="java.lang.Double" calculation="System"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -114,15 +117,15 @@ Factura.`Num_Factura`=$P{numFactura}]]>
 	<pageHeader>
 		<band height="51" splitType="Stretch">
 			<textField pattern="MM">
-				<reportElement x="193" y="31" width="32" height="20" uuid="7a3b0799-e57f-42ec-aa1a-ec68e9cd707c"/>
+				<reportElement x="193" y="31" width="32" height="20" forecolor="#0000FF" uuid="7a3b0799-e57f-42ec-aa1a-ec68e9cd707c"/>
 				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="YYYY">
-				<reportElement x="225" y="31" width="32" height="20" uuid="3587bd70-dae0-46d9-bd55-2084f6b09124"/>
+				<reportElement x="225" y="31" width="32" height="20" forecolor="#0000FF" uuid="3587bd70-dae0-46d9-bd55-2084f6b09124"/>
 				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd">
-				<reportElement x="161" y="31" width="32" height="20" uuid="2a1d1cae-a9ab-455c-9d76-14cb5dd47c20"/>
+				<reportElement x="161" y="31" width="32" height="20" forecolor="#0000FF" uuid="2a1d1cae-a9ab-455c-9d76-14cb5dd47c20"/>
 				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -130,27 +133,19 @@ Factura.`Num_Factura`=$P{numFactura}]]>
 	<columnHeader>
 		<band height="83" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="49" y="43" width="208" height="20" uuid="1bff8b9b-027d-4df5-9691-f8bdfae48d35"/>
+				<reportElement x="49" y="43" width="208" height="20" forecolor="#0000FF" uuid="1bff8b9b-027d-4df5-9691-f8bdfae48d35"/>
 				<textFieldExpression><![CDATA[$F{Cliente}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="49" y="63" width="208" height="20" uuid="da4234fb-6199-4170-aa7c-94edcc1d939a"/>
+				<reportElement x="49" y="63" width="208" height="20" forecolor="#0000FF" uuid="da4234fb-6199-4170-aa7c-94edcc1d939a"/>
 				<textFieldExpression><![CDATA[$F{Dirección}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="0" y="63" width="49" height="20" uuid="35968c93-f1f6-463d-bb41-67cc075377a5"/>
-				<text><![CDATA[Dirección:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="43" width="49" height="20" uuid="2bd5b60c-7ce8-404f-a70a-44051cba2a81"/>
-				<text><![CDATA[Cliente:]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table" style="table" x="0" y="0" width="257" height="125" uuid="7235db48-7b00-422f-8c49-960e1db06f1f"/>
+				<reportElement key="table" style="table" x="0" y="0" width="257" height="125" forecolor="#0000FF" uuid="7235db48-7b00-422f-8c49-960e1db06f1f"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="DSProducto" uuid="0f21d1e2-dc70-4b59-8668-a41238fb71b8">
 						<datasetParameter name="numFactura1">
@@ -162,7 +157,7 @@ Factura.`Num_Factura`=$P{numFactura}]]>
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
 								<textField>
-									<reportElement x="0" y="0" width="30" height="15" uuid="4a7a1b16-6c0f-4673-8fe7-01fea5d56e07"/>
+									<reportElement x="0" y="0" width="30" height="15" forecolor="#0000FF" uuid="4a7a1b16-6c0f-4673-8fe7-01fea5d56e07"/>
 									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 										<pen lineWidth="0.5"/>
 										<topPen lineWidth="0.5"/>
@@ -177,20 +172,20 @@ Factura.`Num_Factura`=$P{numFactura}]]>
 						</jr:groupFooter>
 						<jr:columnHeader style="table_CH" height="15" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="30" height="15" uuid="f7583303-6e66-4347-bd8d-64208a21d00c"/>
+								<reportElement x="0" y="0" width="30" height="15" forecolor="#0000FF" uuid="f7583303-6e66-4347-bd8d-64208a21d00c"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Cant]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter height="24" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="30" height="24" uuid="47ee6240-05bd-4582-95cc-13f07a2b6bdc"/>
+								<reportElement x="0" y="0" width="30" height="24" forecolor="#0000FF" uuid="47ee6240-05bd-4582-95cc-13f07a2b6bdc"/>
 								<box>
 									<pen lineWidth="0.5"/>
 									<topPen lineWidth="0.5"/>
 									<leftPen lineWidth="0.5"/>
 									<bottomPen lineWidth="0.5"/>
-									<rightPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.0"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Son]]></text>
@@ -202,7 +197,7 @@ Factura.`Num_Factura`=$P{numFactura}]]>
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
 								<textField>
-									<reportElement x="0" y="0" width="127" height="15" uuid="d3c5a876-ee9b-4edf-81b9-99385c0bb926"/>
+									<reportElement x="0" y="0" width="127" height="15" forecolor="#0000FF" uuid="d3c5a876-ee9b-4edf-81b9-99385c0bb926"/>
 									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 										<pen lineWidth="0.5"/>
 										<topPen lineWidth="0.5"/>
@@ -217,18 +212,18 @@ Factura.`Num_Factura`=$P{numFactura}]]>
 						</jr:groupFooter>
 						<jr:columnHeader style="table_CH" height="15" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="127" height="15" uuid="27035df4-c03f-4473-8614-c11d62be66f4"/>
+								<reportElement x="0" y="0" width="127" height="15" forecolor="#0000FF" uuid="27035df4-c03f-4473-8614-c11d62be66f4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Producto]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter height="24" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="127" height="24" uuid="3b49a7c2-37da-4773-92ed-7fe6b32d3da2"/>
+								<reportElement x="0" y="0" width="127" height="24" forecolor="#0000FF" uuid="3b49a7c2-37da-4773-92ed-7fe6b32d3da2"/>
 								<box>
 									<pen lineWidth="0.5"/>
 									<topPen lineWidth="0.5"/>
-									<leftPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.0"/>
 									<bottomPen lineWidth="0.5"/>
 									<rightPen lineWidth="0.5"/>
 								</box>
@@ -242,7 +237,7 @@ Factura.`Num_Factura`=$P{numFactura}]]>
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
 								<textField pattern="¤ #,##0.00">
-									<reportElement x="0" y="0" width="35" height="15" uuid="f2567078-3bd4-4ed1-a05e-17add04d2579"/>
+									<reportElement x="0" y="0" width="35" height="15" forecolor="#0000FF" uuid="f2567078-3bd4-4ed1-a05e-17add04d2579"/>
 									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 										<pen lineWidth="0.5"/>
 										<topPen lineWidth="0.5"/>
@@ -259,7 +254,7 @@ Factura.`Num_Factura`=$P{numFactura}]]>
 						</jr:groupFooter>
 						<jr:columnHeader style="table_CH" height="15" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="35" height="15" uuid="b49ef6ef-4af4-4ac8-88ad-cc665029dbd7"/>
+								<reportElement x="0" y="0" width="35" height="15" forecolor="#0000FF" uuid="b49ef6ef-4af4-4ac8-88ad-cc665029dbd7"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
@@ -273,7 +268,7 @@ Uni]]></text>
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
 								<textField pattern="¤ #,##0.00">
-									<reportElement x="0" y="0" width="33" height="15" uuid="83c0005b-5f60-4862-9377-bc7eb9f07dcd"/>
+									<reportElement x="0" y="0" width="33" height="15" forecolor="#0000FF" uuid="83c0005b-5f60-4862-9377-bc7eb9f07dcd"/>
 									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 										<pen lineWidth="0.5"/>
 										<topPen lineWidth="0.5"/>
@@ -290,7 +285,7 @@ Uni]]></text>
 						</jr:groupFooter>
 						<jr:columnHeader style="table_CH" height="15" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="33" height="15" uuid="fbf766b5-25b0-42df-9d41-34f14d2b3a5e"/>
+								<reportElement x="0" y="0" width="33" height="15" forecolor="#0000FF" uuid="fbf766b5-25b0-42df-9d41-34f14d2b3a5e"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
@@ -303,7 +298,7 @@ Exentas]]></text>
 					<jr:column width="32" uuid="22422f18-b03a-4c13-947d-dce6ae7eae4b">
 						<jr:tableFooter height="23" rowSpan="1">
 							<textField pattern="¤ #,##0.00">
-								<reportElement x="0" y="0" width="32" height="23" uuid="aab16f4c-4061-453d-94bc-bb5622c19a43"/>
+								<reportElement x="0" y="0" width="32" height="23" forecolor="#0000FF" uuid="aab16f4c-4061-453d-94bc-bb5622c19a43"/>
 								<box>
 									<pen lineWidth="0.5"/>
 									<topPen lineWidth="0.5"/>
@@ -320,7 +315,7 @@ Exentas]]></text>
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
 								<textField pattern="¤ #,##0.00">
-									<reportElement x="0" y="0" width="32" height="15" uuid="60f5f214-0c7b-4056-af27-56d5e9d880eb"/>
+									<reportElement x="0" y="0" width="32" height="15" forecolor="#0000FF" uuid="60f5f214-0c7b-4056-af27-56d5e9d880eb"/>
 									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 										<pen lineWidth="0.5"/>
 										<topPen lineWidth="0.5"/>
@@ -337,7 +332,7 @@ Exentas]]></text>
 						</jr:groupFooter>
 						<jr:columnHeader style="table_CH" height="15" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="32" height="15" uuid="e403af4f-e86e-4711-ba10-8180c0d97a01"/>
+								<reportElement x="0" y="0" width="32" height="15" forecolor="#0000FF" uuid="e403af4f-e86e-4711-ba10-8180c0d97a01"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
@@ -347,7 +342,7 @@ Afectas]]></text>
 						</jr:columnHeader>
 						<jr:columnFooter height="24" rowSpan="1">
 							<textField pattern="¤ #,##0.00">
-								<reportElement x="0" y="12" width="32" height="12" uuid="a8497124-8208-4ec0-824a-fc1bccd7599e"/>
+								<reportElement x="0" y="12" width="32" height="12" forecolor="#0000FF" uuid="a8497124-8208-4ec0-824a-fc1bccd7599e"/>
 								<box>
 									<pen lineWidth="0.5"/>
 									<topPen lineWidth="0.5"/>
@@ -361,7 +356,7 @@ Afectas]]></text>
 								<textFieldExpression><![CDATA[$V{Suma VExt}]]></textFieldExpression>
 							</textField>
 							<textField pattern="¤ #,##0.00">
-								<reportElement x="0" y="0" width="32" height="12" uuid="841f0a68-101a-45e5-a45b-4ff82dbaad47"/>
+								<reportElement x="0" y="0" width="32" height="12" forecolor="#0000FF" uuid="841f0a68-101a-45e5-a45b-4ff82dbaad47"/>
 								<box>
 									<pen lineWidth="0.5" lineColor="#000000"/>
 									<topPen lineWidth="0.5" lineColor="#000000"/>
