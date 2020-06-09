@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="623" pageHeight="396" columnWidth="583" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f451427d-74fe-4032-b135-108b5bab7cfa">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="numReceta" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Edad" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     Receta.`Num_Receta` AS NumReceta,
+     Receta.`id_Consulta` AS RidConsulta,
+     Receta.`Indicaciones` AS Indicaciones,
+     Paciente.`id_Paciente` AS Paciente,
+     Paciente.`Nombres` AS PNombres,
+     Paciente.`Apellidos` AS PApellidos,
+     Consulta.`id_Consulta` AS CidConsulta,
+     Consulta.`id_Paciente` AS CidPaciente,
+     Consulta.`id_usuario` AS Cidusuario,
+     Consulta.`Fecha_Consulta` AS CFechaConsulta,
+     Paciente.`Fecha_Nacimiento` AS Edad
+FROM
+     `Paciente` Paciente INNER JOIN `Consulta` Consulta ON Paciente.`id_Paciente` = Consulta.`id_Paciente`
+     INNER JOIN `Receta` Receta ON Consulta.`id_Consulta` = Receta.`id_Consulta`
+WHERE
+     Receta.`Num_Receta` = $P{numReceta}]]>
+	</queryString>
+	<field name="NumReceta" class="java.lang.Integer"/>
+	<field name="RidConsulta" class="java.lang.Integer"/>
+	<field name="Indicaciones" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Paciente" class="java.lang.Integer"/>
+	<field name="PNombres" class="java.lang.String"/>
+	<field name="PApellidos" class="java.lang.String"/>
+	<field name="CidConsulta" class="java.lang.Integer"/>
+	<field name="CidPaciente" class="java.lang.Integer"/>
+	<field name="Cidusuario" class="java.lang.Integer"/>
+	<field name="CFechaConsulta" class="java.sql.Date"/>
+	<field name="Edad" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="62" splitType="Stretch">
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement x="116" y="0" width="45" height="62" forecolor="#0000FF" uuid="e24a0f46-a9fa-4717-a372-84eaadf9995e"/>
+				<imageExpression><![CDATA["C:\\Users\\babef\\Documents\\NetBeansProjects\\ClinicaArevalo\\ClinicaArevalo\\ClinicaArevalo\\src\\Iconos\\varaEsculapio.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="24" y="0" width="100" height="20" forecolor="#0000FF" uuid="cbeba5af-8725-4cb3-8d46-d7cdb6ed4957"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DIRECCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="20" width="100" height="42" forecolor="#0000FF" uuid="29e4feab-eb41-4440-9f36-a1c2bc7d4a9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[21 Calle Oriente #3
+Barrio San Miguelito,
+Frente al FSV
+Santa Ana
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="0" width="100" height="20" forecolor="#0000FF" uuid="5e2d468d-1a60-495c-8cda-59405c897e25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[HORARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="20" width="100" height="42" forecolor="#0000FF" uuid="336ba638-de0b-4148-9134-14731d44d451"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Lunes a Viernes
+4:30 pm a 7:00 pm
+Tel. 2440-1791
+Cel. 7883-8335]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="270" height="20" forecolor="#0000FF" uuid="5446497d-75de-47e9-bf57-790471d17998"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Brush Script MT" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dr. José Miguel Arévalo Martínez]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="20" width="152" height="42" forecolor="#0000FF" uuid="09e530a9-fc5b-46e7-a32c-3c8eb03e1346"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Médico Internista
+J.V.P.M 3681]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="583" height="125" forecolor="#0000FF" uuid="466d645d-2827-4de0-84e4-dcea4b05a2bb"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" forecolor="#0000FF" uuid="0431fb09-d044-4062-91d7-9d17bb35449d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="0" width="350" height="20" forecolor="#0000FF" uuid="46ea4dd2-5bdc-461b-99b0-03bdf4c6588a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PNombres}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="450" y="0" width="33" height="20" forecolor="#0000FF" uuid="d92d7e58-1e56-4184-a791-21946fa74a17"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="483" y="0" width="100" height="20" forecolor="#0000FF" uuid="f7f9165f-67ff-4fda-a8aa-0f63df167b8c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{CFechaConsulta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="20" forecolor="#0000FF" uuid="efc2a680-7fd5-4ead-8b31-e2ff98fead04"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Rp]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="20" width="350" height="85" forecolor="#0000FF" uuid="67899a67-1050-46e5-a9eb-7532abfdb180"/>
+				<textFieldExpression><![CDATA[$F{Indicaciones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="350" y="105" width="100" height="20" forecolor="#0000FF" uuid="e787b578-c644-412c-a2c2-c112eea12dc3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Sello y Firma:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="20" width="33" height="20" forecolor="#0000FF" uuid="c28e7d13-c4bb-4eef-afb0-8d3feedb0624"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Edad:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="483" y="20" width="100" height="20" forecolor="#0000FF" uuid="b0556d3b-db49-40e1-80a7-697ed9570e78"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Edad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="20" forecolor="#0000FF" uuid="b24244dd-d4c3-4968-8571-5c716aac3873"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[PROXIMA CITA]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="98" splitType="Stretch">
+			<rectangle>
+				<reportElement x="49" y="0" width="49" height="33" forecolor="#0000FF" uuid="5a237580-9c04-4a21-b237-e809f576e757"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="49" y="0" width="49" height="14" forecolor="#0000FF" uuid="80864bf5-f3fb-4ea5-9f54-799c26c2d8f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Febrero]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="147" y="0" width="49" height="33" forecolor="#0000FF" uuid="0fb638a9-e4f8-4c02-b3e5-28fb8137d88d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="98" y="0" width="49" height="33" forecolor="#0000FF" uuid="a15c4ed9-b1ad-4446-89fa-066d2560dfac"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="147" y="0" width="49" height="14" forecolor="#0000FF" uuid="ec2c7e68-b707-42e9-88ac-bdc4e308af7e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Abril]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="47" height="14" forecolor="#0000FF" uuid="5ed3f047-b915-4809-858c-28ee7a4aeca1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Marzo]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="245" y="0" width="49" height="33" forecolor="#0000FF" uuid="51f22ff5-33c8-4712-8163-5ef77e8a3087"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="196" y="0" width="49" height="33" forecolor="#0000FF" uuid="f8007b33-0635-4874-8452-b87739e01198"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="294" y="0" width="49" height="33" forecolor="#0000FF" uuid="dd5f0a9b-0fe9-4f21-a1a4-b0062ee37afc"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="245" y="0" width="49" height="14" forecolor="#0000FF" uuid="b5ffe384-c3f0-49b0-ab98-c4f763f1aba8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Junio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="0" width="49" height="14" forecolor="#0000FF" uuid="b244417c-b8b7-41b5-a4dc-34bc27165bb1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Julio]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="343" y="0" width="49" height="33" forecolor="#0000FF" uuid="62a61e49-86ec-44a2-8e05-5a39515d138a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="196" y="0" width="49" height="14" forecolor="#0000FF" uuid="89d034cd-9838-4798-8914-fd72a578a3d8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Mayo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="0" width="49" height="14" forecolor="#0000FF" uuid="da0e6622-1bab-4891-8556-d154b3a7741d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Agosto]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="441" y="0" width="49" height="33" forecolor="#0000FF" uuid="fe30cff8-5e96-40e8-9896-f3f760a4ecc9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="392" y="0" width="49" height="33" forecolor="#0000FF" uuid="43ac8cbc-4c88-4dcb-8f22-6945301b41a7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="490" y="0" width="49" height="33" forecolor="#0000FF" uuid="1f2e7eba-0eb8-4254-9e07-f86c7fee9223"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="441" y="0" width="49" height="14" forecolor="#0000FF" uuid="5902eac9-2d41-4ff1-8040-2067f662fdbb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Octubre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="0" width="49" height="14" forecolor="#0000FF" uuid="e232a8dc-ba4a-4ad4-be5f-acbecf877c67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Noviembre]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="539" y="0" width="44" height="33" forecolor="#0000FF" uuid="eb08dc8e-f90a-4438-9cad-3ef1aa606fcc"/>
+			</rectangle>
+			<elementGroup>
+				<rectangle>
+					<reportElement x="0" y="0" width="49" height="33" forecolor="#0000FF" uuid="cc2083b0-c234-4808-8f38-6f117503081b"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="0" y="0" width="51" height="14" forecolor="#0000FF" uuid="ac2d8858-f6cd-4393-8285-449d8a35d06b"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Enero]]></text>
+				</staticText>
+			</elementGroup>
+			<staticText>
+				<reportElement x="392" y="0" width="49" height="14" forecolor="#0000FF" uuid="7303c0f1-3031-460d-86b6-e4531fef3369"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Septiembre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="539" y="0" width="44" height="14" forecolor="#0000FF" uuid="30dc14bf-d0ee-41c5-a053-49589e41bbf6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Diciembre]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

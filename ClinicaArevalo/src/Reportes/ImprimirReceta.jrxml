@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f5c2467-4664-4635-885d-4ae63fa7c7ca">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="numReceta" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     Receta.`Num_Receta` AS NumReceta,
+     Receta.`id_Consulta` AS RidConsulta,
+     Receta.`Indicaciones` AS Indicaciones,
+     Paciente.`id_Paciente` AS Paciente,
+     Paciente.`Nombres` AS PNombres,
+     Paciente.`Apellidos` AS PApellidos,
+     Consulta.`id_Consulta` AS CidConsulta,
+     Consulta.`id_Paciente` AS CidPaciente,
+     Consulta.`id_usuario` AS Cidusuario,
+     Consulta.`Fecha_Consulta` AS CFechaConsulta,
+     Paciente.`Fecha_Nacimiento` AS Edad
+FROM
+     `Paciente` Paciente INNER JOIN `Consulta` Consulta ON Paciente.`id_Paciente` = Consulta.`id_Paciente`
+     INNER JOIN `Receta` Receta ON Consulta.`id_Consulta` = Receta.`id_Consulta`
+WHERE
+     Receta.`Num_Receta` = $P{numReceta}]]>
+	</queryString>
+	<field name="NumReceta" class="java.lang.Integer"/>
+	<field name="RidConsulta" class="java.lang.Integer"/>
+	<field name="Indicaciones" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Paciente" class="java.lang.Integer"/>
+	<field name="PNombres" class="java.lang.String"/>
+	<field name="PApellidos" class="java.lang.String"/>
+	<field name="CidConsulta" class="java.lang.Integer"/>
+	<field name="CidPaciente" class="java.lang.Integer"/>
+	<field name="Cidusuario" class="java.lang.Integer"/>
+	<field name="CFechaConsulta" class="java.sql.Date"/>
+	<field name="Edad" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="48" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="199" splitType="Stretch">
+			<textField>
+				<reportElement x="76" y="0" width="349" height="20" uuid="c77b8f44-f6bd-45c4-8afe-41de57f0dfaf"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PApellidos}+", "+$F{PNombres}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="6b10ff52-25df-4f0c-9fd5-3cd28e7f7cbf"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{CFechaConsulta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="76" y="33" width="349" height="136" uuid="57c215ba-d196-4c7d-a41e-f0855755370a"/>
+				<textFieldExpression><![CDATA[$F{Indicaciones}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="33" width="48" height="20" uuid="583cabc6-eb64-43a4-b6cc-b4e769337dba"/>
+				<textFieldExpression><![CDATA[(new java.util.Date().getYear())-$F{Edad}.getYear()+" Años"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

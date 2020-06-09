@@ -115,6 +115,13 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
         jScrollPane3 = new javax.swing.JScrollPane();
         tbFactura = new javax.swing.JTable();
         btnMenuFac = new javax.swing.JButton();
+        PanelRecetas = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbRecetas = new javax.swing.JTable();
+        txtReceta = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -677,6 +684,8 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
             }
         });
 
+        txtIdFactura.setBackground(new java.awt.Color(255, 255, 255));
+        txtIdFactura.setForeground(new java.awt.Color(0, 0, 0));
         txtIdFactura.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIdFacturaKeyReleased(evt);
@@ -713,14 +722,13 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
                     .addGroup(PanelFacturaLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtIdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelFacturaLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnReporteFac, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                            .addComponent(btnMenuFac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(419, Short.MAX_VALUE))
+                        .addComponent(btnReporteFac, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMenuFac, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
         PanelFacturaLayout.setVerticalGroup(
             PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -729,17 +737,70 @@ FacturaJpaController FC = new FacturaJpaController(entityMain.getInstance());
                 .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtIdFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelFacturaLayout.createSequentialGroup()
-                        .addComponent(btnReporteFac)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnMenuFac)))
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReporteFac)
+                    .addComponent(btnMenuFac))
+                .addGap(36, 36, 36))
         );
 
         PanelReportes.addTab("Factura Digital", PanelFactura);
+
+        PanelRecetas.setBackground(new java.awt.Color(15, 76, 129));
+
+        jLabel8.setText("# de Receta:");
+
+        tbRecetas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane4.setViewportView(tbRecetas);
+
+        jButton2.setText("Generar receta digital");
+
+        jButton3.setText("Volver al menú");
+
+        javax.swing.GroupLayout PanelRecetasLayout = new javax.swing.GroupLayout(PanelRecetas);
+        PanelRecetas.setLayout(PanelRecetasLayout);
+        PanelRecetasLayout.setHorizontalGroup(
+            PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelRecetasLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelRecetasLayout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelRecetasLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(244, Short.MAX_VALUE))
+        );
+        PanelRecetasLayout.setVerticalGroup(
+            PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelRecetasLayout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(PanelRecetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        PanelReportes.addTab("Recetas", PanelRecetas);
 
         javax.swing.GroupLayout FondoCelesteLayout = new javax.swing.GroupLayout(FondoCeleste);
         FondoCeleste.setLayout(FondoCelesteLayout);
@@ -1506,6 +1567,7 @@ btnEnfermedad.setEnabled(true);
     private javax.swing.JPanel PanelFacturas;
     private javax.swing.JPanel PanelHistorialClinico;
     private javax.swing.JPanel PanelPacientes;
+    private javax.swing.JPanel PanelRecetas;
     private javax.swing.JTabbedPane PanelReportes;
     private javax.swing.JButton btnBuscarEnfermedad;
     private javax.swing.JButton btnEnfermedad;
@@ -1521,6 +1583,8 @@ btnEnfermedad.setEnabled(true);
     private com.toedter.calendar.JDateChooser fechapickerFinal;
     private com.toedter.calendar.JDateChooser fechapickerInicial;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -1533,22 +1597,26 @@ btnEnfermedad.setEnabled(true);
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable tbEnfermedades;
     private javax.swing.JTable tbFactura;
     private javax.swing.JTable tbPacientes;
     private javax.swing.JTable tbPacientes1;
+    private javax.swing.JTable tbRecetas;
     private javax.swing.JTable tbVademecum;
     private javax.swing.JTextField txtBuscarPaciente;
     private javax.swing.JTextField txtEnfermedad;
     private javax.swing.JTextField txtIdFactura;
     private javax.swing.JTextField txtMedicamentoBusqueda;
     private javax.swing.JTextField txtNombreBusqueda;
+    private javax.swing.JTextField txtReceta;
     // End of variables declaration//GEN-END:variables
 }

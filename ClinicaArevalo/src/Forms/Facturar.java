@@ -48,6 +48,7 @@ DetalleFacturaJpaController DFC = new DetalleFacturaJpaController(entityMain.get
 Factura numFac;
 Factura Eliminar;
 DetalleFactura EliminarDetalleFactura;
+Numeros num = new Numeros();
 long precio = 0;
     public Facturar() {
         initComponents();
@@ -109,7 +110,6 @@ long precio = 0;
         tbDetalleFactura = new javax.swing.JTable();
         lblTotal = new javax.swing.JLabel();
         btnAgregar2 = new javax.swing.JButton();
-        txtCancelar = new javax.swing.JButton();
         btnEliminar2 = new javax.swing.JButton();
         btnCobrar = new javax.swing.JButton();
         txtImprimir = new javax.swing.JButton();
@@ -185,7 +185,7 @@ long precio = 0;
         btnLimpiar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnLimpiar.setForeground(new java.awt.Color(0, 0, 0));
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/limpiar 32.png"))); // NOI18N
-        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setText("Cancelar");
         btnLimpiar.setEnabled(false);
         btnLimpiar.setPreferredSize(new java.awt.Dimension(150, 40));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -469,18 +469,6 @@ long precio = 0;
             }
         });
 
-        txtCancelar.setBackground(new java.awt.Color(76, 201, 223));
-        txtCancelar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        txtCancelar.setForeground(new java.awt.Color(0, 0, 0));
-        txtCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Cancelar 32.png"))); // NOI18N
-        txtCancelar.setText(" Cancelar");
-        txtCancelar.setPreferredSize(new java.awt.Dimension(150, 40));
-        txtCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCancelarActionPerformed(evt);
-            }
-        });
-
         btnEliminar2.setBackground(new java.awt.Color(76, 201, 223));
         btnEliminar2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnEliminar2.setForeground(new java.awt.Color(0, 0, 0));
@@ -553,8 +541,7 @@ long precio = 0;
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtProd))))
-                        .addGap(38, 38, 38)
-                        .addComponent(txtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(188, 188, 188))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                         .addComponent(jScrollPane2)))
@@ -582,12 +569,11 @@ long precio = 0;
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                    .addComponent(txtProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -695,8 +681,8 @@ long precio = 0;
             F.setDireccioncliente(txtDireccion.getText());
             F.setFechaFactura(date);
             F.setEstadoFactura(0);
-            
-            JOptionPane.showMessageDialog(null, "Datos agregados exitosamente!");
+            F.setTotal(0L);
+            F.setNumLetras("0");
            FC.create(F);
            CrearModelo();
            CargarTabla();
@@ -745,24 +731,23 @@ long precio = 0;
     
     private void btnAgregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar2ActionPerformed
         try {  
+            
             DetalleFactura DF = new DetalleFactura();
-            int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea añadir este producto a esta factura?", "Añadir factura",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
+            
                     DF.setIdProducto(PC.findProducto(Integer.parseInt(this.tbProducto.getValueAt(tbProducto.getSelectedRow(),0).toString())));
                     DF.setNumFactura(numFac);
                     DFC.create(DF);
-                    Numeros num = new Numeros();
-                    numFac.setTotal(precio);
-                    numFac.setNumLetras(num.Convertir(numFac.getTotal().toString(), true));
-                    FC.edit(numFac);
+//                    String id = txtNumFac.getText();
+//                    numFac = (Factura) FC.findFactura(Integer.parseInt(id));
+//                    numFac.setTotal(precio);
+//                    numFac.setNumLetras(num.Convertir(numFac.getTotal().toString(), true));
+//                    FC.edit(numFac);
                     JOptionPane.showMessageDialog(null,"El producto fue añadido con éxito");
+                    lblTotal.setText("$0.00");
+                    precio = 0L;
                     CrearTablaDetalle();
                     CargarTablaDetalle(); 
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"El registro no se añadió");
-                }
+               
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -807,13 +792,6 @@ long precio = 0;
         CargarTablaProducto(this.txtProd.getText());
     }//GEN-LAST:event_txtProdKeyReleased
 
-    private void txtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelarActionPerformed
-       txtProd.setText("");
-       CrearModeloProd();
-       CrearTablaDetalle();
-       CargarTablaDetalle();
-    }//GEN-LAST:event_txtCancelarActionPerformed
-
     private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
         try {
                 int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea eliminar este producto de esta factura?", "Eliminar factura",
@@ -840,6 +818,10 @@ long precio = 0;
          btnNuevo.setEnabled(true);
          CrearModelo();
          CargarTabla();
+         CrearTablaDetalle();
+         CargarTablaDetalle();
+         lblTotal.setText("$ 0.00");
+         precio = 0;
          Llenar_Combo();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
@@ -847,8 +829,7 @@ long precio = 0;
         try {
             int resp = JOptionPane.showConfirmDialog(null, "¿Quiere cobrar esta factura?", "Cobrar", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == resp) {
-                Numeros num = new Numeros();
-                Double numero = (double) precio;
+                
                 numFac.setEstadoFactura(1);
                 numFac.setTotal(precio);
                 numFac.setNumLetras(num.Convertir(numFac.getTotal().toString(), true));
@@ -876,9 +857,9 @@ long precio = 0;
         txtNumFac.setText("");
         txtDireccion.setText("");
         txtCliente.setText("");
-        btnNuevo.setEnabled(true);
-        btnAgregar.setEnabled(false);
-        btnEliminar.setEnabled(false);
+        btnNuevo.setEnabled(false);
+        btnAgregar.setEnabled(true);
+        btnEliminar.setEnabled(true);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -1182,7 +1163,6 @@ long precio = 0;
     private javax.swing.JTable tbDetalleFactura;
     private javax.swing.JTable tbFactura;
     private javax.swing.JTable tbProducto;
-    private javax.swing.JButton txtCancelar;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JButton txtImprimir;

@@ -395,8 +395,17 @@ WHERE
 						</jr:columnHeader>
 						<jr:columnFooter height="25" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="119" height="25" uuid="259a6eae-ed3a-4f5c-bb6e-3085f31eab9f"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="119" height="25" forecolor="#0000FF" uuid="259a6eae-ed3a-4f5c-bb6e-3085f31eab9f"/>
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{Factura_num_letras}]]></textFieldExpression>
 							</textField>
 						</jr:columnFooter>
