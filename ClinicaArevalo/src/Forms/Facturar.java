@@ -907,8 +907,10 @@ long precio = 0;
 
     private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetterOrDigit(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-            
+        if(Character.isLetterOrDigit(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
+                || evt.getKeyChar()==KeyEvent.VK_SPACE || (int) evt.getKeyChar()==35 || (int) evt.getKeyChar()>=44
+                && (int) evt.getKeyChar()<=47|| (int) evt.getKeyChar()>=39
+                && (int) evt.getKeyChar()<=42){
         }else{
             evt.consume();
             getToolkit().beep();
