@@ -44,7 +44,8 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class Consulta_Medica extends javax.swing.JFrame {
- //Creacion de Controladores con su respectivo constructor unido a la persistencia.
+    //Creacion de Controladores con su respectivo constructor unido a la persistencia.
+
     PacienteJpaController PC = new PacienteJpaController(entityMain.getInstance());
     AntecedentesJpaController AC = new AntecedentesJpaController(entityMain.getInstance());
     ConsultaJpaController CC = new ConsultaJpaController(entityMain.getInstance());
@@ -55,7 +56,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     DetalleRecetaJpaController DRC = new DetalleRecetaJpaController(entityMain.getInstance());
     CitasJpaController CitasC = new CitasJpaController(entityMain.getInstance());
     DiagnosticoJpaController DGC = new DiagnosticoJpaController(entityMain.getInstance());
- //Creación de Objetos para guardar datos para operaciones de la base de datos
+    //Creación de Objetos para guardar datos para operaciones de la base de datos
     Receta DatosReceta;
     Receta EditarReceta;
     Vademecum Insumo;
@@ -72,19 +73,21 @@ public class Consulta_Medica extends javax.swing.JFrame {
     String CamposVacios = "Aún tiene campos vacíos";
     String ValorIncorrecto = "Valores incorrectos";
     String SexoIncorrecto = "Ingrese Masculino o Femenino";
+
     public Consulta_Medica() {
         initComponents();
         CrearModeloPacientes();
         CargarCombo();
     }
     DefaultTableModel modeloPacientes;
+
     private void CrearModeloPacientes() {
         try {
             modeloPacientes = (new DefaultTableModel(
                     null, new String[]{
-                        "ID", "Nombres","Apellidos",
-                        "Fecha de Nacimiento","DUI","Sexo","Ocupación",
-                         "Dirección","Estado Civil","Teléfono"}) {
+                        "ID", "Nombres", "Apellidos",
+                        "Fecha de Nacimiento", "DUI", "Sexo", "Ocupación",
+                        "Dirección", "Estado Civil", "Teléfono"}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
                     java.lang.String.class,
@@ -95,8 +98,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                     java.lang.String.class,
                     java.lang.String.class,
                     java.lang.String.class,
-                    java.lang.String.class,
-                };
+                    java.lang.String.class,};
                 boolean[] canEdit = new boolean[]{
                     false, false, false, false
                 };
@@ -116,7 +118,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
-    private void CargarTablaPacientesporNombre(String nombre ) {
+
+    private void CargarTablaPacientesporNombre(String nombre) {
         try {
             Object o[] = null;
             List<Paciente> listPacientes = PC.findPacienteporNombre(nombre);
@@ -136,9 +139,10 @@ public class Consulta_Medica extends javax.swing.JFrame {
             this.btnSeleccionPaciente.setEnabled(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }    
+        }
     }
-    private void CargarTablaPacientesporDui(String dui ) {
+
+    private void CargarTablaPacientesporDui(String dui) {
         try {
             Object o[] = null;
             List<Paciente> listPacientes = PC.findPacienteporDui(dui);
@@ -158,8 +162,9 @@ public class Consulta_Medica extends javax.swing.JFrame {
             this.btnSeleccionPaciente.setEnabled(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }    
+        }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -357,7 +362,6 @@ public class Consulta_Medica extends javax.swing.JFrame {
         cbHora = new javax.swing.JComboBox<>();
         fechapicker = new com.toedter.calendar.JDateChooser();
         btnReceta = new javax.swing.JButton();
-        btnImprimirReceta = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
 
@@ -847,8 +851,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtObservacionesIdenti.setColumns(20);
         txtObservacionesIdenti.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtObservacionesIdenti.setForeground(new java.awt.Color(0, 0, 0));
-        txtObservacionesIdenti.setLineWrap(true);
         txtObservacionesIdenti.setRows(5);
+        txtObservacionesIdenti.setWrapStyleWord(true);
         txtObservacionesIdenti.setNextFocusableComponent(btnSiguienteIdenti);
         jScrollPane1.setViewportView(txtObservacionesIdenti);
 
@@ -1107,8 +1111,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtPersonalAnte.setColumns(20);
         txtPersonalAnte.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtPersonalAnte.setForeground(new java.awt.Color(0, 0, 0));
-        txtPersonalAnte.setLineWrap(true);
         txtPersonalAnte.setRows(5);
+        txtPersonalAnte.setWrapStyleWord(true);
         txtPersonalAnte.setEnabled(false);
         txtPersonalAnte.setNextFocusableComponent(txtFamiliarAnte);
         jScrollPane3.setViewportView(txtPersonalAnte);
@@ -1117,8 +1121,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtFamiliarAnte.setColumns(20);
         txtFamiliarAnte.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtFamiliarAnte.setForeground(new java.awt.Color(0, 0, 0));
-        txtFamiliarAnte.setLineWrap(true);
         txtFamiliarAnte.setRows(5);
+        txtFamiliarAnte.setWrapStyleWord(true);
         txtFamiliarAnte.setEnabled(false);
         txtFamiliarAnte.setNextFocusableComponent(btnAgregarAnte);
         jScrollPane4.setViewportView(txtFamiliarAnte);
@@ -1435,8 +1439,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtPresenteConsulta.setColumns(20);
         txtPresenteConsulta.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtPresenteConsulta.setForeground(new java.awt.Color(0, 0, 0));
-        txtPresenteConsulta.setLineWrap(true);
         txtPresenteConsulta.setRows(5);
+        txtPresenteConsulta.setWrapStyleWord(true);
         txtPresenteConsulta.setNextFocusableComponent(btnSiguienteConsulta);
         txtPresenteConsulta.setPreferredSize(new java.awt.Dimension(412, 150));
         txtPresenteConsulta.setRequestFocusEnabled(false);
@@ -1771,8 +1775,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtFisico.setColumns(20);
         txtFisico.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtFisico.setForeground(new java.awt.Color(0, 0, 0));
-        txtFisico.setLineWrap(true);
         txtFisico.setRows(5);
+        txtFisico.setWrapStyleWord(true);
         txtFisico.setNextFocusableComponent(btnSiguienteFisica);
         jScrollPane6.setViewportView(txtFisico);
 
@@ -2035,8 +2039,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtObservacionesDiagnostico.setColumns(20);
         txtObservacionesDiagnostico.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtObservacionesDiagnostico.setForeground(new java.awt.Color(0, 0, 0));
-        txtObservacionesDiagnostico.setLineWrap(true);
         txtObservacionesDiagnostico.setRows(5);
+        txtObservacionesDiagnostico.setWrapStyleWord(true);
         txtObservacionesDiagnostico.setEnabled(false);
         txtObservacionesDiagnostico.setPreferredSize(new java.awt.Dimension(412, 150));
         jScrollPane13.setViewportView(txtObservacionesDiagnostico);
@@ -2243,8 +2247,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtExamenes.setColumns(20);
         txtExamenes.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtExamenes.setForeground(new java.awt.Color(0, 0, 0));
-        txtExamenes.setLineWrap(true);
         txtExamenes.setRows(5);
+        txtExamenes.setWrapStyleWord(true);
         jScrollPane8.setViewportView(txtExamenes);
 
         jLabel60.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -2586,18 +2590,6 @@ public class Consulta_Medica extends javax.swing.JFrame {
             }
         });
 
-        btnImprimirReceta.setBackground(new java.awt.Color(76, 201, 223));
-        btnImprimirReceta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnImprimirReceta.setForeground(new java.awt.Color(0, 0, 0));
-        btnImprimirReceta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Generar Reporte.png"))); // NOI18N
-        btnImprimirReceta.setText("Imprimir Receta");
-        btnImprimirReceta.setEnabled(false);
-        btnImprimirReceta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimirRecetaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout PanelTratamientoLayout = new javax.swing.GroupLayout(PanelTratamiento);
         PanelTratamiento.setLayout(PanelTratamientoLayout);
         PanelTratamientoLayout.setHorizontalGroup(
@@ -2610,8 +2602,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnEditarMedicamento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnImprimirReceta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnEliminarMedicamento, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(PanelTratamientoLayout.createSequentialGroup()
                         .addGroup(PanelTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelTratamientoLayout.createSequentialGroup()
@@ -2643,7 +2634,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelTratamientoLayout.setVerticalGroup(
             PanelTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2683,9 +2674,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                     .addGroup(PanelTratamientoLayout.createSequentialGroup()
                         .addComponent(btnEliminarMedicamento)
                         .addGap(20, 20, 20)
-                        .addComponent(btnEditarMedicamento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnImprimirReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEditarMedicamento)))
                 .addGap(83, 83, 83))
         );
 
@@ -2748,7 +2737,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPacienteActionPerformed
-         //Desabilitar botones y textbox
+        //Desabilitar botones y textbox
         this.btnSeleccionPaciente.setEnabled(false);
         this.txtDUIBusqueda.setEnabled(true);
         this.txtNombreBusqueda.setEnabled(true);
@@ -2781,7 +2770,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarPacienteActionPerformed
 
     private void btnNuevoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPacienteActionPerformed
-       //Desabilitar botones y textbox
+        //Desabilitar botones y textbox
         this.btnSeleccionPaciente.setEnabled(false);
         this.txtDUIBusqueda.setEnabled(false);
         this.txtNombreBusqueda.setEnabled(false);
@@ -2828,85 +2817,84 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtTelefonoPaciente.setText(tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 9).toString());
         if (txtIdPaciente.getText().equals("")) {
             this.btnSeleccionPaciente.setEnabled(false);
-        }
-        else{
+        } else {
             this.btnSeleccionPaciente.setEnabled(true);
         }
     }//GEN-LAST:event_tbPacientesMouseClicked
 
     private void btnAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacienteActionPerformed
         if (txtNombrePaciente.getText().equals("") || txtDUIPaciente.getText().equals("") || txtSexoPaciente.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Los campos de Nombre, DUI y sexp no pueden estar vacíos","Error, campos vacíos",JOptionPane.INFORMATION_MESSAGE);
-        } else{
-          try {
-            int mensaje = JOptionPane.showConfirmDialog(null, "¿Están sus datos correctos?", "Agregar paciente",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (mensaje == 0) {
-                
-            } else {
+            JOptionPane.showMessageDialog(this, "Los campos de Nombre, DUI y sexp no pueden estar vacíos", "Error, campos vacíos", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            try {
+                int mensaje = JOptionPane.showConfirmDialog(null, "¿Están sus datos correctos?", "Agregar paciente",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (mensaje == 0) {
+
+                } else {
+                }
+                Paciente P = new Paciente();
+                char caracterSexo = txtSexoPaciente.getText().charAt(0);
+                char caracterEstado = txtCivilPaciente.getText().charAt(0);
+
+                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+                String spinnerValue = formater.format(this.spFechaPaciente.getValue());
+                Date date = formater.parse(spinnerValue);
+
+                P.setSexo(caracterSexo);
+                P.setNombres(this.txtNombrePaciente.getText());
+                P.setApellidos(this.txtApellidoPaciente.getText());
+                P.setDui(this.txtDUIPaciente.getText().toString());
+                P.setFechaNacimiento(date);
+                P.setOcupacion(this.txtOcupacionPaciente.getText());
+                P.setDireccion(this.txtDireccionPaciente.getText());
+                P.setEstadoCivil(caracterEstado);
+                P.setTelefono(this.txtTelefonoPaciente.getText());
+
+                PC.create(P);
+                JOptionPane.showMessageDialog(null, "Datos Guardados Exitosamente");
+                CrearModeloPacientes();
+                //Desabilitar botones y textbox
+                this.btnSeleccionPaciente.setEnabled(false);
+                this.txtDUIBusqueda.setEnabled(true);
+                this.txtNombreBusqueda.setEnabled(true);
+                this.tbPacientes.setEnabled(true);
+                this.btnNuevoPaciente.setEnabled(true);
+                //Limpieza de Textbox
+                this.txtIdPaciente.setText("");
+                this.txtNombrePaciente.setText("");
+                this.txtApellidoPaciente.setText("");
+                this.txtApellidoPaciente.setText("");
+                this.txtDUIPaciente.setText("");
+                this.txtDireccionPaciente.setText("");
+                this.txtSexoPaciente.setText("");
+                this.txtCivilPaciente.setText("");
+                this.txtOcupacionPaciente.setText("");
+                this.txtTelefonoPaciente.setText("");
+                //Habilitar botones y Textbox
+                this.btnCancelarPaciente.setEnabled(false);
+                this.btnAgregarPaciente.setEnabled(false);
+                this.txtNombrePaciente.setEnabled(false);
+                this.txtApellidoPaciente.setEnabled(false);
+                this.txtApellidoPaciente.setEnabled(false);
+                this.txtDUIPaciente.setEnabled(false);
+                this.txtDireccionPaciente.setEnabled(false);
+                this.txtSexoPaciente.setEnabled(false);
+                this.txtCivilPaciente.setEnabled(false);
+                this.txtOcupacionPaciente.setEnabled(false);
+                this.spFechaPaciente.setEnabled(false);
+                this.txtTelefonoPaciente.setEnabled(false);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
-            Paciente P = new Paciente();
-            char caracterSexo = txtSexoPaciente.getText().charAt(0);
-            char caracterEstado = txtCivilPaciente.getText().charAt(0);
-
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-            String spinnerValue = formater.format(this.spFechaPaciente.getValue());
-            Date date = formater.parse(spinnerValue);
-
-            P.setSexo(caracterSexo);
-            P.setNombres(this.txtNombrePaciente.getText());
-            P.setApellidos(this.txtApellidoPaciente.getText());
-            P.setDui(this.txtDUIPaciente.getText().toString());
-            P.setFechaNacimiento(date);
-            P.setOcupacion(this.txtOcupacionPaciente.getText());
-            P.setDireccion(this.txtDireccionPaciente.getText());
-            P.setEstadoCivil(caracterEstado);
-            P.setTelefono(this.txtTelefonoPaciente.getText());
-
-            PC.create(P);
-            JOptionPane.showMessageDialog(null, "Datos Guardados Exitosamente");
-            CrearModeloPacientes();
-            //Desabilitar botones y textbox
-            this.btnSeleccionPaciente.setEnabled(false);
-            this.txtDUIBusqueda.setEnabled(true);
-            this.txtNombreBusqueda.setEnabled(true);
-            this.tbPacientes.setEnabled(true);
-            this.btnNuevoPaciente.setEnabled(true);
-            //Limpieza de Textbox
-            this.txtIdPaciente.setText("");
-            this.txtNombrePaciente.setText("");
-            this.txtApellidoPaciente.setText("");
-            this.txtApellidoPaciente.setText("");
-            this.txtDUIPaciente.setText("");
-            this.txtDireccionPaciente.setText("");
-            this.txtSexoPaciente.setText("");
-            this.txtCivilPaciente.setText("");
-            this.txtOcupacionPaciente.setText("");
-            this.txtTelefonoPaciente.setText("");
-            //Habilitar botones y Textbox
-            this.btnCancelarPaciente.setEnabled(false);
-            this.btnAgregarPaciente.setEnabled(false);
-            this.txtNombrePaciente.setEnabled(false);
-            this.txtApellidoPaciente.setEnabled(false);
-            this.txtApellidoPaciente.setEnabled(false);
-            this.txtDUIPaciente.setEnabled(false);
-            this.txtDireccionPaciente.setEnabled(false);
-            this.txtSexoPaciente.setEnabled(false);
-            this.txtCivilPaciente.setEnabled(false);
-            this.txtOcupacionPaciente.setEnabled(false);
-            this.spFechaPaciente.setEnabled(false);
-            this.txtTelefonoPaciente.setEnabled(false);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }  
         }
-        
+
     }//GEN-LAST:event_btnAgregarPacienteActionPerformed
 
     private void txtDUIBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDUIBusquedaKeyReleased
-       CrearModeloPacientes();
-       CargarTablaPacientesporDui(txtDUIBusqueda.getText().toString());
+        CrearModeloPacientes();
+        CargarTablaPacientesporDui(txtDUIBusqueda.getText().toString());
     }//GEN-LAST:event_txtDUIBusquedaKeyReleased
 
     private void btnSeleccionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionPacienteActionPerformed
@@ -2924,34 +2912,34 @@ public class Consulta_Medica extends javax.swing.JFrame {
             this.lblCivilIdenti.setText(this.txtCivilPaciente.getText());
             this.lblDireccionIdenti.setText(this.txtDireccionPaciente.getText());
             this.lblSexoIdenti.setText(this.txtSexoPaciente.getText());
-            
+
             //Poner nombre de paciente a todas las pestañas
-            String Paciente =this.txtApellidoPaciente.getText()+", "+this.txtNombrePaciente.getText();
+            String Paciente = this.txtApellidoPaciente.getText() + ", " + this.txtNombrePaciente.getText();
             this.lblPacienteAnte.setText(Paciente);
             this.lblPacienteConsulta.setText(Paciente);
             this.lblPacienteDiagnostico.setText(Paciente);
             this.lblPacienteFisica.setText(Paciente);
             this.lblPacienteTratamiento.setText(Paciente);
             this.lblPacienteExamen.setText(Paciente);
-            
+
             //Calcula la edad y da formato a la fecha de nacimiento
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaconformato = formato.format((Date)this.spFechaPaciente.getValue());
+            String fechaconformato = formato.format((Date) this.spFechaPaciente.getValue());
             this.lblFechaIdenti1.setText(fechaconformato);
             SimpleDateFormat years = new SimpleDateFormat("yyyy");
-            String fechaYears = years.format((Date)this.spFechaPaciente.getValue());
-            this.lblEdad.setText(CalcularEdad(fechaYears)+" AÑOS");
-            
+            String fechaYears = years.format((Date) this.spFechaPaciente.getValue());
+            this.lblEdad.setText(CalcularEdad(fechaYears) + " AÑOS");
+
             //Carga la tabla de la pestaña de Antecedentes
             CrearModeloAntecedentes();
             CargarTablaAntecedentes();
-            
+
             //Calcula IMC en estado normal
             this.lblIMC.setText("0");
-            
+
             //Pasa a la pestaña de Identidad
             this.PanelPestañas.setSelectedIndex(1);
-            
+
             //Busca la ultima consulta
             List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
             if (listconsulta.size() > 0) {
@@ -2979,31 +2967,31 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreBusquedaKeyReleased
 
     private void btnMenuPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPacienteActionPerformed
-         //Validación de regreso
+        //Validación de regreso
         int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
                 + "Se descartarán los datos no guardados.", "Regresar al menú",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    MenuPrincipal menu = new MenuPrincipal();
-                    menu.setVisible(true);
-                    this.dispose();
-            }else{
-                    
-                }
+        if (mensaje == 0) {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        } else {
+
+        }
     }//GEN-LAST:event_btnMenuPacienteActionPerformed
 
     private void btnMenuIdentiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuIdentiActionPerformed
-       //Validación de regreso
+        //Validación de regreso
         int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
                 + "Se descartarán los datos no guardados.", "Regresar al menú",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    MenuPrincipal menu = new MenuPrincipal();
-                    menu.setVisible(true);
-                    this.dispose();
-            }else{
-                    
-                }
+        if (mensaje == 0) {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        } else {
+
+        }
     }//GEN-LAST:event_btnMenuIdentiActionPerformed
 
     private void btnMenuConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuConsultaActionPerformed
@@ -3011,13 +2999,13 @@ public class Consulta_Medica extends javax.swing.JFrame {
         int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
                 + "Se descartarán los datos no guardados.", "Regresar al menú",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    MenuPrincipal menu = new MenuPrincipal();
-                    menu.setVisible(true);
-                    this.dispose();
-            }else{
-                    
-                }
+        if (mensaje == 0) {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        } else {
+
+        }
     }//GEN-LAST:event_btnMenuConsultaActionPerformed
 
     private void btnMenuFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuFisicaActionPerformed
@@ -3025,13 +3013,13 @@ public class Consulta_Medica extends javax.swing.JFrame {
         int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
                 + "Se descartarán los datos no guardados.", "Regresar al menú",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    MenuPrincipal menu = new MenuPrincipal();
-                    menu.setVisible(true);
-                    this.dispose();
-            }else{
-                    
-                }
+        if (mensaje == 0) {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        } else {
+
+        }
     }//GEN-LAST:event_btnMenuFisicaActionPerformed
 
     private void btnMenuFisica1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuFisica1ActionPerformed
@@ -3039,18 +3027,18 @@ public class Consulta_Medica extends javax.swing.JFrame {
         int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
                 + "Se descartarán los datos no guardados.", "Regresar al menú",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    MenuPrincipal menu = new MenuPrincipal();
-                    menu.setVisible(true);
-                    this.dispose();
-            }else{
-                    
-                }
+        if (mensaje == 0) {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        } else {
+
+        }
     }//GEN-LAST:event_btnMenuFisica1ActionPerformed
 
     private void btnSiguienteFisica1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteFisica1ActionPerformed
         this.PanelPestañas.setSelectedIndex(6);
-                       
+
     }//GEN-LAST:event_btnSiguienteFisica1ActionPerformed
 
     private void btnMenuTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuTratamientoActionPerformed
@@ -3058,49 +3046,51 @@ public class Consulta_Medica extends javax.swing.JFrame {
         int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
                 + "Se descartarán los datos no guardados.", "Regresar al menú",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    MenuPrincipal menu = new MenuPrincipal();
-                    menu.setVisible(true);
-                    this.dispose();
-            }else{
-                    
-                }
+        if (mensaje == 0) {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        } else {
+
+        }
     }//GEN-LAST:event_btnMenuTratamientoActionPerformed
 
     private void btnSiguienteIdentiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteIdentiActionPerformed
-         this.PanelPestañas.setSelectedIndex(2);
+        this.PanelPestañas.setSelectedIndex(2);
     }//GEN-LAST:event_btnSiguienteIdentiActionPerformed
 
     private void btnCancelarIdentiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarIdentiActionPerformed
-         this.PanelPestañas.setSelectedIndex(0);
+        this.PanelPestañas.setSelectedIndex(0);
     }//GEN-LAST:event_btnCancelarIdentiActionPerformed
 
     private void btnSiguienteConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteConsultaActionPerformed
         if (txtMotivoConsulta.getText().equals("") || txtPresenteConsulta.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Ingrese motivo de consulta y presente enfermedad","Campos vacíos",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ingrese motivo de consulta y presente enfermedad", "Campos vacíos", JOptionPane.INFORMATION_MESSAGE);
         } else {
             this.PanelPestañas.setSelectedIndex(4);
-         txtPresion.requestFocus();
+            txtPresion.requestFocus();
         }
     }//GEN-LAST:event_btnSiguienteConsultaActionPerformed
 
     private void btnCancelarCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCancelarActionPerformed
-         this.PanelPestañas.setSelectedIndex(2);
+        this.PanelPestañas.setSelectedIndex(2);
     }//GEN-LAST:event_btnCancelarCancelarActionPerformed
 
     private void btnSiguienteFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteFisicaActionPerformed
-       if (txtPresion.getText().isEmpty() || txtPulso.getText().isEmpty() || txtFCC.getText().isEmpty() || txtFR.getText().isEmpty()
-                || txtTemperatura.getText().isEmpty() || txtMasa.getText().isEmpty() || txtTalla.getText().isEmpty()){
-           JOptionPane.showMessageDialog(this, "Aún tiene campos vacíos","Campos vacíos",JOptionPane.WARNING_MESSAGE);
-       }else{
-             this.PanelPestañas.setSelectedIndex(5);
-        txtEnfermedad.requestFocus();
-       }
-      
+        if (txtPresion.getText().isEmpty() || txtPulso.getText().isEmpty() || txtFCC.getText().isEmpty() || txtFR.getText().isEmpty()
+                || txtTemperatura.getText().isEmpty() || txtMasa.getText().isEmpty() || txtTalla.getText().isEmpty()) {
+            int resp = JOptionPane.showConfirmDialog(null, "Aún tiene campos vacíos ¿Desea continuar?", "Datos sin ingresar", JOptionPane.YES_NO_OPTION);
+            if (JOptionPane.YES_OPTION == resp) {
+                this.PanelPestañas.setSelectedIndex(5);
+                txtEnfermedad.requestFocus();
+            } else {
+
+            }
+        }
     }//GEN-LAST:event_btnSiguienteFisicaActionPerformed
 
     private void btnCancelarFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarFisicaActionPerformed
-         this.PanelPestañas.setSelectedIndex(3);
+        this.PanelPestañas.setSelectedIndex(3);
     }//GEN-LAST:event_btnCancelarFisicaActionPerformed
 
     private void txtMasaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMasaKeyReleased
@@ -3113,15 +3103,14 @@ public class Consulta_Medica extends javax.swing.JFrame {
         } else {
             if (this.txtMasa.getText().isEmpty()) {
                 this.lblIMC.setText("Ingresar Masa");
-            }
-            else{
-                this.lblIMC.setText(CalcularIMC(Double.parseDouble(this.txtMasa.getText()),Double.parseDouble(this.txtTalla.getText())));
+            } else {
+                this.lblIMC.setText(CalcularIMC(Double.parseDouble(this.txtMasa.getText()), Double.parseDouble(this.txtTalla.getText())));
             }
         }
     }//GEN-LAST:event_txtMasaKeyReleased
 
     private void txtTallaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyReleased
-         if (this.txtTalla.getText().isEmpty()) {
+        if (this.txtTalla.getText().isEmpty()) {
             if (this.txtMasa.getText().isEmpty()) {
                 this.lblIMC.setText("Ingresar Masa y Talla");
             } else {
@@ -3130,9 +3119,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         } else {
             if (this.txtMasa.getText().isEmpty()) {
                 this.lblIMC.setText("Ingresar Masa");
-            }
-            else{
-                this.lblIMC.setText(CalcularIMC(Double.parseDouble(this.txtMasa.getText()),Double.parseDouble(this.txtTalla.getText())));
+            } else {
+                this.lblIMC.setText(CalcularIMC(Double.parseDouble(this.txtMasa.getText()), Double.parseDouble(this.txtTalla.getText())));
             }
         }
     }//GEN-LAST:event_txtTallaKeyReleased
@@ -3142,35 +3130,35 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMasaActionPerformed
 
     private void txtEnfermedadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnfermedadKeyReleased
-        
+
     }//GEN-LAST:event_txtEnfermedadKeyReleased
 
     private void tbEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEnfermedadesMouseClicked
-       this.txtAgregarDiagnostico.setEnabled(true);
-       this.txtObservacionesDiagnostico.setEnabled(true);
+        this.txtAgregarDiagnostico.setEnabled(true);
+        this.txtObservacionesDiagnostico.setEnabled(true);
     }//GEN-LAST:event_tbEnfermedadesMouseClicked
 
     private void txtAgregarDiagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgregarDiagnosticoActionPerformed
         try {
             DetalleDiagnostico DD = new DetalleDiagnostico();
             String id = tbEnfermedades.getValueAt(tbEnfermedades.getSelectedRow(), 0).toString();
-            AgregarEnfermedad = (EnfermedadesCie10) EC.findEnfermedadesCie10(Integer.parseInt(id));          
+            AgregarEnfermedad = (EnfermedadesCie10) EC.findEnfermedadesCie10(Integer.parseInt(id));
             DD.setIdDiagnostico(DatosDiagnostico);
             DD.setIdEnfermedad(AgregarEnfermedad);
             DD.setDescripcion(this.txtObservacionesDiagnostico.getText());
 
             DC.create(DD);
-            
+
             CrearModeloEnfermedades();
             CrearModeloDiagnostico();
             CargarTablaDiagnostico();
- 
+
             this.txtAgregarDiagnostico.setEnabled(false);
             this.txtObservacionesDiagnostico.setEnabled(true);
             this.txtObservacionesDiagnostico.setText("");
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_txtAgregarDiagnosticoActionPerformed
 
@@ -3190,9 +3178,9 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 CargarTablaDiagnostico();
 
                 this.btnEliminarDiagnostico.setEnabled(false);
-                
+
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Seleccione Registro a Eliminar");
+                JOptionPane.showMessageDialog(null, "Seleccione Registro a Eliminar");
             }
         }
     }//GEN-LAST:event_btnEliminarDiagnosticoActionPerformed
@@ -3213,11 +3201,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void btnSiguienteExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteExamenActionPerformed
         //Orden de Pestañas
-        int mensaje = JOptionPane.showConfirmDialog(null, "Aún existen campos vacíos, ¿desea continuar?","Campos vacíos",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    this.PanelPestañas.setSelectedIndex(7);
-                }  
+        this.PanelPestañas.setSelectedIndex(7);
+
     }//GEN-LAST:event_btnSiguienteExamenActionPerformed
 
     private void btnMenuExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuExamenActionPerformed
@@ -3225,49 +3210,49 @@ public class Consulta_Medica extends javax.swing.JFrame {
         int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
                 + "Se descartarán los datos no guardados.", "Regresar al menú",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    MenuPrincipal menu = new MenuPrincipal();
-                    menu.setVisible(true);
-                    this.dispose();
-            }else{
-                    
-                }
+        if (mensaje == 0) {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        } else {
+
+        }
     }//GEN-LAST:event_btnMenuExamenActionPerformed
 
     private void txtMedicamentoBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedicamentoBusquedaKeyReleased
-       this.CrearModeloVademecum();
-       this.CargarTablaVademecum(this.txtMedicamentoBusqueda.getText());
+        this.CrearModeloVademecum();
+        this.CargarTablaVademecum(this.txtMedicamentoBusqueda.getText());
     }//GEN-LAST:event_txtMedicamentoBusquedaKeyReleased
 
     private void tbVademecumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVademecumMouseClicked
-       
+
     }//GEN-LAST:event_tbVademecumMouseClicked
 
     private void btnAgregarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMedicamentoActionPerformed
         if (txtCantidad.getText().equals("") || txtDosis.getText().equals("")) {
-            JOptionPane.showMessageDialog(this,"Los campos de dosis y cantidad no pueden estar vacíos","Campos vacíos",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Los campos de dosis y cantidad no pueden estar vacíos", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
-            DetalleReceta DD = new DetalleReceta();
-            String id = tbVademecum.getValueAt(tbVademecum.getSelectedRow(), 0).toString();
-            Insumo = (Vademecum) VC.findVademecum(Integer.parseInt(id));
-            DD.setIdInsumo(Insumo);
-            DD.setNumReceta(DatosReceta);
-            DD.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
-            DD.setDosis(this.txtDosis.getText());
-            
-            DRC.create(DD);
-            
-            CrearModeloReceta();
-            CrearModeloVademecum();
-            CargarTablaReceta();
- 
-            this.txtDosis.setText("");
-            this.txtCantidad.setText("");
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
+                DetalleReceta DD = new DetalleReceta();
+                String id = tbVademecum.getValueAt(tbVademecum.getSelectedRow(), 0).toString();
+                Insumo = (Vademecum) VC.findVademecum(Integer.parseInt(id));
+                DD.setIdInsumo(Insumo);
+                DD.setNumReceta(DatosReceta);
+                DD.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
+                DD.setDosis(this.txtDosis.getText());
+
+                DRC.create(DD);
+
+                CrearModeloReceta();
+                CrearModeloVademecum();
+                CargarTablaReceta();
+
+                this.txtDosis.setText("");
+                this.txtCantidad.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
         }
     }//GEN-LAST:event_btnAgregarMedicamentoActionPerformed
 
@@ -3278,7 +3263,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         String id = tbReceta.getValueAt(tbReceta.getSelectedRow(), 0).toString();
         EditarDetalleReceta = (DetalleReceta) DRC.findDetalleReceta(Integer.parseInt(id));
         EliminarDetalleReceta = (DetalleReceta) DRC.findDetalleReceta(Integer.parseInt(id));
-        
+
         this.btnEditarMedicamento.setEnabled(true);
         this.btnEliminarMedicamento.setEnabled(true);
         this.txtDosis.setEnabled(true);
@@ -3349,8 +3334,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }  
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_btnHacerCitaActionPerformed
 
     private void btnElminarAnteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarAnteActionPerformed
@@ -3383,57 +3368,57 @@ public class Consulta_Medica extends javax.swing.JFrame {
         int resp = JOptionPane.showConfirmDialog(null, "¿Están todos los datos correctos?", "Registrar antecedentes", JOptionPane.YES_NO_OPTION);
         if (JOptionPane.YES_OPTION == resp) {
             try {
-            EditarAntecedente.setFamiliares(this.txtFamiliarAnte.getText());
-            EditarAntecedente.setPersonales(this.txtPersonalAnte.getText());
-            AC.edit(EditarAntecedente);
-            JOptionPane.showMessageDialog(null, "El registro fue editado con Éxito");
-            CrearModeloAntecedentes();
-            CargarTablaAntecedentes();
-            this.btnAgregarAnte.setEnabled(false);
-            this.btnCancelarAnte.setEnabled(false);
-            this.btnNuevoAnte.setEnabled(true);
-            this.btnEditarAnte.setEnabled(false);
-            this.btnElminarAnte.setEnabled(false);
-            this.txtFamiliarAnte.setEnabled(false);
-            this.txtPersonalAnte.setEnabled(false);
-            this.txtFamiliarAnte.setText("");
-            this.txtPersonalAnte.setText("");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+                EditarAntecedente.setFamiliares(this.txtFamiliarAnte.getText());
+                EditarAntecedente.setPersonales(this.txtPersonalAnte.getText());
+                AC.edit(EditarAntecedente);
+                JOptionPane.showMessageDialog(null, "El registro fue editado con Éxito");
+                CrearModeloAntecedentes();
+                CargarTablaAntecedentes();
+                this.btnAgregarAnte.setEnabled(false);
+                this.btnCancelarAnte.setEnabled(false);
+                this.btnNuevoAnte.setEnabled(true);
+                this.btnEditarAnte.setEnabled(false);
+                this.btnElminarAnte.setEnabled(false);
+                this.txtFamiliarAnte.setEnabled(false);
+                this.txtPersonalAnte.setEnabled(false);
+                this.txtFamiliarAnte.setText("");
+                this.txtPersonalAnte.setText("");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         } else {
-        } 
+        }
     }//GEN-LAST:event_btnEditarAnteActionPerformed
 
     private void btnAgregarAnteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAnteActionPerformed
         int resp = JOptionPane.showConfirmDialog(null, "¿Están todos los datos correctos?", "Registrar antecedentes", JOptionPane.YES_NO_OPTION);
         if (JOptionPane.YES_OPTION == resp) {
             try {
-            
-            Antecedentes A = new Antecedentes();
-            A.setIdPaciente(DatosPaciente);
-            A.setFamiliares(this.txtFamiliarAnte.getText());
-            A.setPersonales(this.txtPersonalAnte.getText());
-            AC.create(A);
-            CrearModeloAntecedentes();
-            CargarTablaAntecedentes();
-            this.btnAgregarAnte.setEnabled(false);
-            this.btnCancelarAnte.setEnabled(false);
-            this.btnNuevoAnte.setEnabled(true);
-            this.btnEditarAnte.setEnabled(false);
-            this.btnElminarAnte.setEnabled(false);
-            this.txtFamiliarAnte.setEnabled(false);
-            this.txtPersonalAnte.setEnabled(false);
 
-            this.txtFamiliarAnte.setText("");
-            this.txtPersonalAnte.setText("");
+                Antecedentes A = new Antecedentes();
+                A.setIdPaciente(DatosPaciente);
+                A.setFamiliares(this.txtFamiliarAnte.getText());
+                A.setPersonales(this.txtPersonalAnte.getText());
+                AC.create(A);
+                CrearModeloAntecedentes();
+                CargarTablaAntecedentes();
+                this.btnAgregarAnte.setEnabled(false);
+                this.btnCancelarAnte.setEnabled(false);
+                this.btnNuevoAnte.setEnabled(true);
+                this.btnEditarAnte.setEnabled(false);
+                this.btnElminarAnte.setEnabled(false);
+                this.txtFamiliarAnte.setEnabled(false);
+                this.txtPersonalAnte.setEnabled(false);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+                this.txtFamiliarAnte.setText("");
+                this.txtPersonalAnte.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         } else {
         }
-        
+
     }//GEN-LAST:event_btnAgregarAnteActionPerformed
 
     private void btnCancelarAnteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarAnteActionPerformed
@@ -3477,17 +3462,17 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_tbAntecendentesMouseClicked
 
     private void btnMenuAnteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuAnteActionPerformed
-       //Validación de regreso
+        //Validación de regreso
         int mensaje = JOptionPane.showConfirmDialog(null, "¿Realmente desea regresar al menú principal?"
                 + "Se descartarán los datos no guardados.", "Regresar al menú",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    MenuPrincipal menu = new MenuPrincipal();
-                    menu.setVisible(true);
-                    this.dispose();
-            }else{
-                    
-                }
+        if (mensaje == 0) {
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        } else {
+
+        }
     }//GEN-LAST:event_btnMenuAnteActionPerformed
 
     private void btnCancelarL2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarL2ActionPerformed
@@ -3496,8 +3481,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void btnSiguienteAnteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteAnteActionPerformed
         this.PanelPestañas.setSelectedIndex(3);
-            
-        
+
+
     }//GEN-LAST:event_btnSiguienteAnteActionPerformed
 
     private void txtVademecumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVademecumActionPerformed
@@ -3511,7 +3496,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             int resp = JOptionPane.showConfirmDialog(null, "Tiene datos sin ingresar en Examen Fisico, si no los ingresa su valor sera de 0 ¿Desea continuar?", "Datos sin ingresar", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == resp) {
                 if (txtPresion.getText().isEmpty()) {
-                   txtPresion.setText("0"); 
+                    txtPresion.setText("0");
                 }
                 if (txtPulso.getText().isEmpty()) {
                     txtPulso.setText("0");
@@ -3523,15 +3508,15 @@ public class Consulta_Medica extends javax.swing.JFrame {
                     txtFR.setText("0");
                 }
                 if (txtTemperatura.getText().isEmpty()) {
-                   txtTemperatura.setText("0"); 
+                    txtTemperatura.setText("0");
                 }
                 if (txtMasa.getText().isEmpty()) {
-                   txtMasa.setText("0"); 
+                    txtMasa.setText("0");
                 }
                 if (txtTalla.getText().isEmpty()) {
-                   txtTalla.setText("0"); 
-                }  
-                try {                  
+                    txtTalla.setText("0");
+                }
+                try {
                     //Agregar Una nueva consulta
                     Consulta C = new Consulta();
                     Login login = new Login();
@@ -3555,16 +3540,16 @@ public class Consulta_Medica extends javax.swing.JFrame {
                     C.setPulso(Integer.parseInt(this.txtPulso.getText()));
                     C.setTalla(Double.parseDouble(this.txtTalla.getText()));
                     C.setTemperatura(Double.parseDouble(this.txtTemperatura.getText()));
-                    
+
                     CC.create(C);
 
                     //Obtiene la ultima consulta del paciente
                     List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
                     int idConsulta = listconsulta.get(0).getIdConsulta();
                     DatosConsulta = (Consulta) CC.findConsulta(idConsulta);
-                    boolean btnrecet=btnReceta.isEnabled();
-                    boolean btndiag=btnDiagnostico.isEnabled();
-                    if (btnrecet==false) {
+                    boolean btnrecet = btnReceta.isEnabled();
+                    boolean btndiag = btnDiagnostico.isEnabled();
+                    if (btnrecet == false) {
                         //Obtener Numero de Receta creada
                         int idReceta = DatosReceta.getNumReceta();
                         DatosReceta = (Receta) RC.findReceta(idReceta);
@@ -3573,7 +3558,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
                         DatosReceta.setIdConsulta(DatosConsulta);
                         RC.edit(DatosReceta);
                     }
-                    if (btndiag==false) {
+                    if (btndiag == false) {
                         //Obtener Numero de Diagnostico Creado
                         int idDiagnostico = DatosDiagnostico.getIdDiagnostico();
                         DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
@@ -3618,62 +3603,61 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 C.setPulso(Integer.parseInt(this.txtPulso.getText()));
                 C.setTalla(Double.parseDouble(this.txtTalla.getText()));
                 C.setTemperatura(Double.parseDouble(this.txtTemperatura.getText()));
-                
+
                 CC.create(C);
 
                 //Obtiene la ultima consulta del paciente
                 List<Consulta> listconsulta = CC.findbyIdPacienteDESC(DatosPaciente);
                 int idConsulta = listconsulta.get(0).getIdConsulta();
                 DatosConsulta = (Consulta) CC.findConsulta(idConsulta);
-                 boolean btnrecet=btnReceta.isEnabled();
-                    boolean btndiag=btnDiagnostico.isEnabled();
-                    if (btnrecet==false) {
-                        //Obtener Numero de Receta creada
-                        int idReceta = DatosReceta.getNumReceta();
-                        DatosReceta = (Receta) RC.findReceta(idReceta);
-                        //Guardar Datos de Receta
-                        DatosReceta.setIndicaciones(this.txtExamenes.getText());
-                        DatosReceta.setIdConsulta(DatosConsulta);
-                        RC.edit(DatosReceta);
-                    }
-                    if (btndiag==false) {
-                        //Obtener Numero de Diagnostico Creado
-                        int idDiagnostico = DatosDiagnostico.getIdDiagnostico();
-                        DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
-                        //Guardar Datos de Diagnostico                   
-                        DatosDiagnostico.setIdConsultas(DatosConsulta);
-                        DGC.edit(DatosDiagnostico);
-                    }
+                boolean btnrecet = btnReceta.isEnabled();
+                boolean btndiag = btnDiagnostico.isEnabled();
+                if (btnrecet == false) {
+                    //Obtener Numero de Receta creada
+                    int idReceta = DatosReceta.getNumReceta();
+                    DatosReceta = (Receta) RC.findReceta(idReceta);
+                    //Guardar Datos de Receta
+                    DatosReceta.setIndicaciones(this.txtExamenes.getText());
+                    DatosReceta.setIdConsulta(DatosConsulta);
+                    RC.edit(DatosReceta);
+                }
+                if (btndiag == false) {
+                    //Obtener Numero de Diagnostico Creado
+                    int idDiagnostico = DatosDiagnostico.getIdDiagnostico();
+                    DatosDiagnostico = (Diagnostico) DGC.findDiagnostico(idDiagnostico);
+                    //Guardar Datos de Diagnostico                   
+                    DatosDiagnostico.setIdConsultas(DatosConsulta);
+                    DGC.edit(DatosDiagnostico);
+                }
 
                 JOptionPane.showMessageDialog(null, "Datos de Consulta Guardados Exitosamente");
                 Facturar menu = new Facturar();
                 menu.setVisible(true);
                 this.setVisible(false);
-                
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }
-        
+
     }//GEN-LAST:event_btnTerminarActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
-         try  {
-        Conexion con = new Conexion();
-        Connection conn = con.getConexion();
-        int id = DatosPaciente.getIdPaciente();
-        String path = "src\\Reportes\\HistorialClinico.jasper";
-        JasperReport reporte = null;
-        reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
-        Map parametro = new HashMap();
-        parametro.put("idPaciente", id);
-        JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
-        JasperViewer jv= new JasperViewer(j,false);
-        jv.setTitle("Historial Clinico/ Clinica Arevalo");
-        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        jv.setVisible(true);
-        }
-        catch (Exception ex) {
+        try {
+            Conexion con = new Conexion();
+            Connection conn = con.getConexion();
+            int id = DatosPaciente.getIdPaciente();
+            String path = "src\\Reportes\\HistorialClinico.jasper";
+            JasperReport reporte = null;
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            Map parametro = new HashMap();
+            parametro.put("idPaciente", id);
+            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
+            JasperViewer jv = new JasperViewer(j, false);
+            jv.setTitle("Historial Clinico/ Clinica Arevalo");
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jv.setVisible(true);
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
     }//GEN-LAST:event_btnHistorialActionPerformed
@@ -3691,7 +3675,6 @@ public class Consulta_Medica extends javax.swing.JFrame {
             this.txtCantidad.setEnabled(true);
             this.btnReceta.setEnabled(false);
             txtMedicamentoBusqueda.setEnabled(true);
-            btnImprimirReceta.setEnabled(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -3716,26 +3699,26 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtDUIBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDUIBusquedaKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isDigit(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-        }else{
+        if (Character.isDigit(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE) {
+        } else {
             evt.consume();
         }
     }//GEN-LAST:event_txtDUIBusquedaKeyTyped
 
     private void txtNombreBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreBusquedaKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-      
-        }else{
+        if (Character.isLetter(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE) {
+
+        } else {
             evt.consume();
             getToolkit().beep();
         }
     }//GEN-LAST:event_txtNombreBusquedaKeyTyped
 
     private void txtOcupacionPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOcupacionPacienteKeyTyped
-       char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-        }else{
+        char car = evt.getKeyChar();
+        if (Character.isLetter(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3743,8 +3726,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtNombrePacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePacienteKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-        }else{
+        if (Character.isLetter(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3752,8 +3735,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtApellidoPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPacienteKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-        }else{
+        if (Character.isLetter(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3761,34 +3744,34 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtSexoPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSexoPacienteKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        if (Character.isLetter(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE) {
             try {
-            
-             if (txtSexoPaciente.getText().equals("Masculino")|| txtSexoPaciente.getText().equals("Femenino")){
-            lblError.setText("");
-        }else{
-                 if(txtSexoPaciente.getText().equals("")){
-                     lblError.setText(CamposVacios);
-                 }else{
-                   lblError.setText(SexoIncorrecto);  
-                 }
-                 
-             } 
-        } catch (Exception e) {
-            
-        }
-        }else{
+
+                if (txtSexoPaciente.getText().equals("Masculino") || txtSexoPaciente.getText().equals("Femenino")) {
+                    lblError.setText("");
+                } else {
+                    if (txtSexoPaciente.getText().equals("")) {
+                        lblError.setText(CamposVacios);
+                    } else {
+                        lblError.setText(SexoIncorrecto);
+                    }
+
+                }
+            } catch (Exception e) {
+
+            }
+        } else {
             evt.consume();
             getToolkit().beep();
         }
-        
-        
+
+
     }//GEN-LAST:event_txtSexoPacienteKeyTyped
 
     private void txtCivilPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCivilPacienteKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-        }else{
+        if (Character.isLetter(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3796,10 +3779,10 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtPresionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPresionKeyTyped
         char car = evt.getKeyChar();
-        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
-                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
-                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
-        }else{
+        if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47 || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE
+                || evt.getKeyChar() == KeyEvent.VK_SPACE || Character.isDigit(car)
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3807,22 +3790,22 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtPulsoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPulsoKeyTyped
         char car = evt.getKeyChar();
-        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
-                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
-                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
-        }else{
+        if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47 || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE
+                || evt.getKeyChar() == KeyEvent.VK_SPACE || Character.isDigit(car)
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64) {
+        } else {
             evt.consume();
             getToolkit().beep();
-            
+
         }
     }//GEN-LAST:event_txtPulsoKeyTyped
 
     private void txtFCCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFCCKeyTyped
         char car = evt.getKeyChar();
-        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
-                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
-                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
-        }else{
+        if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47 || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE
+                || evt.getKeyChar() == KeyEvent.VK_SPACE || Character.isDigit(car)
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3830,33 +3813,33 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtFRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFRKeyTyped
         char car = evt.getKeyChar();
-        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
-                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
-                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
-        }else{
+        if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47 || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE
+                || evt.getKeyChar() == KeyEvent.VK_SPACE || Character.isDigit(car)
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
     }//GEN-LAST:event_txtFRKeyTyped
 
     private void txtTemperaturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTemperaturaKeyTyped
-       char car = evt.getKeyChar();
-        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
-                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
-                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
-        }else{
+        char car = evt.getKeyChar();
+        if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47 || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE
+                || evt.getKeyChar() == KeyEvent.VK_SPACE || Character.isDigit(car)
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64) {
+        } else {
             evt.consume();
             getToolkit().beep();
-            
+
         }
     }//GEN-LAST:event_txtTemperaturaKeyTyped
 
     private void txtMasaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMasaKeyTyped
         char car = evt.getKeyChar();
-        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
-                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
-                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
-        }else{
+        if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47 || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE
+                || evt.getKeyChar() == KeyEvent.VK_SPACE || Character.isDigit(car)
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3864,8 +3847,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtTallaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyTyped
         char car = evt.getKeyChar();
-        if(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
-        }else{
+        if (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE || Character.isDigit(car)) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3873,8 +3856,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtEnfermedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnfermedadKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-        }else{
+        if (Character.isLetter(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3882,8 +3865,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtMedicamentoBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedicamentoBusquedaKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-        }else{
+        if (Character.isLetter(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3891,8 +3874,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetterOrDigit(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE ){
-        }else{
+        if (Character.isLetterOrDigit(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
@@ -3900,79 +3883,57 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtDosisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDosisKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isLetterOrDigit(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE ){
-        }else{
+        if (Character.isLetterOrDigit(car) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_SPACE
+                || (int) evt.getKeyChar() >= 40 && (int) evt.getKeyChar() <= 41 || (int) evt.getKeyChar() >= 44 && (int) evt.getKeyChar() >= 47) {
+        } else {
             evt.consume();
             getToolkit().beep();
         }
     }//GEN-LAST:event_txtDosisKeyTyped
 
     private void btnReporteAntecedentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteAntecedentesActionPerformed
-         try  {
+        try {
             Conexion con = new Conexion();
             Connection conn = con.getConexion();
             int id = DatosPaciente.getIdPaciente();
             String path = "src\\Reportes\\Paciente.jasper";
             JasperReport reporte = null;
-            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
             Map parametro = new HashMap();
             parametro.put("idPaciente", id);
             JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
-            JasperViewer jv= new JasperViewer(j,false);
+            JasperViewer jv = new JasperViewer(j, false);
             jv.setTitle("Paciente / Clinica Arevalo");
             jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             jv.setVisible(true);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
     }//GEN-LAST:event_btnReporteAntecedentesActionPerformed
 
     private void btnEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadesActionPerformed
-         ReporteEnfermedades menu = new ReporteEnfermedades();
-         menu.setVisible(true);
+        ReporteEnfermedades menu = new ReporteEnfermedades();
+        menu.setVisible(true);
     }//GEN-LAST:event_btnEnfermedadesActionPerformed
-
-    private void btnImprimirRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirRecetaActionPerformed
-         try  {
-            Conexion con = new Conexion();
-            Connection conn = con.getConexion();
-            int idPaciente = DatosPaciente.getIdPaciente();
-            int idReceta = DatosReceta.getNumReceta();
-            String path = "src\\Reportes\\ImprimirReceta.jasper";
-            JasperReport reporte = null;
-            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
-            Map parametro = new HashMap();
-            parametro.put("idPaciente", idPaciente);
-            parametro.put("numReceta", idReceta);
-            parametro.put("SUBREPORT_DIR","src\\Reportes\\");
-            JasperPrint j = JasperFillManager.fillReport(reporte, parametro, conn);
-            JasperViewer jv= new JasperViewer(j,false);
-            jv.setTitle("Impresión de Receta / Clinica Arevalo");
-            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            jv.setVisible(true);
-        }
-        catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.toString());
-        }
-    }//GEN-LAST:event_btnImprimirRecetaActionPerformed
     private static int CalcularEdad(String fecha) {
-        Calendar cal= Calendar.getInstance();
-        int year= cal.get(Calendar.YEAR);
-        int Resta = year- Integer.parseInt(fecha);
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int Resta = year - Integer.parseInt(fecha);
         return Resta;
     }
-    private static String CalcularIMC(double masa,double talla) {
-       double imc = masa/Math.pow((talla/100), 2);
 
-       return String.format("%.2f", imc);
+    private static String CalcularIMC(double masa, double talla) {
+        double imc = masa / Math.pow((talla / 100), 2);
+
+        return String.format("%.2f", imc);
     }
     DefaultTableModel modeloAntecedentes;
+
     private void CrearModeloAntecedentes() {
         try {
             modeloAntecedentes = (new DefaultTableModel(
                     null, new String[]{
-                        "ID Antecedente", "Nombre Paciente","Familiar",
+                        "ID Antecedente", "Nombre Paciente", "Familiar",
                         "Personal"}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
@@ -3983,10 +3944,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 boolean[] canEdit = new boolean[]{
                     false, false, false, false
                 };
+
                 @Override
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
+
                 @Override
                 public boolean isCellEditable(int rowIndex, int colIndex) {
                     return canEdit[colIndex];
@@ -3997,6 +3960,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
+
     private void CargarTablaAntecedentes() {
         try {
             Object o[] = null;
@@ -4004,7 +3968,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             for (int i = 0; i < listAnte.size(); i++) {
                 modeloAntecedentes.addRow(o);
                 modeloAntecedentes.setValueAt(listAnte.get(i).getIdAntecedentes(), i, 0);
-                modeloAntecedentes.setValueAt(listAnte.get(i).getIdPaciente().getNombres().concat(", "+listAnte.get(i).getIdPaciente().getApellidos()), i, 1);
+                modeloAntecedentes.setValueAt(listAnte.get(i).getIdPaciente().getNombres().concat(", " + listAnte.get(i).getIdPaciente().getApellidos()), i, 1);
                 modeloAntecedentes.setValueAt(listAnte.get(i).getFamiliares(), i, 2);
                 modeloAntecedentes.setValueAt(listAnte.get(i).getPersonales(), i, 3);
             }
@@ -4013,11 +3977,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
         }
     }
     DefaultTableModel modeloEnfermedades;
+
     private void CrearModeloEnfermedades() {
         try {
-            modeloEnfermedades= (new DefaultTableModel(
+            modeloEnfermedades = (new DefaultTableModel(
                     null, new String[]{
-                        "ID", "Enfermedad","Categoria",
+                        "ID", "Enfermedad", "Categoria",
                         "clave"}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
@@ -4028,10 +3993,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 boolean[] canEdit = new boolean[]{
                     false, false, false, false
                 };
+
                 @Override
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
+
                 @Override
                 public boolean isCellEditable(int rowIndex, int colIndex) {
                     return canEdit[colIndex];
@@ -4042,6 +4009,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
+
     private void CargarTablaPorEnfermedad(String nombre) {
         try {
             Object o[] = null;
@@ -4057,6 +4025,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+
     private void CargarTablaPorCategoria(String nombre) {
         try {
             Object o[] = null;
@@ -4073,11 +4042,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
         }
     }
     DefaultTableModel modeloDiagnostico;
+
     private void CrearModeloDiagnostico() {
         try {
-            modeloDiagnostico= (new DefaultTableModel(
+            modeloDiagnostico = (new DefaultTableModel(
                     null, new String[]{
-                        "ID", "Enfermedad","Descripcion"}) {
+                        "ID", "Enfermedad", "Descripcion"}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
                     java.lang.String.class,
@@ -4087,10 +4057,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 boolean[] canEdit = new boolean[]{
                     false, false, false, false
                 };
+
                 @Override
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
+
                 @Override
                 public boolean isCellEditable(int rowIndex, int colIndex) {
                     return canEdit[colIndex];
@@ -4101,6 +4073,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
+
     private void CargarTablaDiagnostico() {
         try {
             Object o[] = null;
@@ -4116,12 +4089,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
         }
     }
     DefaultTableModel modeloVademecum;
+
     private void CrearModeloVademecum() {
         try {
-            modeloVademecum= (new DefaultTableModel(
+            modeloVademecum = (new DefaultTableModel(
                     null, new String[]{
-                        "ID","Principio Activo", "Marcas",
-                    }) {
+                        "ID", "Principio Activo", "Marcas",}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
                     java.lang.String.class,
@@ -4130,10 +4103,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 boolean[] canEdit = new boolean[]{
                     false, false, false
                 };
+
                 @Override
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
+
                 @Override
                 public boolean isCellEditable(int rowIndex, int colIndex) {
                     return canEdit[colIndex];
@@ -4144,7 +4119,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
-    private void CargarTablaVademecum(String Buscar){
+
+    private void CargarTablaVademecum(String Buscar) {
         try {
             Object o[] = null;
             List<Vademecum> listvademecum = VC.findVademecumporNombre(Buscar);
@@ -4159,11 +4135,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
         }
     }
     DefaultTableModel modeloReceta;
+
     private void CrearModeloReceta() {
         try {
-            modeloReceta= (new DefaultTableModel(
+            modeloReceta = (new DefaultTableModel(
                     null, new String[]{
-                        "ID","Principio Activo", "Cantidad Recetada", "Dosis", "Num Receta"
+                        "ID", "Principio Activo", "Cantidad Recetada", "Dosis", "Num Receta"
                     }) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
@@ -4175,10 +4152,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
                 boolean[] canEdit = new boolean[]{
                     false, false, false, false, false
                 };
+
                 @Override
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
+
                 @Override
                 public boolean isCellEditable(int rowIndex, int colIndex) {
                     return canEdit[colIndex];
@@ -4189,7 +4168,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
-    private void CargarTablaReceta(){
+
+    private void CargarTablaReceta() {
         try {
             Object o[] = null;
             List<DetalleReceta> listvademecum = DRC.findbyNumReceta(DatosReceta);
@@ -4205,18 +4185,20 @@ public class Consulta_Medica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    private void CargarCombo(){
-            cbHora.addItem(new Hora(8, "08:00 AM"));
-            cbHora.addItem(new Hora(9, "09:00 AM"));
-            cbHora.addItem(new Hora(10, "10:00 AM"));
-            cbHora.addItem(new Hora(11, "11:00 AM"));
-            cbHora.addItem(new Hora(12, "12:00 PM"));
-            cbHora.addItem(new Hora(13, "01:00 PM"));
-            cbHora.addItem(new Hora(14, "02:00 PM"));
-            cbHora.addItem(new Hora(15, "03:00 PM"));
-            cbHora.addItem(new Hora(16, "04:00 PM"));
-            cbHora.addItem(new Hora(17, "05:00 PM"));
+
+    private void CargarCombo() {
+        cbHora.addItem(new Hora(8, "08:00 AM"));
+        cbHora.addItem(new Hora(9, "09:00 AM"));
+        cbHora.addItem(new Hora(10, "10:00 AM"));
+        cbHora.addItem(new Hora(11, "11:00 AM"));
+        cbHora.addItem(new Hora(12, "12:00 PM"));
+        cbHora.addItem(new Hora(13, "01:00 PM"));
+        cbHora.addItem(new Hora(14, "02:00 PM"));
+        cbHora.addItem(new Hora(15, "03:00 PM"));
+        cbHora.addItem(new Hora(16, "04:00 PM"));
+        cbHora.addItem(new Hora(17, "05:00 PM"));
     }
+
     /**
      * @param args the command line arguments
      */
@@ -4283,7 +4265,6 @@ public class Consulta_Medica extends javax.swing.JFrame {
     private javax.swing.JButton btnEnfermedades;
     private javax.swing.JButton btnHacerCita;
     private javax.swing.JButton btnHistorial;
-    private javax.swing.JButton btnImprimirReceta;
     private javax.swing.JButton btnMenuAnte;
     private javax.swing.JButton btnMenuConsulta;
     private javax.swing.JButton btnMenuExamen;
