@@ -847,6 +847,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtObservacionesIdenti.setColumns(20);
         txtObservacionesIdenti.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtObservacionesIdenti.setForeground(new java.awt.Color(0, 0, 0));
+        txtObservacionesIdenti.setLineWrap(true);
         txtObservacionesIdenti.setRows(5);
         txtObservacionesIdenti.setNextFocusableComponent(btnSiguienteIdenti);
         jScrollPane1.setViewportView(txtObservacionesIdenti);
@@ -1106,6 +1107,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtPersonalAnte.setColumns(20);
         txtPersonalAnte.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtPersonalAnte.setForeground(new java.awt.Color(0, 0, 0));
+        txtPersonalAnte.setLineWrap(true);
         txtPersonalAnte.setRows(5);
         txtPersonalAnte.setEnabled(false);
         txtPersonalAnte.setNextFocusableComponent(txtFamiliarAnte);
@@ -1115,6 +1117,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtFamiliarAnte.setColumns(20);
         txtFamiliarAnte.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtFamiliarAnte.setForeground(new java.awt.Color(0, 0, 0));
+        txtFamiliarAnte.setLineWrap(true);
         txtFamiliarAnte.setRows(5);
         txtFamiliarAnte.setEnabled(false);
         txtFamiliarAnte.setNextFocusableComponent(btnAgregarAnte);
@@ -1421,11 +1424,6 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtMotivoConsulta.setForeground(new java.awt.Color(0, 0, 0));
         txtMotivoConsulta.setNextFocusableComponent(txtPresenteConsulta);
         txtMotivoConsulta.setPreferredSize(new java.awt.Dimension(200, 40));
-        txtMotivoConsulta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtMotivoConsultaKeyTyped(evt);
-            }
-        });
 
         jLabel36.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(239, 239, 239));
@@ -1437,15 +1435,11 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtPresenteConsulta.setColumns(20);
         txtPresenteConsulta.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtPresenteConsulta.setForeground(new java.awt.Color(0, 0, 0));
+        txtPresenteConsulta.setLineWrap(true);
         txtPresenteConsulta.setRows(5);
         txtPresenteConsulta.setNextFocusableComponent(btnSiguienteConsulta);
         txtPresenteConsulta.setPreferredSize(new java.awt.Dimension(412, 150));
         txtPresenteConsulta.setRequestFocusEnabled(false);
-        txtPresenteConsulta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPresenteConsultaKeyTyped(evt);
-            }
-        });
         jScrollPane5.setViewportView(txtPresenteConsulta);
 
         btnSiguienteConsulta.setBackground(new java.awt.Color(76, 201, 223));
@@ -1777,13 +1771,9 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtFisico.setColumns(20);
         txtFisico.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtFisico.setForeground(new java.awt.Color(0, 0, 0));
+        txtFisico.setLineWrap(true);
         txtFisico.setRows(5);
         txtFisico.setNextFocusableComponent(btnSiguienteFisica);
-        txtFisico.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtFisicoKeyTyped(evt);
-            }
-        });
         jScrollPane6.setViewportView(txtFisico);
 
         btnSiguienteFisica.setBackground(new java.awt.Color(76, 201, 223));
@@ -2045,14 +2035,10 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtObservacionesDiagnostico.setColumns(20);
         txtObservacionesDiagnostico.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtObservacionesDiagnostico.setForeground(new java.awt.Color(0, 0, 0));
+        txtObservacionesDiagnostico.setLineWrap(true);
         txtObservacionesDiagnostico.setRows(5);
         txtObservacionesDiagnostico.setEnabled(false);
         txtObservacionesDiagnostico.setPreferredSize(new java.awt.Dimension(412, 150));
-        txtObservacionesDiagnostico.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtObservacionesDiagnosticoKeyTyped(evt);
-            }
-        });
         jScrollPane13.setViewportView(txtObservacionesDiagnostico);
 
         btnSiguienteFisica1.setBackground(new java.awt.Color(76, 201, 223));
@@ -2257,12 +2243,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
         txtExamenes.setColumns(20);
         txtExamenes.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtExamenes.setForeground(new java.awt.Color(0, 0, 0));
+        txtExamenes.setLineWrap(true);
         txtExamenes.setRows(5);
-        txtExamenes.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtExamenesKeyTyped(evt);
-            }
-        });
         jScrollPane8.setViewportView(txtExamenes);
 
         jLabel60.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -3067,11 +3049,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuFisica1ActionPerformed
 
     private void btnSiguienteFisica1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteFisica1ActionPerformed
-        int mensaje = JOptionPane.showConfirmDialog(null, "Aún existen campos vacíos, ¿desea continuar?","Campos vacíos",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (mensaje == 0) {
-                    this.PanelPestañas.setSelectedIndex(6);
-                }       
+        this.PanelPestañas.setSelectedIndex(6);
+                       
     }//GEN-LAST:event_btnSiguienteFisica1ActionPerformed
 
     private void btnMenuTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuTratamientoActionPerformed
@@ -3187,7 +3166,7 @@ public class Consulta_Medica extends javax.swing.JFrame {
             CargarTablaDiagnostico();
  
             this.txtAgregarDiagnostico.setEnabled(false);
-            this.txtObservacionesDiagnostico.setEnabled(false);
+            this.txtObservacionesDiagnostico.setEnabled(true);
             this.txtObservacionesDiagnostico.setText("");
 
         } catch (Exception e) {
@@ -3516,13 +3495,8 @@ public class Consulta_Medica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarL2ActionPerformed
 
     private void btnSiguienteAnteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteAnteActionPerformed
-        if (txtPersonalAnte.getText().isEmpty() || txtFamiliarAnte.getText().isEmpty()) {
-            int resp = JOptionPane.showConfirmDialog(null, "Aún hay campos vacíos, ¿desea continuar a la siguiente pestaña?", "Datos sin ingresar", JOptionPane.YES_NO_OPTION);
-            if (JOptionPane.YES_OPTION == resp) {
-                this.PanelPestañas.setSelectedIndex(3);
-            }
-        } else {
-        }
+        this.PanelPestañas.setSelectedIndex(3);
+            
         
     }//GEN-LAST:event_btnSiguienteAnteActionPerformed
 
@@ -3820,27 +3794,11 @@ public class Consulta_Medica extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCivilPacienteKeyTyped
 
-    private void txtMotivoConsultaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMotivoConsultaKeyTyped
-        char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
-        }else{
-            evt.consume();
-            getToolkit().beep();
-        }
-    }//GEN-LAST:event_txtMotivoConsultaKeyTyped
-
-    private void txtPresenteConsultaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPresenteConsultaKeyTyped
-        char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
-        }else{
-            evt.consume();
-            getToolkit().beep();
-        }
-    }//GEN-LAST:event_txtPresenteConsultaKeyTyped
-
     private void txtPresionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPresionKeyTyped
         char car = evt.getKeyChar();
-        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
+        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
+                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
+                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
         }else{
             evt.consume();
             getToolkit().beep();
@@ -3849,16 +3807,21 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtPulsoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPulsoKeyTyped
         char car = evt.getKeyChar();
-        if(Character.isDigit(car) || (car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
+        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
+                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
+                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
         }else{
             evt.consume();
             getToolkit().beep();
+            
         }
     }//GEN-LAST:event_txtPulsoKeyTyped
 
     private void txtFCCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFCCKeyTyped
         char car = evt.getKeyChar();
-        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
+        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
+                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
+                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
         }else{
             evt.consume();
             getToolkit().beep();
@@ -3867,7 +3830,9 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtFRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFRKeyTyped
         char car = evt.getKeyChar();
-        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
+        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
+                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
+                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
         }else{
             evt.consume();
             getToolkit().beep();
@@ -3876,16 +3841,21 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtTemperaturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTemperaturaKeyTyped
        char car = evt.getKeyChar();
-        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
+        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
+                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
+                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
         }else{
             evt.consume();
             getToolkit().beep();
+            
         }
     }//GEN-LAST:event_txtTemperaturaKeyTyped
 
     private void txtMasaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMasaKeyTyped
         char car = evt.getKeyChar();
-        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
+        if((int) evt.getKeyChar()>32 && (int) evt.getKeyChar()<=47  || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE 
+                || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car) 
+                || (int) evt.getKeyChar()>=58 && (int) evt.getKeyChar()<=64){
         }else{
             evt.consume();
             getToolkit().beep();
@@ -3894,21 +3864,12 @@ public class Consulta_Medica extends javax.swing.JFrame {
 
     private void txtTallaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTallaKeyTyped
         char car = evt.getKeyChar();
-        if((car<'.' || car>'.' || car>'/') || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
+        if(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
         }else{
             evt.consume();
             getToolkit().beep();
         }
     }//GEN-LAST:event_txtTallaKeyTyped
-
-    private void txtFisicoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFisicoKeyTyped
-        char car = evt.getKeyChar();
-        if(Character.isLetterOrDigit(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE){
-        }else{
-            evt.consume();
-            getToolkit().beep();
-        }
-    }//GEN-LAST:event_txtFisicoKeyTyped
 
     private void txtEnfermedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnfermedadKeyTyped
         char car = evt.getKeyChar();
@@ -3918,24 +3879,6 @@ public class Consulta_Medica extends javax.swing.JFrame {
             getToolkit().beep();
         }
     }//GEN-LAST:event_txtEnfermedadKeyTyped
-
-    private void txtObservacionesDiagnosticoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionesDiagnosticoKeyTyped
-        char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
-        }else{
-            evt.consume();
-            getToolkit().beep();
-        }
-    }//GEN-LAST:event_txtObservacionesDiagnosticoKeyTyped
-
-    private void txtExamenesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExamenesKeyTyped
-        char car = evt.getKeyChar();
-        if(Character.isLetter(car) || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE || evt.getKeyChar()==KeyEvent.VK_SPACE || Character.isDigit(car)){
-        }else{
-            evt.consume();
-            getToolkit().beep();
-        }
-    }//GEN-LAST:event_txtExamenesKeyTyped
 
     private void txtMedicamentoBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedicamentoBusquedaKeyTyped
         char car = evt.getKeyChar();
