@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RecetaDigital_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="91480656-9b88-4509-b869-d50dc1141a0c">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.9487171000000014"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="NumReceta" class="java.lang.Integer">
@@ -38,31 +38,41 @@ Receta.`Num_Receta`=$P{NumReceta}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="23" splitType="Stretch">
+		<band height="11" splitType="Stretch">
 			<textField>
-				<reportElement x="46" y="0" width="509" height="20" forecolor="#0000FF" uuid="c363ca59-0608-4906-a4e8-569ae9fa2ee2"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{Vademecum_Principio_activo}+" - "+$F{Detalle_Receta_Dosis}+"(Cantidad "+$F{Detalle_Receta_Cantidad}+" )"]]></textFieldExpression>
+				<reportElement x="17" y="0" width="509" height="10" forecolor="#0000FF" uuid="c363ca59-0608-4906-a4e8-569ae9fa2ee2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Vademecum_Principio_activo}+" - "+$F{Detalle_Receta_Dosis}+" (Cantidad: "+$F{Detalle_Receta_Cantidad}+")"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="32" y="0" width="14" height="20" forecolor="#0000FF" uuid="c72bba30-4dfe-48f8-94e1-209baf3979c6"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="3" y="0" width="14" height="10" forecolor="#0000FF" uuid="c72bba30-4dfe-48f8-94e1-209baf3979c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
 				<text><![CDATA[*]]></text>
 			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="22">
-			<textField isBlankWhenNull="true">
-				<reportElement x="92" y="1" width="463" height="20" forecolor="#0000FF" uuid="bd746064-705d-4137-8548-bf497c745d5d"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{Receta_Indicaciones}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="32" y="1" width="60" height="20" forecolor="#0000FF" uuid="1013d6c0-42c0-4a21-881d-969389c07703"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[*Exámenes: ]]></text>
-			</staticText>
+		<band height="29">
+			<elementGroup>
+				<textField isBlankWhenNull="true">
+					<reportElement x="56" y="1" width="470" height="28" isPrintWhenDetailOverflows="true" forecolor="#0000FF" uuid="bd746064-705d-4137-8548-bf497c745d5d"/>
+					<textElement verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Receta_Indicaciones}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="3" y="1" width="53" height="10" forecolor="#0000FF" uuid="1013d6c0-42c0-4a21-881d-969389c07703"/>
+					<textElement verticalAlignment="Top">
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[   * Exámenes: ]]></text>
+				</staticText>
+			</elementGroup>
 		</band>
 	</columnFooter>
 </jasperReport>

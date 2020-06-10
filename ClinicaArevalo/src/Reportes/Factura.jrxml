@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="297" pageHeight="439" whenNoDataType="BlankPage" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a4a4bad7-a940-4c8e-961d-7e4b2c7906c7">
 	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="97"/>
+	<property name="ireport.y" value="200"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#0000FF"/>
@@ -427,7 +427,7 @@ WHERE
 						</jr:tableFooter>
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
+								<textField pattern="$ #,##0.00">
 									<reportElement x="0" y="0" width="35" height="15" forecolor="#0000FF" uuid="13e0178c-69d1-4d32-9cbe-0bf3b1d4b8d4"/>
 									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 										<pen lineWidth="0.5" lineColor="#0000FF"/>
@@ -498,7 +498,7 @@ Uni
 						</jr:tableFooter>
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
+								<textField pattern="$ #,##0.00">
 									<reportElement x="0" y="0" width="38" height="15" forecolor="#0000FF" uuid="a05677d1-180c-413b-81fd-e838cc51eb36"/>
 									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 										<pen lineWidth="0.5" lineColor="#0000FF"/>
@@ -556,7 +556,7 @@ Exent]]></text>
 					</jr:column>
 					<jr:column width="35" uuid="aa368692-c2db-439c-be66-2d9bff268744">
 						<jr:tableFooter height="24" rowSpan="1">
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="$ #,##0.00">
 								<reportElement x="0" y="0" width="35" height="24" forecolor="#0000FF" uuid="b2a4279a-8d57-4385-8fac-1cd6a88f942f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$V{Total}]]></textFieldExpression>
@@ -564,7 +564,7 @@ Exent]]></text>
 						</jr:tableFooter>
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
+								<textField pattern="$ #,##0.00">
 									<reportElement x="0" y="0" width="35" height="15" forecolor="#0000FF" uuid="d480868f-6049-48f7-b392-c36f086c016a"/>
 									<box>
 										<pen lineWidth="0.5" lineColor="#0000FF"/>
@@ -591,7 +591,7 @@ Afect]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter height="25" rowSpan="1">
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="$ #,##0.00">
 								<reportElement x="0" y="0" width="35" height="12" forecolor="#0000FF" uuid="eeb278cd-a2dc-4a72-8ef2-7e7d995bcb63"/>
 								<box>
 									<pen lineWidth="0.5" lineColor="#0000FF"/>
@@ -605,7 +605,7 @@ Afect]]></text>
 								</textElement>
 								<textFieldExpression><![CDATA[$V{Suma}]]></textFieldExpression>
 							</textField>
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="$ #,##0.00">
 								<reportElement x="0" y="12" width="35" height="13" forecolor="#0000FF" uuid="20d01216-d815-4633-a4ef-5364c1871d02"/>
 								<box>
 									<pen lineWidth="0.5" lineColor="#0000FF"/>

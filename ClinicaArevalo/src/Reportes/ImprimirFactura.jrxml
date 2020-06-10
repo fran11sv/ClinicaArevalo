@@ -236,7 +236,7 @@ Factura.`Num_Factura`=$P{numFactura}]]>
 					<jr:column width="35" uuid="9c1e5a55-469c-4792-aa3b-f8e63a5de21a">
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
+								<textField pattern="$ #,##0.00">
 									<reportElement x="0" y="0" width="35" height="15" forecolor="#0000FF" uuid="f2567078-3bd4-4ed1-a05e-17add04d2579"/>
 									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 										<pen lineWidth="0.5"/>
@@ -267,7 +267,7 @@ Uni]]></text>
 					<jr:column width="33" uuid="ed76e4cc-a974-4de8-b280-2fcf34316c3f">
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
+								<textField pattern="$ #,##0.00">
 									<reportElement x="0" y="0" width="33" height="15" forecolor="#0000FF" uuid="83c0005b-5f60-4862-9377-bc7eb9f07dcd"/>
 									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 										<pen lineWidth="0.5"/>
@@ -297,7 +297,7 @@ Exentas]]></text>
 					</jr:column>
 					<jr:column width="32" uuid="22422f18-b03a-4c13-947d-dce6ae7eae4b">
 						<jr:tableFooter height="23" rowSpan="1">
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="$ #,##0.00">
 								<reportElement x="0" y="0" width="32" height="23" forecolor="#0000FF" uuid="aab16f4c-4061-453d-94bc-bb5622c19a43"/>
 								<box>
 									<pen lineWidth="0.5"/>
@@ -314,7 +314,7 @@ Exentas]]></text>
 						</jr:tableFooter>
 						<jr:groupFooter groupName="GrupoProducto">
 							<jr:cell height="15" rowSpan="1">
-								<textField pattern="¤ #,##0.00">
+								<textField pattern="$ #,##0.00">
 									<reportElement x="0" y="0" width="32" height="15" forecolor="#0000FF" uuid="60f5f214-0c7b-4056-af27-56d5e9d880eb"/>
 									<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
 										<pen lineWidth="0.5"/>
@@ -341,7 +341,7 @@ Afectas]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter height="24" rowSpan="1">
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="$ #,##0.00">
 								<reportElement x="0" y="12" width="32" height="12" forecolor="#0000FF" uuid="a8497124-8208-4ec0-824a-fc1bccd7599e"/>
 								<box>
 									<pen lineWidth="0.5"/>
@@ -355,7 +355,7 @@ Afectas]]></text>
 								</textElement>
 								<textFieldExpression><![CDATA[$V{Suma VExt}]]></textFieldExpression>
 							</textField>
-							<textField pattern="¤ #,##0.00">
+							<textField pattern="$ #,##0.00">
 								<reportElement x="0" y="0" width="32" height="12" forecolor="#0000FF" uuid="841f0a68-101a-45e5-a45b-4ff82dbaad47"/>
 								<box>
 									<pen lineWidth="0.5" lineColor="#000000"/>

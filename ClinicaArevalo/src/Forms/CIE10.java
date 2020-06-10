@@ -143,7 +143,6 @@ CategoriasCie10 EliminarCategoria;
         txtCategoriaNombre.setBackground(new java.awt.Color(239, 239, 239));
         txtCategoriaNombre.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtCategoriaNombre.setForeground(new java.awt.Color(0, 0, 0));
-        txtCategoriaNombre.setEnabled(false);
         txtCategoriaNombre.setPreferredSize(new java.awt.Dimension(4, 30));
         txtCategoriaNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -553,7 +552,7 @@ CategoriasCie10 EliminarCategoria;
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -665,6 +664,7 @@ CategoriasCie10 EliminarCategoria;
         EliminarEnfermedad = (EnfermedadesCie10) EC.findEnfermedadesCie10(Integer.parseInt(id));
         this.btnEditarEnfermedad.setEnabled(true);
         this.btnEliminarEnfermedad.setEnabled(true);
+        btnCancelarEnfermedad.setEnabled(true);
     }//GEN-LAST:event_tbEnfermedadesMouseClicked
 
     private void txtBuscarSubGrupoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarSubGrupoKeyReleased
@@ -744,6 +744,7 @@ CategoriasCie10 EliminarCategoria;
         EliminarCategoria = (CategoriasCie10) CC.findCategoriasCie10(Integer.parseInt(id));
         this.btnEditarCategoria.setEnabled(true);
         this.btnEliminarCategoria.setEnabled(true);
+        btnCancelarCategoria.setEnabled(true);
     }//GEN-LAST:event_tbCategoriasMouseClicked
 
     private void btnNuevoCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCategoriaActionPerformed
